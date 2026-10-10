@@ -1,0 +1,66 @@
+# m=10 N=55 eps=-1 P=2147483647 hhat=19,15,11,7,3,
+# g(rho,rho,rho) mod P = 30290998 ; a(rho) = -1
+COLLIDE rank=0 a=1 gmodP=1 lam=55 
+hook 55^1^0 a=1 gmodP=1
+hook 54^1^1 a=-1 gmodP=9
+hook 53^1^2 a=1 gmodP=81
+hook 52^1^3 a=0 gmodP=648
+hook 51^1^4 a=0 gmodP=4608
+hook 50^1^5 a=0 gmodP=29184
+hook 49^1^6 a=0 gmodP=164472
+hook 48^1^7 a=1 gmodP=826077
+hook 47^1^8 a=-1 gmodP=3709307
+hook 46^1^9 a=1 gmodP=14953439
+hook 45^1^10 a=0 gmodP=54380336
+hook 44^1^11 a=1 gmodP=179274099
+hook 43^1^12 a=-1 gmodP=538286547
+hook 42^1^13 a=1 gmodP=1478549397
+hook 41^1^14 a=0 gmodP=1582652793
+hook 40^1^15 a=1 gmodP=84656901
+hook 39^1^16 a=-1 gmodP=1475820755
+hook 38^1^17 a=1 gmodP=702565780
+hook 37^1^18 a=1 gmodP=286405381
+hook 36^1^19 a=0 gmodP=1139357471
+hook 35^1^20 a=0 gmodP=1281592293
+hook 34^1^21 a=1 gmodP=416918312
+hook 33^1^22 a=1 gmodP=99335724
+hook 32^1^23 a=-1 gmodP=275515610
+hook 31^1^24 a=1 gmodP=1620121735
+hook 30^1^25 a=0 gmodP=1232612867
+hook 29^1^26 a=2 gmodP=748783945
+hook 28^1^27 a=-2 gmodP=37029074
+hook 27^1^28 a=2 gmodP=748783945
+hook 26^1^29 a=0 gmodP=1232612867
+hook 25^1^30 a=1 gmodP=1620121735
+hook 24^1^31 a=-1 gmodP=275515610
+hook 23^1^32 a=1 gmodP=99335724
+hook 22^1^33 a=1 gmodP=416918312
+hook 21^1^34 a=0 gmodP=1281592293
+hook 20^1^35 a=0 gmodP=1139357471
+hook 19^1^36 a=1 gmodP=286405381
+hook 18^1^37 a=1 gmodP=702565780
+hook 17^1^38 a=-1 gmodP=1475820755
+hook 16^1^39 a=1 gmodP=84656901
+hook 15^1^40 a=0 gmodP=1582652793
+hook 14^1^41 a=1 gmodP=1478549397
+hook 13^1^42 a=-1 gmodP=538286547
+hook 12^1^43 a=1 gmodP=179274099
+hook 11^1^44 a=0 gmodP=54380336
+hook 10^1^45 a=1 gmodP=14953439
+hook 9^1^46 a=-1 gmodP=3709307
+hook 8^1^47 a=1 gmodP=826077
+hook 7^1^48 a=0 gmodP=164472
+hook 6^1^49 a=0 gmodP=29184
+hook 5^1^50 a=0 gmodP=4608
+hook 4^1^51 a=0 gmodP=648
+hook 3^1^52 a=1 gmodP=81
+hook 2^1^53 a=-1 gmodP=9
+COLLIDE rank=451275 a=1 gmodP=1 lam=1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+hook 1^1^54 a=1 gmodP=1
+# #lambda=451276  a<0:29524 a=0:392185 a>0:29567
+# lambdas with eps*a<0 and g == |a| (mod P): 2   (0 => every such g > |a|)
+# lambdas with a==0 and g == 0 (mod P): 0
+# check sum_lambda g*dim(lambda) - dim(rho)^2 == 0 mod P : OK
+# check sum_lambda g*a(lambda) == 1 mod P : OK
+# g(rho,rho,(N)) mod P = 1 ; g(rho,rho,(1^N)) mod P = 1
+# fnv1a(g mod P) = 3c35d7ae2dc31373

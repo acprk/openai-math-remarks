@@ -28,6 +28,7 @@ All constructions and main arguments discussed here are **OpenAI's work**. Each 
 | R12 | 053 | [Pixton completeness counterexample in genus ≈ 2.26·10^14](remarks/R12-pixton-genus/) (was 10^60) | explicit parameters | independent exact budget re-implementation; adversarial review |
 | R13 | 176 | [Second Kahn–Kalai conjecture: constant 2048e^50 ≈ 10^25 → 10^5](remarks/R13-kahn-kalai-constant/) | constant | Arb ball arithmetic re-implementation; adversarial review |
 | R14 | 196 | [Kaplansky zero-divisor counterexample over PG(2,16)](remarks/R14-kaplansky-zero-divisor-q16/) (was q = 128; 138 instead of 8,258 generators) | explicit parameters | independent PG(2,q) construction in Sage; adversarial review |
+| R15 | 205 | [HSTZ for A_n at n = 28, 36, 45, 66, 78, and S_n-universality does not pass to A_n](remarks/R15-hstz-205/) (staircase witness; published checks stopped at n ≤ 25; counterexample family incl. (4,4,4,3) ⊢ 15) | new cases + counterexample | modular Kronecker computation with consistency checks; GAP n ≤ 20; adversarial review |
 
 
 ## How these remarks were produced and checked

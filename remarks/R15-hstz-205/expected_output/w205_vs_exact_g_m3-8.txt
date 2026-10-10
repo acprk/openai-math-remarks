@@ -1,0 +1,24 @@
+m=3: #lambda=11  #(w > g) = 0
+205 bound certifies all lambda with a<0 (two-sided max): True  failures: []
+w(rho) = 3  (>=2 needed)
+#lambda with a<0 where w(lambda) alone is too small but w(lambda') suffices: 0
+m=4: #lambda=42  #(w > g) = 0
+205 bound certifies all lambda with a<0 (two-sided max): True  failures: []
+w(rho) = 19  (>=2 needed)
+#lambda with a<0 where w(lambda) alone is too small but w(lambda') suffices: 0
+m=5: #lambda=176  #(w > g) = 0
+205 bound certifies all lambda with a<0 (two-sided max): True  failures: []
+w(rho) = 311  (>=2 needed)
+#lambda with a<0 where w(lambda) alone is too small but w(lambda') suffices: 0
+m=6: #lambda=792  #(w > g) = 0
+205 bound certifies all lambda with a<0 (two-sided max): True  failures: []
+w(rho) = 13077  (>=2 needed)
+#lambda with a<0 where w(lambda) alone is too small but w(lambda') suffices: 0
+m=7: #lambda=3718  #(w > g) = 0
+205 bound certifies all lambda with a<0 (two-sided max): True  failures: []
+w(rho) = 1512323  (>=2 needed)
+#lambda with a<0 where w(lambda) alone is too small but w(lambda') suffices: 0
+m=8: #lambda=17977  #(w > g) = 0
+205 bound certifies all lambda with a<0 (two-sided max): True  failures: []
+w(rho) = 492288925  (>=2 needed)
+#lambda with a<0 where w(lambda) alone is too small but w(lambda') suffices: 0

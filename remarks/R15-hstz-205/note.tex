@@ -1,0 +1,250 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Irr}{\operatorname{Irr}}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title[Staircase squares in alternating groups]{Remark on OpenAI's proof of Saxl's conjecture:\\
+the staircase square in the alternating group}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI (family 205 of \texttt{github.com/openai/math}) proved Saxl's conjecture and the
+tensor-square conjecture for symmetric groups. The motivating conjecture of Heide, Saxl,
+Tiep and Zalesski (HSTZ) concerns the alternating groups and remains open. We record three
+facts about the passage from $S_n$ to $A_n$ for self-conjugate labels. (i) We recall the
+closed formula for the square of a split character of $A_n$, which turns universality into
+the condition $g\ne|a|$ on the constituents with $a<0$. By a known parity fact, the staircase
+split character is never universal when $m\equiv2\pmod 4$. (ii) Universality of $\chi^\lambda$ for $S_n$ does
+not pass to its split constituents: for $\lambda=(4,4,4,3)$ the square of $\chi^\lambda$
+contains every irreducible character of $S_{15}$, but the square of each constituent of
+$\chi^\lambda|_{A_{15}}$ misses the $14$-dimensional standard character. (iii) By a direct
+modular computation of all Kronecker coefficients $g(\rho_m,\rho_m,\lambda)$, the HSTZ
+property holds for $A_n$, $n\in\{28,36,45,66,78\}$, with the staircase split character as
+witness. Previously published checks reached $n\le 25$. We also explain why the multiplicity
+lower bounds contained in OpenAI's cyclic module, which suffice for small $m$, cannot be
+pushed to all $m$.
+\end{abstract}
+\maketitle
+
+\noindent\emph{Attribution.} Saxl's conjecture and the $S_n$ tensor-square theorem are
+OpenAI's work (family 205, preprints \emph{A Cyclic Polytabloid Proof of Saxl's Conjecture}
+and \emph{Universal Tensor Squares for Symmetric Groups}, \texttt{github.com/openai/math},
+commit \texttt{fd4aeeb2e}). Proposition~\ref{prop:square} is classical in substance
+(Bessenrodt--Behns~\cite{BB}; Pak--Panova--Vallejo~\cite[Main Lemma]{PPV}); we include a
+proof because we need the exact multiplicities. Corollary~\ref{cor:mod4} and the value
+$g(\lambda,\lambda,(n-1,1))$ used in Proposition~\ref{prop:counter} are in
+Bessenrodt--Bowman~\cite[Thm.~6.1, Cor.~6.2]{BBow}. Developed with AI assistance (Anthropic
+Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews were run
+by separate AI sessions and are not human peer review.
+
+\section{The square of a split character}
+
+Let $\lambda=\lambda'\vdash n$, let $\hat h(\lambda)=(h_1>\dots>h_d)$ be its diagonal hook
+lengths (all odd), $P=\prod h_i$ and $\varepsilon=\varepsilon_\lambda=(-1)^{(n-d)/2}$. Then
+$\chi^\lambda|_{A_n}=\chi_+ +\chi_-$, and $\chi_\pm$ differ only on the two $A_n$-classes
+$C_\pm$ of cycle type $\hat h(\lambda)$, where
+$\chi_\pm(C_\pm)=\tfrac12(\varepsilon+\sqrt{\varepsilon P})$ and
+$\chi_\pm(C_\mp)=\tfrac12(\varepsilon-\sqrt{\varepsilon P})$. In particular $\chi_\pm$ is
+real if and only if $\varepsilon=1$. For $\nu\vdash n$ write
+$g_\nu=g(\lambda,\lambda,\nu)$ and $a_\nu=\chi^\nu(\hat h(\lambda))$.
+
+\begin{proposition}\label{prop:square}
+The multiplicities of the irreducible characters of $A_n$ in $\chi_+^2$ are:
+\begin{enumerate}
+\item $\tfrac12(g_\nu+\varepsilon a_\nu)$ for $\Res\chi^\nu$, if $\nu\neq\nu'$;
+\item $\tfrac14(g_\nu+\varepsilon a_\nu)$ for each constituent of $\Res\chi^\nu$, if
+$\nu=\nu'\neq\lambda$;
+\item $\tfrac14(g_\lambda+1+2\varepsilon)$ for $\chi_+$ and
+$\tfrac14(g_\lambda+1-2\varepsilon)$ for $\chi_-$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Write $\chi_\pm=A\pm\delta$ with $A=\tfrac12\chi^\lambda|_{A_n}$ and $\delta$ supported on
+$C_+\cup C_-$, $\delta(C_\pm)=\pm\tfrac12\sqrt{\varepsilon P}$; thus $\delta^2=\varepsilon P/4$
+there. For a class function $f$ of $S_n$, $\langle f|_{A_n},1\rangle_{A_n}=\langle
+f,1\rangle_{S_n}+\langle f,\mathrm{sgn}\rangle_{S_n}$, and $|C_+\cup C_-|/|A_n|=2/P$.
+(1),(2): $\psi=\Res\chi^\nu$ is invariant under the outer automorphism, which swaps
+$\chi_+^2$ and $\chi_-^2$; hence $\langle\chi_+^2,\psi\rangle=\langle A^2+\delta^2,\psi\rangle
+=\tfrac14(g_\nu+g_{\nu'})+\tfrac2P\cdot\tfrac{\varepsilon P}4 a_\nu$, and
+$g_{\nu'}=g_\nu$ because $\lambda=\lambda'$. When $\nu=\nu'\ne\lambda$, $\chi_+^2$ is constant
+on the two classes of type $\hat h(\nu)\ne\hat h(\lambda)$, so it pairs equally with the two
+constituents of $\psi$. (3): expand $(A+\delta)^2\overline{(A\pm\delta)}$; terms odd in
+$\delta$ cancel, $\langle A^3,1\rangle=g_\lambda/4$, and $A\delta^2=P/8$ on $C_+\cup C_-$
+(as $A=\varepsilon/2$ there).
+\end{proof}
+
+Since multiplicities are non-negative integers, (1) recovers the bound
+$g_\nu\ge|a_\nu|$ and $g_\nu\equiv a_\nu\pmod 2$ of \cite{PPV}, and (3) gives
+$g_\lambda\equiv1\pmod4$ (cf.~\cite{BB}). Call $\chi_+$ \emph{universal} if $\chi_+^2$
+contains every irreducible character of $A_n$.
+
+\begin{corollary}\label{cor:crit}
+$\chi_+$ is universal iff $\varepsilon=1$, $g_\lambda\ge5$, and $g_\nu>-a_\nu$ for every
+$\nu$. If $g_\nu>0$ for all $\nu$ (the $S_n$ property) and $\varepsilon=1$, this reduces to:
+$g_\nu\ne|a_\nu|$ whenever $a_\nu<0$, and $g_\lambda\ne1$.
+\end{corollary}
+
+For the staircase $\rho_m$, $n=N_m=m(m+1)/2$, $\hat h(\rho_m)=(2m-1,2m-5,\dots)$ has
+$d=\lceil m/2\rceil$ parts and $(n-d)/2=\sum_i(h_i-1)/2\equiv d(m-1)\pmod 2$.
+
+\begin{corollary}[{\cite[Cor.~6.2]{BBow}}]\label{cor:mod4}
+$\varepsilon_{\rho_m}=-1$ iff $m\equiv2\pmod4$. For such $m$ the split staircase characters
+are non-real, so $\chi_+^2$ does not contain the trivial character
+($\langle\chi_+^2,1\rangle=\langle\chi_+,\overline{\chi_+}\rangle=\langle\chi_+,\chi_-\rangle=0$).
+\end{corollary}
+
+So the staircase can be an HSTZ witness only if $m\not\equiv2\pmod4$, i.e.
+$m=3,4,5,7,8,9,11,12,13,\dots$
+
+\section{$S_n$-universality does not pass to $A_n$}
+
+\begin{proposition}\label{prop:counter}
+Let $\lambda=((q+s)^q,q^s)$ with $q,s\ge1$; this is self-conjugate with exactly two part
+sizes. Then the split constituents $\chi_\pm$ of $\chi^\lambda$ are never universal: if
+$\varepsilon_\lambda=-1$ they miss the trivial character, and if $\varepsilon_\lambda=+1$
+they miss $\Res\chi^{(n-1,1)}$.
+\end{proposition}
+\begin{proof}
+The case $\varepsilon=-1$ is Corollary~\ref{cor:mod4}'s argument. Let $\nu=(n-1,1)$. It is
+standard that $g(\lambda,\lambda,\nu)$ equals the number of distinct parts of $\lambda$
+minus one, here $1$. The diagonal hooks are $h_i=2(q+s-i)+1\ge 2s+1\ge3$ ($1\le i\le q$), so the class
+$\hat h(\lambda)$ has no fixed points and $a_\nu=-1$. Proposition~\ref{prop:square}(1)
+gives multiplicity $(1-1)/2=0$.
+\end{proof}
+
+For $(q,s)=(1,2)$ and $(3,1)$, i.e.\ $\lambda=(3,1,1)\vdash5$ and $\lambda=(4,4,4,3)\vdash15$,
+we have $\varepsilon=+1$, and a GAP computation shows $g(\lambda,\lambda,\nu)>0$ for all
+$\nu$. Hence a self-conjugate $S_n$-universal label need not give a universal character of
+$A_n$. The degenerate case $n=5$ only says that the two $3$-dimensional characters of $A_5$
+are not universal. $(4,4,4,3)$ is the first case with a non-hook label. Among all
+self-conjugate $\lambda\vdash n\le 20$ with $\varepsilon=+1$, these are the only two that
+are $S_n$-universal but not $A_n$-universal (GAP, all $n\le20$; see the computation
+record). This does not refute HSTZ at $n=15$: the staircase $(5,4,3,2,1)$ is a witness there.
+
+\section{HSTZ at triangular degrees $n\le 78$}
+
+\begin{theorem}\label{thm:main}
+For $m\in\{3,4,5,7,8,9,11,12\}$, i.e.\ $n\in\{6,10,15,28,36,45,66,78\}$, the square of each
+irreducible constituent of $\chi^{\rho_m}|_{A_n}$ contains every irreducible character of
+$A_n$. In particular the HSTZ conjecture holds for these $A_n$.
+\end{theorem}
+
+The cases $n\le25$ were already covered by computer checks (O'Brien for $n\le17$, reported
+in \cite[Remark 1.3(3)]{HSTZ}; Bessenrodt for $n\le25$, \cite[\S5]{Bes}). To our knowledge
+(search of GitHub and arXiv up to 2026-10-09) the cases $n=28,36,45,66,78$ are new.
+
+\begin{proof}[Proof (computer-assisted)]
+By Corollaries~\ref{cor:crit} and \ref{cor:mod4} ($\varepsilon=+1$), and because $g\ge|a|$ is
+automatic, it suffices to show the following for every $\lambda\vdash N_m$: $g_\lambda\ne
+-a_\lambda$ whenever $a_\lambda\le 0$, together with $g(\rho_m,\rho_m,\rho_m)\ne1$. A
+congruence $g\not\equiv c\pmod p$ proves $g\neq c$. We therefore compute the vector
+$(g(\rho_m,\rho_m,\lambda)\bmod p)_{\lambda\vdash N_m}$ for $p=2^{31}-1$, together with the
+exact integers $a_\lambda=\chi^\lambda(\hat h(\rho_m))$, for all $p(N_m)$ partitions (up to
+$p(78)=12{,}132{,}164$). Since $\rho_m$ is a $2$-core, $\chi^{\rho_m}$ vanishes off the
+classes with all parts odd, so
+\[\textstyle\sum_\lambda g(\rho_m,\rho_m,\lambda)s_\lambda=\sum_{\mu\text{ odd}}
+\chi^{\rho_m}(\mu)^2 z_\mu^{-1}p_\mu .\]
+We evaluate the right side in the Schur basis using the Murnaghan--Nakayama rule on
+$\beta$-sets. Each odd $\mu$ is split as head (parts $>T$) and tail (parts $\le T$). The head
+vectors $p_{\mathrm{head}}$ are built along a trie. $\chi^{\rho_m}(\mu)=\langle
+p_{\mathrm{head}},Y_{\mathrm{tail}}\rangle$ with $Y_{\mathrm{tail}}[\nu]=\langle
+p_{\mathrm{tail}}s_\nu,s_{\rho_m}\rangle$. The tail sum is evaluated by Horner's rule. For
+every $m$ in the theorem the check finds no $\lambda$ with $g\equiv-a$, and
+$g(\rho_m,\rho_m,\rho_m)\not\equiv1$. The run counts are in Table~\ref{tab}.
+\end{proof}
+
+\begin{table}[h]\centering\small
+\begin{tabular}{rrrrrl}\toprule
+$m$&$n$&$p(n)$&$\#\{a<0\}$&$\#\{a=0\}$&tightest exact margin $\min_{a<0}(g-|a|)$\\\midrule
+3&6&11&2&6&2 at $(4,2)$\\
+4&10&42&10&21&2 at $(9,1)$\\
+5&15&176&22&131&14 at $(13,2)$\\
+7&28&3718&286&3145&34 at $(26,2)$\\
+8&36&17977&1654&14656&6 at $(35,1)$\\
+9&45&89134&4659&79813&62 at $(43,2)$\\
+11&66&2323520&92010&2139531&(mod $p$ only)\\
+12&78&12132164&626548&10879571&(mod $p$ only)\\\bottomrule
+\end{tabular}
+\caption{Direct computation. For $m\le9$ four primes and the CRT give the exact $g$ (they are
+below $\dim\chi^{\rho_m}$, which is less than the product of the primes).}\label{tab}
+\end{table}
+
+\emph{Validation.} (a) For $m\le6$ the full vectors agree with $g$ computed from GAP's $S_n$
+character tables. (b) For $m\le9$ the exact identity
+$\sum_\lambda g\cdot\dim\chi^\lambda=(\dim\chi^{\rho_m})^2$ holds over $\mathbb Z$, and for
+$m=10,11,12$ it holds modulo $p$, as does $\sum_\lambda g\,a_\lambda=\chi^{\rho_m}(\hat
+h)^2=1$. (c) Different head/tail thresholds $T$ give bit-identical vectors.
+(d) $g(\rho_8,\rho_8,(8,1^{28}))=84465$, matching an earlier independent computation.
+(e) Proposition~\ref{prop:square} was checked against direct decompositions of $\chi_+^2$
+in GAP's $A_n$ tables for every self-conjugate $\lambda\vdash n$, $5\le n\le20$ (no
+mismatch). The tightest constraint in Table~\ref{tab} is $\nu=(n-1,1)$ or $(n-2,2)$, e.g.\
+$g(\rho_m,\rho_m,(n-1,1))=m-1$ against $|a|=1$ for even $m$.
+
+\section{What OpenAI's cyclic module gives, and where it stops}
+
+OpenAI's proof yields more than positivity. Let $W_m\subseteq S^{\rho_m}\otimes S^{\rho_m}$
+be the cyclic module of \cite[\S3]{SaxlCyclic}. The \emph{proof} of its Proposition~3.2 (an isomorphic image of
+$W_m\otimes\mathrm{sgn}$ contains a module that surjects onto $M^{\rho_m}$), Proposition~4.2 (band quotients
+$W_m\twoheadrightarrow\mathrm{Ind}(W_{m-s}\boxtimes U_{m,s})$, $s=1,2$) and Proposition~5.3
+(every $\eta\vdash2m-1$ with at most four rows occurs in $U_{m,2}$) give a recursive lower bound $w_m(\lambda)$ for the multiplicity of $S^\lambda$ in $W_m$
+itself (each term bounds that multiplicity, which is what makes the recursion valid), hence
+\[ g(\rho_m,\rho_m,\lambda)\ \ge\ w_m(\lambda):=\max\Bigl(1,\ K_{\lambda',\rho_m},
+\sum_{\lambda/\nu\ \text{horiz.}\ m\text{-strip}} w_{m-1}(\nu),\
+\sum_{\nu\vdash N_{m-2}} w_{m-2}(\nu)\!\!\sum_{\ell(\eta)\le4}\! c^\lambda_{\nu\eta}\Bigr). \]
+Combined with Corollary~\ref{cor:crit}, the test $\max(w_m(\lambda),w_m(\lambda'))\ge|a_\lambda|+1$
+for all $\lambda$ with $a_\lambda<0$ gives a second proof of Theorem~\ref{thm:main} for small
+$m$. This second proof is conditional on the 205 propositions. We verified it independently
+for $m\le8$; we also checked $w_m\le g$ for every $\lambda$ there. An earlier internal
+computation pushed this route to $m=12$, using an inductive surrogate for $w$ that we did not
+re-run. The direct computation above makes it unnecessary.
+
+We see no way to carry this route to all $m$, for two reasons. Neither is a proof of
+impossibility. The two-sided test itself passes on all hooks for $m\le16$.
+\emph{(1) One-sidedness on hooks.} For $\lambda=(m,1^{N_m-m})$ and every $m\ge5$,
+$w_m(\lambda)=1$. Indeed $K_{\lambda',\rho_m}=\binom{m-1}{m-1}=1$; the only horizontal
+$m$-strip leaves $(1^{N_{m-1}})$, whose bound is $1$; and a width-two cut must remove
+$2m-1>m-1+4$ boxes, so it would need a column of length $>4$. The true value is large, e.g.\
+$g=84465$ at $m=8$. The conjugate hook carries the information ($w=263$ at $m=8$), so the
+two-sided test passes. But any induction that feeds $w_{m-1},w_{m-2}$ back into the band sums
+sees only the weak side (computed for $m\le16$). On hooks $\max_k|\chi^{(N-k,1^k)}(\hat h)|$ is $1,4,30,289,2974$ for $m=8,16,24,32,40$.
+\emph{(2) No mechanism for the margin.} Nothing in the construction relates the multiplicity
+of $S^\lambda$ in $W_m$ to $|\chi^\lambda(\hat h)|$. The latter grows exponentially in $m$ on
+hooks, so a uniform argument would need a new lemma (for instance, that hooks and near-hooks
+occur in $W_m$ with exponential multiplicity). We do not have one. The direct method costs
+about $p(N_m)$ times a small polynomial; $m=13$ ($n=91$) is beyond our memory budget.
+
+\emph{What is not claimed.} HSTZ for non-triangular $n$, or for $m\equiv2\pmod4$ (where a
+witness other than the staircase would be needed); any statement for general $m$.
+Theorem~\ref{thm:main} for $n=66,78$ rests on one modular computation per $n$ (with internal
+checksums), not on exact integers.
+
+\begin{thebibliography}{9}
+\bibitem{BB} C.~Bessenrodt and C.~Behns, \emph{On the Durfee size of Kronecker products of
+characters of the symmetric group and its double covers}, J.~Algebra 280 (2004) 132--144.
+\bibitem{Bes} C.~Bessenrodt, \emph{Critical classes, Kronecker products of spin characters,
+and the Saxl conjecture}, Algebraic Combinatorics 1 (2018) 353--369; arXiv:1704.00707.
+\bibitem{BBow} C.~Bessenrodt and C.~Bowman, \emph{Splitting Kronecker squares, 2-decomposition
+numbers, Catalan combinatorics, and the Saxl conjecture}, Algebraic Combinatorics (2023);
+arXiv:2202.03066.
+\bibitem{HSTZ} G.~Heide, J.~Saxl, P.~H.~Tiep, A.~E.~Zalesski, \emph{Conjugacy action, induced
+representations and the Steinberg square for simple groups of Lie type}, Proc.\ LMS 106
+(2013) 908--930; arXiv:1209.1768.
+\bibitem{PPV} I.~Pak, G.~Panova, E.~Vallejo, \emph{Kronecker products, characters, partitions,
+and the tensor square conjectures}, Adv.\ Math.\ 288 (2016) 702--731; arXiv:1304.0738.
+\bibitem{SaxlCyclic} OpenAI, \emph{A Cyclic Polytabloid Proof of Saxl's Conjecture} (2026),
+\texttt{github.com/openai/math}, family 205, commit \texttt{fd4aeeb2e}.
+\bibitem{UTS} OpenAI, \emph{Universal Tensor Squares for Symmetric Groups} (2026), ibid.
+\end{thebibliography}
+\end{document}

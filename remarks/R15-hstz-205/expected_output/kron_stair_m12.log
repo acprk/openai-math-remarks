@@ -1,0 +1,5 @@
+m=12 N=78 p(N)=12132164 P=2147483647 T=9 threads=3
+tails: 54113 nodes
+heads done, leaves(mu) = 64193
+done
+1433.93 s 11082700 KB

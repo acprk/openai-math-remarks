@@ -1,0 +1,40 @@
+m=7 N=28 eps=1 primes=[2147483579, 2147483587, 2147483629, 2147483647]
+exact identity sum_lambda g*dim(lambda) == dim(rho)^2 : True
+g(rho,rho,rho) = 359757913385  (mod 4 = 1 )
+lambdas violating g + eps*a > 0 : 0 []
+#lambda with eps*a<0 : 286
+  smallest margins g-|a|: 34 lambda (2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) g 35 a -1
+  smallest margins g-|a|: 34 lambda (26, 2) g 35 a -1
+  smallest margins g-|a|: 2194 lambda (4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) g 2195 a -1
+  smallest margins g-|a|: 2194 lambda (24, 2, 1, 1) g 2195 a -1
+  smallest margins g-|a|: 9890 lambda (3, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) g 9891 a -1
+min g over a=0 lambdas: (6, (2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+hooks (k = leg length): g(rho,rho,(N-k,1^k)), a
+  k=0 g=1 a=1
+  k=1 g=6 a=0
+  k=2 g=36 a=0
+  k=3 g=180 a=0
+  k=4 g=750 a=0
+  k=5 g=2625 a=1
+  k=6 g=7740 a=0
+  k=7 g=19416 a=0
+  k=8 g=41884 a=0
+  k=9 g=78399 a=1
+  k=10 g=128296 a=0
+  k=11 g=184680 a=0
+  k=12 g=234882 a=0
+  k=13 g=264693 a=1
+  k=14 g=264693 a=1
+  k=15 g=234882 a=0
+  k=16 g=184680 a=0
+  k=17 g=128296 a=0
+  k=18 g=78399 a=1
+  k=19 g=41884 a=0
+  k=20 g=19416 a=0
+  k=21 g=7740 a=0
+  k=22 g=2625 a=1
+  k=23 g=750 a=0
+  k=24 g=180 a=0
+  k=25 g=36 a=0
+  k=26 g=6 a=0
+  k=27 g=1 a=1

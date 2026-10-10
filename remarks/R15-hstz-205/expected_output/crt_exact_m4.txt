@@ -1,0 +1,22 @@
+m=4 N=10 eps=1 primes=[2147483579, 2147483587, 2147483629, 2147483647]
+exact identity sum_lambda g*dim(lambda) == dim(rho)^2 : True
+g(rho,rho,rho) = 117  (mod 4 = 1 )
+lambdas violating g + eps*a > 0 : 0 []
+#lambda with eps*a<0 : 10
+  smallest margins g-|a|: 2 lambda (2, 1, 1, 1, 1, 1, 1, 1, 1) g 3 a -1
+  smallest margins g-|a|: 2 lambda (9, 1) g 3 a -1
+  smallest margins g-|a|: 14 lambda (2, 2, 2, 2, 1, 1) g 15 a -1
+  smallest margins g-|a|: 14 lambda (6, 4) g 15 a -1
+  smallest margins g-|a|: 30 lambda (3, 2, 1, 1, 1, 1, 1) g 31 a -1
+min g over a=0 lambdas: (6, (2, 2, 2, 2, 2))
+hooks (k = leg length): g(rho,rho,(N-k,1^k)), a
+  k=0 g=1 a=1
+  k=1 g=3 a=-1
+  k=2 g=9 a=1
+  k=3 g=18 a=0
+  k=4 g=24 a=0
+  k=5 g=24 a=0
+  k=6 g=18 a=0
+  k=7 g=9 a=1
+  k=8 g=3 a=-1
+  k=9 g=1 a=1

@@ -1,0 +1,3 @@
+m=10: T=5 vs T=7 ; m=11: T=7 vs T=9
+# fnv1a(g mod P) = 3c35d7ae2dc31373	# fnv1a(g mod P) = 3c35d7ae2dc31373
+# fnv1a(g mod P) = a9f364bdc7a52eca	# fnv1a(g mod P) = a9f364bdc7a52eca

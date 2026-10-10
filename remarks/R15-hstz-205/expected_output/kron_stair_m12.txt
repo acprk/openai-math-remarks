@@ -1,0 +1,87 @@
+# m=12 N=78 eps=1 P=2147483647 hhat=23,19,15,11,7,3,
+# g(rho,rho,rho) mod P = 529007051 ; a(rho) = 1
+hook 78^1^0 a=1 gmodP=1
+hook 77^1^1 a=-1 gmodP=11
+hook 76^1^2 a=1 gmodP=121
+hook 75^1^3 a=0 gmodP=1210
+hook 74^1^4 a=0 gmodP=11000
+hook 73^1^5 a=0 gmodP=91000
+hook 72^1^6 a=0 gmodP=684330
+hook 71^1^7 a=1 gmodP=4679001
+hook 70^1^8 a=-1 gmodP=29121459
+hook 69^1^9 a=1 gmodP=165320169
+hook 68^1^10 a=0 gmodP=858348256
+hook 67^1^11 a=1 gmodP=1941227468
+hook 66^1^12 a=-1 gmodP=748718559
+hook 65^1^13 a=1 gmodP=1745267422
+hook 64^1^14 a=0 gmodP=1943398808
+hook 63^1^15 a=1 gmodP=1647468811
+hook 62^1^16 a=-1 gmodP=612655715
+hook 61^1^17 a=1 gmodP=229417157
+hook 60^1^18 a=1 gmodP=1531025337
+hook 59^1^19 a=0 gmodP=2021803267
+hook 58^1^20 a=0 gmodP=1710291166
+hook 57^1^21 a=1 gmodP=1962835218
+hook 56^1^22 a=1 gmodP=62841116
+hook 55^1^23 a=0 gmodP=2126441619
+hook 54^1^24 a=0 gmodP=1532180256
+hook 53^1^25 a=1 gmodP=2070314596
+hook 52^1^26 a=2 gmodP=591964758
+hook 51^1^27 a=-2 gmodP=387740930
+hook 50^1^28 a=2 gmodP=1782698699
+hook 49^1^29 a=0 gmodP=1557791268
+hook 48^1^30 a=2 gmodP=866997986
+hook 47^1^31 a=-2 gmodP=451460075
+hook 46^1^32 a=2 gmodP=423035667
+hook 45^1^33 a=1 gmodP=119626495
+hook 44^1^34 a=1 gmodP=1739893756
+hook 43^1^35 a=-1 gmodP=93608551
+hook 42^1^36 a=2 gmodP=1759471123
+hook 41^1^37 a=1 gmodP=995247155
+hook 40^1^38 a=0 gmodP=1174508740
+hook 39^1^39 a=0 gmodP=1174508740
+hook 38^1^40 a=1 gmodP=995247155
+hook 37^1^41 a=2 gmodP=1759471123
+hook 36^1^42 a=-1 gmodP=93608551
+hook 35^1^43 a=1 gmodP=1739893756
+hook 34^1^44 a=1 gmodP=119626495
+hook 33^1^45 a=2 gmodP=423035667
+hook 32^1^46 a=-2 gmodP=451460075
+hook 31^1^47 a=2 gmodP=866997986
+hook 30^1^48 a=0 gmodP=1557791268
+hook 29^1^49 a=2 gmodP=1782698699
+hook 28^1^50 a=-2 gmodP=387740930
+hook 27^1^51 a=2 gmodP=591964758
+hook 26^1^52 a=1 gmodP=2070314596
+hook 25^1^53 a=0 gmodP=1532180256
+hook 24^1^54 a=0 gmodP=2126441619
+hook 23^1^55 a=1 gmodP=62841116
+hook 22^1^56 a=1 gmodP=1962835218
+hook 21^1^57 a=0 gmodP=1710291166
+hook 20^1^58 a=0 gmodP=2021803267
+hook 19^1^59 a=1 gmodP=1531025337
+hook 18^1^60 a=1 gmodP=229417157
+hook 17^1^61 a=-1 gmodP=612655715
+hook 16^1^62 a=1 gmodP=1647468811
+hook 15^1^63 a=0 gmodP=1943398808
+hook 14^1^64 a=1 gmodP=1745267422
+hook 13^1^65 a=-1 gmodP=748718559
+hook 12^1^66 a=1 gmodP=1941227468
+hook 11^1^67 a=0 gmodP=858348256
+hook 10^1^68 a=1 gmodP=165320169
+hook 9^1^69 a=-1 gmodP=29121459
+hook 8^1^70 a=1 gmodP=4679001
+hook 7^1^71 a=0 gmodP=684330
+hook 6^1^72 a=0 gmodP=91000
+hook 5^1^73 a=0 gmodP=11000
+hook 4^1^74 a=0 gmodP=1210
+hook 3^1^75 a=1 gmodP=121
+hook 2^1^76 a=-1 gmodP=11
+hook 1^1^77 a=1 gmodP=1
+# #lambda=12132164  a<0:626548 a=0:10879571 a>0:626045
+# lambdas with eps*a<0 and g == |a| (mod P): 0   (0 => every such g > |a|)
+# lambdas with a==0 and g == 0 (mod P): 0
+# check sum_lambda g*dim(lambda) - dim(rho)^2 == 0 mod P : OK
+# check sum_lambda g*a(lambda) == 1 mod P : OK
+# g(rho,rho,(N)) mod P = 1 ; g(rho,rho,(1^N)) mod P = 1
+# fnv1a(g mod P) = 1b13c43200110037
