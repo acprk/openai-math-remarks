@@ -8,3 +8,4 @@ __pycache__/
 !**/expected_output/*.out
 _build/
 .venv/
+*.pkl
