@@ -1,4 +1,4 @@
-# R14 primary script (copied from reviews/R7-skill/rescan/topt-lean/). Env: sage -python (SageMath 9.5), run from scripts/primary/.
+# R14 primary script. Env: sage -python (SageMath 9.5), run from scripts/primary/.
 # Expected: expected_output/primary_exact.txt
 # exact certificates: q=16 Mf <= lam f (lam<1) with paper's f (5 on t with bar t extra, else 1);
 # q=8: Collatz-Wielandt lower bound M g >= mu g with mu>1 (so sum_W P(W)^2 grows; lemma false)

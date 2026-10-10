@@ -13,8 +13,8 @@ All computations were run on the shared host with ≤ 3 threads under `nice`; no
 | threshold independence | T = 5 vs 7 (m = 10), T = 7 vs 9 (m = 11) | bit-identical vectors (FNV hashes equal; `threshold_consistency.txt`) |
 | exact integers, m ≤ 9 | 4 primes + `crt_exact.py` | exact identity Σ g·dim = dim(ρ)² over ℤ: True for m = 3,4,5,7,8,9; g(ρ,ρ,ρ) ≡ 1 mod 4 (as Prop. 1(3) predicts); minimal margins g − \|a\| = 2, 2, 14, 34, 6, 62 |
 | full-vector cross-check | `gap_stair_g.g` (GAP S_n tables) vs kron_stair | identical for m = 3,4,5,6 (`gap_vs_kron_stair.txt`) |
-| earlier independent value | R5-push hook computation | g(ρ₈,ρ₈,(8,1^28)) = 84465 reproduced |
-| 205 lower bound w_m | `w205.sage` (Sage 9.5 lrcalc, own Kostka via Pieri) | w ≤ g for every λ, m ≤ 8; two-sided test max(w(λ),w(λ′)) ≥ \|a\|+1 passes for all a<0, m ≤ 8; agrees **exactly** with the earlier (separate-code) tables `reviews/R4-hard/C-hstz/scripts/w_m{3..8}.pkl` (0 differences out of 17977 at m = 8) |
+| earlier independent value | earlier separate hook computation | g(ρ₈,ρ₈,(8,1^28)) = 84465 reproduced |
+| 205 lower bound w_m | `w205.sage` (Sage 9.5 lrcalc, own Kostka via Pieri) | w ≤ g for every λ, m ≤ 8; two-sided test max(w(λ),w(λ′)) ≥ \|a\|+1 passes for all a<0, m ≤ 8; agrees **exactly** with the earlier separate-code tables (not shipped) (0 differences out of 17977 at m = 8) |
 | hook obstruction | `w205.sage hooks 16` | w_m((m,1^{N−m})) = 1 for all 4 ≤ m ≤ 16, conjugate hook 6 … 816504 (`w205_hooks_m1-16.txt`); proof for all m ≥ 5 in note §4 |
 
 ## 2. Independent adversarial review (separate AI session, read-only, own code in /tmp)
@@ -44,5 +44,5 @@ Verdict: no mathematical or certificate error. Details:
 
 * n = 66, 78 rest on one modular run each (p = 2³¹−1) plus mod-p checksums, not exact integers; no second prime at m = 12.
 * m ≥ 13 not attempted (m = 13: p(91) ≈ 7·10⁷ partitions, beyond the memory budget of this implementation).
-* The conditional 205 route was independently re-run only for m ≤ 8. The earlier inductive extension to m = 12 (`reviews/R5-push/HSTZ-hook/star_test2.py`) was **not** re-run and is not needed for the theorem.
+* The conditional 205 route was independently re-run only for m ≤ 8. The earlier inductive extension to m = 12 (not shipped) was **not** re-run and is not needed for the theorem.
 * GAP's A_n tables are trusted for n ≤ 20; Sage/GAP generic character tables are trusted in the cross-checks.

@@ -18,7 +18,7 @@
 #     u = L + (kf-1) B_f + (kg-1) B_g - H,   v = (2-kf) B_f + (2-kg) B_g - 2L + H.
 #
 # The quadrature/strip method is the one of the paper's appendix; the code is adapted from the
-# certificate written by the adversarial reviewer of the CONST-OPT round (reviewer script
+# certificate written by the adversarial reviewer of the constant-optimisation round (reviewer script
 # "certify.py"), parameterised and cleaned up here.
 #
 # Usage: python3 hardcore_certificate.py [main|dense|paper] [N]

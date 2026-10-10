@@ -1,6 +1,6 @@
 # R14 verification record (2026-10-09)
 
-## 1. Primary computation (topt-lean session; `scripts/primary/`)
+## 1. Primary computation (primary session; `scripts/primary/`)
 | Item | Command | Result |
 |---|---|---|
 | q = 16 certificate with the paper's f | `kz196_exact.py` | max (Mf)/f = 7138933/7179627 = 0.994332 < 1, Σf = 288 |

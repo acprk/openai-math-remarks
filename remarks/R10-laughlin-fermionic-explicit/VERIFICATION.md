@@ -8,7 +8,7 @@ Pins: openai/math `adc7f1241b42e322a6451854ab7e4b4c146bf78a`. The preprint direc
 
 | Role | Session | What |
 |---|---|---|
-| Primary computation | R7-skill 269 session (`reviews/R7-skill/269/cert/`, here `scripts/primary/`) | SDP for Γ, rationalisation, arb certificates for Q = 24..299 (r-space + rank-free b-space), 168 Taylor-model boxes for Q ≥ 300, rigorous ED for N ≤ 8, Jordan–Wigner sector cross-check (22 sectors). |
+| Primary computation | primary session (`scripts/primary/`) | SDP for Γ, rationalisation, arb certificates for Q = 24..299 (r-space + rank-free b-space), 168 Taylor-model boxes for Q ≥ 300, rigorous ED for N ≤ 8, Jordan–Wigner sector cross-check (22 sectors). |
 | Adversarial review + independent re-implementation | this session (separate AI session) | Instructed to refute Theorems A and B. Rebuilt the operators from Clebsch–Gordan coefficients with new code (`scripts/independent/`). The new code shares no code with `primary/` except: check1e and check3 read the certified Γ, γ_Q and ρ_D, which are the objects under test, and check3 calls the primary pipeline in order to compare against it. Results below. |
 
 ## Items checked

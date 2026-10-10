@@ -70,4 +70,4 @@ gp -q independent/pcheck.gp < /dev/null      # APRCL + Pocklington certificate, 
 * The Lean certificate was not redone. It would need the new parameters and a Pratt or Pocklington certificate for the 25-digit prime.
 * A smaller instance, (N, k, s) = (74, 35, 11) with p = 1569396701548619508553 (22 digits), would follow from replacing the crude bound \|𝓡\| ≥ \|A₀\|/(2p³) (`03-modular.tex` L137–154) by the true proportion ≈ 1/(48p). That needs a new estimate and is **not** claimed here.
 * Characteristic two is not addressed (that is a separate OpenAI preprint).
-* Novelty: the earlier rescan session searched GitHub and arXiv (up to 2026-10-09) and found no explicit prime for this construction. The only related community item found, formal-conjectures #6919, concerns Gottschalk's conjecture. To our knowledge, no one has given one.
+* Novelty: the earlier search session searched GitHub and arXiv (up to 2026-10-09) and found no explicit prime for this construction. The only related community item found, formal-conjectures #6919, concerns Gottschalk's conjecture. To our knowledge, no one has given one.

@@ -10,12 +10,12 @@ thread each. `scripts/run_all.sh` reproduced all six expected outputs byte-for-b
 
 | Item | Primary derivation | Independent re-implementation | Adversarial review | Status |
 |---|---|---|---|---|
-| σ-variant of alias extraction (coverage, sizes, cumulative caps) | internal session "CONST-OPT" (2026-10-09); proofs written out in note §2 by this build | exponent inequalities recomputed in exact rationals + arb (`independent/indep_check.py`, Part 2) | round 1 (CONST-OPT reviewer): accepted, three holes A/B/C; round 2 (this build): no fault in the σ-variant | holds (premise) |
+| σ-variant of alias extraction (coverage, sizes, cumulative caps) | internal session (2026-10-09); proofs written out in note §2 by this build | exponent inequalities recomputed in exact rationals + arb (`independent/indep_check.py`, Part 2) | round 1 (constant-optimisation reviewer): accepted, three holes A/B/C; round 2 (this build): no fault in the σ-variant | holds (premise) |
 | Repairs A (cumulative caps), B (guard in pair exponent), C (checksum certified at τ₀ = 0.48888) | this build (note §2–3, `chain_check.py`, `hardcore_certificate.py main`) | Part 1–2 of the independent script | round 2 checked all three | closed |
-| New densities, κ_f ≠ κ_g, Theorem 4.1 unchanged | CONST-OPT (differential evolution) | — | round 1: identities split correctly; round 2: re-derived u, v and checked that Thm 4.1 uses κ only through normalisation and relative entropies | holds |
+| New densities, κ_f ≠ κ_g, Theorem 4.1 unchanged | constant-optimisation (differential evolution) | — | round 1: identities split correctly; round 2: re-derived u, v and checked that Thm 4.1 uses κ only through normalisation and relative entropies | holds |
 | Filtering moments (the only numerical input) | `hardcore_certificate.py` (mpmath intervals, N = 128, analytic trapezoid + strip bounds) | `indep_check.py` Part 1 (python-flint balls, N = 192, strips 0.4 / 0.34, scores from the definitions of D, A, E, its own strip bounds) | round 2: own non-interval computation at N = 512, 1024; strip algebra re-derived | certified twice, same 12 digits |
 | Dense corollary 0.4741 | this build | Part 1 (dense row) | round 2: **must-fix**, the checksum ran at τ = 0.4741, so its time 2^{(0.4741+20ε)n} exceeded the claim; repaired: run at τ = 0.47409, λ = (8.447, 8.236), recertified | closed |
-| Proposition C | B-lattice session (short proof + exhaustive check on 3 groups) | `theorem_c_exhaustive.py` (closure BFS) and `indep_check.py` Part 3 (kernels of all endomorphisms) on 7 groups, same subgroup counts | round 2: proof correct; third enumeration method on (ℤ/4)², (ℤ/8)², (ℤ/49)², (ℤ/8)³ (802 subgroups), (ℤ/4)⁴ (1983 subgroups); 0 violations | holds |
+| Proposition C | earlier internal session (short proof + exhaustive check on 3 groups) | `theorem_c_exhaustive.py` (closure BFS) and `indep_check.py` Part 3 (kernels of all endomorphisms) on 7 groups, same subgroup counts | round 2: proof correct; third enumeration method on (ℤ/4)², (ℤ/8)², (ℤ/49)², (ℤ/8)³ (802 subgroups), (ℤ/4)⁴ (1983 subgroups); 0 violations | holds |
 
 ## 2. Adversarial review, round 2 (separate AI session, 2026-10-09): **CONFIRMED WITH FIXES**
 
@@ -39,7 +39,7 @@ Findings and what was done:
    open the Ye–Li abstract. This build fetched it through the arXiv API ("O(2^{0.499999n}) … representation
    technique framework of Randolph and Węgrzycki … partial match"), so the citation is accurate.
 
-Round 1 (CONST-OPT reviewer, earlier on 2026-10-09) had accepted O(2^{0.4889n}) and reported holes A/B/C. It
+Round 1 (constant-optimisation reviewer, earlier on 2026-10-09) had accepted O(2^{0.4889n}) and reported holes A/B/C. It
 also proved the quadrature gap with a rigorous banded bound (the basis of `hardcore_certificate.py`), and its
 independent re-optimization found ≈ 0.48884 for the whole chain.
 

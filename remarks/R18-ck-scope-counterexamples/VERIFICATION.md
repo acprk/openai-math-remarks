@@ -7,7 +7,7 @@ All runs: 2026-10-09, CPython 3.10.12, mpmath 1.3.0, sympy 1.14.0, NumPy 2.2.6, 
 
 | Item | Primary | Independent re-implementation | Adversarial review | Status |
 |---|---|---|---|---|
-| Extended Cor. 1.2 / Thm 1.1 fail for small λ when w ≠ ½ (resampling noise) | internal review (G-boolean §3.1, "Proposition A"); `primary/qary_refined_boolean.py` scan, max gap 4.6e-3 | `independent/indep_scope.py`: interval certificates at q=4, q=3, p=0.3; exact sympy series | separate AI session: sympy series incl. λ³ term −m²λ³/(6w(1−w)); direct 4×4 joint-law sum for q=4 matches the closed form to 40 digits; windows reproduced | holds |
+| Extended Cor. 1.2 / Thm 1.1 fail for small λ when w ≠ ½ (resampling noise) | internal review; `primary/qary_refined_boolean.py` scan, max gap 4.6e-3 | `independent/indep_scope.py`: interval certificates at q=4, q=3, p=0.3; exact sympy series | separate AI session: sympy series incl. λ³ term −m²λ³/(6w(1−w)); direct 4×4 joint-law sum for q=4 matches the closed form to 40 digits; windows reproduced | holds |
 | Extended Hellinger bound fails (0.005464 > 0.005013) | internal review (CKB-ROUND1, Prop. 4); `primary/hellinger_counter.py` | interval certificate [0.00546448802612, …] vs [0.00501256289338, …] | reproduced: 0.00546449 > 0.00501256; window root 0.3227258 | holds |
 | Plain CK curve not violated by these examples | — | interval check in each witness | grid w = 0.01..0.99 × 199 values of λ: never violated (equality only at w = ½) | observation only |
 | Uniform binary cube cannot produce a witness | — | AND control under bit flips satisfies both bounds | same control computed by the reviewer | consistent with 119 |

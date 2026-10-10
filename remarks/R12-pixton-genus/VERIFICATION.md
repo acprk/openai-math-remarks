@@ -8,7 +8,7 @@ Pins: openai/math `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`. The family-053 dir
 
 | Role | Session | What |
 |---|---|---|
-| Primary computation | R7-skill rescan s0 (`reviews/R7-skill/rescan/s0/pixton_budget.py`) | Transcribed the Section 8 budget. Binary search over g for K ∈ {290, 300, …} with local K-refinement. Result: 2.263·10^14 (4K+20) and 9.38·10^13 (3K+5). |
+| Primary computation | primary session (`scripts/primary/pixton_budget.py`) | Transcribed the Section 8 budget. Binary search over g for K ∈ {290, 300, …} with local K-refinement. Result: 2.263·10^14 (4K+20) and 9.38·10^13 (3K+5). |
 | Main agent | — | Re-ran the integer test. |
 | Adversarial review + independent re-implementation | this session (separate AI session) | Line-by-line reading of `08-support.tex` L326-510, Lemma `lem:large-vertex-test` / Lemma `lem:exterior-ideal` / Theorem `thm:surface` hypotheses, and Sections 1, 2, 7. New code `independent/indep_budget_053.py`, written from the tex. It uses an exhaustive K range and exact least-g certification. |
 

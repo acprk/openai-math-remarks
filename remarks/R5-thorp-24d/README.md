@@ -128,7 +128,7 @@ Prints `OK` for each of the five outputs:
 
 ## Relation to earlier internal estimates
 
-- **CONST-OPT (45d, adversarially reviewed).** This is route O. It kept the main paper's final step
+- **constant-optimisation (45d, adversarially reviewed).** This is route O. It kept the main paper's final step
   (‖B‖_HS ≤ √D‖B‖_op for every factor). That is why it needed four factors, and why its stated "framework
   bound" 44.30 / ≥ 41.47 applies only to that architecture. Its claim is reproduced and certified here
   (Corollary 1.2, route O). One fix: the earlier interval check certified (4,4,4,5) = 44.30299 but not

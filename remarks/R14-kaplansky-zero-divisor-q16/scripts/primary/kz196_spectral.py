@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# R14 primary script (copied from reviews/R7-skill/rescan/topt-lean/). Env: sage -python or python3+numpy.
+# R14 primary script. Env: sage -python or python3+numpy.
 # Expected: expected_output/primary_spectral.txt
 """196 Kaplansky zero-divisor: squared-word decay needs rho(M)<1, M_{t,u}=w(t,u)^2.
 Builds PG(2,q) for q=2^a, the alphabet T = points + 3 extras, involution pairing,

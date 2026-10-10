@@ -8,7 +8,7 @@ Pins: openai/math `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`. The family-100 pre
 
 | Role | Session | What |
 |---|---|---|
-| Primary computation | R7-skill rescan s1 (`reviews/R7-skill/rescan/s1/`) | Chose per-sector margins (`cyl_persector.py`, floating point). Wrote the certificate `cyl_cert.py`: exact rational dual vectors, one per (j,k), then the area via rational bounds r_j ≥ 1/√(·). Log `cert_04_320_ps.log`: max U_jk = −1.5·10⁻⁷, 0 uncertified, S/A_min ≤ 0.4999773398. |
+| Primary computation | primary session (`scripts/primary/`) | Chose per-sector margins (`cyl_persector.py`, floating point). Wrote the certificate `cyl_cert.py`: exact rational dual vectors, one per (j,k), then the area via rational bounds r_j ≥ 1/√(·). Log `cert_04_320_ps.log`: max U_jk = −1.5·10⁻⁷, 0 uncertified, S/A_min ≤ 0.4999773398. |
 | Adversarial review + independent reimplementation | this session (separate AI session) | Re-derived the geometry from the tex. Wrote new code (`scripts/independent/`) that reuses only the margin data file. Its exact primal LP, interval area, direct geometric test and A_min check are described below. |
 
 ## (a) Logic of the reduction (adversarial reading)

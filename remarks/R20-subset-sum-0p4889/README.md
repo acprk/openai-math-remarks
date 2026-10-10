@@ -69,7 +69,7 @@ independent adversarial reviews were run by separate AI sessions and are not hum
 | `aliases.tex` l. 397, (5.16) | .4894 > γ | σ(1 − θ′) = 0.371412 > γ |
 | `implementation.tex` l. 125–150, 274–290, (6.4) | polynomially many prime draws; all-history 0.489995 < 0.49 | 2^{ρn}·poly draws of P′ (total cost 2^{0.01997n}, coupling failure still o(1)); all-history 0.4888802 < 0.4889 |
 
-**Repairs of the three holes found by the earlier adversarial review** (CONST-OPT round):
+**Repairs of the three holes found by the earlier adversarial review** (constant-optimisation round):
 (A) with exponentially many trials, the caps must be cumulative (otherwise the cap is multiplied by T);
 (B) the visited-pair exponent must carry the bit-guard term +10⁻⁵ (0.488846 → 0.488856);
 (C) the checksum must be certified at the exponent at which it runs, τ₀ = 0.48888 (λ = 8.323 / 8.132; margin
@@ -77,7 +77,7 @@ independent adversarial reviews were run by separate AI sessions and are not hum
 
 ## Where the gain comes from
 
-| Step (numerical, from the CONST-OPT notes; not certified) | Exponent |
+| Step (numerical, from the constant-optimisation notes; not certified) | Exponent |
 |---|---|
 | Preprint | 0.49 (0.489995 before slack) |
 | (i) re-optimize λ, η, μ, δ with the preprint's densities | 0.48977 |

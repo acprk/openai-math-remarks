@@ -8,7 +8,7 @@ Pins: openai/math `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`. The family-059 dir
 
 | Role | Session | What |
 |---|---|---|
-| Primary computation | R7-skill rescan s0 (`reviews/R7-skill/rescan/s0/`) | Ran `prune.py` (6000-smooth columns, iterative pruning), `ktime.sage` (ℚ-kernel, saturation; 3250 s), and `fromK.sage` (weighted LLL, best E≠0 vector). Output `relK_11_6000.json`, sha256 `e3b747b1…`. The preprint's verifier accepts it with N = 1,802,976. |
+| Primary computation | primary session (`scripts/primary/`) | Ran `prune.py` (6000-smooth columns, iterative pruning), `ktime.sage` (ℚ-kernel, saturation; 3250 s), and `fromK.sage` (weighted LLL, best E≠0 vector). Output `relK_11_6000.json`, sha256 `e3b747b1…`. The preprint's verifier accepts it with N = 1,802,976. |
 | Main agent | — | Re-ran the preprint's verifier on the new relation: `verification_passed: true`. |
 | Adversarial review + independent re-implementation | this session (separate AI session) | Full read of the preprint to list the properties of the relation that the proof uses (table (a)). New checker `independent/indep_check_059.py`, written from the tex without the verifier. Negative controls. Dedup search. |
 

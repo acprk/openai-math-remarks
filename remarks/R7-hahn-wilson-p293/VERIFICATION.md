@@ -4,7 +4,7 @@ Claim: with R₀ = (M−3)/2 and conditions (P1)–(P4) (see README), the proof 
 
 All runs: Python 3.10.12 (`/usr/bin/python3`), numpy 2.2.6, single thread, on 2026-10-09. Every script uses exact `int`/`Fraction` arithmetic.
 
-## Layer 1: main computation (rescan session, re-run by the coordinating agent)
+## Layer 1: main computation (primary session, re-run by the coordinating agent)
 
 `scripts/main/hw319_pmin.py` encodes the conditions of `operator.tex` with line references: C1 (L322–326), CB (L503), CS (L590–597, with the L592 bound rewritten), CE (L507), first-band bounds (L583–603), J (L692–694), and the base stage (L546–562). It searches primes 11 ≤ p < 10⁵ and all odd M, R₀.
 

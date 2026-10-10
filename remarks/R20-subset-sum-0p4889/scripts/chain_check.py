@@ -1,7 +1,7 @@
 # Exponent bookkeeping for the whole algorithm of family 138 with the modifications of this remark:
 #   (1) sigma-variant of alias extraction (|J cap M| = sigma m instead of m/2, exponentially many trials);
 #   (2) new checksum hard core (certified separately by hardcore_certificate.py);
-#   (3) the three repairs requested by the CONST-OPT adversarial review:
+#   (3) the three repairs requested by the constant-optimisation adversarial review:
 #       A  caps on alias lists / visited pairs are CUMULATIVE over all trials (one budget 2^{ceil(tau_run n)}),
 #       B  the visited-pair exponent carries the bit-guard term +1e-5 (b <= 2^{1e-5 n}),
 #       C  the checksum is run (and certified) at tau_run = 0.48888 < 0.4889, not at 0.4889.
@@ -87,6 +87,6 @@ print('\n== comparison ==')
 print('  exponent: 0.49 -> %s ; saving below 1/2: 0.0100 -> %s (x%s)' %
       (C['claim'], mp.nstr(0.5 - mp.mpf(C['claim']), 4), mp.nstr((0.5 - mp.mpf(C['claim'])) / mp.mpf('0.01'), 4)))
 print('  running-time ratio old/new = 2^{%s n}' % mp.nstr(mp.mpf('0.49') - mp.mpf(C['claim']), 4))
-print('  heuristic framework limit ~0.4798 (CONST-OPT): share of the headroom 1/2 - 0.4798 used: paper %s, new %s' %
+print('  heuristic framework limit ~0.4798 (constant-optimisation): share of the headroom 1/2 - 0.4798 used: paper %s, new %s' %
       (mp.nstr(mp.mpf('0.01') / mp.mpf('0.0202'), 3), mp.nstr((0.5 - mp.mpf(C['claim'])) / mp.mpf('0.0202'), 3)))
 print('\nALL CHAIN CHECKS PASS:', ok)

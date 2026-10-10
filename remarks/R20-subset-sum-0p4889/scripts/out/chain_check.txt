@@ -24,6 +24,6 @@
 == comparison ==
   exponent: 0.49 -> 0.4889 ; saving below 1/2: 0.0100 -> 0.0111 (x1.11)
   running-time ratio old/new = 2^{0.0011 n}
-  heuristic framework limit ~0.4798 (CONST-OPT): share of the headroom 1/2 - 0.4798 used: paper 0.495, new 0.55
+  heuristic framework limit ~0.4798 (constant-optimisation): share of the headroom 1/2 - 0.4798 used: paper 0.495, new 0.55
 
 ALL CHAIN CHECKS PASS: True

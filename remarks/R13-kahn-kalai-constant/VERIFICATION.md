@@ -1,6 +1,6 @@
 # R13 verification record (2026-10-09)
 
-## 1. Primary computation (topt-lean session; `scripts/primary/kk176_verify.py`)
+## 1. Primary computation (primary session; `scripts/primary/kk176_verify.py`)
 | Item | Command | Result |
 |---|---|---|
 | Main | `kk176_verify.py 6.15 1.4 0.4 6` | B = 0.402469, K = 7.20698, λ = 17.6514, ar1 = 1.68017, ar2 = 3.40960 → C1 = 100 183.8, C2 = 203 304.5 |

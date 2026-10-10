@@ -27,14 +27,14 @@ Pins:
 
 | Check | Command | Result |
 |---|---|---|
-| Build the library entry point | `lake build OAI.Combinatorics.SharpRamsey.Main` (in `math/lean`) | `Build completed successfully (9331 jobs)`. The SharpRamsey closure had previously been built from scratch: 9329 jobs in 1069 s on 8 cores (`reviews/R4-hard/B-ramsey4/build.log`). |
+| Build the library entry point | `lake build OAI.Combinatorics.SharpRamsey.Main` (in `math/lean`) | `Build completed successfully (9331 jobs)`. The SharpRamsey closure had previously been built from scratch: 9329 jobs in 1069 s on 8 cores. |
 | Elaborate the remark | `lake env lean lean/R4Lower.lean` | Both theorems elaborate, about 37 s. |
 | Axioms | `#print axioms` in the file | `r4_lower` and `main_four` each depend on `[propext, Classical.choice, Quot.sound]`, matching the comparator's `permitted_axioms`. |
 | Fresh kernel replay | `LEAN_NUM_THREADS=1 lake env leanchecker --fresh OAI.Combinatorics.SharpRamsey.Main` | Exit 0, no errors; 1:24:22 wall clock (3232 s user CPU, single thread, max RSS 8.7 GB). This replays all of Mathlib plus the SharpRamsey closure in a fresh environment. |
 | Script syntax | `bash -n scripts/check.sh` | ok |
 | Note | `latexmk -lualatex note.tex` | 3 pages, no errors, no overfull boxes, no undefined references. |
 
-An earlier session had independently checked a 5-line version of `r4_lower` (importing `PrimeConstruction` and `Lower` directly) with the same axiom output (`reviews/R4-hard/RESULTS.md`, §B).
+An earlier session had independently checked a 5-line version of `r4_lower` (importing `PrimeConstruction` and `Lower` directly) with the same axiom output.
 
 ## GAPs (not covered)
 

@@ -86,7 +86,7 @@ We searched GitHub code (`gh search code` for "3h+a-1", "shifted tripling" and "
   - `eliottcassidy2000/math` THM-4568 (commit `450388a22f72`, 2026-10-07T16:03Z), with a proof, an LP check and an audit;
   - `GasStationManager/SafeVerifyAgent` `audits/mm94-intake/READ-F.md` §2d (2026-10-08), numerically.
 
-  Copies of the eliottcassidy2000 files are kept for provenance in `0940project/reviews/A-fastarith/allfields/prior_art_eliottcassidy2000/`.
+  Local copies of the eliottcassidy2000 files were kept for provenance; they are not redistributed here.
 - **Their "gadget barrier" overlaps our chain row.** It covers shared-leg gadgets `P(a, mh+c) ≥ mP(a,h)` and the minimal shift `c ≥ (m−1)(a−1)/2`.
 - **Not found elsewhere.** We found the enlarged families nowhere else: the A–D determinant/bivariate filtrations, peel, CW, 1-block, T→C, T⊗C and the zero/rest laser, together with the balanced lift.
 - **Other sources.** `selanavot/matrix-multiplication-all-fields`, `jzuiddam/omega-nine-quarters-all-fields`, arXiv:2610.10494 (Uznański, rectangular) and VibeMathed contain no barrier statement.

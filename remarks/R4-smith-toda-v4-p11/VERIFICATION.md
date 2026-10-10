@@ -6,7 +6,7 @@ Claim: every finite (May E₁ page / inequality) statement in OpenAI's *A finite
 
 Environment: Python 3.10.12 (`/usr/bin/python3`, numpy 2.2.6, sympy 1.14.0). For `independent/` we used a Python 3.12 venv with z3-solver 4.x (version string 5.1.0) and numpy. All scripts are single-threaded and all arithmetic is exact. Re-run on 2026-10-09 inside this repository; outputs are in `scripts/expected_output/`.
 
-## Layer 1: main computation (rescan session; re-run by the coordinating agent and again here)
+## Layer 1: main computation (primary session; re-run by the coordinating agent and again here)
 
 * `main/may308.py p` uses a direct recursive enumeration of E₁ monomials and computes d₁ ranks over 𝔽_p. It runs these checks:
   * (A) Lemma `low:algebraic-vanishing`: every lower obstruction bidegree is empty;

@@ -8,7 +8,7 @@ Host: Intel Xeon Gold 6230R, Ubuntu 22.04.5, Linux 6.8.0, Boost 1.86 headers; on
 
 | Item | Primary | Second toolchain ("independent re-implementation" replaced by another compiler / level, as instructed) | Adversarial review | Status |
 |---|---|---|---|---|
-| Full traversal (a) | 2026-10-07, GCC 9.5.0 `-O3` (session "I-infotheory"): trace identical to upstream | 2026-10-09: Clang 17.0.6 `-O2` and GCC 12.3.0 `-O1`, full, identical; `run_all.sh` again with Clang | reviewer re-ran `run_all.sh` (ALL OK, 3m32s) | reproduced 4× |
+| Full traversal (a) | 2026-10-07, GCC 9.5.0 `-O3`: trace identical to upstream | 2026-10-09: Clang 17.0.6 `-O2` and GCC 12.3.0 `-O1`, full, identical; `run_all.sh` again with Clang | reviewer re-ran `run_all.sh` (ALL OK, 3m32s) | reproduced 4× |
 | Full traversal (b) | 2026-10-07, GCC 9.5.0 `-O3`: trace identical to upstream | 2026-10-09: Clang 17.0.6 `-O2`, first 30 min (8 of 19 progress lines, 800 of 1935 cells), prefix identical | not re-run (20–90 min); the reviewer checked file times against the logged run time | reproduced 1× in full + 1 prefix |
 | 2026-10-07 binary flags | not logged at the time | rebuild `g++ -std=c++17 -O3 -UNDEBUG checks/certificate.cpp` gives the same SHA-256 `a18f5b85…` | reviewer reproduced it, and showed `-O2` gives a different hash | identified |
 | `small_polynomials.py` | 2026-10-09 | — | reviewer re-ran | JSON identical to upstream |

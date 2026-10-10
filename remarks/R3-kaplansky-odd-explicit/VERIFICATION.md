@@ -4,7 +4,7 @@ Claim: OpenAI's odd-characteristic Kaplansky counterexample (family 197) goes th
 
 Environment: Python 3.10.12 (`/usr/bin/python3`, sympy 1.14.0) and PARI/GP 2.13.3. All arithmetic is exact (`int`, `Fraction`, GP integers). Runs on 2026-10-09.
 
-## Layer 1: main computation (rescan session; re-run by the coordinating agent and again here)
+## Layer 1: main computation (primary session; re-run by the coordinating agent and again here)
 
 * `scripts/main/tk_exact.py` computes m, t, t/m = 0.0102593 < 1/96, and p (25 digits). It checks the fit identities F(a) ∈ {0, 1} for a = 0..41 and the maximum degree Δ.
 * `scripts/main/tk_opt.py` returns the first admissible (N, k, s) for each constant: (86,42,14) for 1/100, (86,41,13) for 1/96, (74,35,11) for 1/48. The original (1200,600,200) has m ≈ 10^359.6.

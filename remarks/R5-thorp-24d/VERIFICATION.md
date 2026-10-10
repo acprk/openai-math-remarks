@@ -8,13 +8,13 @@ core. `scripts/run_all.sh` reproduced all five expected outputs byte-for-byte (`
 
 | Item | Primary derivation | Independent check | Adversarial review | Status |
 |---|---|---|---|---|
-| Route O ingredients M1–M7 (θ→0, KL chain, local look-back, any σ, b blocks, mixed factors, cap) | internal session "CONST-OPT" | separate session re-derived each step; reran `const_chain.py`; recomputed 2/L_b independently; checked search completeness | same separate session (did not refute; corrected the σ-window of (3,4,5,5) to σ < 2/59) | holds; reproduced here |
-| Lemma 2.3 (closed form of the recurrence) | this build session (new, tighter than CONST-OPT's: η* in place of η/(1−ρ)) | worst-case recurrence iterated at 40-digit precision; bound held at every step (`energy_lemma_check.py`; max ratio 2.6e-3) | none yet | proof written in note §2 |
+| Route O ingredients M1–M7 (θ→0, KL chain, local look-back, any σ, b blocks, mixed factors, cap) | internal session | separate session re-derived each step; reran `const_chain.py`; recomputed 2/L_b independently; checked search completeness | same separate session (did not refute; corrected the σ-window of (3,4,5,5) to σ < 2/59) | holds; reproduced here |
+| Lemma 2.3 (closed form of the recurrence) | this build session (new, tighter than the internal session's: η* in place of η/(1−ρ)) | worst-case recurrence iterated at 40-digit precision; bound held at every step (`energy_lemma_check.py`; max ratio 2.6e-3) | none yet | proof written in note §2 |
 | Route H (two factors, Σe(b_i) > 1) | this build session | HS bound re-derived by hand (coset Plancherel, note Prop. 3.2) and matched to companion Thm 1.1 (1.2), which allows any b and any u > 0 | **independent adversarial review (separate AI session), verdict CONFIRMED**: checked line by line against companion Thm 1.1 and upstream Lean `ComplementaryCosetsFiniteStatement`; separate interval certification (`scripts/independent/`) | holds (GAP-1 closed) |
 | Physical vs cyclic frame (block lengths ⌊c_i d⌋ not multiples of d) | clarified after the adversarial review (raised by the reviewer) | physical law = R^T · (cyclic-frame law); fixed left translation preserves marginal TV and coset caps (note §4, "Frames") | — | proof written in note §4 |
 | Constants 23.5394 / 44.3006, optimality, σ-windows, fractional lower bounds, ledgers | this build session | `constants_certificate.py`: exact rationals plus mpmath.iv outward rounding | adversarial reviewer: `independent/indep_constants.py` (separate code), same optima, runners-up, σ-windows and ledger | certified twice |
-| Small-d unit test t_mix(2)=3, t_mix(3)=5 | K3 session (floating point) | `small_d_exact.py`, re-implemented in exact `Fraction` arithmetic | — | agree |
-| Energy identity (Lemma 2.1) in simulation | CONST-OPT `energy_mc.py` | rerun d=8, b=4, 4000 runs: RHS = E_t within MC error | — | consistent |
+| Small-d unit test t_mix(2)=3, t_mix(3)=5 | earlier internal session (floating point) | `small_d_exact.py`, re-implemented in exact `Fraction` arithmetic | — | agree |
+| Energy identity (Lemma 2.1) in simulation | constant-optimisation `energy_mc.py` | rerun d=8, b=4, 4000 runs: RHS = E_t within MC error | — | consistent |
 
 ## 2. Commands and key outputs
 

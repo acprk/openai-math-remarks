@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# R13 primary script (copied from reviews/R7-skill/rescan/topt-lean/). Env: /usr/bin/python3 + mpmath, single thread.
+# R13 primary script. Env: /usr/bin/python3 + mpmath, single thread.
 # Expected: expected_output/primary_main.txt (args 6.15 1.4 0.4 6), primary_control_paper_params.txt (args 50 10 1 16 2/3).
 """Rigorous (mpmath interval + exact rational binomial) check of the 176 constant.
 Usage: kk176_verify.py L al be g [target]   (th = 1/2 fixed)
