@@ -5,7 +5,9 @@
 \newtheorem{theorem}{Theorem}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
-\title{A remark on OpenAI's Smith--Toda complex $V(4)$:\\ from $p=1009$ to every prime $p\ge11$}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{Smith--Toda $V(4)$ exists if and only if $p\ge11$\\ (conditional on the $p=1009$ manuscript)}
 \author{[AUTHOR NAME]}
 \date{October 9, 2026}
 \begin{document}
@@ -16,7 +18,9 @@ proof holds, as written with $1009$ replaced by $p$, for all primes $p\ge19$. At
 $p=11,13,17$ three inequalities fail, but the statements they were used for can be verified
 directly by exact enumeration of May $E_1$ pages. \textbf{Conditional on the correctness of the
 original $p=1009$ manuscript, which we did not re-verify}, $V(4)$ therefore exists at every prime
-$p\ge11$. The argument is OpenAI's; we only re-select the prime and replace three
+$p\ge11$. Combined with the published nonexistence theorems of Toda, Ravenel and Nave,
+and a short Adem-relation lemma at $p=2$, this gives the sharp classification: $V(4)$ exists if and only
+if $p\ge11$. Only the ``if'' direction depends on the manuscript. The argument for $p\ge11$ is OpenAI's; we only re-select the prime and replace three
 inequalities by exact enumeration, and we list every changed line. Developed with AI assistance
 (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews
 were run by separate AI sessions and are not human peer review.
@@ -77,7 +81,8 @@ argument of the form ``$p$ is large, hence a group vanishes''.
 \begin{remark}[Controls]
 At $p=7$ the same enumeration finds non-empty product-obstruction pages, for example
 $y\,A^{16}$ in bidegree $(33,119)$ for the profile $e=(0,2,0,2)$, $k=3$. So the mechanism fails at
-$p=7$. This is consistent with Toda's requirement $p\ge11$ for a unital product on $V(3)$ and with Nave's
+$p=7$. This is consistent with Toda's requirement $p\ge11$ for a unital product on $V(3)$ (as reported in
+\cite[\S5.6, p.~184]{Rav}) and with Nave's
 theorem that $V((p+1)/2)=V(4)$ does not exist at $p=7$. At $p=1009$ the enumeration reproduces the
 paper's tables verbatim (positive control).
 \end{remark}
@@ -85,8 +90,76 @@ paper's tables verbatim (positive control).
 \begin{remark}[What is not claimed]
 We do not verify the homotopy-theoretic content of \cite{OAI308}: the adjusted-filtration injectivity
 (\S3), the Frobenius left-hand side (\S4), the extension of powers (\S5) and the appendix pairing.
-Theorem~\ref{thm} is exactly as reliable as that proof. Nothing is claimed for $p=3,5$.
+Theorem~\ref{thm} is exactly as reliable as that proof. The primes $p\le7$ are treated in \S\ref{sec:class}.
 \end{remark}
+
+
+\section{The classification}\label{sec:class}
+We use the standard definition \cite[Definition~1.1]{Nave}: a Smith--Toda complex $V(k)$ is a finite
+$p$-local spectrum with $BP_*V(k)\cong BP_*/(p,v_1,\dots,v_k)$ as a $BP_*$-module (hence as a
+$BP_*BP$-comodule). This is the notion in Theorem~\ref{thm}. The definition does not refer to $V(k-1)$.
+
+\begin{lemma}[{\cite[Theorem~1.2 and p.~493]{Nave}}]\label{lem:skel}
+Let $p$ be odd. If $V(k)$ exists, then it is the cofiber of a map
+$\Sigma^{|v_k|}V(k-1)'\to V(k-1)$ inducing $v_k$ on $BP$-homology, where $V(k-1)$ and $V(k-1)'$ are Smith--Toda
+complexes (not necessarily equivalent). In particular, if no $V(k-1)$ exists at $p$, then no $V(k)$ exists at $p$.
+\end{lemma}
+Nave proves that $BP_*X\cong BP_*/I_{k+1}$ if and only if $H_*(X;\mathbb F_p)\cong E(\tau_0,\dots,\tau_k)$ as
+an $A_*$-comodule. The bottom part of a minimal cell structure, the cells below dimension $|\tau_k|=2p^k-1$,
+then has homology $E(\tau_0,\dots,\tau_{k-1})$, because every monomial without $\tau_k$ has degree at most
+$\sum_{i<k}(2p^i-1)<2p^k-1$. So that skeleton is a $V(k-1)$.
+
+\begin{lemma}\label{lem:p2}
+Let $p=2$ and $k\ge1$. There is no finite $2$-local spectrum $X$ with $BP_*X\cong BP_*/(2,v_1,\dots,v_k)$
+as a $BP_*$-module.
+\end{lemma}
+\begin{proof}
+We use only $BP_iX=0$ for $i<0$ and $1\le i\le3$ (here $k\ge1$ is used for $i=2$), and $BP_0X=\mathbb Z/2$.
+This is Ravenel's Adem-relation argument for $V(1)$ \cite[\S1.3, p.~19]{Rav}, written out so that it
+visibly applies for every $k$.
+
+(i) The cofiber $C$ of $BP\to H\mathbb Z_{(2)}$ is $2$-connected. If $m$ is minimal with $H_m(X;\mathbb Z_{(2)})\ne0$,
+then $BP_mX\cong H_mX$, so $m=0$, and $X$ is $(-1)$-connected. Since $C\wedge X$ is $2$-connected,
+$BP_iX\to H_i(X;\mathbb Z_{(2)})$ is an isomorphism for $i\le1$ and onto for $i=2$. Hence $H_0=\mathbb Z/2$ and
+$H_1=H_2=0$ integrally, and $H_*(X;\mathbb F_2)$ is $\mathbb F_2$ in degrees $0$ and $1$ and $0$ in degree $2$.
+
+(ii) Take a minimal cell structure: one cell per basis element of $H_*(X;\mathbb F_2)$, so all mod-$2$
+cellular differentials vanish. Then $X^{(2)}=M(2)$, $Sq^1x_0=x_1$, and
+$X^{(3)}=M(2)\cup_{g_j}\bigvee_j e^3_j$ with $g_j\in\pi_2M(2)\cong\mathbb Z/4\langle\tilde\eta\rangle$. Here
+$q\tilde\eta=\eta$ for the pinch map $q\colon M(2)\to S^1$, and $2\tilde\eta=i\eta^2$. The $BP$-Hurewicz image of $i\eta^2$ in
+$BP_2M(2)=\mathbb Z/2\langle v_1\rangle$ is $0$. Since $BP_3(X/X^{(3)})=0$, the map $BP_2X^{(3)}\to BP_2X=0$
+is injective, and $BP_2X^{(3)}=BP_2M(2)/\langle h(g_j)\rangle$. So $h(g_{j})=v_1$ for $j$ in a non-empty set $J$.
+For $j\in J$, $g_j$ is an odd multiple of $\tilde\eta$ and $qg_j=\eta$. Since $Sq^2$ detects $\eta$ on the subquotient
+$X^{(3)}/X^{(0)}$, we get $y:=Sq^2x_1=\sum_{j\in J}e_j^*\neq0$.
+
+(iii) $BP_3X^{(3)}\cong K:=\{\sum a_je_j\in\bigoplus_j\mathbb Z_{(2)}e_j:\ \sum_{j\in J}a_j\equiv0\ (2)\}$, and
+$BP_3X^{(4)}\hookrightarrow BP_3X=0$. Hence the integral cellular boundary $d\colon C_4\to C_3$ has image $K\ni2e_{j_0}$
+($j_0\in J$). Write $\tilde y=\sum_{j\in J}e_j^*$ and pick $c$ with $dc=2e_{j_0}$. Then $(\delta\tilde y/2)(c)=1$, so
+$Sq^1y=[\delta\tilde y/2]\neq0$.
+
+(iv) The Adem relations give $Sq^3Sq^1x_0=Sq^3x_1=Sq^1Sq^2x_1=Sq^1y\ne0$. But also
+$Sq^3Sq^1x_0=Sq^2Sq^2x_0\in Sq^2H^2(X;\mathbb F_2)=0$. This is a contradiction.
+\end{proof}
+
+\begin{corollary}\label{cor:class}
+Assume the proof in \cite{OAI308} is correct. Then a Smith--Toda complex $V(4)$ exists at the prime $p$ if and only if $p\ge11$.
+The ``only if'' direction is unconditional.
+\end{corollary}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+$p$ & $V(4)$ & reason\\\midrule
+$2$ & no & Lemma~\ref{lem:p2} (no $V(k)$ for any $k\ge1$; $V(1)$: Toda \cite{Toda})\\
+$3$ & no & Lemma~\ref{lem:skel} twice; $V(2)$ does not exist at $p=3$ (Toda \cite{Toda}; see \cite[p.~493]{Nave}, \cite[\S1.3]{Rav})\\
+$5$ & no & Lemma~\ref{lem:skel}; $V(3)$ does not exist at $p=5$ \cite[Theorem~7.6.1]{Rav}\\
+$7$ & no & \cite[Theorem~1.3]{Nave}: $V((p+1)/2)=V(4)$ does not exist for $p\ge7$\\
+$\ge11$ & yes & Theorem~\ref{thm} (conditional on \cite{OAI308})\\\bottomrule
+\end{tabular}
+\end{center}
+At $p=7$ the Annals version is needed. The 1998 preprint \cite{Nave98} only proves that $V((p+3)/2)$ does not exist for $p>5$
+(Theorem~1.1 there), and at $p=7$ that is $V(5)$. Mahowald reportedly conjectured that no $V(n)$ with $n>3$ exists at any prime
+\cite{Salch}. The ``if'' direction contradicts that conjecture, which is another reason the homotopy theory of \cite{OAI308}
+needs independent verification.
 
 \section{Certificates}
 \texttt{may308.py} (direct recursive enumeration, exact integers, $d_1$ ranks over $\mathbb F_p$) and
@@ -95,11 +168,14 @@ Theorem~\ref{thm} is exactly as reliable as that proof. Nothing is claimed for $
 and an int64 DP modulo $2^{61}-1$. All agree at $p=7,11,13,17$ and at $p=1009$ (sampled). \texttt{may308.py}
 also passes at $p=19,\dots,47$.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 \bibitem{OAI308} OpenAI, \emph{A finite Smith--Toda complex $V(4)$ at the prime $1009$}, OpenAI Math
 Release preprint, September 23, 2026,
 \url{https://github.com/openai/math/tree/main/preprints/A-finite-Smith-Toda-complex-V4-at-the-prime-1009-September-23-2026}.
 \bibitem{Nave} L.~S.~Nave, \emph{The Smith--Toda complex $V((p+1)/2)$ does not exist}, Ann.\ of Math.\ 171 (2010), 491--509.
+\bibitem{Nave98} L.~S.~Nave, \emph{On the nonexistence of Smith--Toda complexes}, arXiv:math/9810178 (1998).
+\bibitem{Rav} D.~C.~Ravenel, \emph{Complex cobordism and stable homotopy groups of spheres}, 2nd ed., AMS Chelsea, 2004.
+\bibitem{Salch} A.~Salch, \emph{The cohomology of the height four Morava stabilizer group at large primes}, arXiv:1607.01108 (2016).
 \bibitem{Toda} H.~Toda, \emph{On spectra realizing exterior parts of the Steenrod algebra}, Topology 10 (1971), 53--65.
 \end{thebibliography}
 \end{document}
