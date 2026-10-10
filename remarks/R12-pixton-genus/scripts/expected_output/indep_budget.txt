@@ -1,0 +1,5 @@
+positive control (paper point g=1e60, K=1e5, m0=2000 g^(2/3), 4K+20 blocks): True
+  paper's displayed ratio (4K+20)m0/g = 8.0004e-12
+  C_K < 1.334e15: True  binom(m0,3) > 1e9 g^2: True
+[4K+20] least g = 226327553857834 (~2.2633e+14) at K = 568, m0 = 49723541408, blocks = 2292, S0 = 112361196950698; ok(g-1)=False; n = 3*C(g,3) ~ 5.797e+42
+[3K+5] least g = 93824084405552 (~9.3824e+13) at K = 567, m0 = 27644793412, blocks = 1706, S0 = 46662066844680; ok(g-1)=False; n = 3*C(g,3) ~ 4.130e+41

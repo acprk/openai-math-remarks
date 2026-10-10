@@ -1,0 +1,23 @@
+positive control q=128 (class rows, exact):
+  row O0 = 500731261911/504183783481 True
+  row O1 = 820350863/1363395845 True
+q=  2 v=    7 |T|=   10  paper-f max(Mf)/f=2.551020 (>=1)  rho(exact)=1.623834  rho(numpy)=1.623834  min/max weight=0.33333/1.0
+  q=2 Collatz-Wielandt: min (Mg)/g = 1.623834 (238703585213/147000000147) > 1: True
+q=  4 v=   21 |T|=   24  paper-f max(Mf)/f=1.450068 (>=1)  rho(exact)=1.182472  rho(numpy)=1.182472  min/max weight=0.20000/1.0
+  q=4 Collatz-Wielandt: min (Mg)/g = 1.182472 (2036143515929/1721938320375) > 1: True
+q=  8 v=   73 |T|=   76  paper-f max(Mf)/f=1.082637 (>=1)  rho(exact)=1.011749  rho(numpy)=1.011749  min/max weight=0.11111/1.0
+  q=8 Collatz-Wielandt: min (Mg)/g = 1.011749 (70905723398671/70082342865504) > 1: True
+q= 16 v=  273 |T|=  276  paper-f max(Mf)/f=0.994332 (<1)  rho(exact)=0.975008  rho(numpy)=0.975008  min/max weight=0.05882/1.0
+  q=16 certificate exact value: 7138933/7179627  sum f = 288
+q= 32 v= 1057 |T|= 1060  paper-f max(Mf)/f=0.983640 (<1)  rho(exact)=0.978399  rho(numpy)=nan  min/max weight=0.03030/1.0
+Perron root of the type-construction matrix (formula, any projective plane of order q):
+  q=  2: rho=1.623834
+  q=  4: rho=1.182472
+  q=  8: rho=1.011749
+  q= 10: rho=0.991212
+  q= 12: rho=0.981594
+  q= 14: rho=0.977037
+  q= 16: rho=0.975008
+  q= 32: rho=0.978399
+  q= 64: rho=0.986807
+  q=128: rho=0.992797

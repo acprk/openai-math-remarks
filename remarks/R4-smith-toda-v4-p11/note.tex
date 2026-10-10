@@ -1,0 +1,105 @@
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amssymb,amsmath,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\title{A remark on OpenAI's Smith--Toda complex $V(4)$:\\ from $p=1009$ to every prime $p\ge11$}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \emph{A finite Smith--Toda complex $V(4)$ at the prime $1009$} chooses
+$p=1009$ to make its finite inequalities generous. We check that every finite claim in that
+proof holds, as written with $1009$ replaced by $p$, for all primes $p\ge19$. At
+$p=11,13,17$ three inequalities fail, but the statements they were used for can be verified
+directly by exact enumeration of May $E_1$ pages. \textbf{Conditional on the correctness of the
+original $p=1009$ manuscript, which we did not re-verify}, $V(4)$ therefore exists at every prime
+$p\ge11$. The argument is OpenAI's; we only re-select the prime and replace three
+inequalities by exact enumeration, and we list every changed line. Developed with AI assistance
+(Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews
+were run by separate AI sessions and are not human peer review.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+Let \cite{OAI308} denote
+\path{preprints/A-finite-Smith-Toda-complex-V4-at-the-prime-1009-September-23-2026}
+of \url{https://github.com/openai/math} (commit \texttt{08fcd61}; line numbers refer to
+\texttt{build/sections/*.tex}). Its main theorem: at $p=1009$ there is a finite $p$-local spectrum
+$X$ with $BP_*X\cong BP_*/(p,v_1,v_2,v_3,v_4)$ as $BP_*BP$-comodules.
+
+\begin{theorem}\label{thm}
+Assume that the proof in \cite{OAI308} is correct at $p=1009$. Then for every prime $p\ge 11$ there is
+a finite $p$-local spectrum $X$ with $BP_*X\cong BP_*/(p,v_1,v_2,v_3,v_4)$ as graded
+$BP_*BP$-comodules, with the canonical quotient coaction and generator in degree zero.
+\end{theorem}
+
+\section{Where $p$ enters}
+The prime enters \cite{OAI308} only through finite statements about the May $E_1$ page
+$\Lambda(h_{i,j})\otimes\mathbb F_p[b_{i,j}]$, with $h_{i,j}$ in bidegree $(1,p^ju_i)$,
+$b_{i,j}$ in $(2,p^{j+1}u_i)$ and $u_i=(p^i-1)/(p-1)$, together with explicit polynomial and
+divisibility inequalities used to prove those statements. We extracted every such inequality
+(33 in total; \texttt{ineq308.py} lists them with line numbers) and determined, for each,
+the primes at which it holds. All hold for $p\ge19$. Exactly three fail somewhere in
+$\{11,13,17\}$:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+line & inequality & holds for\\\midrule
+\texttt{02} L109--113 & $p^2-\tfrac{27}{2}p-9>0$ & $p\ge17$\\
+\texttt{02} L154--155 & no nonzero multiple of $p$ in $[-14,3]$ & $p\ge17$\\
+\texttt{03} L161--163 & $2p-19>p-2$ & $p\ge19$\\\bottomrule
+\end{tabular}
+\end{center}
+The first two are used only to prove Lemma \texttt{low:algebraic-vanishing}: certain cobar groups
+vanish because their May $E_1$ page is empty. The third is used only in the exhaustion proof of
+Table \texttt{may:n5-table}. At $p=11,13,17$ we verify these conclusions directly. We enumerate every
+$E_1$ monomial in every relevant bidegree: $(qk+1,u_n+k)$ for $n\le3$, and $(qk+1-\rho,U+k)$ for every
+profile $e\in\{0,1,2\}^{n+1}$ with $\rho\ge2$, for all $k$ up to the normalized cutoff of
+\texttt{low:normalized-cutoff}; also the bidegrees $(q+1,u_4+1)$ and $(q+1,u_5+1)$. The vanishing groups
+have no monomials. The table at $(q+1,u_5+1)$ has exactly the five entries of \cite{OAI308}, with
+exponents $p-2,p-3,p-3,p-3,p-4$ in place of $1007,\dots,1005$, and $d_1$ is injective over $\mathbb F_p$
+on the exterior-length-$3$ and length-$5$ spans. In the same runs we re-verify the other finite
+tables the proof uses at each $p$:
+\begin{itemize}
+\item the $v_4$-target lists, non-empty exactly at $k=1,2,p-1,p$, with the paper's monomials;
+\item the Frobenius quotient-group table;
+\item the small-stem lemma, with $d_1$-cohomology $0$ at $(6,W+1)$;
+\item the page bound $qp+1-S=2p-6>0$, $N-K=p-3>0$.
+\end{itemize}
+All other uses of $1009$ in \cite{OAI308} are numerical instantiations of these symbolic
+inequalities (the README lists them line by line). The adversarial review read every section,
+including the appendix, and found no further dependence on the size of $p$, in particular no
+argument of the form ``$p$ is large, hence a group vanishes''.
+
+\begin{remark}[Controls]
+At $p=7$ the same enumeration finds non-empty product-obstruction pages, for example
+$y\,A^{16}$ in bidegree $(33,119)$ for the profile $e=(0,2,0,2)$, $k=3$. So the mechanism fails at
+$p=7$. This is consistent with Toda's requirement $p\ge11$ for a unital product on $V(3)$ and with Nave's
+theorem that $V((p+1)/2)=V(4)$ does not exist at $p=7$. At $p=1009$ the enumeration reproduces the
+paper's tables verbatim (positive control).
+\end{remark}
+
+\begin{remark}[What is not claimed]
+We do not verify the homotopy-theoretic content of \cite{OAI308}: the adjusted-filtration injectivity
+(\S3), the Frobenius left-hand side (\S4), the extension of powers (\S5) and the appendix pairing.
+Theorem~\ref{thm} is exactly as reliable as that proof. Nothing is claimed for $p=3,5$.
+\end{remark}
+
+\section{Certificates}
+\texttt{may308.py} (direct recursive enumeration, exact integers, $d_1$ ranks over $\mathbb F_p$) and
+\texttt{may308\_dp.py} (knapsack DP counts) form the primary computation. \texttt{independent/sweep.py} and
+\texttt{independent/d1check.py} were written separately; they use z3 exact enumeration with blocking clauses
+and an int64 DP modulo $2^{61}-1$. All agree at $p=7,11,13,17$ and at $p=1009$ (sampled). \texttt{may308.py}
+also passes at $p=19,\dots,47$.
+
+\begin{thebibliography}{9}
+\bibitem{OAI308} OpenAI, \emph{A finite Smith--Toda complex $V(4)$ at the prime $1009$}, OpenAI Math
+Release preprint, September 23, 2026,
+\url{https://github.com/openai/math/tree/main/preprints/A-finite-Smith-Toda-complex-V4-at-the-prime-1009-September-23-2026}.
+\bibitem{Nave} L.~S.~Nave, \emph{The Smith--Toda complex $V((p+1)/2)$ does not exist}, Ann.\ of Math.\ 171 (2010), 491--509.
+\bibitem{Toda} H.~Toda, \emph{On spectra realizing exterior parts of the Steenrod algebra}, Topology 10 (1971), 53--65.
+\end{thebibliography}
+\end{document}

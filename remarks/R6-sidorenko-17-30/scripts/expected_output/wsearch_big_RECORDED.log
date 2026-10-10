@@ -1,0 +1,16 @@
+k=5 l=8 scale=1 seed=144272509  min log(t/p^30)=5.713e-08  transpose=5.748e-08  sum=1.146e-07
+k=5 l=8 scale=3 seed=611178002  min log(t/p^30)=9.235e-09  transpose=1.639e-08  sum=2.562e-08
+k=5 l=8 scale=6 seed=909925047  min log(t/p^30)=9.034e-10  transpose=1.003e-09  sum=1.906e-09
+k=8 l=5 scale=1 seed=861425548  min log(t/p^30)=2.937e-07  transpose=2.936e-07  sum=5.873e-07
+k=8 l=5 scale=3 seed=820096753  min log(t/p^30)=5.037e-10  transpose=3.185e-10  sum=8.223e-10
+k=8 l=5 scale=6 seed=67760436  min log(t/p^30)=1.035e-06  transpose=9.502e-07  sum=1.985e-06
+k=6 l=6 scale=1 seed=273878287  min log(t/p^30)=3.191e-08  transpose=3.865e-08  sum=7.056e-08
+k=6 l=6 scale=3 seed=126614242  min log(t/p^30)=6.165e-08  transpose=8.439e-08  sum=1.460e-07
+k=6 l=6 scale=6 seed=531969374  min log(t/p^30)=2.312e-08  transpose=1.484e-08  sum=3.796e-08
+k=7 l=7 scale=1 seed=817077201  min log(t/p^30)=1.666e-06  transpose=1.666e-06  sum=3.332e-06
+k=7 l=7 scale=3 seed=482637352  min log(t/p^30)=1.089e-08  transpose=1.047e-08  sum=2.136e-08
+k=7 l=7 scale=6 seed=507069464  min log(t/p^30)=1.880e-09  transpose=3.020e-09  sum=4.900e-09
+k=8 l=8 scale=1 seed=699642630  min log(t/p^30)=1.158e-06  transpose=1.158e-06  sum=2.316e-06
+k=8 l=8 scale=3 seed=407608741  min log(t/p^30)=1.539e-06  transpose=1.270e-06  sum=2.809e-06
+k=8 l=8 scale=6 seed=846885253  min log(t/p^30)=1.408e-07  transpose=1.701e-07  sum=3.108e-07
+BEST (5.0374815430132e-10, (8, 5, 820096753, 3.0))

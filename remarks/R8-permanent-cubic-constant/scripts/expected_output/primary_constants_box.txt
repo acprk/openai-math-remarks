@@ -1,0 +1,9 @@
+paper stated: c^-1 = 5529600 e ;  asymptotic closed forms: BOX 4*29791=119164, BOXB 59582, A 29791
+m=1408: paper: 262835e (136, 45, 46, 945) | L2: 149684e (135, 39, 57, 1333) | BOX: 125317e (136, 46, 44, 2073) | BOXB: 60590e (136, 45, 46, 4096) | A: 29318e (136, 45, 46, 8464)
+   ratios: paper_opt/BOX=2.097  L2/BOX=1.194  stated/BOX=44.1  BOX/BOXB=2.068  BOX/A=4.274
+m=5000: paper: 245793e (483, 160, 163, 12558) | L2: 141203e (479, 135, 209, 17025) | BOX: 120334e (485, 168, 149, 28076) | BOXB: 59651e (485, 168, 149, 56637) | A: 29572e (485, 168, 149, 114244)
+   ratios: paper_opt/BOX=2.043  L2/BOX=1.173  stated/BOX=46.0  BOX/BOXB=2.017  BOX/A=4.069
+
+real	2m15.412s
+user	1m4.562s
+sys	0m0.032s

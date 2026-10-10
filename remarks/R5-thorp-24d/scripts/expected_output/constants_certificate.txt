@@ -1,0 +1,63 @@
+=== per-factor costs kappa(b) = 2/log2(2b/(2b-1)), certified intervals ===
+  b=3: kappa in [7.603568033848, 7.603568033848]
+  b=4: kappa in [10.381786139369, 10.381786139369]
+  b=5: kappa in [13.157626957921, 13.157626957921]
+  b=6: kappa in [15.932334472596, 15.932334472596]
+  b=7: kappa in [18.706413369999, 18.706413369999]
+  b=8: kappa in [21.480107332563, 21.480107332563]
+
+=== original constants for comparison ===
+  paper (1600d): 8 factors x 200d.  Paper's own inequalities need T > (2 + 3/log2(32/31)) d = [67.496907, 67.496907] d per factor
+  family's best explicit constant before this note: 512d (Random-coordinate-frames, Cor. 11.4, label shear:cor:512; 2 factors x 256d, already uses the companion's two-factor HS transfer)
+
+=== route O: orbit-span operator transfer of the main paper (four factors) ===
+--- route O: sum(1-2/b_i) > 2;  search: b in [3,11], r <= 6, cost <= 47.0
+    completeness: kappa(b) >= 2(2b-1)ln2 > 31.793 for b > 11; r > 6 costs > 47.0
+    (3, 4, 5, 5)           cost in [44.3006080891, 44.3006080891]   sum e = 61/30 = 2.03333
+    (4, 4, 4, 5)           cost in [44.302985376, 44.302985376]   sum e = 21/10 = 2.10000
+    (3, 3, 3, 4, 5)        cost in [46.3501171988, 46.3501171988]   sum e = 21/10 = 2.10000
+    (3, 3, 4, 4, 4)        cost in [46.3524944858, 46.3524944858]   sum e = 13/6 = 2.16667
+    certified optimum (3, 4, 5, 5): 44.300608089059 <= c <= 44.300608089059; runner-up (4, 4, 4, 5) >= 44.302985376028
+    (3, 4, 5, 5): slack sum e - 2 = 1/30; admissible for every sigma < 2/59 = 0.033898
+    (4, 4, 4, 5): slack sum e - 2 = 1/10; admissible for every sigma < 2/19 = 0.105263
+
+=== route H: companion's isotypic Hilbert--Schmidt transfer (two factors) ===
+--- route H: sum(1-2/b_i) > 1;  search: b in [3,7], r <= 3, cost <= 27.0
+    completeness: kappa(b) >= 2(2b-1)ln2 > 19.396 for b > 7; r > 3 costs > 27.0
+    (4, 5)                 cost in [23.5394130973, 23.5394130973]   sum e = 11/10 = 1.10000
+    (3, 3, 4)              cost in [25.5889222071, 25.5889222071]   sum e = 7/6 = 1.16667
+    (3, 7)                 cost in [26.3099814038, 26.3099814038]   sum e = 22/21 = 1.04762
+    (4, 6)                 cost in [26.314120612, 26.314120612]   sum e = 7/6 = 1.16667
+    (5, 5)                 cost in [26.3152539158, 26.3152539158]   sum e = 6/5 = 1.20000
+    certified optimum (4, 5): 23.53941309729 <= c <= 23.53941309729; runner-up (3, 3, 4) >= 25.588922207065
+    (4, 5): slack sum e - 1 = 1/10; admissible for every sigma < 2/9 = 0.222222
+
+=== fractional relaxation (strict lower bound for each route with these stage-1 rates) ===
+    fractional relaxation: inf_(real b>=3) kappa(b)/(1-2/b) in [20.738135, 20.738179]  (minimiser b* ~ 3.8647)
+    integer points: min_(b>=3) kappa(b)/(1-2/b) = kappa(4)/(1/2) in [20.763572, 20.763572]
+    => every integer multiset admissible for threshold 1 costs > 1 x 20.763572 (strict lower bound; not attained)
+    route H >= 20.763572 (> 20.738135);  route O >= 41.527145 (> 41.47627)
+
+=== ratios (512d = family's best, which already has the x4 two-factor step) ===
+  1600 / route H optimum in [67.9711, 67.9711];  512 / route H optimum in [21.7508, 21.7508]
+  1600 / route O optimum in [36.1169, 36.1169];  512 / route O optimum in [11.5574, 11.5574]
+
+=== loss ledger, route H (cumulative; each line keeps all previous changes) ===
+  paper as written: 8 factors x 200d                                              1600.0 d
+  paper's own inequalities, minimal T per factor (8 x (2 + 3/log2(32/31)))       539.975 d   step factor 2.963
+  companion two-factor HS transfer, b=8 [already in 512d corollary; not ours]    134.994 d   step factor 4.0
+  + concentration theta->0: beta 1/16 -> 1/8                                       68.44 d   step factor 1.972
+  + KL chain rule: need n^2 E_T -> 0 instead of n^3 E_T -> 0                       46.96 d   step factor 1.457
+  + local look-back: offset 2d -> O(log d)                                         42.96 d   step factor 1.093
+  + mixed block numbers {4,5} instead of {8,8}                                    23.539 d   step factor 1.825
+
+=== loss ledger, route O (paper-internal transfer only; cumulative) ===
+  paper as written: 8 factors x 200d                                              1600.0 d
+  paper's own inequalities; 5 factors suffice for its Lemma 5.1                  337.485 d   step factor 4.741
+  + concentration theta->0: beta 1/16 -> 1/8                                     171.101 d   step factor 1.972
+  + KL chain rule                                                                117.401 d   step factor 1.457
+  + local look-back                                                              107.401 d   step factor 1.093
+  + any sigma>0 in the degree lemma: b=8 needs only 3 factors                      64.44 d   step factor 1.667
+  + mixed block numbers {3,4,5,5}                                                 44.301 d   step factor 1.455
+
+ALL CHECKS PASSED

@@ -1,0 +1,3 @@
+q 16 paper-f certificate max (Mf)/f = 7138933/7179627 0.9943320175268158 <1: True  sum f= 288
+q 32 paper-f certificate max (Mf)/f = 398926565/405561387 0.9836404001646242 <1: True  sum f= 1072
+q 8 Collatz-Wielandt exact lower bound mu = 1.0117487583964297 >1: True

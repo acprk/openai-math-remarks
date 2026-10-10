@@ -1,0 +1,4 @@
+new(86,41,13) {'m': 6054252965430758779982760, 't': 62112284749374537743384, 'deg': 28, 't/m': 0.010259281385173383, '96t<m': True, '100t<m': False, 'triangle_free_bound': True, 'fit_diag': True, 'fit_nonedge': True, 'fit_eval_all_x': True, 'denominators': (1, 28), 'p>m': True, 'p%4': 1, 'p>max_den': True, 'cr_den_coprime_p': True}
+random-set check bad = 0
+tiny(10,4,2) {'m': 210, 't': 56, 'deg': 2, 't/m': 0.26666666666666666, '96t<m': False, '100t<m': False, 'triangle_free_bound': False, 'fit_diag': True, 'fit_nonedge': True, 'fit_eval_all_x': True, 'denominators': (1, 2)}
+tiny explicit multilinear fit errors: 0 over 210 vertices

@@ -1,0 +1,175 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,hyperref}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{fancyvrb}
+\usepackage[no-math]{fontspec}
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+\fvset{fontsize=\footnotesize}
+% compile with lualatex (latexmk -lualatex)
+\emergencystretch=3em\sloppy
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{A remark on OpenAI family 170: the case $r(4,t)$}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's manuscripts in family~170 of \texttt{github.com/openai/math}
+state the sharp logarithmic exponent
+$r(s,t)=t^{s-1}/(\log t)^{s-2+o(1)}$ only for $s\ge5$
+($s=5$ in a companion paper, $s\ge6$ in the general paper, whose
+construction theorem is stated for projective dimension $d\ge5$).
+We observe that the accompanying Lean formalization already proves the
+prime-field construction for every $d\ge3$, and that the library's
+lower-bound transfer and upper bound need only $d\ge1$ and $s\ge3$.
+Instantiating at $d=3$ gives, with a ten-line Lean file whose axioms are
+only \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound},
+\[
+\frac{t^3}{(\log t)^{2+\varepsilon}}\le r(4,t)\le C\frac{t^3}{(\log t)^2}
+\qquad(t\ge t_0(\varepsilon)),
+\]
+so $r(4,t)=t^3/(\log t)^{2+o(1)}$. The previous best lower bound we are
+aware of is $\Omega(t^3/(\log t)^4)$ (Mattheus--Verstra\"ete). No new
+mathematics is claimed: the construction and every proof are OpenAI's.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+Let $r(s,t)$ be the least $N$ such that every simple graph on $N$
+vertices has a clique of order $s$ or an independent set of order $t$.
+
+\begin{theorem}\label{thm:main}
+There is $C>0$ such that for every $\varepsilon>0$ and all sufficiently
+large integers $t$,
+\[
+\frac{t^3}{(\log t)^{2+\varepsilon}}\le r(4,t)\le C\frac{t^3}{(\log t)^2},
+\qquad\text{hence}\qquad
+\lim_{t\to\infty}\frac{3\log t-\log r(4,t)}{\log\log t}=2 .
+\]
+\end{theorem}
+
+This is exactly the statement \texttt{MainBounds 4 $\wedge$ MainLimit 4}
+in the notation of the comparator file
+\texttt{lean/ComparatorChallenges/SharpLogRamsey.lean}, whose public
+theorem is stated for $6\le s$.
+
+\paragraph{Before / after.}
+\begin{center}
+\small\begin{tabular}{lp{0.33\textwidth}p{0.4\textwidth}}
+ & lower bound for $r(4,t)$ & source\\\hline
+Before & $c\,t^3/(\log t)^4$ & Mattheus--Verstra\"ete~\cite{MV}; Brada\v{c}~\cite{Bradac} at $s=4$\\
+After & $t^3/(\log t)^{2+\varepsilon}$, every $\varepsilon>0$ & OpenAI 170 Lean library at $d=3$ (this remark)\\
+Upper & $C\,t^3/(\log t)^2$ & Ajtai--Koml\'os--Szemer\'edi~\cite{AKS}; see also~\cite{LRZ}; also in the 170 library
+\end{tabular}
+\end{center}
+
+\section{Where the statement comes from}
+In the general manuscript (\emph{Sharp Logarithmic Exponents for Fixed
+Off-Diagonal Ramsey Numbers}, Theorem~1.2) the construction reads: for
+$d\ge5$, $0<\eta<1/10$ and every sufficiently large prime $q$, with
+$\sigma=\log q$, there is a $K_{d+1}$-free graph on
+$\lfloor q^d\sigma\rfloor$ vertices with independence number
+$<\lfloor q\sigma^{1+\eta}\rfloor$ (the random ordered incident-flag graph
+of $\mathrm{PG}(d,q)$). In Lean this is the proposition
+\texttt{LowerTransfer.PrimeConstruction d}. The library contains
+\begin{Verbatim}
+theorem actual_prime_construction (i : ℕ) : PrimeConstruction (i+3)
+theorem prime_construction (d : ℕ) (hd : 5 ≤ d) : PrimeConstruction d
+theorem all_epsilon_lower (d : ℕ) (hd : 1≤d) (hprime : PrimeConstruction d)
+    (ε : ℝ) (hε : 0<ε) : ∀ᶠ t : ℕ in atTop,
+      (t:ℝ)^d/(Real.log t)^(((d-1:ℕ):ℝ)+ε) ≤ (ramsey (d+1) t :ℝ)
+theorem Upper.ramsey_upper {s : ℕ} (hs : 3 ≤ s) : ∃ C : ℝ, 0 < C ∧ ∃ t₀ : ℕ,
+    ∀ t : ℕ, t₀ ≤ t → (ramsey s t : ℝ) ≤ C*(t:ℝ)^(s-1)/(Real.log (t:ℝ))^(s-2)
+\end{Verbatim}
+(\texttt{Construction/PrimeConstruction.lean},
+\texttt{Bounds/Lower.lean}, \texttt{Bounds/SamplingParameter.lean}).
+The restriction $d\ge5$ appears only in the wrapper
+\texttt{prime\_construction}, which is itself proved from
+\texttt{actual\_prime\_construction (d-3)}; the formal proof of
+\texttt{actual\_prime\_construction} is uniform in $i\ge0$, i.e.\ in
+$d\ge3$ (vector dimension $i+4$). The public theorem
+\texttt{main\_of\_primeConstruction} assumes $6\le s$ but its proof uses
+only $3\le s$ (upper bound) and $1\le s-1$ (transfer).
+
+The manuscript itself is consistent with this: its geometric core is
+carried out in projective dimensions $2$ and $3$, and higher dimensions
+$j\ge4$ are reduced to these by repeated projection
+(Section~2, Proposition ``Repeated projection''). Neither manuscript
+gives a reason for excluding $s=4$; the companion $r(5,t)$ paper remarks
+that one of its counting bounds ``also covers dimension three''.
+We did not re-audit the manuscript at $d=3$; the evidence offered here is
+the machine-checked proof.
+
+\section{The Lean certificate}
+\begin{Verbatim}
+import OAI.Combinatorics.SharpRamsey.Main
+open OAI.SharpLogRamsey
+
+theorem r4_lower (ε : ℝ) (hε : 0 < ε) :
+    ∀ᶠ t : ℕ in Filter.atTop,
+      (t:ℝ)^3/(Real.log t)^(((3-1:ℕ):ℝ)+ε) ≤ (ramsey (3+1) t : ℝ) :=
+  LowerTransfer.all_epsilon_lower 3 (by norm_num)
+    (LowerTransfer.actual_prime_construction 0) ε hε
+
+theorem main_four : MainBounds 4 ∧ MainLimit 4 := by
+  have hb : MainBounds 4 := by
+    obtain ⟨C, hC, t₀, ht₀⟩ := Upper.ramsey_upper (s := 4) (by norm_num)
+    refine ⟨C, hC, fun ε hε => ?_⟩
+    have hl := LowerTransfer.all_epsilon_lower 3 (by norm_num)
+      (LowerTransfer.actual_prime_construction 0) ε hε
+    obtain ⟨t₁, ht₁⟩ := Filter.eventually_atTop.mp hl
+    exact ⟨max t₀ t₁, fun t ht => ⟨ht₁ t ((le_max_right _ _).trans ht),
+      ht₀ t ((le_max_left _ _).trans ht)⟩⟩
+  exact ⟨hb, mainLimit_of_mainBounds 4 hb⟩
+\end{Verbatim}
+Here \texttt{ramsey s t} is
+$\inf\{N:\ \forall G\text{ on }\mathrm{Fin}\,N,\ G\text{ has an }s\text{-clique or }G^{c}\text{ has a }t\text{-clique}\}$,
+which is $r(s,t)$; the definitions in \texttt{Model.lean} are textually
+identical to those of the comparator file. Pinned to
+\texttt{openai/math} commit \texttt{fd4aeeb2ee4f} (the
+\texttt{SharpRamsey} directory is unchanged since the initial commit
+\texttt{adc7f1241b42}), Lean \texttt{v4.34.1}, both theorems elaborate and
+\texttt{\#print axioms} reports only \texttt{propext},
+\texttt{Classical.choice}, \texttt{Quot.sound}. The \texttt{SharpRamsey}
+sources contain no \texttt{sorry}, \texttt{axiom}, \texttt{native\_decide},
+\texttt{implemented\_by}, \texttt{unsafe} or \texttt{set\_option}, and import
+nothing from \texttt{OAI} outside that directory.
+
+\begin{remark}
+The same observation at $i=1$ ($d=4$) recovers the $r(5,t)$ statement
+from the general library, independently of the separate
+\texttt{RamseyFive} formalization. We do not pursue this.
+\end{remark}
+
+\section*{Scope}
+Nothing here is claimed as new mathematics; the construction, its proof
+and its formalization are OpenAI's. The remark only records that the
+existing formal proof covers $s=4$, which the manuscripts and the
+comparator statement do not state. To our knowledge (search of arXiv,
+the web and the \texttt{openai/math} GitHub repository up to 2026-10-09)
+no earlier source states a lower bound for $r(4,t)$ with logarithmic power
+below~$4$.
+
+\medskip\noindent\emph{Developed with AI assistance (Anthropic Claude,
+Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews
+were run by separate AI sessions and are not human peer review.}
+
+\begin{thebibliography}{9}
+\bibitem{AKS} M.~Ajtai, J.~Koml\'os, E.~Szemer\'edi, A note on Ramsey
+numbers, \emph{J. Combin. Theory Ser. A} \textbf{29} (1980), 354--360.
+\bibitem{Bradac} D.~Brada\v{c}, Off-diagonal Ramsey numbers,
+arXiv:2605.28793v3 (2026).
+\bibitem{LRZ} Y.~Li, C.~C.~Rousseau, W.~Zang, Asymptotic upper bounds for
+Ramsey functions, \emph{Graphs Combin.} \textbf{17} (2001), 123--128.
+\bibitem{MV} S.~Mattheus, J.~Verstra\"ete, The asymptotics of $r(4,t)$,
+\emph{Ann. of Math.} \textbf{199} (2024), 919--941.
+\bibitem{OAI170} OpenAI, Sharp logarithmic exponents for fixed
+off-diagonal Ramsey numbers; The sharp logarithmic exponent of $r(5,t)$,
+OpenAI Math Release (2026), \url{https://github.com/openai/math}, family 170.
+\end{thebibliography}
+\end{document}

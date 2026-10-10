@@ -1,0 +1,5 @@
+k=16: adj*M == det(M)*I verified; F = prod(x+theta_i y); min order of adj entries at p = 14 (claim >= k-2 = 14)
+  dim_Q Q[x,y]/(F, adj, m^14) = 105
+  dim_Q Q[x,y]/(F, adj, m^15) = 105
+  stabilised => local length of Z_X at p = 105  (C(k-1,2) = 105; delta at p = C(k,2) = 120)
+  family dim = 64 ; Lemma B bound k^2+k-2*C(k-1,2) = 62

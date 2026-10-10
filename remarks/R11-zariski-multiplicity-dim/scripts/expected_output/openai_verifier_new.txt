@@ -1,0 +1,88 @@
+{
+  "verification_passed": true,
+  "relation_file": "relation_d3pow11_N1802976.json",
+  "relation_file_sha256": "e3b747b10841fc2da891dbc5150bb494e5d34c54fc6e7f8a10e9b06f5c9982c8",
+  "method": "Independent exact integer arithmetic; trial division of all six raw integers per row; no matrix or producer imported.",
+  "d": 177147,
+  "d_power_of_three": 11,
+  "D": 531441,
+  "support_size": 1160,
+  "sum_e": "206",
+  "sum_abs_e": "7414",
+  "coefficient_gcd": "1",
+  "max_abs_e_digits": 2,
+  "positive_coefficients": 585,
+  "negative_coefficients": 575,
+  "raw_factorizations_performed": 6960,
+  "largest_raw_integer": 531440,
+  "largest_prime_divisor": 5987,
+  "first_product_nonzero_row_prime_count": 409,
+  "second_product_nonzero_row_prime_count": 631,
+  "first_product_residual_valuations": {},
+  "second_product_residual_valuations": {},
+  "product_conclusion": "Both products are positive rational numbers. Every prime valuation is zero, so unique factorization makes each product exactly 1.",
+  "chain_checks": {
+    "distinct_table_chains_checked": 4640,
+    "chain_length_histogram_unweighted": {
+      "1": 2,
+      "2": 1,
+      "3": 16,
+      "4": 111,
+      "5": 316,
+      "6": 608,
+      "7": 779,
+      "8": 875,
+      "9": 765,
+      "10": 564,
+      "11": 316,
+      "12": 155,
+      "13": 77,
+      "14": 28,
+      "15": 21,
+      "16": 6
+    },
+    "minimum_exponent": 2,
+    "maximum_exponent": 531441,
+    "all_weighted_degrees_one": true,
+    "all_ordinary_monomial_degrees_at_least_three": true,
+    "all_required_denominators_correct": true
+  },
+  "seed_construction": {
+    "side_convention": "Signed count is side 2 minus side 1: positive counts on side 2, negative counts on side 1; balancing squares on side 1.",
+    "initial_variable_counts": [
+      "29244",
+      "30068"
+    ],
+    "common_tail_variable_count_per_side": "420670",
+    "balancing_square_counts": [
+      "824",
+      "0"
+    ],
+    "balanced_dimension_before_final_cubes": "450738",
+    "common_final_cube_count": 2,
+    "ambient_dimension_s0": "450740",
+    "ambient_dimension_formula": "s0=4*sum_abs_e+2*sum_e+common_tail_variable_count_per_side+2",
+    "hessian_ranks": [
+      "824",
+      "0"
+    ],
+    "orders": [
+      2,
+      3
+    ]
+  },
+  "final_construction": {
+    "definition": "q_j=p_j+x^5+y^7; f_j is the sum of four disjoint copies of q_j, six cubes, one eleventh power, and one thirteenth power.",
+    "ambient_dimension": "1802976",
+    "ambient_dimension_formula": "4*s0+16",
+    "hessian_ranks": [
+      "3296",
+      "0"
+    ],
+    "orders": [
+      2,
+      3
+    ]
+  },
+  "scope": "This report verifies the finite relation and arithmetic of the indicated polynomial construction; it does not certify the topological or lattice-theoretic parts of the proof."
+}

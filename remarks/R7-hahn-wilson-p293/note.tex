@@ -1,0 +1,132 @@
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amssymb,amsmath,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\title{A remark on OpenAI's height-two Hahn--Wilson counterexample:\\ every prime $p\ge 293$}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \emph{Counterexamples to the Hahn--Wilson conjecture at height two}
+proves its main theorem for every sufficiently large prime. The explicit
+sufficient condition stated there first holds at $p=17{,}073{,}437$. We
+observe that the same argument, with the central window of the digit construction
+enlarged to the largest radius the proof allows, works for every prime $p\ge293$.
+The argument is OpenAI's; we only re-select parameters, and we list every changed
+line. Developed with AI assistance (Anthropic Claude, Opus 5.5) under
+[AUTHOR NAME]'s direction; independent adversarial reviews were run by separate
+AI sessions and are not human peer review.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+Line numbers refer to \texttt{build/sections/*.tex} of
+\path{preprints/Counterexamples-to-the-Hahn-Wilson-conjecture-at-height-two-September-26-2026}
+in \url{https://github.com/openai/math} at commit \texttt{08fcd61}. We write
+\cite{OAI319} for that preprint. Its main theorem (Theorem~1.1 of \cite{OAI319}) asserts, for every
+sufficiently large prime $p$, a connective $p$-complete spectrum of exact fp-type two
+outside $\mathrm{Thick}(\mathrm{BP}\langle2\rangle_p^\wedge)$. The only place where the size of $p$
+enters beyond $p>8$ is the parameter condition
+\begin{equation}\tag{op:parameters}
+M\ge 81\ \text{odd},\qquad p>16M^2,\qquad 2\lfloor M/8\rfloor>p^{1/3},
+\end{equation}
+(\texttt{operator.tex} L264--268), together with $R_0=\lfloor M/8\rfloor$ (L500).
+The least prime for which some odd $M$ satisfies (op:parameters) is $17{,}073{,}437$, attained with $M=1033$:
+writing $a=\lfloor M/8\rfloor$, one needs $8a^3>16M^2\ge 1024a^2$, so $a\ge129$.
+
+\begin{theorem}\label{thm}
+Theorem~1.1 of \cite{OAI319} holds, with the same proof, for every prime $p\ge 293$.
+\end{theorem}
+
+For an odd integer $M\ge 11$ put $R_0=(M-3)/2$, $B_0=2R_0=M-3$, $q=p+1$, and consider
+\begin{align*}
+&\text{(P1)}\quad \frac{p+1}{2M}-\frac{p(M+1)}{p-1}>1, &&\text{(P2)}\quad (M-3)^3>p,\\
+&\text{(P3)}\quad p>4M, &&\text{(P4)}\quad \Bigl(\frac{(M-3)p}{M}+3\Bigr)(p+1)\le p^2 .
+\end{align*}
+
+\begin{lemma}\label{lem:cover}
+For every prime $p\ge293$, the least odd $M\ge11$ with $(M-3)^3>p$ satisfies (P1)--(P4).
+\end{lemma}
+\begin{proof}
+If $M=11$ then $293\le p<512$; (P1) holds for $M=11$ exactly when $p\ge293$ (at $p=293$ its
+left side minus one equals $259/803$), and (P3), (P4) are immediate. If $M\ge13$, minimality gives $p\ge(M-5)^3\ge 2M(M+3)$.
+Then $(p+1)/(2M)>M+3$ while $p(M+1)/(p-1)=M+1+(M+1)/(p-1)<M+2$, giving (P1).
+(P3) is clear, and $p^2-((M-3)p/M+3)(p+1)=3p^2/M-(M-3)p/M-3p-3>0$ gives (P4).
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm}: the changed steps}
+We replace (op:parameters) by ``$M\ge11$ odd and (P1)--(P4)'', and $R_0=\lfloor M/8\rfloor$ by
+$R_0=(M-3)/2$. Then $I=\{s_0-R_0+1,\dots,s_0+R_0\}=\{2,\dots,M-2\}$ and $I-1=\{1,\dots,M-3\}$.
+We go through every use of these quantities.
+
+\emph{Lemma op:coefficient-control (L309--357).} The parameters enter only through
+(op:correction-bound): $qb-r'_m\ge (q/(2M)-\kappa(M+1))X>X$ for $b\ge X/(2M)$ and
+$m<(M+1)X$, with $\kappa\le p/(p-1)$ by (op:kappa). This is (P1). Also $M<p$.
+
+\emph{Initial depth (L544--564).} $d=\lfloor p/M\rfloor$ satisfies $p\le qd<p^2$, $d\ge p/(2M)$
+and $d\le\delta=(p-1)/2$ whenever $M<p$. At most $M$ digits are protected at one lower label.
+
+\emph{First band (L580--603).} Column and row lower labels in stage $X=p^r$ differ, below digit
+$r-1$, by at most the digit diameter of $I\cup(I-1)$ at position $r-2$, plus less than
+$X/p^2$ from lower positions. Since
+$d_{s_0+R_0}-d_{s_0-R_0}\le 2R_0p/M+1$, the bound at L592 becomes
+$(2R_0p/M+3)X/p^2$; the original $(p/4+3)$ is the same bound with $2R_0\le M/4$.
+By (P4) this is less than $X/q$, so same-cluster pairs (and their cyclic complements)
+fall outside the stage interval $[X/q,X-X/q)$; also it is at most $X/p$, so a pair of clusters
+$k_1$ steps apart has depth in $X(k_1/M\pm2/p)$. By (P3) the band $k_1=1$ lies strictly
+below the band $k_1=2$, and its lower end $X(1/M-2/p)$ is at least $X/(2M)$, so
+Lemma op:coefficient-control applies to every depth used.
+
+\emph{Retained digits (L605--637).} Since $\min I=2$, column cluster $i\in I$ pairs with row cluster
+$i-1\ge1$ without cyclic wrap, so retained digits on the two sides agree. Both sides of each
+adjacent cluster pair have $B_0^{r-2}$ lower labels. The counting argument is unchanged.
+
+\emph{Finite crossings (L680--698).} The representative of a crossing column label, divided by $X$,
+lies within $1/M+2/p+o(1)$ above $1/2$, and within $1/p$ of $(i+\tfrac12)/M$ for its
+cluster index $i$. Hence $s_0\le i\le s_0+1$ once $p>3M$, which is within three places of $s_0$
+and inside $I$ because $R_0\ge4$. This replaces ``since $M\ge81$'' at L694.
+
+\emph{Growth (L700--720 and \texttt{obstruction.tex} L1082, L1123).} One needs
+$d(I)$ to contain a digit below $\delta$ and $d(I-1)$ one above $\delta$ ($R_0\ge2$), and
+$\beta=\log_pB_0>1/3$, which is (P2).
+
+\emph{Rest of the paper.} \texttt{gluing.tex} and \texttt{obstruction.tex} use only the conclusions of
+Proposition op:operator and $\beta>1/3$; Lemma obs:growth has constants depending on $p$
+but no size condition. The other sections need only $p>5$, $p>8$ ($D>12$), $D>2$, $D>3$
+and $\gcd(q,p)=1$. The phrases ``sufficiently large prime'' in \texttt{main.tex}
+(L57--58, L115, L129) and \texttt{consequences.tex} (L14, L172--173, L187) refer only to
+(op:parameters). \qed
+
+\section{Computational certificate}
+All checks use exact integer or rational arithmetic.
+\begin{itemize}
+\item \texttt{main/hw319\_pmin.py} (rescan session): $p_{\min}=293$ with $(M,R_0)=(11,4)$;
+the original condition gives $17{,}073{,}437$.
+\item \texttt{independent/indep\_scan.py} (separate session): re-derivation with exact centers
+$d_i=\lfloor(2i+1)p/(2M)\rfloor$ and exact band bounds; same value $293$.
+\item \texttt{independent/hw319\_enumerate.py} (adversarial session): builds the actual surviving
+label sets of the induction table (op:induction) at $p=293$, $M=11$, $R_0=4$ for stages
+$r=2,3,4,5$ ($X$ up to $2.2\cdot10^{12}$; up to $5632^2$ label pairs), computes every depth exactly
+and checks all band, wrap, cut and counting claims. The first-band depth ratio is
+$b/X\in[0.08687,0.09465]$, inside $[1/M-2/p,1/M+2/p]=[0.0841,0.0978]$, with $k_1=2$ starting
+at $0.179$. It also verifies (P1)--(P4) for the chosen $M$ at every prime $293\le p\le 2\cdot10^6$,
+and it repeats the stage enumeration at $(509,11)$, $(521,13)$, $(1009,15)$, $(10007,25)$. Negative controls: $p=283$
+fails (P1); $R_0=(M-1)/2$ makes $I$ meet an endpoint; $p=37$ breaks the bands; $M=9$ fails (P2).
+\end{itemize}
+
+\begin{remark}
+Two sharper variants are recorded in the scripts but not claimed. Reading L689--694 exactly
+(only $R_0\ge2$ is needed) gives $199$ (with $M=9$). Restating Lemma op:coefficient-control
+with the exact first-band lower end gives $109$--$167$. Both require further changes to the text.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{OAI319} OpenAI, \emph{Counterexamples to the Hahn--Wilson conjecture at height two},
+OpenAI Math Release preprint, September 26, 2026,
+\url{https://github.com/openai/math/tree/main/preprints/Counterexamples-to-the-Hahn-Wilson-conjecture-at-height-two-September-26-2026}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,1 @@
+candidate leaf sets Z with H[Z∪N(Z)] a tree: 56  passing the copy test: 0

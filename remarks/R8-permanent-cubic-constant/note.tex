@@ -1,0 +1,303 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,mathtools,hyperref,booktabs}
+\usepackage[margin=1.1in]{geometry}
+% compile with: latexmk -pdf note.tex
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\per}{per}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\len}{length}
+\DeclareMathOperator{\Ann}{Ann}
+\newcommand{\bdc}{\overline{\mathrm{dc}}}
+
+\title{A remark on OpenAI family 108: the cubic constant for $\bdc(\per_m)$}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's manuscript \emph{A cubic lower bound for border determinantal
+complexity of the permanent} (family~108 of \texttt{github.com/openai/math},
+commit \texttt{adc7f124}) proves $\bdc(\per_m)\ge m^3/(5\,529\,600\,e)$ for
+$m\ge1408$. We record three facts.
+(1) A short lemma (``box lemma'') improves the manuscript's length bound
+$\len Z\ge\binom{q+2}2$ to $\len Z\ge(q+1)^2$ and removes the hypothesis
+$q\le r-1$. Together with re-chosen parameters this gives
+$\bdc(\per_m)\ge m^3/(125\,500\,e)$ for all $m\ge1408$, and
+$m^3/((118\,800+o(1))e)$ asymptotically: $44\times$ resp.\ $46.5\times$
+better. Parameter choice alone accounts for about $21\times$/$23\times$;
+the box lemma for the remaining factor $2.1\times$/$2.0\times$.
+(2) The gradient locus contains explicit block-triangular families, valid in
+every characteristic, whose codimension is asymptotically
+$(\tfrac12-\beta^2)k^2$ with $\beta=r/k$. This is smaller than
+$(2q+2)^2$, the codimension of the rank family. So the latter is not the true
+codimension, and two natural strengthening lemmas are false.
+(3) Consequently no proof inside the manuscript's pipeline (selector, smooth
+linear section, smooth-hypersurface theorem) can give a uniform constant
+better than $1/((33\,065+o(1))e)$, i.e.\ more than $167\times$ the stated one.
+The construction and all main arguments are OpenAI's.
+\end{abstract}
+\maketitle
+
+\section{Setting}
+We use the notation of the manuscript. $K$ is algebraically closed,
+$\theta_1,\dots,\theta_k\in K$ are distinct, $D=\mathrm{diag}(\theta_i)$,
+$0\le q\le (k-2)/2$, $r=k-2q\ge2$, $c=r-1$, and
+\[
+G_D(X)=[s^qt^q]\det(X+sI+tD),\qquad
+\Gamma_D=\{X:\nabla G_D(X)=0\}\subset\mathrm{Mat}_k(K).
+\]
+For fixed $X$ let $M=sI+tD+uX$, $F_X=\det M$, $C_X=V(F_X)\subset\mathbb P^2$,
+and let $Z=Z_X\subset C_X$ be the finite scheme cut out by the entries of
+$\adj M$ (\texttt{adjugate.tex} L123--137). Let $I_Z\subset S=K[s,t,u]$ be its
+saturated homogeneous ideal.
+
+The manuscript's chain is: $\nabla G_D(X)=0\iff[s^qt^qu^c]\adj M=0$
+(\texttt{adjugate.tex} L261--270, no hypothesis on $q$);
+$\len Z\ge T:=\binom{q+2}2$ (Prop.~\texttt{adjugate-length}, L250--309, which
+uses $q\le c$ at L291); $\len Z\le\delta(C_X)$
+(Prop.~\texttt{conductor-length}); hence
+$\dim\Gamma_D\le k^2+k-T$ (\texttt{dimension.tex} L10--27, L353--366).
+With $\Delta=T-k$, characteristic transfer, a smooth linear section of
+dimension $d$ with $2\le d<k^2$, $d-1<\Delta$, and the selector
+$m\ge11k-2q$ (\texttt{transfer.tex} L218--309, \texttt{selector.tex} L55--58),
+Theorem~\texttt{smooth-border} gives
+\begin{equation}\label{eq:chain}
+\bdc(\per_m)\ \ge\ \frac{(r-1)(d-1)}{4e}.
+\end{equation}
+The manuscript takes $q=\lfloor(k-1)/3\rfloor$, $d=\lfloor k^2/100\rfloor$,
+$k=\lfloor m/11\rfloor$ (\texttt{consequences.tex} L8--38).
+
+\sloppy
+\paragraph{Related work.} Two follow-ups bound other quantities and leave the
+cubic constant $5\,529\,600$ unchanged. Guo~\cite{Guo} (v2, October 8, 2026)
+moves the smooth slice of family~108 to circuits with division and obtains
+$L_{\mathrm{div}}(\per_n)\ge(n^2/86400)\log_2(n/48)$ ($n\ge1408$), assuming the
+manuscript's Prop.~7.3; from the Lean declarations alone he obtains
+$(n^2/119790)\log_2(n/44)$ ($n\ge1936$). Xie~\cite{Xie} (October 2, 2026)
+proves $\bdc(\per_n)=\Omega(n^2\log n)$, explicitly
+$\ge n^2(\log_2n-5)/(64e)$ for $n\ge64$.
+
+\paragraph{Paper versus Lean.} Guo also points out that the Lean slice size
+$D=\lfloor\binom{q+2}2/18\rfloor$ differs from Prop.~7.3. We confirm this. The
+Lean development (\texttt{Main.lean}, \texttt{critical\_dimension\_effective})
+proves only $\dim\Gamma_D\le k^2-\lfloor T/18\rfloor$, where the paper's
+Prop.~6.1 has $k^2+k-T$. It reaches the same constant $5\,529\,600$ through
+tighter auxiliary estimates ($r-1\ge0.33k$, $D-1\ge k^2/330$, $m\le11.1k$).
+Our baseline and all our constants follow the paper: Prop.~6.1, $d\le\Delta$,
+and $5\,529\,600=12^3\cdot3200$ from \texttt{consequences.tex}. The number is
+the same in both sources, so the ratios reported below are unaffected. However,
+our constants rest on the paper's Prop.~6.1 and are not Lean-certified. If one
+uses only the Lean dimension bound, re-chosen parameters give
+$c^{-1}\approx4.2\cdot10^6e$ ($1.3\times$).
+
+\section{The box lemma}
+\begin{lemma}[Box lemma]\label{lem:box}
+Let $0\le q\le (k-1)/2$ and $X\in\Gamma_D$. Then $\len Z_X\ge(q+1)^2$.
+\end{lemma}
+
+\begin{proof}
+Put $\Lambda=[s^qt^qu^c]$, a linear functional on $S_{k-1}$.
+
+\emph{Step 1.} By Lemma~\texttt{adjugate-generation} (\texttt{adjugate.tex}
+L139--248, no hypothesis on $q$), every form of degree $k-1$ in $I_Z$ is a
+constant linear combination of entries of $\adj M$. These entries are killed
+by $\Lambda$ because $X\in\Gamma_D$. Let $P\in(I_Z)_d$ with $d\le k-1$. For every
+monomial $Q$ of degree $k-1-d$ we have $PQ\in(I_Z)_{k-1}$, so $\Lambda(PQ)=0$.
+In other words, no monomial dividing $s^qt^qu^c$ occurs in $P$. Thus
+\[
+(I_Z)_d\subset(s^{q+1},t^{q+1},u^{c+1})_d\qquad(d\le k-1).
+\]
+This is coefficient extraction, not differentiation, so it holds in every
+characteristic, including~$2$. It is the computation of \texttt{adjugate.tex}
+L283--297, applied to all degrees and not only to degree~$q$.
+
+\emph{Step 2.} Let $B=(s^{q+1},t^{q+1},u)$. For $d\le 2q\le k-1$, Step~1 gives
+$(I_Z+(u))_d\subset B_d$. For $d\ge2q+1$, every monomial of degree $d$ in $s,t$
+is divisible by $s^{q+1}$ or $t^{q+1}$, so $B_d=S_d$. Hence
+$I_Z+(u)\subset B$ in every degree.
+
+\emph{Step 3.} $Z$ does not meet the line $u=0$. The points of $C_X$ on it are
+$P_i=[-\theta_i:1:0]$, and there the diagonal adjugate entry
+$\prod_{j\ne i}(\theta_j-\theta_i)$ is nonzero (\texttt{adjugate.tex} L81--87).
+So $u$ lies in no associated prime of $S/I_Z$ and is a nonzerodivisor. Then
+$H_{S/(I_Z+u)}(d)=H_{S/I_Z}(d)-H_{S/I_Z}(d-1)$, and summing gives
+\[
+\len Z=\dim_K S/(I_Z+(u))\ \ge\ \dim_K S/B=(q+1)^2. \qedhere
+\]
+\end{proof}
+
+\begin{remark}
+The manuscript's argument extracts only the injectivity of
+$S_q\to H^0(\mathcal O_Z(q))$, which gives $\dim S_q=\binom{q+2}2$. Step~3
+turns the whole Hilbert function of the Artinian reduction into length. The
+lemma is short; we regard it as a small improvement, not as new technique.
+\end{remark}
+
+Replacing $T$ by $(q+1)^2$ in \texttt{dimension.tex} gives
+$\dim\Gamma_D\le k^2+k-(q+1)^2$ for every $0\le q\le (k-2)/2$. The Severi bound,
+the conductor bound, and the fibre bound do not involve $q$.
+
+\section{Constants}
+With $\Delta=(q+1)^2-k$ we take $d=\Delta$ (so $d-1<\Delta$), which needs
+$2\le\Delta<k^2$, $r\ge2$, and $11k-2q\le m$. We maximise $(r-1)(d-1)$ in
+\eqref{eq:chain}. Write $c^{-1}=4m^3/((r-1)(d-1))$ in units of $e$.
+
+\begin{theorem}\label{thm:new}
+For every integer $m\ge1408$, $\bdc(\per_m)\ge \dfrac{m^3}{125\,500\,e}$.
+Moreover $\bdc(\per_m)\ge \dfrac{m^3}{(118\,800+o(1))\,e}$ as $m\to\infty$.
+The same bounds hold for $\mathrm{dc}(\per_m)$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+\emph{Asymptotics.} Put $q=\gamma k$. Then $m\approx(11-2\gamma)k$ and
+$(r-1)(d-1)\approx(1-2\gamma)\gamma^2k^3$. The function
+$(1-2\gamma)\gamma^2/(11-2\gamma)^3$ is maximised at $\gamma=11/32$, with value
+$1/29\,700$. So $c^{-1}\to4\cdot29\,700=118\,800$.
+
+\emph{Tail.} Take $k=\lfloor 32(m-2)/330\rfloor$ and $q=\lfloor 11k/32\rfloor$.
+Then $11k-2q\le m$, $r-1\ge 10k/32-1$, and $d-1\ge(11k/32)^2-k-1$. Substituting
+$k\ge 32(m-2)/330-1$ gives an explicit rational function $g(m)\ge c^{-1}(m)$.
+The numerator of $g'$ has no real root above $65$ (exact computation), so
+$g$ decreases. Also $g(200\,000)=118\,893$.
+
+\emph{Range $1408\le m\le200\,000$.} For each $m$ we search $(k,q)$ near the
+optimum. The largest value of $c^{-1}(m)$ found is $125\,422.2$, at $m=1419$.
+See \texttt{scripts/independent/uniform\_indep.py}.
+\end{proof}
+
+\begin{table}[h]
+\begin{tabular}{lrrr}
+\toprule
+ & uniform, $m\ge1408$ & $m=5000$ & $m\to\infty$\\
+\midrule
+stated (\texttt{introduction.tex} L48) & $5\,529\,600$ & $5\,529\,600$ & $5\,529\,600$\\
+manuscript's lemma, re-chosen parameters & $267\,955$ & $245\,793$ & $238\,328$\\
+box lemma, re-chosen parameters & $125\,422$ & $120\,334$ & $118\,800$\\
+\midrule
+gain from parameters only & $20.6\times$ & $22.5\times$ & $23.2\times$\\
+gain from box lemma & $2.14\times$ & $2.04\times$ & $2.006\times$\\
+total & $44.1\times$ & $46.0\times$ & $46.5\times$\\
+\bottomrule
+\end{tabular}
+\caption{Values of $c^{-1}/e$. ``Re-chosen parameters'' means $q\le(k-1)/3$,
+$d=\Delta$, and $k$ maximal subject to $11k-2q\le m$. Of the box-lemma factor
+$2.006$, the change $\binom{q+2}2\to(q+1)^2$ contributes $2.000$, and dropping
+$q\le c$ contributes $1.003$.}
+\end{table}
+
+Most of the loss in the stated constant comes from the manuscript's
+deliberately crude estimates $d\approx k^2/100$ against $\Delta\approx k^2/18$,
+$k\ge m/12$, and $r-1\ge k/4$ against $k/3$. These alone are worth
+$\approx23\times$.
+
+\section{The true codimension and the limit of the method}
+\begin{proposition}[Block families]\label{prop:F}
+The partials of $G_D$ are $K$-linear combinations of the
+\emph{almost-principal} $(r-1)$-minors of $X$, that is, minors with row set
+$U\cup\{a\}$ and column set $U\cup\{b\}$. Let $X$ be block upper triangular
+for some ordered partition of the coordinates into $m'$ blocks, and let the
+diagonal blocks have ranks $\rho_i$ with $\sum\rho_i+m'\le r-1$. Then every
+such minor vanishes, so $X\in\Gamma_D$. This holds for every field, every
+characteristic, and every $\theta$.
+\end{proposition}
+
+\begin{proof}
+$\partial G_D/\partial X_{ij}=[s^qt^q]\adj(X+sI+tD)_{ji}$. Expanding along the
+diagonal $(s+t\theta_l)$ entries gives a sum over $2q$-sets $S$ of a polynomial
+in $\theta$ times the minor of $X$ with rows $[k]\setminus(S\cup\{i\})$ and
+columns $[k]\setminus(S\cup\{j\})$. For the vanishing, apply the generalized
+Laplace expansion along the row blocks:
+$\det X[I,J]=\pm\sum\prod_p\det X[I_p,C_p]$, where $C_p$ consists of columns in
+blocks $\ge p$. A term is nonzero only if $C_p$ contains at most $\rho_p$
+columns of block $p$. Process the blocks in order. Since $|I_p|$ and $|J_p|$
+differ in at most two blocks and by at most one, at most $m'-1$ columns are
+assigned off the diagonal. So $\sum_p\rho_p\ge (r-1)-(m'-1)$, which
+contradicts the hypothesis.
+\end{proof}
+
+Take one block of size $n_1\approx2\beta k$ and rank $r-1-m'$, and let the
+remaining $m'-1\to\infty$ blocks have rank $0$ and equal sizes. The family has
+codimension $(\tfrac12-\beta^2+o(1))k^2$, where $\beta=r/k$. The case $m'=1$
+is the rank-$\le r-2$ family, of codimension $(2q+2)^2\approx(1-\beta)^2k^2$.
+Since $(1-\beta)^2-(\tfrac12-\beta^2)=2(\beta-\tfrac12)^2$, the block families
+are strictly larger for $\beta\ne\tfrac12$. Two explicit instances, each
+verified by exact computation over $\mathbb Q$ and $\mathbb F_{2^{20}}$:
+\begin{itemize}
+\item $k=9$, $q=3$: $X=\begin{psmallmatrix}0&Y\\0&0\end{psmallmatrix}$ with
+$4+5$ blocks has codimension $61<64=(2q+2)^2$.
+\item $k=22$, $q=7$: blocks $(16,6)$, ranks $(5,0)$, codimension $253<256$.
+\end{itemize}
+Hence a lemma of the form $\codim\Gamma_D\ge(2q+2)^2-O(1)$ is false. The
+natural intermediate lemma $\dim\{X:\len Z_X\ge\ell\}\le k^2+k-2\ell$ is also
+false. For $k=16$ and $X=\begin{psmallmatrix}0&Y\\0&0\end{psmallmatrix}$ with
+$8\times8$ blocks, every adjugate entry has order $\ge k-2$ at $[0:0:1]$.
+So $\len Z_X\ge\binom{15}2=105$ for every $Y$, and the local length is exactly
+$105$. This family has dimension $64>62$.
+
+\begin{proposition}[Ceiling]\label{prop:ceiling}
+Consider any proof that applies Theorem~\texttt{smooth-border} to a
+$d$-dimensional linear section of $G_D$, for some diagonal $D$, and embeds it
+in $\per_m$ by the selector ($m\ge11k-2q$). Then $d\le\codim\Gamma_D$, by the
+projective dimension theorem and Euler's identity over $\mathbb C$.
+Proposition~\ref{prop:F} therefore gives
+\[
+\frac{(r-1)(d-1)}{4e}\ \le\ \frac{(1+o(1))\,m^3}{C_{\rm ceil}\,e},\qquad
+C_{\rm ceil}=\min_{0<\beta<1}\frac{4(10+\beta)^3}{\beta\min\{(1-\beta)^2,\tfrac12-\beta^2\}}
+=33\,065.4\ldots,
+\]
+attained at $\beta=(\sqrt{601}-1)/60\approx0.392$. So no uniform constant from
+this pipeline beats $1/((33\,065+o(1))e)$, a factor $167\times$ over the stated
+constant. The box lemma is within $3.59\times$ of this ceiling.
+\end{proposition}
+
+At finite $m$ the per-$m$ ceiling is slightly weaker: $30\,872e$ at $m=1408$
+($179\times$) and $31\,858e$ at $m=5000$ ($174\times$). The ceiling depends on
+the premises stated. It does not cover initial forms at non-zero points,
+other coefficients $[s^at^b]$, or other selectors.
+
+The true codimension is therefore in
+$\bigl[(q+1)^2-k,\ \min\{(2q+2)^2,\ \text{block-family codim}\}\bigr]$,
+asymptotically $[\tfrac14(1-\beta)^2,\ \tfrac12-\beta^2]\,k^2$.
+
+\begin{conjecture}[A$^*$, open]
+For $\beta=r/k$ fixed in $(\tfrac14,\tfrac12)$,
+$\codim\Gamma_D\ge(\tfrac12-\beta^2-o(1))k^2$ for generic $\theta$; that is,
+the block families of Proposition~\ref{prop:F} are asymptotically extremal.
+If true, the pipeline would reach $c^{-1}\to33\,065e$.
+\end{conjecture}
+We have not checked this conjecture beyond small cases, and we do not know
+whether families with several ranked blocks do better.
+
+\section{Computational certificates}
+All scripts are in \texttt{scripts/}, with outputs in
+\texttt{scripts/expected\_output/}. \texttt{box\_indep.sage} checks steps 1--3
+of Lemma~\ref{lem:box} for $k\le9$ over $\mathbb Q$, $\mathbb F_{1000003}$ and
+$\mathbb F_{2^{10}}$, including cases with $q>c$. \texttt{grad\_check.sage}
+checks the counterexamples. It uses the characteristic-free identity
+$\adj(sI-B)=\sum_j s^{k-1-j}\sum_{i\le j}c_iB^{j-i}$, which it cross-checks
+against brute-force differentiation. \texttt{minor\_span.sage} checks the
+almost-principal-minor span for $k\le7$. \texttt{lemmaB\_check.sage} computes
+the local length $105$ exactly over $\mathbb Q$.
+
+\begin{thebibliography}{9}
+\bibitem{OAI} OpenAI, \emph{A cubic lower bound for border determinantal
+complexity of the permanent}, September 24, 2026,
+\texttt{github.com/openai/math}, \url{preprints/A-cubic-lower-bound-for-border-determinantal-complexity-of-the-permanent-September-24-2026}, commit \texttt{adc7f1241b42}.
+\bibitem{Guo} J.~Guo, \emph{An $n^2\log\log n$ lower bound for permanent
+circuits with valid division}, arXiv:2609.29568, v2, October 8, 2026.
+\bibitem{Xie} Y.~Xie, \emph{Smooth slices and superquadratic border
+determinantal complexity of the permanent}, Zenodo, record 23108131,
+October 2, 2026.
+\end{thebibliography}
+
+\medskip\noindent\emph{Developed with AI assistance (Anthropic Claude, Opus 5.5)
+under [AUTHOR NAME]'s direction; independent adversarial reviews were run by
+separate AI sessions and are not human peer review.}
+\end{document}

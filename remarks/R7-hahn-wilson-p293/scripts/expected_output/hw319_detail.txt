@@ -1,0 +1,10 @@
+M= 7 Rmax=2 B0max= 4 B0^3=  64  C1 first prime=127  C1v first prime=79
+M= 9 Rmax=3 B0max= 6 B0^3= 216  C1 first prime=199  C1v first prime=127
+M=11 Rmax=4 B0max= 8 B0^3= 512  C1 first prime=293  C1v first prime=167
+M=13 Rmax=5 B0max=10 B0^3=1000  C1 first prime=397  C1v first prime=223
+M=15 Rmax=6 B0max=12 B0^3=1728  C1 first prime=521  C1v first prime=293
+293 11 4 CS(+3): True  dev<=2/p(+3): True  C1 margin: 259/803  B0^3-p: 219
+199 9 3 CS(+3): True  dev<=2/p(+3): True  C1 margin: 2/33  B0^3-p: 17
+paper at p=293: need M>=81 and p>16M^2 = 104976
+C1v literal R0>=4 p_min = 167 [(11, 4)]
+C1v sharpened R0>=2 p_min = 127 [(9, 3)]

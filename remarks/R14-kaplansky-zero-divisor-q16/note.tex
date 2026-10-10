@@ -1,0 +1,147 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,mathtools,hyperref,booktabs}
+\newcommand{\ee}{\mathrm e}
+\usepackage[margin=1.1in]{geometry}
+% compile with: latexmk -pdf note.tex
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{A remark on OpenAI family 196: the zero-divisor construction works with $q=16$}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's manuscript \emph{A Torsion-Free Group Algebra with Zero Divisors}
+(family~196 of \texttt{github.com/openai/math}, commit \texttt{adc7f124})
+builds its graphs from the projective plane $\mathrm{PG}(2,128)$: $16\,513$
+ordinary letters, an alphabet of $16\,516$ letters, and a rose with
+$8\,258$ edges. We check every place where $q$ enters the argument. The
+construction goes through unchanged for $q=16$: $273$ points, $276$ letters,
+and a rose with $138$ edges. The only nontrivial input is the squared-word
+lemma (Lemma~2.1). For $q=16$ the manuscript's own weight vector certifies it
+with ratio $7138933/7179627<1$, and the manuscript's explicit $\delta=1/600$
+still holds. For $q=8$ the lemma is false: the transfer matrix has spectral
+radius $1.01175>1$. Hence $q=16$ is the smallest power of two for which the
+construction works.
+\end{abstract}
+\maketitle
+
+\section{Where $q$ enters}
+We re-read all sections of the manuscript (\texttt{types.tex},
+\texttt{entropy.tex}, \texttt{planar.tex}, \texttt{topology.tex},
+\texttt{factors.tex}). The parameter $q$ enters only at the following places.
+\begin{enumerate}
+\item \emph{Parity} (\texttt{types.tex} L28--31, \texttt{factors.tex} L139).
+Two lines meet in $1$ or $q+1$ points, and the extra parts meet in $0$ or $2$
+letters. So $|S_x\cap S_y|$ is odd for all $x,y$ if and only if $q$ is even.
+Also $v-3$ is even for every $q$.
+\item \emph{Squared words} (Lemma~2.1, L72--101). The lemma requires the
+spectral radius of $M_{t,u}=w(t,u)^2$ to be less than $1$. It is the only
+input to the entropy section that depends on $q$: \texttt{entropy.tex} uses
+only $\delta>0$, the fixed alphabet $|T|$, and the least positive weight,
+through $a_0$.
+\item \emph{Minimum degree}. The short-closure lemma (\texttt{planar.tex}
+L63) needs $(q+1)-2\ge3$. The expansion count in Lemma~2.4
+(\texttt{types.tex} L158--167) needs
+$r/k\ge(q+1)/2>2$; for $q=128$ this is the exponent $62.5=64.5-2$.
+\item \emph{Existence of constants}. The constant $c$ in (2.5), and the
+constants $D_0,d,D,\varepsilon$ that follow from it, depend on $q$, but only
+their existence is used. With $q=16$ the value $c=1/100$ still works:
+$c\log(2|T|/p)=0.091<1$ and $2c\log d_*=0.060<1$, where $d_*=q+4=20$.
+\end{enumerate}
+The remaining numbers in Section~2.1 only illustrate $q=128$. These are the
+counts at $n=2v^2$, the value $16528<\ee^{10}$, the weight range
+$[1/129,1]$, and $\delta=1/600$, $h\ge3002$. For $q=16$ they become: at
+$n=2v^2=149\,058$, each line class on $A$ has $17$ vertices of each
+double-extra type and $495$ of empty type, and on $B$ it has $34$
+triple-extra and $512$ empty; $\sum f=288$; the weights lie in
+$[1/17,1]$; and $\delta=1/600$ holds for $h\ge2412$.
+
+\section{The squared-word lemma for $q=16$}
+Classify letters as $O_0$ ($t,\bar t$ ordinary), $O_1$ ($\bar t$ extra, three
+letters) and $E$ ($t$ extra, three letters). The weight $w(t,u)$ depends only
+on the classes of $\bar t$ and $u$. Hence this partition is equitable for
+$M$, with quotient
+\[
+Q=\begin{pmatrix}(v-4)o&3o&3e\\(v-3)e&3e&2\\(v-3)o&2o&3e\end{pmatrix},\qquad
+o=\frac1{(q+1)^2},\ e=p^2,\ p=\frac{q+1}{v}.
+\]
+The manuscript's $f$ is constant on classes ($f=5$ on $O_1$, $f=1$ otherwise).
+So $(Mf)(t)/f(t)$ takes exactly three values:
+\[
+\frac q{q+1}+\frac{12}{(q+1)^2}+3p^2,\qquad
+\frac{2+(v+12)p^2}5,\qquad
+\frac{v+7}{(q+1)^2}+3p^2 .
+\]
+The first two are exactly the row bounds of the manuscript (L83, L89). At
+$q=128$ they equal $500731261911/504183783481$ and $820350863/1363395845$,
+the rationals printed there.
+
+\begin{proposition}\label{prop:16}
+For $q=16$, $Mf\le\lambda_{16}f$ with
+$\lambda_{16}=7138933/7179627=0.99433\ldots$ (attained on $O_0$; the other
+two values are $77141/124215$ and $7039561/7179627$). Consequently
+$\sum_{W\in T^h}P(W)^2\le288\,\lambda_{16}^{h-1}\le\ee^{-h/300}$ for
+$h\ge2412$, so Lemma~2.1 holds with $\delta=1/600$. The exact Perron root is
+$\rho(M)=0.975008$, the largest root of
+$x^3-\frac{6849809}{7179627}x^2-\frac{2458920281}{178363473561}x-\frac{215608591}{33320648907}$.
+\end{proposition}
+
+\begin{proposition}\label{prop:8}
+For $q=8$, $\rho(M)=1.011749$. A rational positive class-constant vector $g$
+gives $\min_t(Mg)(t)/g(t)=70905723398671/70082342865504>1$, so by the
+Collatz--Wielandt inequality $\rho(M)>1.0117$. Since
+$\sum_{W\in T^h}P(W)^2=\mathbf 1^{\mathsf T}M^{h-1}\mathbf 1\ge
+c\,\rho(M)^{h-1}$ for some $c>0$, Lemma~2.1 fails for every $\delta>0$.
+The same holds for $q=2$ ($\rho=1.6238$) and $q=4$ ($\rho=1.1825$).
+\end{proposition}
+
+\section{Verification}
+\texttt{scripts/independent/kz196\_indep.py} builds $\mathrm{PG}(2,q)$ over
+$\mathrm{GF}(q)$ in Sage for $q\in\{2,4,8,16,32\}$. From the plane it builds
+the explicit vertex types at $n=2v^2$ and checks: integrality of the counts,
+letter frequency $p$ on both sides, and odd cross-intersections for all type
+pairs (exhaustively for $q\le16$). It then computes $w(t,u)$
+\emph{empirically} from the $B$-side type counts, checks that the $A$-side
+frequencies are at most $w$, checks that the three-class partition is
+equitable and that its quotient equals $Q$, and finally computes the exact
+certificates above. Numerical eigenvalues of the full matrix agree with the
+exact Perron root. The primary scripts (\texttt{kz196\_exact.py},
+\texttt{kz196\_spectral.py}) take the weights from the formula instead of the
+geometry and give the same numbers.
+
+\begin{remark}[Other orders]
+$\rho(M)$ depends only on $q$, so any projective plane of even order $q$
+could be used. The formula gives $\rho<1$ already for $q=10,12,14$
+($0.9912$, $0.9816$, $0.9770$). There is no plane of order~$10$ (Lam et al.),
+and the existence of planes of order $12$ or $14$ is open. So $q=16$ is the
+smallest order for which a plane is known to exist and the construction works.
+Among Desarguesian planes $\mathrm{PG}(2,q)$, which the manuscript uses, it
+is the smallest.
+\end{remark}
+
+\section{What this does and does not change}
+The rose, and hence the generating set of $G$, shrinks from $8\,258$ to
+$138$ generators, and the vertex degrees drop from $129$--$132$ to $17$--$20$.
+The group $G$ itself still comes from a random graph on $2n$ vertices with
+$n\to\infty$ unspecified, and it has one cone (relator family) per graph
+component. This remark therefore does not make the counterexample explicit or
+computer-checkable, and it does not bound the number of relators. It also
+says nothing about other type designs. For $q=8$, a different choice of extra
+letters might give a contracting transfer matrix; we have not explored this.
+The Lean formalisation hard-codes $q=128$ (for example
+\texttt{TypedDiameter.lean}, \texttt{WordEstimate.lean}) and was not modified.
+
+\begin{thebibliography}{9}
+\bibitem{OAI} OpenAI, \emph{A Torsion-Free Group Algebra with Zero Divisors},
+September 23, 2026,
+\url{https://github.com/openai/math/tree/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/A-Torsion-Free-Group-Algebra-with-Zero-Divisors-September-23-2026}.
+\bibitem{Lam} C.~W.~H.~Lam, L.~Thiel, S.~Swiercz, The non-existence of finite projective planes of order 10,
+\emph{Canad. J. Math.} 41 (1989), 1117--1123.
+\end{thebibliography}
+\end{document}

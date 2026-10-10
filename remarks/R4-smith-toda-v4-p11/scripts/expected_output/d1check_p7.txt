@@ -1,0 +1,7 @@
+(C) #entries 5  m-profile [3, 5, 5, 5, 7]  rank d1 on m<=5 span = 4 of 4
+    k=1 a b c B^5  d1 nonzero: True
+    k=1 y z a b c B^4  d1 nonzero: False
+(E) (6,W+1): dim 4  rank in 2  rank out 2  => H = 0
+(D) quotient table matches: True
+(F) S=77 < qp+1=85 : True ; N-K=4
+0.97 s

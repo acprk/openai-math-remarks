@@ -1,0 +1,4 @@
+margins E_j in [2.3886e-05, 2.6666e-03]; argmax at sectors [  0 319], argmin [160 159]
+per-sector cutoffs (certified): 0.4999773398
+uniform margin max E_j:          0.5005642068
+no margin (coverage unknown):    0.4997200802

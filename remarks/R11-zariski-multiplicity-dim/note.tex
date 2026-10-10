@@ -1,0 +1,123 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\B}{\mathcal{B}}
+
+\title[A shorter product relation for the Zariski multiplicity counterexample]{A shorter product relation for OpenAI's\\ multiplicity-two/three Zariski counterexample}
+\author{[AUTHOR NAME]}
+\date{2026-10-09}
+
+\begin{document}
+\begin{abstract}\sloppy
+OpenAI's preprint \emph{Ambiently homeomorphic isolated hypersurfaces of multiplicities two and three}
+(\texttt{openai/math}, family~059) answers Zariski's embedded multiplicity question negatively by a
+pair of weighted homogeneous germs in $\C^N$, where $N=4s_0+16$ and $s_0$ is determined by an
+integer relation among the rational numbers $A_b=(d-b)/b$ and $R_b=(2d+b)(2d-b)/((3d-b)(d+b))$, $d=3^{11}$.
+The relation supplied with the preprint has $140$-digit coefficients and gives $N\approx4.58\cdot10^{143}$.
+We exhibit a relation with all $|e_b|\le29$ and $\sum e_b=206$; the unchanged construction then gives
+$N=1{,}802{,}976$. The argument is OpenAI's; we only find a shorter relation, and we assume the
+preprint is correct.
+\end{abstract}
+\maketitle
+
+\section{The finite input}
+Let $d=3^{11}$, $D=3d$, and $\B=\{b\in\Z:0<b<d/2,\ 3\nmid b\}$.
+\begin{lemma}[{\cite[Lemma~\texttt{seed:product}]{OAI059}}]\label{lem:product}
+There are integers $(e_b)_{b\in\B}$ with $E:=\sum_b e_b>0$ and
+$\prod_b A_b^{e_b}=\prod_b R_b^{e_b}=1$.
+\end{lemma}
+The preprint proves Lemma~\ref{lem:product} by a rank certificate over $\mathbb F_{1009}$ and the
+adjugate of an $868\times868$ minor, and supplies, as an independent witness, an explicit relation with
+$849$ nonzero coefficients of up to $140$ decimal digits \cite[App.~A]{OAI059}.
+
+From any such relation the preprint builds (\cite[Prop.~\texttt{seed:seeds}]{OAI059}) two sums of chain
+polynomials $p_1,p_2$ in $s_0$ variables. For each $b$, the four starting weights
+$3b/D$, $b/D$, $(d-b)/D$, $(d+b)/D$ occur with signed multiplicities $2e_b,-2e_b,2e_b,2e_b$
+(positive means side~2). Each occurrence is completed to an isolated chain by the
+decreasing-remainder algorithm, and its tail is copied to the opposite side. Side~1 receives $4E$ squares and
+both sides receive two cubes. Writing $\ell(c)$ for the length of the chain that starts at $c/D$, one
+obtains
+\begin{equation}\label{eq:N}
+s_0=\sum_{b}|e_b|\,c_b+2E+2,\qquad c_b=4+2\!\!\sum_{c\in\{3b,b,d-b,d+b\}}\!\!(\ell(c)-1),
+\qquad N=4s_0+16 .
+\end{equation}
+
+\section{What the proof uses from the relation}
+We read the full preprint and list every use of $(e_b)$:
+\begin{enumerate}
+\item $e_b\in\Z$ and $b\in\B$: the weight table and chain completion (\texttt{seeds.tex}:131--154);
+\item $E>0$: the squares sit on side~1, so $\operatorname{ord}_0p_1=2$, and $f_1$ has Hessian rank $16E>0$
+ (\texttt{seeds.tex}:156--166; \texttt{conclusion.tex}:284--287, 391--394);
+\item parity: all signed counts are even, so $s_0$ is even (\texttt{seeds.tex}:157--161);
+\item $\prod A_b^{2e_b}=1$ and $\prod(R_b/A_b)^{2e_b}=1$: Case~1 of the mod-$2$ spectral comparison
+ (\texttt{seeds.tex}:197--212).
+\end{enumerate}
+Case~2 (the triple-angle identity) holds row by row for any $e_b$. Case~3, the monodromy order $D=3^{12}$,
+and everything in Sections~4--6 of the preprint use only the conclusions of
+Corollary~\texttt{seed:prepared}, which depend on (1)--(4). The adjugate form of the witness is used only
+for existence and finiteness (\texttt{seeds.tex}:58--76).
+
+\begin{theorem}\label{thm:main}
+The integers $e_b$ in the file \texttt{relation\_d3pow11\_N1802976.json} ($1160$ nonzero entries,
+$\max|e_b|=29$, $E=206$, $\sum|e_b|=7414$) satisfy Lemma~\ref{lem:product}.
+Consequently, if the preprint's proof is correct, the conclusion of its Theorem~1.1 (reduced, isolated,
+weighted homogeneous, real-coefficient germs $f_1,f_2$ with $\operatorname{ord}_0f_1=2$,
+$\operatorname{ord}_0f_2=3$, ambiently homeomorphic) holds in $\C^{N}$ with
+\[
+ s_0=450{,}740,\qquad N=1{,}802{,}976=8\cdot225{,}372,
+\]
+and the Hessian coranks are $N-3296$ and $N$.
+\end{theorem}
+\begin{proof}
+The relation is verified by exact integer arithmetic in two ways. (a) The six integers of each row are
+factored, using the preprint's own verifier and, separately, our own sieve-based code. (b) Both products are
+formed directly as big integers, without factoring: numerator and denominator agree, with $118{,}503$ and
+$272{,}384$ bits respectively. Inserting the relation in \eqref{eq:N} gives $s_0=450{,}740$. The rest
+follows from the preprint, since by \S2 it uses nothing beyond properties (1)--(4).
+\end{proof}
+
+\begin{remark}[Additional check]
+Equality of the two spectra modulo $2$ is equivalent to the equality of the two Fourier transforms
+$P_{p_j}(e^{\pi i k\,\cdot})$ for all $k$ modulo $4D$. We assembled both full weight multisets explicitly
+($450{,}738$ weights per side before the cubes) and compared the transforms at $398$ characters
+(all $k<60$ and $400$ random $k$; $k$ odd with $3\mid k$ is trivial). The angles were reduced exactly
+before floating-point evaluation. The maximal discrepancy is $10^{-9}$. Perturbing one coefficient, or
+flipping one sign, gives discrepancies $\ge0.57$.
+\end{remark}
+
+\section{How the relation was found}
+Keep the columns $b\in\B$ for which $d-b,b,2d\pm b,3d-b,d+b$ are $6000$-smooth. Delete singly-supported
+columns repeatedly, as in \cite[proof of Lemma~\texttt{seed:product}]{OAI059}. This leaves $1405$ columns
+and $1150$ nonzero valuation rows. The $\mathbb Q$-kernel has dimension $255$; saturate it to the integer
+kernel lattice. Apply LLL after scaling column $b$ by $c_b$ (cf.\ \eqref{eq:N}). Among the reduced vectors
+and their pairwise sums and differences, choose the one with $E\neq0$ minimizing \eqref{eq:N}, and change
+its sign if needed. This search is heuristic. Only its output is used, and that output is verified as above.
+
+\begin{remark}[Limitations]
+$N=1{,}802{,}976$ is an upper bound for this particular construction. We do not claim that it is
+optimal. Partial runs found no relation with $E\ne0$ for $d\le3^8$, nor for $d=3^9$ with smoothness
+bound $10^5$. These runs prove nothing about minimality. The topological and lattice-theoretic parts of
+\cite{OAI059} were not re-verified.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{OAI059} OpenAI, \emph{Ambiently homeomorphic isolated hypersurfaces of multiplicities two and three},
+ OpenAI Math Release preprint, September~24, 2026,
+ \url{https://github.com/openai/math} (commit \texttt{fd4aeeb2}), directory
+ \texttt{preprints/Ambiently-homeomorphic-isolated-hypersurfaces-of-multiplicities-two-and-three-September-24-2026}.
+\bibitem{LLL} A.~K.~Lenstra, H.~W.~Lenstra, L.~Lov\'asz, \emph{Factoring polynomials with rational
+ coefficients}, Math.\ Ann.\ 261 (1982), 515--534.
+\bibitem{Zariski} O.~Zariski, \emph{Some open questions in the theory of singularities},
+ Bull.\ Amer.\ Math.\ Soc.\ 77 (1971), 481--491.
+\end{thebibliography}
+
+\noindent\emph{Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction;
+independent adversarial reviews were run by separate AI sessions and are not human peer review.}
+\end{document}

@@ -1,0 +1,9 @@
+  Rational Field: k=5 q=1 r=3: 70 almost-principal 2-minors; all k^2 partials in their span: True
+  Rational Field: k=6 q=1 r=4: 200 almost-principal 3-minors; all k^2 partials in their span: True
+  Rational Field: k=7 q=2 r=3: 231 almost-principal 2-minors; all k^2 partials in their span: True
+  Rational Field: k=7 q=1 r=5: 455 almost-principal 4-minors; all k^2 partials in their span: True
+  Finite Field in a of size 2^8: k=5 q=1 r=3: 70 almost-principal 2-minors; all k^2 partials in their span: True
+  Finite Field in a of size 2^8: k=6 q=1 r=4: 200 almost-principal 3-minors; all k^2 partials in their span: True
+  Finite Field in a of size 2^8: k=7 q=2 r=3: 231 almost-principal 2-minors; all k^2 partials in their span: True
+  Finite Field in a of size 2^8: k=7 q=1 r=5: 455 almost-principal 4-minors; all k^2 partials in their span: True
+

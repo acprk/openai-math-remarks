@@ -1,0 +1,9 @@
+delta=1/600: holds for all h >= 2412
+delta=1/400: holds for all h >= 8287
+delta=1/360: holds for all h >= 44097
+q=8 h=10: sum_W P(W)^2 = 8.523454e+01
+q=8 h=100: sum_W P(W)^2 = 2.438691e+02
+q=8 h=1000: sum_W P(W)^2 = 8.965392e+06
+q=16 h=10: sum_W P(W)^2 = 2.199656e+02
+q=16 h=100: sum_W P(W)^2 = 2.254718e+01
+q=16 h=1000: sum_W P(W)^2 = 2.887129e-09

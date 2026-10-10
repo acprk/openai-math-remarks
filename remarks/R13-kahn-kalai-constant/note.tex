@@ -1,0 +1,215 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,mathtools,hyperref,booktabs}
+\usepackage[margin=1.1in]{geometry}
+% compile with: latexmk -pdf note.tex
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\pc}{p_{\mathrm c}}
+\newcommand{\pE}{p_{\mathrm E}}
+\newcommand{\ee}{\mathrm e}
+
+\title{A remark on OpenAI family 176: the constant in the second Kahn--Kalai bound}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's manuscript \emph{The second Kahn--Kalai conjecture} (family~176 of
+\texttt{github.com/openai/math}, commit \texttt{adc7f124}) proves
+$\pc(n,H)\le\min\{1,2048\ee^{50}\pE(n,H)(1+\log_2 h)\}$ and
+$\pc(n,H)\le 6144\ee^{50}\pE(n,H)\log_2 n$.
+We run the same proof with its numerical choices left as parameters, and
+sharpen three elementary estimates. The result is
+$\pc(n,H)\le\min\{1,10^5\,\pE(n,H)(1+\log_2 h)\}$ and
+$\pc(n,H)\le 2\cdot10^5\,\pE(n,H)\log_2 n$. This improves the constants by
+factors of about $1.06\cdot10^{20}$ and $1.59\cdot10^{20}$. Nearly all of the
+gain, a factor $\ee^{43.85}\approx1.1\cdot10^{19}$, comes from the margin
+$a/\rho=\ee^{-50}$ in the local resampling lemma, which the proof does not
+need. The method is OpenAI's; this note only does the bookkeeping.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+We use the notation of the manuscript: $\pc(n,H)$ is the least $p$ with
+$\PP(N(G(n,p),H)>0)\ge\frac12$, and $\pE(n,H)$ is the least $p$ at which every
+$F\subseteq H$ has $\EE N(G(n,p),F)\ge\frac12$ (\texttt{introduction.tex}
+L17--23; the Lean statement \texttt{SecondKahnKalai.lean} uses the same $\frac12$).
+
+\begin{theorem}\label{thm:main}
+For every $n\ge2$ and every graph $H$ with $h\ge1$ edges and at most $n$ vertices,
+\[
+\pc(n,H)\le\min\{1,\;C_1\,\pE(n,H)(1+\log_2h)\},\qquad
+\pc(n,H)\le C_2\,\pE(n,H)\log_2 n,
+\]
+with $C_1=10^5$ and $C_2=2\cdot10^5$. The certified values are
+$C_1\le 99\,379$ and $C_2\le197\,985$.
+\end{theorem}
+
+Fix the parameters
+\[
+L=\tfrac{123}{20},\quad \alpha=\tfrac75,\quad \beta=\tfrac25,\quad g=6,\quad
+\lambda=\frac{(g+1)^{g+1}}{g^g}=\frac{7^7}{6^6},\quad x=\ee^{-L},\quad
+c=\alpha+\beta+\log(1+x).
+\]
+In the manuscript, $L=50$, $\alpha=10$, $\beta=1$, $g=16$ and the spread
+multiplier is $128$ instead of~$\lambda$.
+
+\section{The proof with parameters}
+Each step below is the manuscript's argument with its numbers replaced by
+parameters. We point to the line that changes.
+
+\begin{lemma}[Hierarchy; \texttt{graphs.tex} L50--112]\label{lem:hier}
+Put $q=\pE(n,H)$ and $\sigma=\lambda q$. There is a disjoint probability tree
+whose path unions are copies of $H$, with every level $\sigma$-spread and
+label sizes $1\le\ell_1$, $\ell_{i+1}\ge g\ell_i$, $\ell_k\le h$.
+\end{lemma}
+\begin{proof}
+The argument is the manuscript's, with $17$ replaced by $g+1=7$. It needs
+$2\binom{h_I}{r}\lambda^{-r}<1$ whenever $r\ge h_I/7$ and $r\ge1$. Since
+$\binom{h_I}{r}\le\binom{7r}{r}$, it suffices that $2\binom{7r}{r}<\lambda^r$
+for all $r\ge1$. Robbins' form of Stirling's formula~\cite{Robbins} gives
+$\binom nk\le\sqrt{n/(2\pi k(n-k))}\,n^n/(k^k(n-k)^{n-k})$. With $n=7r$, $k=r$
+this is $\sqrt{7/(12\pi r)}\,\lambda^r$, and $2\sqrt{7/(12\pi)}<0.87$. We also
+checked the inequality in exact integer arithmetic for $r\le3000$.
+Maximality then gives $|S|<|I|/7$, so $\ell_{i+1}>6|H_i|\ge6\ell_i$, and the
+conditional-spread computation (L94--112) is unchanged.
+\end{proof}
+
+\begin{lemma}[Local resampling; \texttt{resampling.tex} L59--148]\label{lem:local}
+Suppose $|A_b|\le m$, $\nu$ is $a$-spread, $0<\rho<1$ and $a/\rho\le x$. Call a transition a failure if
+$Z(Y)<\ee^{-\alpha m}$ or $|T|>m/2$. Then
+\[
+\PP(\mathrm{failure})\le\delta(m):=\ee^{-\alpha m}+\ee^{\alpha m}\sum_{r>m/2}\binom mr x^r,
+\qquad
+\EE[\mathbf 1_{\{\mathrm{target}=b,\,Z\ge\ee^{-\alpha m}\}}f(W)]\le\ee^{\alpha m}(1+x)^m\nu_b\,\EE f(W).
+\]
+\end{lemma}
+\begin{proof}
+This is the manuscript's proof with $10$ replaced by $\alpha$. We keep the
+two exact sums and drop the final rounding to $\ee^{-9m}$ and $\ee^{11m}$.
+\end{proof}
+
+\begin{lemma}[Reduction; \texttt{trees.tex} L56--205]\label{lem:red}
+Suppose the capacities satisfy $m_{j+1}\ge g\,m_j$, every level is
+$a$-spread, and $\rho=\ee^{L}a<1$. Use pruning threshold
+$\epsilon_j=\ee^{-\beta m_j}$. Then one attempt succeeds with probability at
+least $1-B$, where
+\[
+B=\sup_{m\ge1}\varphi_0(m)+\sum_{j\ge2}\ \sup_{m\ge g^{j-1}}\varphi_0(m)\,\ee^{cS(m)},\qquad
+\varphi_0(m)=\ee^{\beta m}\delta(m),\quad S(m)=\sum_{i\ge1}\lfloor m/g^i\rfloor.
+\]
+On success, level $j$ becomes $\alpha_j/(1-\ee^{-\beta m_j})$-spread and its
+capacity becomes $\lfloor m_j/2\rfloor$.
+\end{lemma}
+\begin{proof}
+The recurrence (L109) becomes $D_v=\ee^{\beta m_s}(d_v+\sum_bt_{vb}D_b)$.
+Lemma~\ref{lem:local} then gives
+$\EE D_v\le\varphi_0(m_s)+\ee^{cm_s}\sum_b\nu_v(b)\EE D_b$, so
+$\EE D_o\le\sum_j\ee^{c\sum_{h<j}m_h}\varphi_0(m_j)$. Since $m_{j-i}$ is an
+integer at most $m_j/g^i$, we have $m_{j-i}\le\lfloor m_j/g^i\rfloor$, hence
+$\sum_{h<j}m_h\le S(m_j)$. Also $m_j\ge g^{j-1}$. This replaces L165--168,
+where the manuscript uses $\sum_{h<j}m_h\le m_j/15$. The spread statement is
+L196--201 with $\ee^{-m_j}$ replaced by $\ee^{-\beta m_j}$.
+\end{proof}
+
+\begin{lemma}[Spread inflation; replaces \texttt{trees.tex} L244--252]\label{lem:K}
+$\prod_{u<t}(1-\ee^{-\beta\lfloor\ell/2^u\rfloor})^{-1}\le K:=\prod_{v\ge0}(1-\ee^{-\beta2^v})^{-1}$
+whenever $\lfloor\ell/2^{t-1}\rfloor\ge1$.
+\end{lemma}
+\begin{proof}
+Since $\lfloor y\rfloor\ge2^v\lfloor y/2^v\rfloor$, the $v$-th smallest
+capacity in the product is at least $2^v$. The factor
+$(1-\ee^{-\beta m})^{-1}$ decreases in $m$.
+\end{proof}
+
+The manuscript bounds the product by one over \emph{all} positive integers,
+giving $4$ at $\beta=1$. The dyadic product is much smaller; at $\beta=1$ it
+equals $1.864$.
+
+\begin{lemma}[Attempts; replaces \texttt{trees.tex} L257--277]\label{lem:att}
+Let $p\le1-B$ and $s=\lfloor\log_2\ell_k\rfloor+1$. Let $N(s)$ be the least $N$ with
+$\PP(\mathrm{Bin}(N,p)\ge s)\ge\frac12$. Put $a=K\sigma$ and $\rho=\ee^La$.
+Then $W\sim\mu_r$ with $r=\min\{1,N(s)\rho\}$ contains a path union with
+probability at least $\frac12$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:K}, every level stays $a$-spread throughout. So each attempt
+before completion succeeds with conditional probability at least $p$.
+Induction on $N$, conditioning on the first attempt, shows that the number
+of successes among $N$ attempts stochastically dominates $\mathrm{Bin}(N,p)$.
+After $s$ successes all capacities are zero. Pre-draw $N(s)$ sets; their union
+has law $\mu_{r_*}$ with $r_*\le N(s)\rho$.
+\end{proof}
+
+The manuscript uses Markov's inequality with $4s$ attempts and success
+probability $\frac23$. The threshold $\pc$ is defined with $\frac12$, so
+$\frac12$ is enough here.
+
+\section{The numbers}
+All quantities were evaluated in Arb ball arithmetic (256 bits) and in
+exact integer arithmetic (\texttt{scripts/independent/kk176\_indep.py}).
+\begin{itemize}
+\item $B\le0.395908$. We tabulate $m\le600$ exactly. For $m>600$ we use
+$\varphi_0(m)\ee^{cS(m)}\le\ee^{-r_1m}+\ee^{-r_2m}$ with
+$r_1=\alpha-\beta-c/(g-1)>0.639$ and
+$r_2=L/2-\alpha-\beta-\log2-c/(g-1)>0.221$. The coarser relaxation
+$S(m)\le\lfloor m/g\rfloor g/(g-1)$ gives $B\le0.402469$, which matches
+\texttt{kk176\_verify.py} exactly. So $p=0.604092937329108\le1-B$.
+\item $K\le7.206978$ and $\lambda=823543/46656\le17.651385$, so
+$\ee^LK\lambda\le59\,627.004$.
+\item $N(s)$ is computed exactly for $s\le200$. Its first values are $1,3,5,6,8,10,11,13$.
+For $s>200$ we use $N(s)\le\lceil s/p\rceil$: every median of
+$\mathrm{Bin}(N,p)$ is at least $\lfloor Np\rfloor$~\cite{KaasBuhrman}.
+This gives $\sup_sN(s)/s=5/3$, attained at $s=3$.
+The worst case for $(1+\log_2h)$ is $h=2^{s-1}$, so $C_1\le59\,627.004\cdot\frac53\le99\,379$.
+\item For $C_2$ we maximise $N(s(n))/\log_2n$, where $s(n)=\lfloor\log_2\binom n2\rfloor+1$.
+For each $s\le400$ we evaluate it at the least $n$ with $s(n)=s$. For
+$s>400$ we use the bound $2/p+1/200$. The supremum is at most $3.32039$, so
+$C_2\le197\,985$.
+\end{itemize}
+If one insists on the manuscript's success probability $\frac23$, a
+rigorous Chernoff/Hoeffding tail for large $s$ gives $C_1\le119\,255$ and
+$C_2\le212\,769$.
+
+\section{Where the factor $10^{20}$ comes from}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+factor & manuscript & here & ratio\\
+\midrule
+margin $\rho/a$ in Lemma~\ref{lem:local} & $\ee^{50}$ & $\ee^{6.15}$ & $1.10\cdot10^{19}$\\
+spread multiplier $\sigma/\pE$ & $128$ & $17.651$ & $7.25$\\
+spread inflation & $4$ & $7.207$ & $0.555$\\
+attempts per success & $4$ & $5/3$ & $2.40$\\
+\midrule
+$C_1$ & $2048\ee^{50}\approx1.062\cdot10^{25}$ & $\le 99\,379$ & $1.07\cdot10^{20}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The spread inflation is worse here because $\beta=0.4<1$. The smaller $\beta$
+pays for a smaller $L$. At the manuscript's own parameters our accounting
+gives $B=1.234\cdot10^{-4}$, which is consistent with its claim $<\frac14$.
+
+\begin{remark}
+Every change is either a different numerical choice or an elementary
+sharpening: the dyadic product, Robbins' bound, and an exact binomial count.
+No new idea is involved, and we did not update the Lean statement, which
+hard-codes $2048\ee^{50}$ and $6144\ee^{50}$.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{OAI} OpenAI, \emph{The second Kahn--Kalai conjecture}, September 24, 2026,
+\url{https://github.com/openai/math/tree/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/The-second-Kahn-Kalai-conjecture-September-24-2026}.
+\bibitem{KaasBuhrman} R.~Kaas and J.~M.~Buhrman, Mean, median and mode in binomial distributions,
+\emph{Statist. Neerlandica} 34 (1980), 13--18.
+\bibitem{Robbins} H.~Robbins, A remark on Stirling's formula, \emph{Amer. Math. Monthly} 62 (1955), 26--29.
+\bibitem{Tran} T.~Tran, Fractional expectation thresholds and the ``second'' Kahn--Kalai conjecture, arXiv:2609.20546.
+\bibitem{DKP} B.~Dubroff, J.~Kahn, J.~Park, On the ``second'' Kahn--Kalai conjecture, arXiv:2508.14269; and \emph{\ldots: cliques, cycles, and trees}, arXiv:2510.02005.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,6 @@
+d = 3^11, support 1160, E = 206, sum|e| = 7414, max|e| = 29
+direct big-integer products: A ok=True (118503 bits), R ok=True (272384 bits)
+sieve valuations: A ok=True, R ok=True
+squares 4E = 824, s0 = 450740, N = 4 s0 + 16 = 1802976 (N/8 = 225372)
+spectral mod-2 Fourier test: 398 characters, max |log diff| = 9.56e-10
+ALL CHECKS PASSED

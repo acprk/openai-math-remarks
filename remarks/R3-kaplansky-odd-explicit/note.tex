@@ -1,0 +1,103 @@
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amssymb,amsmath,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\F}{\mathbb F}
+\title{A remark on OpenAI's odd-characteristic Kaplansky counterexample:\\ an explicit prime}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \emph{A Counterexample to Kaplansky's Direct-Finiteness Conjecture
+in Odd Characteristic} works over a field of order $p^4$, where $p$ is the least prime
+factor of $(m!)^2+1$ for $m=\binom{1200}{600}$. That prime is not known. We observe that the same
+proof runs with the threshold-Kneser graph on the $41$-subsets of $[86]$, and with the
+explicit prime $p=6054252965430758779982953$, certified by APRCL and a Pocklington
+certificate. The argument is OpenAI's; we only re-select parameters and replace one
+estimate by an exact computation, and we list every changed line. Developed with
+AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction;
+independent adversarial reviews were run by separate AI sessions and are not human
+peer review.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+We write \cite{OAI197} for the preprint
+\path{preprints/A-Counterexample-to-Kaplanskys-Direct-Finiteness-Conjecture-in-Odd-Characteristic-September-26-2026}
+of \url{https://github.com/openai/math}; line numbers refer to \texttt{build/sections/*.tex} at commit
+\texttt{08fcd61}. Theorem~1.1 of \cite{OAI197} reads: with $m=\binom{1200}{600}$ and $p$ the least
+divisor $>1$ of $(m!)^2+1$, there are a field $K$ of order $p^4$, a finitely generated group $G$ with
+torsion and $a,b\in K[G]$ with $ab=1\ne ba$.
+
+\begin{theorem}\label{thm}
+Let $m=\binom{86}{41}=6054252965430758779982760$ and $p=6054252965430758779982953$, the least prime
+$p>m$ with $p\equiv1\pmod 4$. There are a field $K$ of order $p^4$, a finitely generated group $G$
+containing torsion, and finite sums $a,b\in K[G]$ with $ab=1$ and $ba\neq1$. The construction is that
+of \cite{OAI197}.
+\end{theorem}
+
+\section{The parameters that change}
+The proof of \cite{OAI197} uses $m$ and $p$ only through the following facts.
+\begin{enumerate}
+\item[(F1)] $p$ is an odd prime with $p>m$, and $-1$ is a square mod $p$ (Lemma op:field, \texttt{02} L7--26).
+\item[(F2)] A triangle-free graph $\Gamma$ on $m$ vertices has a fitting factorization over $\F_p$ of size
+$t$, with $t/m<d/w$ (\texttt{02} L44--88, \texttt{05} L91--95).
+\item[(F3)] $p>600$, $p\ge5$ for the estimates in \texttt{03} L58--61, L139--146 and L207--209, which give $d/w>1/96$.
+\item[(F4)] The residues $\bar i\in\F_p$ of the vertex indices are distinct (\texttt{04-gluing} L391).
+\end{enumerate}
+For (F1) we \emph{define} $p$ as the least prime $>m$ with $p\equiv1\pmod4$. Then $p>m$, and $-1$
+is a square because $4\mid p-1$. This replaces the least-divisor argument at \texttt{02} L16--20.
+(F3) and (F4) are immediate from $p>m>600$.
+
+For (F2) let $\Gamma$ be the graph on the $41$-subsets $I_1,\dots,I_m$ of $[86]$, with $I_i\sim I_j$ iff
+$|I_i\cap I_j|<13$. Three pairwise adjacent sets would have union at least
+$3\cdot41-3\cdot12=87>86$, so $\Gamma$ is triangle-free. With
+$\alpha_i(T)=[T\subseteq I_i]$ and $\beta_j(T)$ the multilinear coefficient of $\prod_{x\in T}X_x$ in
+\[
+Q_j(X)=\prod_{k=13}^{40}\frac{\sum_{x\in I_j}X_x-k}{41-k},
+\]
+(the threshold-Kneser polynomial of \cite{Hav,GH}, as used in \cite{OAI197}) one gets $F_{ij}=\prod_{k=13}^{40}(|I_i\cap I_j|-k)/(41-k)$, which equals $1$ on the diagonal and
+$0$ for distinct non-neighbours ($13\le|I_i\cap I_j|\le40$). All denominators lie in $\{1,\dots,28\}$ and are
+invertible mod $p$. The index set is $\mathcal T=\{T\subseteq[86]:|T|\le28\}$, of size
+$t=\sum_{j=0}^{28}\binom{86}{j}=62112284749374537743384$. The estimate
+$t/m\le 401(5/7)^{100}<1/100$ (\texttt{02} L79--87) is replaced by the exact comparison
+\[
+96t=5962779335939955623364864<m=6054252965430758779982760,
+\]
+so $t/m<1/96<d/w$, where $d/w>1/96$ is \texttt{03} L209. The chain $t/m<1/100<1/96$ at
+\texttt{01} L66, \texttt{03} L4 and \texttt{05} L93 becomes $t/m<1/96$. Nothing else in the seven
+sections depends on $m$ or on the special form of $p$. In particular, neither vertex transitivity nor
+any spectral property of $\Gamma$ is used. \qed
+
+\begin{remark}[Minimality within the mechanism]
+Among all threshold-Kneser instances $(N,k,s)$ satisfying the paper's triangle-free criterion
+$3k-3(s-1)>N$ and $t/m<1/96$, $(86,41,13)$ has the least $m$. For $N\le120$ this is checked by
+exhaustive search. For $N>120$, $k-s\ge\lfloor N/3\rfloor$ forces $m>96t\ge96\binom{121}{40}>10^{34}$.
+Keeping the constant $1/100$ instead, $(86,42,14)$ works, with $p=m+313=6486699605818670121410413$.
+A sharper version of \texttt{03} L137--154 (true bad fraction $\approx1/(48p)$ instead of
+$1/2$) would allow $(74,35,11)$; we do not claim this.
+\end{remark}
+
+\section{Certificates}
+\begin{itemize}
+\item Primality: $p-1=2^3\cdot3\cdot19\cdot60101\cdot220909311629180017$, each factor APRCL-prime.
+Pocklington witnesses $a$ for the factors $r=2,3,19,60101,220909311629180017$ are $5,2,2,2,2$:
+$a^{p-1}\equiv1$ and $\gcd(a^{(p-1)/r}-1,p)=1$. PARI/GP's \texttt{isprime(p,2)} (APRCL) also returns $1$.
+\item $p\nmid(m!)^2+1$ (Wilson: $m!\equiv-1/192!$), so the original definition of $p$ cannot simply be kept.
+\item Fit identities: exact rational check of $F(x)=\prod_{k=13}^{40}(x-k)/(41-k)$ for every
+$x\in\{0,\dots,41\}$ via the Stirling-number form of the multilinear reduction; plus a full
+symbolic expansion on the toy instance $(10,4,2)$ (210 vertices, $0$ errors).
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{OAI197} OpenAI, \emph{A Counterexample to Kaplansky's Direct-Finiteness Conjecture in Odd
+Characteristic}, OpenAI Math Release preprint, September 26, 2026,
+\url{https://github.com/openai/math/tree/main/preprints/A-Counterexample-to-Kaplanskys-Direct-Finiteness-Conjecture-in-Odd-Characteristic-September-26-2026}.
+\bibitem{GH} A.~Golovnev and I.~Haviv, \emph{The (Generalized) Orthogonality Dimension of (Generalized) Kneser Graphs: Bounds and Applications}, Theory of Computing 18 (2022), no.~22, 1--22.
+\bibitem{Hav} I.~Haviv, \emph{On Minrank and the Lov\'asz Theta Function}, APPROX/RANDOM 2018, LIPIcs 116, 13:1--13:15.
+\end{thebibliography}
+\end{document}

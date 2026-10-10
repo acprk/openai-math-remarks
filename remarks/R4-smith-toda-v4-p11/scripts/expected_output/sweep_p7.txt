@@ -1,0 +1,18 @@
+p=7 q=12 u4=400 kcut4=36 W=127 jobs=550
+NONEMPTY ('prod n=3 e=(0, 2, 0, 2)', 33, 119, 1, ['y A^16'], True)
+NONEMPTY ('prod n=3 e=(0, 2, 1, 2)', 20, 126, 1, ['y b A^9'], True)
+NONEMPTY ('v4 target k=1', 13, 401, 2, ['a b c B^5', 'y z a b c B^4'], None)
+NONEMPTY ('v4 target k=2', 25, 402, 2, ['x y z a c A^5 C^5', 'x a c A^5 C^5 B'], None)
+NONEMPTY ('v4 target k=6', 73, 406, 3, ['y A^33 B^3', 'y z b A^34 B', 'b A^34 B^2'], None)
+NONEMPTY ('v4 target k=7', 85, 407, 2, ['y a b A^40 B', 'y b c A^41'], None)
+NONEMPTY ('src (5,W)', 5, 127, 2, ['y b c A', 'y a b B'], None)
+NONEMPTY ('stem d=1 j=0', 6, 128, 4, ['a c A B', 'x y b c A', 'y z a c A', 'x y a b B'], None)
+(q+1,u5+1): dpcount=5 z3=5
+    y h[3,4) a b h[2,4) h[1,4) h[0,4) b30^3
+    y h[3,4) c h[1,4) h[0,4) b30^4
+    a h[1,4) h[0,4) b30^5
+    y a h[2,4) h[1,4) h[0,4) b30^4
+    h[3,4) a b h[1,4) h[0,4) b30^4
+k=p target A^N-divisible: True
+product w<u_{n+1} all: True
+1.79 s

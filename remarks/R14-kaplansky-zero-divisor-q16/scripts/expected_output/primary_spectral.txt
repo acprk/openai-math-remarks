@@ -1,0 +1,6 @@
+control q=128 row bounds 500731261911/504183783481 820350863/1363395845 True True
+q=2 v=7 |T|=10 rose edges=5: rho(M) min=1.623834 max=1.623834
+q=4 v=21 |T|=24 rose edges=12: rho(M) min=1.182472 max=1.182472
+q=8 v=73 |T|=76 rose edges=38: rho(M) min=1.011749 max=1.011749
+q=16 v=273 |T|=276 rose edges=138: rho(M) min=0.975008 max=0.975008
+q=32 v=1057 |T|=1060 rose edges=530: rho(M) min=0.978399 max=0.978399

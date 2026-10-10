@@ -1,0 +1,10 @@
+===== p=13  q=24  u=(0,1,14,183,2380)
+(A) lower obstruction groups (low:algebraic-vanishing) empty May page: True
+(B) v_4 targets: nonempty k = [1, 2, 12, 13]  matches paper tables: True
+(C) (q+1,u5+1) list = Table may:n5-table: True ; d1 injective on m=3 and m=5 spans: True
+    F7-F* = -303 (<0 needed)
+(D) frob:quotient-groups table: True ; 3p+2<p(p-1): True ; units 2,3,6 mod p: True
+(E) (5,W) source list: ['ayb B^1', 'cyb A^1'] ; other stems empty: True ; (6,W+1) list: ['ac B^1 A^1', 'acyz A^1', 'xayb B^1', 'xcyb A^1'] ; d1-cohomology dim: 0
+(F) qp+1-S=20, N-K=10 : True
+RESULT p=13: ALL MAY-PAGE / FINITE CLAIMS HOLD []
+1.30 s

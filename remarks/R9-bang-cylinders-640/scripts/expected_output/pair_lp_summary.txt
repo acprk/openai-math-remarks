@@ -1,0 +1,5 @@
+pairs: 102400  pairs with Z_jk >= 0: 0
+exact max Z_jk = -29290260249784175320141/1220427626492079325376000000000 = -2.3999997717172515e-08
+in units of eps^2 (primary script's U_jk): -1.4999998573232821e-07
+attained at pairs: [(78, 84), (84, 241), (235, 78), (241, 235)]
+COVERAGE CERTIFIED: True

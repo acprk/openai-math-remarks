@@ -1,0 +1,26 @@
+== main case: p=293, M=11, R0=(M-3)/2=4 ==
+(p,M,R0)=(293,11,4) global: OK  C1 margin = 259/803
+   r=2 OK {'r': 2, 'X': 85849, 'ncol': 11, 'b1': (7644, 7937), 'b1_over_X': (0.08904005870773102, 0.09245302799100746), 'k2min': 15555, 'reach': [5, 6]}
+   r=3 OK {'r': 3, 'X': 25153757, 'ncol': 88, 'b1': (2185220, 2380651), 'b1_over_X': (0.08687449751542085, 0.09464395318758943), 'k2min': 4503143, 'reach': [5, 6]}
+   r=4 OK {'r': 4, 'X': 7370050801, 'ncol': 704, 'b1': (640214988, 697585853), 'b1_over_X': (0.08686710652159045, 0.09465143074798732), 'k2min': 1319366427, 'reach': [5, 6]}
+   r=5 OK {'r': 5, 'X': 2159424884693, 'ncol': 5632, 'b1': (187582937012, 204392710039), 'b1_over_X': (0.08686708129635554, 0.09465145626867127), 'k2min': 386574308639, 'reach': [5, 6]}
+== negative controls (each must FAIL something) ==
+   (283,11,4) prime just below 293 -> ['C1']
+   (293,11,5) R0=(M-1)/2: I meets endpoint -> ['CE(I meets endpoint)', 'CE(I meets endpoint)', 'CE(I meets endpoint)']
+   (37,11,4) p<4M: bands collide -> ['C1', 'SEP (band 1 below band 2; b >= X/2M)', 'r=4:JCUT reach=[0, 5, 6]', 'r=4:LIT3']
+   (293,9,3) R0=3 <4 (literal three-places) -> ['CB', 'R0>=4 (literal l.694)']
+== exhaustive p_min under the modified argument (literal J: R0>=4, R0<=(M-3)/2) ==
+   p_min = (293, 11, 4)
+   primes <293 passing the global conditions with any R0 in [4,(M-3)/2]: []
+== original parameters (op:parameters): smallest prime with M>=81 odd, p>16M^2, 2*floor(M/8)>p^(1/3) ==
+   original p_min = (17073437, 1033)
+== coverage: every prime 293 <= p <= 2000000 has an admissible M (M_p = least odd M>=11 with (M-3)^3 > p, R0=(M-3)/2) ==
+   uncovered primes: [] (count 0); M values used: 11..129
+   analytic tail: for M>=13, p >= (M-5)^3 >= 2M(M+3) implies C1; checked (M-5)^3 >= 2M(M+3) for 13<=M<=10^5: True (and it is increasing in M beyond)
+== stage enumeration at sample (p,M_p) from different windows ==
+   (509, 11, 4) OK
+   (521, 13, 5) OK
+   (1009, 15, 6) OK
+   (10007, 25, 11) OK
+VERDICT: ALL CHECKS PASS
+exit=0

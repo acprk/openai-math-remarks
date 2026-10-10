@@ -1,0 +1,11 @@
+plantri version: "5.8 - March 4, 2026"
+V | all (OEIS A000109) | P4 discrete | discrete & maxdeg<=6 | discrete: frac-feasible / exact certs | max t* (discrete) | non-discrete: frac-feasible / integral-feasible
+ 4 |     1 |     0 |   0 | 0 / 0 | 0.000000 (worst certified bound 0) | 1 / 1
+ 5 |     1 |     0 |   0 | 0 / 0 | 0.000000 (worst certified bound 0) | 1 / 1
+ 6 |     2 |     0 |   0 | 0 / 0 | 0.000000 (worst certified bound 0) | 2 / 2
+ 7 |     5 |     0 |   0 | 0 / 0 | 0.000000 (worst certified bound 0) | 3 / 3
+ 8 |    14 |     2 |   0 | 0 / 2 | 0.200000 (worst certified bound 1/5) | 4 / 4
+ 9 |    50 |    16 |   1 | 0 / 16 | 0.285714 (worst certified bound 2/7) | 5 / 5
+10 |   233 |   137 |   4 | 0 / 137 | 0.285714 (worst certified bound 2/7) | 8 / 8
+TOTAL V=4..10: discrete=155, exact rational dual certificates verified=155
+POSITIVE CONTROL paper 13-point complex: (1) ok, (4) discrete, 1756 admissible splits, paper bits admissible, separation min/max = 1/3, LP t* = 0.333333 (feasible: True)

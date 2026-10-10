@@ -1,0 +1,8 @@
+m=1408: L2: 149684e (135, 39, 57, 1333) | BOX: 125317e (136, 46, 44, 2073) | A_old: 29318e (136, 45, 46, 8464) | A_ceil: 30872e (136, 44, 48, 7696) | PER_ceil: 18291e (134, 33, 68, 9112)
+   stated/BOX=44.1x  L2/BOX=1.194x  BOX/A_ceil=4.06x  A_ceil/A_old=1.053  stated/A_ceil=179x  stated/PER_ceil=302x
+m=5000: L2: 141203e (479, 135, 209, 17025) | BOX: 120334e (485, 168, 149, 28076) | A_old: 29572e (485, 168, 149, 114244) | A_ceil: 31857e (482, 151, 180, 87682) | PER_ceil: 18467e (476, 118, 240, 113288)
+   stated/BOX=46.0x  L2/BOX=1.173x  BOX/A_ceil=3.78x  A_ceil/A_old=1.077  stated/A_ceil=174x  stated/PER_ceil=299x
+
+real	0m18.486s
+user	0m7.726s
+sys	0m0.016s

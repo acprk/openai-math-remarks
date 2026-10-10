@@ -1,0 +1,196 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\eps}{\varepsilon}
+
+\title[A 640-cylinder cover below Bang's half-area bound]{A cover of the regular tetrahedron by 640 cylinders\\ below Bang's half-area bound}
+\author{[AUTHOR NAME]}
+\date{2026-10-09}
+
+\begin{document}
+\begin{abstract}\sloppy
+OpenAI's preprint \emph{Finite angular cylinder covers below the half-area bound}
+(\texttt{openai/math}, family~100) disproves Bang's half-area question: a regular tetrahedron $K$ admits
+a finite cover by cylinders whose perpendicular bases have total area below $\frac12A_{\min}(K)$.
+Its explicit threshold $\eps\le1/2000$ yields $2\lceil2/\eps^2\rceil=16{,}000{,}000$ cylinders.
+Keeping the same angular construction and the same (parameter-free) sector-selection lemma,
+but replacing the global radial estimate by per-sector cutoffs certified by $102{,}400$ exact
+rational linear programs, we obtain a cover by $640$ cylinders ($\eps=2/5$) with
+$\sum|B_i|/A_{\min}(K)<0.4999773399$.
+\end{abstract}
+\maketitle
+
+\section{Setting}
+A cylinder is $C=B+\R u$ with $u$ a unit vector and $B\subset u^\perp$ measurable; $|B|$ is its
+(perpendicular) base area. For a convex body $K\subset\R^3$, $A_{\min}(K)$ is the minimum area of
+an orthogonal projection of $K$ onto a plane. Bang~\cite{Bang1951} asked, as recorded by Bezdek and
+Litvak~\cite[Introduction]{BL2009} and Bezdek~\cite[Problem~3.1]{Bezdek2009}, whether every finite
+cylinder cover satisfies $\sum_i|B_i|\ge\frac12A_{\min}(K)$; the two-cylinder cover of a regular
+tetrahedron attains equality. The family-100 preprint~\cite{OAI100} answers this negatively.
+
+\paragraph{Related work.} An independent parameter-window optimisation within the original
+certificate gives $10^6$ cylinders~\cite{SupsupNMR}: keeping the preprint's coverage condition
+$\eta\ge(2\tau+\tau^2/4)/(2(1-\tau))$ and area condition $\eta<1/480-\tau^2$, the choice
+$\tau=1/500$, $\eta=1/498$, $2/n=\tau^2$ gives $2n=10^6$ cylinders (a factor $16$ fewer), with exact
+coverage budget $1751/249000000$ and area saving at least $2959/5187500000000$ of $A_{\min}(K)$; we
+thank its authors. Our improvement to $640$ replaces the coverage argument itself (per-sector
+truncations $T_j$ and exact pairwise LPs over $320^2$ sector pairs), which allows $\eps=2/5$ instead
+of $\eps\le1/2000$; any choice inside the original certificate's window still needs
+$\tau\lesssim1/482$, i.e.\ more than $9\cdot10^5$ cylinders.
+
+We use its coordinates: $H=\sqrt2$,
+\[
+K=\{(x,y,Ht):0\le t\le1,\ |x|\le1-t,\ |y|\le t\},
+\]
+a regular tetrahedron of edge $2$ with $A_{\min}(K)=H$~\cite[\S2, \texttt{lem:projection-minimum}]{OAI100}.
+Fix $\eps>0$, an integer $n$, $q_j=-1+2j/n$ ($0\le j\le n$),
+\[
+\alpha_j=\tfrac14(1+q_jq_{j+1}),\qquad \beta_j=\tfrac14(q_j+q_{j+1}),
+\]
+and \emph{arbitrary} positive cutoffs $T_0,\dots,T_{n-1}$. The $2n$ cylinders are
+$P_j+\R v_j$ and $Q_j+\R w_j$ with $v_j=(1,\eps\alpha_j,H\eps\beta_j)$,
+$w_j=(-\eps\alpha_j,1,H\eps\beta_j)$ and intercept triangles
+\begin{align*}
+P_j&=\{(0,y_0,Ht_0):0\le t_0\le T_j,\ q_jt_0\le y_0\le q_{j+1}t_0\},\\
+Q_j&=\{(x_0,0,H(1-s_0)):0\le s_0\le T_j,\ q_js_0\le x_0\le q_{j+1}s_0\}.
+\end{align*}
+The preprint takes $T_j=\frac12+\eps^2(\eta+\max_{[q_j,q_{j+1}]}d)$ with
+$d(q)=q^2(1+q^2)/16$, $\eta=10^{-3}$, $n=\lceil2/\eps^2\rceil$, and proves coverage for
+$\eps\le\eta/2$~\cite[\S3, \texttt{prop:coverage}]{OAI100}.
+
+\section{Two parameter-free facts}
+\begin{lemma}[membership]\label{lem:member}
+$p=(x,y,Ht)$ lies in $P_j+\R v_j$ iff, with $t_0=t-\eps x\beta_j$ and $y_0=y-\eps x\alpha_j$,
+$0\le t_0\le T_j$ and $q_jt_0\le y_0\le q_{j+1}t_0$. It lies in $Q_k+\R w_k$ iff, with
+$s_0=1-t+\eps y\beta_k$, $x_0=x+\eps y\alpha_k$, $0\le s_0\le T_k$ and $q_ks_0\le x_0\le q_{k+1}s_0$.
+\end{lemma}
+\begin{proof}
+The first coordinate of $v_j$ is $1$, so $p-\lambda v_j$ meets the plane $\{x=0\}$ exactly for
+$\lambda=x$, at $(0,y_0,Ht_0)$. The second family is symmetric.
+\end{proof}
+
+Write $W_j$ (resp.\ $V_k$) for the set of $p\in K$ satisfying the two \emph{angular} inequalities
+of Lemma~\ref{lem:member} for sector $j$ (resp.\ $k$).
+
+\begin{lemma}[first crossing; {\cite[proof of \texttt{prop:coverage}, lines 13--45 of \texttt{coverage.tex}]{OAI100}}]\label{lem:select}
+For every $\eps>0$ and $n\ge1$, $K=\bigcup_jW_j=\bigcup_kV_k$, and $p\in W_j$ implies $t_0\ge0$,
+$p\in V_k$ implies $s_0\ge0$.
+\end{lemma}
+\begin{proof}
+Since $\alpha_j-q\beta_j=(1-q^2)/4$ for $q\in\{q_j,q_{j+1}\}$, the inequality $q_it_0\le y_0$
+($i\in\{j,j+1\}$) is equivalent to $F_i\le y$ with $F_i=q_it+\eps x(1-q_i^2)/4$, independent of $j$.
+As $F_0=-t\le y\le t=F_n$, the first $i\ge1$ with $F_i\ge y$ gives $F_{i-1}\le y\le F_i$, i.e.\
+$p\in W_{i-1}$; no monotonicity of $(F_i)$ is used. Subtracting the two inequalities gives
+$(q_{j+1}-q_j)t_0\ge0$. The second family is identical with $G_i=q_i(1-t)-\eps y(1-q_i^2)/4$.
+\end{proof}
+Neither lemma uses smallness of $\eps$: the only properties used are the exact identity above and
+$\phi(\pm1)=0$ for $\phi(q)=(1-q^2)/4$.
+
+\section{The reduction}
+For a pair $(j,k)$ let
+\[
+Z_{jk}=\max\{\min(t_0-T_j,\ s_0-T_k):\ p\in W_j\cap V_k\},
+\]
+a linear program in $(x,y,t,z)$ with $12$ constraints (six for $K$, two wedge inequalities per family,
+two for $z$); $W_j\cap V_k\ne\emptyset$ always, and the maximum exists since $K$ is compact.
+
+\begin{theorem}\label{thm:reduction}
+If $Z_{jk}<0$ for all $0\le j,k<n$, the $2n$ cylinders cover $K$.
+\end{theorem}
+\begin{proof}
+Let $p\in K$. By Lemma~\ref{lem:select} choose $j,k$ with $p\in W_j\cap V_k$; then $t_0,s_0\ge0$.
+As $Z_{jk}<0$, $t_0<T_j$ or $s_0<T_k$, so by Lemma~\ref{lem:member} $p$ is in the $j$-th
+cylinder of the first family or the $k$-th of the second.
+\end{proof}
+The hypothesis is sufficient, not necessary: a point of $W_j\cap V_k$ with $Z>0$ there can still be
+covered by a neighbouring sector. The preprint's radial argument (lines 47--124 of
+\texttt{coverage.tex}) is one way to bound all $Z_{jk}$ at once; Theorem~\ref{thm:reduction} replaces
+it by a finite exact computation and allows a separate cutoff per sector.
+
+\paragraph{Area.} $|P_j|=HT_j^2/n$ and the normal of the plane $x=0$ has inner product $1$ with
+$v_j$, so the perpendicular base has area $|P_j|/|v_j|$, $|v_j|^2=1+\eps^2(\alpha_j^2+2\beta_j^2)$;
+likewise for $Q_j$, $w_j$. Hence
+\begin{equation}\label{eq:area}
+\frac{\sum_i|B_i|}{A_{\min}(K)}=\sum_{j=0}^{n-1}\frac{2T_j^2}{n\sqrt{1+\eps^2(\alpha_j^2+2\beta_j^2)}}.
+\end{equation}
+At $\eps=0$, $T_j=\frac12$ this is exactly $\frac12$ (Bang's cover).
+
+\section{The certificate}
+\begin{theorem}\label{thm:main}
+Let $\eps=2/5$, $n=320$, and $T_j=\frac12+\eps^2(\max(d(q_j),d(q_{j+1}))+E_j)$ with the rational
+margins $E_j\in[2.39\cdot10^{-5},\,2.67\cdot10^{-3}]$ listed in \texttt{scripts/independent/params\_T.txt}
+(md5 \texttt{0f4291bd4ee5cd4686db5d688b8d0f1e}). The resulting $640$ cylinders, with compact
+nondegenerate triangular perpendicular bases, cover $K$, and
+\[
+0.49997733980102354\le\frac{\sum_i|B_i|}{A_{\min}(K)}\le0.49997733980102355<\frac12 .
+\]
+Consequently also $\sum_i|B_i|/|\pi_{u_i^\perp}K|<\frac12$ (numerically $\approx0.4511$).
+\end{theorem}
+\begin{proof}[Computational proof]
+\emph{Coverage.} For all $102{,}400$ pairs $(j,k)$, $Z_{jk}$ was computed exactly over $\mathbb Q$
+(SageMath, PPL backend). The maximum is
+$Z^\ast=-2.39999977\cdot10^{-8}<0$, attained at $(78,84)$ and its three images under the symmetries of
+the construction; apply Theorem~\ref{thm:reduction}. Independently, the margins were certified by
+exact nonnegative dual vectors $y$ with $y^\top A_{x,y,t}=0$, $y^\top a_z=1$, giving
+$Z_{jk}\le\varepsilon^2 U_{jk}$ with $\max U_{jk}=-1.5\cdot10^{-7}$, which equals $Z^\ast/\eps^2$.
+\emph{Area.} \eqref{eq:area} evaluated in $256$-bit interval arithmetic with exact rational inputs
+gives the stated enclosure; a second evaluation with rational upper bounds $r_j\ge|v_j|^{-1}$
+(checked by $r_j^2|v_j|^2\ge1$) gives $0.4999773398$.
+\emph{Directionwise.} Each denominator is $\ge A_{\min}(K)$, as in~\cite[eq.~\texttt{cost-comparison}]{OAI100}.
+\end{proof}
+
+\begin{remark}[sanity checks]
+(i) $1{,}102{,}405$ points of $K$ with exact rational coordinates (uniform; $|t-\frac12|\le\frac1{20}$;
+on faces; on edges and within $10^{-3}$ of vertices; the $102{,}400$ LP maximizers) were each verified
+to lie in one of the 640 cylinders by Lemma~\ref{lem:member} in exact arithmetic; none failed.
+The same test with all $T_j=\frac12$ finds uncovered points ($959$ of $40{,}005$), so it is not vacuous.
+(ii) With the same axes, cutoffs $T_j=\frac12+\eps^2(d_j+\max_iE_i)$ (a uniform margin) give
+area $0.50056>\frac12$, so per-sector cutoffs are needed at this $\eps$.
+(iii) A numerical minimization over $2\cdot10^5$ directions reproduces $A_{\min}(K)=\sqrt2$.
+\end{remark}
+
+\section{Where the constant was lost}
+The preprint bounds all $Z_{jk}$ through one inequality,
+$2\eta-(2+2\eta)\eps-\eps^2/4>0$ (\texttt{coverage.tex}, eq.~\texttt{uniform-coverage-gap}). The term $(2+2\eta)\eps$ comes from the
+rough-angle estimate $|y-q/2|,|x-p/2|\le\eps$ and $|x^2-p^2/4|\le\frac32\eps$, valid uniformly but
+first-order in $\eps$, while the gain is only $2\eta$; with $\eta=10^{-3}$ this forces
+$\eps\le1/2000$ and $n=\lceil2/\eps^2\rceil=8\cdot10^6$ sectors per family. Area saving
+$\frac{13}{6000}\eps^2$ is then about $5\cdot10^{-10}$. The exact formulation does not pay these first-order terms, and the margin actually required varies
+by two orders of magnitude across sectors (the largest $E_j$ sit at the two ends $|q|\approx1$, the
+smallest near $q=0$), so a per-sector margin pays only where it is needed.
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+ & $\eps$ & cylinders & $\sum|B_i|/A_{\min}$\\
+\midrule
+Preprint, Thm.~1.1 & $1/2000$ & $16{,}000{,}000$ & $\frac12-\frac{13}{6000}\eps^2+O(\eps^4)\approx\frac12-5.4\cdot10^{-10}$\\
+This note & $2/5$ & $640$ & $\le\frac12-2.266\cdot10^{-5}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The count improves by a factor $25{,}000$ over the displayed parameters, and by a factor
+$1{,}562.5$ over the $10^6$ cylinders obtainable inside the preprint's certificate~\cite{SupsupNMR}. We do not claim $640$ is minimal for this family; with
+$n=128$ sectors the same procedure (heuristic margins, not certified) gave area $0.50045>\frac12$.
+
+\paragraph{What is not claimed.} No new idea beyond the preprint's construction: the selection lemma,
+axes, triangles and area formula are OpenAI's; only the cutoffs, the parameters and the
+certificate are new. The certificate is a computer proof (exact rational LP via PPL, plus an
+independent exact-dual check); it has not been formalized in Lean.
+
+\paragraph{Authorship.} \sloppy Developed with AI assistance (Anthropic Claude, Opus 5.5) under
+[AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI sessions and are
+not human peer review.
+
+\begin{thebibliography}{9}
+\bibitem{Bang1951} T.~Bang, A solution of the ``plank problem'', Proc.\ Amer.\ Math.\ Soc.\ 2 (1951), 990--993.
+\bibitem{Bezdek2009} K.~Bezdek, Tarski's plank problem revisited, arXiv:0903.4637 (2009), Problem~3.1.
+\bibitem{BL2009} K.~Bezdek and A.~E.~Litvak, Covering convex bodies by cylinders and lattice points by flats, J.\ Geom.\ Anal.\ 19 (2009), 233--243; arXiv:0903.4842.
+\bibitem{OAI100} OpenAI, Finite angular cylinder covers below the half-area bound (September 27, 2026), \url{https://github.com/openai/math/tree/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/preprints/Finite-angular-cylinder-covers-below-the-half-area-bound-September-27-2026}.
+\bibitem{SupsupNMR} supsup/new\_math\_review, \emph{Covering a tetrahedron with a million thin cylinders} (family-100 card, \texttt{showcase.md}; see also \texttt{possible\_further\_findings.md}, item~1), commit \texttt{cd6549b2}, 2026-10-08, \url{https://github.com/supsup/new_math_review}.
+\end{thebibliography}
+\end{document}

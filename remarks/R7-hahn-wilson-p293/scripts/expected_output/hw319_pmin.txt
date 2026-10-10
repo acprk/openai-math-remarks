@@ -1,0 +1,5 @@
+literal R0>=4 p_min = 293 witnesses [(11, 4)]
+sharpened R0>=2 p_min = 199 witnesses [(9, 3)]
+paper: need a=floor(M/8) with 8a^3 > 1024a^2 => a>=129; M= 1033 16M^2= 17073424 (2a)^3= 17173512
+paper p_min = 17073437  count in window 5960
+paper p_min over all M: 17073437  16^6= 16777216

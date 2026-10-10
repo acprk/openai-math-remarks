@@ -1,0 +1,20 @@
+=== field: QQ
+  [impl check] k=5 q=1: Cayley-Hamilton adjugate formula == brute-force derivative (2 random X)
+  [impl check] k=6 q=2: Cayley-Hamilton adjugate formula == brute-force derivative (2 random X)
+  k=9 q=3 r=3 random X (control): rank X=9, nonzero gradient entries=81
+  k=9 q=3 r=3 rank r-2 family: rank X=1, nonzero gradient entries=0 | family dim=17 codim=64 vs (2q+2)^2=64 | sum(rho)+m=2 vs r-1=2
+  k=9 q=3 r=3 k=9 q=3 family [[0,Y],[0,0]] blocks (4,5): rank X=4, nonzero gradient entries=0 | family dim=20 codim=61 vs (2q+2)^2=64 | sum(rho)+m=2 vs r-1=2
+  k=22 q=7 r=8 random X (control): rank X=22, nonzero gradient entries=484
+  k=22 q=7 r=8 rank r-2 family: rank X=6, nonzero gradient entries=0 | family dim=228 codim=256 vs (2q+2)^2=256 | sum(rho)+m=7 vs r-1=7
+  k=22 q=7 r=8 k=22 q=7 family m=2 blocks (16,6) ranks (5,0): rank X=11, nonzero gradient entries=0 | family dim=231 codim=253 vs (2q+2)^2=256 | sum(rho)+m=7 vs r-1=7
+  k=22 q=7 r=8 k=22 q=7 m=2 blocks (16,6) ranks (6,0) [violates Prop F, control]: rank X=12, nonzero gradient entries=96 | family dim=252 codim=232 vs (2q+2)^2=256 | sum(rho)+m=8 vs r-1=7
+=== field: GF(2^20)
+  [impl check] k=5 q=1: Cayley-Hamilton adjugate formula == brute-force derivative (2 random X)
+  [impl check] k=6 q=2: Cayley-Hamilton adjugate formula == brute-force derivative (2 random X)
+  k=9 q=3 r=3 random X (control): rank X=9, nonzero gradient entries=81
+  k=9 q=3 r=3 rank r-2 family: rank X=1, nonzero gradient entries=0 | family dim=17 codim=64 vs (2q+2)^2=64 | sum(rho)+m=2 vs r-1=2
+  k=9 q=3 r=3 k=9 q=3 family [[0,Y],[0,0]] blocks (4,5): rank X=4, nonzero gradient entries=0 | family dim=20 codim=61 vs (2q+2)^2=64 | sum(rho)+m=2 vs r-1=2
+  k=22 q=7 r=8 random X (control): rank X=22, nonzero gradient entries=484
+  k=22 q=7 r=8 rank r-2 family: rank X=6, nonzero gradient entries=0 | family dim=228 codim=256 vs (2q+2)^2=256 | sum(rho)+m=7 vs r-1=7
+  k=22 q=7 r=8 k=22 q=7 family m=2 blocks (16,6) ranks (5,0): rank X=11, nonzero gradient entries=0 | family dim=231 codim=253 vs (2q+2)^2=256 | sum(rho)+m=7 vs r-1=7
+  k=22 q=7 r=8 k=22 q=7 m=2 blocks (16,6) ranks (6,0) [violates Prop F, control]: rank X=12, nonzero gradient entries=96 | family dim=252 codim=232 vs (2q+2)^2=256 | sum(rho)+m=8 vs r-1=7

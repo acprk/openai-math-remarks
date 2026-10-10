@@ -1,0 +1,34 @@
+faces [(0, 1, 2), (0, 1, 6), (0, 2, 3), (0, 3, 4), (0, 4, 5), (0, 5, 6), (1, 2, 5), (1, 5, 6), (2, 3, 4), (2, 4, 5)]
+point classes [[0], [1, 4], [2, 5], [3, 6]]
+face classes [[(0, 1, 2), (0, 4, 5)], [(0, 1, 6), (0, 3, 4)], [(0, 2, 3), (0, 5, 6)], [(1, 2, 5), (2, 4, 5)], [(1, 5, 6), (2, 3, 4)]]
+colour-preserving maps 65536 homomorphisms among them 2
+   (0, 1, 2, 3, 4, 5, 6) (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+   (0, 4, 5, 6, 1, 2, 3) (4, 3, 5, 1, 0, 2, 9, 8, 7, 6)
+automorphisms [(0, 1, 2, 3, 4, 5, 6), (0, 4, 5, 6, 1, 2, 3)]
+number of good splits 17
+bits found: True
+   face 0 (0, 1, 2) bits 000
+   face 1 (0, 1, 6) bits 001
+   face 2 (0, 2, 3) bits 001
+   face 3 (0, 3, 4) bits 011
+   face 4 (0, 4, 5) bits 111
+   face 5 (0, 5, 6) bits 011
+   face 6 (1, 2, 5) bits 100
+   face 7 (1, 5, 6) bits 110
+   face 8 (2, 3, 4) bits 100
+   face 9 (2, 4, 5) bits 110
+   pair (0, 1) faces (0, 1, 2) (0, 1, 6) a_e=1/3
+   pair (0, 2) faces (0, 1, 2) (0, 2, 3) a_e=1/3
+   pair (0, 3) faces (0, 2, 3) (0, 3, 4) a_e=1/3
+   pair (0, 4) faces (0, 3, 4) (0, 4, 5) a_e=1/3
+   pair (0, 5) faces (0, 4, 5) (0, 5, 6) a_e=1/3
+   pair (0, 6) faces (0, 1, 6) (0, 5, 6) a_e=1/3
+   pair (1, 2) faces (0, 1, 2) (1, 2, 5) a_e=1/3
+   pair (1, 5) faces (1, 2, 5) (1, 5, 6) a_e=1/3
+   pair (1, 6) faces (0, 1, 6) (1, 5, 6) a_e=3/3
+   pair (2, 3) faces (0, 2, 3) (2, 3, 4) a_e=2/3
+   pair (2, 4) faces (2, 3, 4) (2, 4, 5) a_e=1/3
+   pair (2, 5) faces (1, 2, 5) (2, 4, 5) a_e=1/3
+   pair (3, 4) faces (0, 3, 4) (2, 3, 4) a_e=3/3
+   pair (4, 5) faces (0, 4, 5) (2, 4, 5) a_e=1/3
+   pair (5, 6) faces (0, 5, 6) (1, 5, 6) a_e=2/3

@@ -1,0 +1,3 @@
+paper point feasible: True
+paper min g = 226327553876041 (~2.263e+14) at K=568 m0=49723541412 blocks=2292 |S0|=112361196959737 ; g-1 feasible? False
+3K+5 min g = 93824084405552 (~9.382e+13) at K=567 m0=27644793412 blocks=1706 |S0|=46662066844680 ; g-1 feasible? False

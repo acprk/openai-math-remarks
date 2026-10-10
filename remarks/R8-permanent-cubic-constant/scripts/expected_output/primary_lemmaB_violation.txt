@@ -1,0 +1,2 @@
+10 (-14, 1, (1, 10, 6), 84)
+first violation: k=17 q=7 family=(2, 8, 0) dim=72  bound=66  margin=6

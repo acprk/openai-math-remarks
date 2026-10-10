@@ -1,0 +1,8 @@
+b  theta   d   s0  T_min  T_min/d  2/L(beta)  excess(steps)  excess_without_lookback  max e_t/bound
+4  0.10    40  17    513   12.825    11.616        48.4        70.4 (=1.76d)   2.567e-03
+4  0.10    80  18    984   12.300    11.616        54.7       115.7 (=1.45d)   2.567e-03
+4  0.10   160  19   1921   12.006    11.616        62.5       202.5 (=1.27d)   2.567e-03
+5  0.10    40  17    645   16.125    14.699        57.0        79.0 (=1.98d)   2.427e-03
+5  0.10    80  18   1241   15.512    14.699        65.1       126.1 (=1.58d)   2.427e-03
+5  0.10   160  19   2425   15.156    14.699        73.1       213.1 (=1.33d)   2.427e-03
+closed-form bound held at every step; excess with look-back grows ~ +7 steps per doubling of d (O(log d)).

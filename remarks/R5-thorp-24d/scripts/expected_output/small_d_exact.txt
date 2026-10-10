@@ -1,0 +1,17 @@
+d=2, n=4: support lower bound t_mix >= 3
+  t=1: support=     4  TV=                         5/6 = 0.833333
+  t=2: support=    16  TV=                         1/3 = 0.333333
+  t=3: support=    24  TV=                         1/6 = 0.166667
+  t=4: support=    24  TV=                        1/12 = 0.083333
+  t=5: support=    24  TV=                        1/24 = 0.041667
+  exact t_mix(1/4) = 3
+d=3, n=8: support lower bound t_mix >= 4
+  t=1: support=    16  TV=                   2519/2520 = 0.999603
+  t=2: support=   256  TV=                     313/315 = 0.993651
+  t=3: support=  4096  TV=                     283/315 = 0.898413
+  t=4: support= 18688  TV=                     169/315 = 0.536508
+  t=5: support= 40320  TV=                   1171/5760 = 0.203299
+  t=6: support= 40320  TV=                   1117/8960 = 0.124665
+  t=7: support= 40320  TV=                32393/516096 = 0.062765
+  exact t_mix(1/4) = 5
+ALL CHECKS PASSED

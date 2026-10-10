@@ -1,0 +1,1 @@
+R=3  max S=222000186000108  S(id)=222000186000108  #maximisers=270  |Aut|=6  (homs only=1)

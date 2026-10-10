@@ -1,0 +1,5 @@
+paper: max over 1408<=m<=200000 of c^-1(m) = 267955.3 e  (attained m=1427)
+BOX: max over 1408<=m<=200000 of c^-1(m) = 125422.2 e  (attained m=1419)
+tail: largest real root of numerator of g'(m): 64.26515988534022 ; sign of g' at M: -1
+tail: g(M) = 118893.4 e ; lim g = 118800.0 e
+A(M), B(M) = 6059.232954545455 44419578.64520951

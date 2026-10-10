@@ -1,0 +1,301 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\E}{\mathbb E}
+
+\title[Thorp shuffle: a smaller explicit constant]{A remark on the constant in the optimal-order mixing of the Thorp shuffle}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+The OpenAI Math Release preprint \emph{Optimal-order mixing of the Thorp shuffle} proves that
+$q_d^{*(1600d)}$ converges to uniform on $S_{2^d}$; the best explicit constant elsewhere in the same
+family of preprints is $512d$. We show that the same conditional-flow method gives
+$\|q_d^{*\lfloor cd\rfloor}-U\|_{\TV}\to0$ for every
+$c>2/\log_2(8/7)+2/\log_2(10/9)=23.5394\ldots$, so $24d$ shuffles suffice for large $d$.
+Using only the paper's own operator-norm transfer (no companion results) the same argument gives every
+$c>44.3006\ldots$ ($45d$). The improvements are: an arbitrarily small concentration loss, a
+Kullback--Leibler chain rule in place of the sequential total-variation sum, a local look-back that
+reduces the start-up offset from $2d$ to $O(\log d)$, and unequal numbers of label blocks in different
+convolution factors. All numerical constants are certified with interval arithmetic. The result is
+asymptotic; no explicit threshold $d_0$ is given.
+\end{abstract}
+\maketitle
+
+\noindent\textbf{Attribution.} The construction, the conditional-flow method and the transfer
+arguments are OpenAI's work (family 238 of \url{https://github.com/openai/math}, commit
+\nolinkurl{08fcd618213aa43b0fcaff4526a8a48d66d02e55}): the main preprint \cite{oai-thorp} and the
+companion \cite{oai-transfer}. This note only re-does the bookkeeping of constants. We take the
+correctness of \cite{oai-thorp,oai-transfer} as given and refer to their numbered statements.
+Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent
+adversarial reviews were run by separate AI sessions and are not human peer review.
+
+\section{Statement}
+Let $n=2^d$, let $q_d$ be the law of one Thorp shuffle as a permutation of positions and $U$ the
+uniform law on $S_n$. Put
+\[
+L(b)=\log_2\frac{2b}{2b-1},\qquad \kappa(b)=\frac2{L(b)},\qquad e(b)=1-\frac2b\qquad(b\ge3).
+\]
+\begin{theorem}\label{thm:main}
+Let $b_1,\dots,b_r\ge3$ be integers and let $c>\sum_i\kappa(b_i)$.
+\begin{enumerate}
+\item[(H)] If $\sum_i e(b_i)>1$, then $\|q_d^{*\lfloor cd\rfloor}-U\|_{\TV}\to0$ as $d\to\infty$.
+\item[(O)] If $\sum_i e(b_i)>2$, the same conclusion holds, and its proof uses only the
+operator-norm transfer of \cite{oai-thorp} (no result of \cite{oai-transfer}).
+\end{enumerate}
+\end{theorem}
+\begin{corollary}\label{cor:constants}
+$\|q_d^{*\lfloor cd\rfloor}-U\|_{\TV}\to0$ for every $c>c_H:=\kappa(4)+\kappa(5)=23.53941\ldots$
+(route~H), and, using only \cite{oai-thorp}, for every $c>c_O:=\kappa(3)+\kappa(4)+2\kappa(5)=44.30060\ldots$
+(route~O). In particular $t_{\mathrm{mix}}(d)\le24d$ for all large $d$. Within each route these block
+choices are optimal among integer block numbers; every admissible multiset costs more than
+$2\kappa(4)=20.7636\ldots$ (route~H) and $4\kappa(4)=41.527\ldots$ (route~O), and even the fractional
+relaxation over real $b$ cannot go below $20.738$ (route~H) and $41.476$ (route~O); see Section~\ref{sec:constants}.
+\end{corollary}
+Comparison: \cite[Thm.~1.1]{oai-thorp} has $1600d$; \cite[Cor.~11.4]{oai-frames} has $512d$;
+the lower bound is $2d-O(1)$ \cite[Thm.~1.1]{oai-thorp}. Ratios: $1600/c_H=67.97$, $512/c_H=21.75$.
+
+\smallskip\noindent\textbf{What is new, and what is not.} The $512d$ bound of
+\cite[Cor.~11.4]{oai-frames} (label \texttt{shear:cor:512}) is already ``first stage $+$ the companion's
+two-factor Hilbert--Schmidt transfer'' ($2\times256d$, eight equal blocks). Hence the factor $4$ that
+the two-factor transfer contributes in Table~\ref{tab:ledger} is \emph{not} a contribution of this note.
+What this note adds is (i) three improvements of the first stage: concentration loss $\theta\to0$
+(Lemma~\ref{lem:contraction}), the Kullback--Leibler chain rule (Lemma~\ref{lem:kl}) and the local
+look-back (Lemmas~\ref{lem:identity}--\ref{lem:closed}); and (ii) different block numbers $\{4,5\}$ in
+the two factors. Measured against the best constant in the family, these give $512d\to23.54d$, a factor
+$21.75$. Route~O is the version that uses \cite{oai-thorp} alone.
+
+\section{First stage: averaged ordered marginals}
+We use the notation of \cite[Sections 2--3]{oai-thorp}: the cyclic-coordinate frame, the exposed list
+$c_1,\dots,c_\ell$, the free set $B_s$ with $|B_s|=m=n-\ell$, the centered flow
+$w_s=p_s-\frac1m\mathbf 1_{B_s}$, $E_s=\E\|w_s\|^2$ and $b_s=\E\sum_xw_s(x)^2\mathbf 1\{x^{(i_s)}\notin B_s\}$;
+expectations include a uniformly random ordered list, independent of the shuffle.
+
+\begin{lemma}[Energy identity including the initial term]\label{lem:identity}
+For all $t\ge0$, $E_t=I_t+\sum_{j=1}^{\min(t,d)}2^{-j}b_{t-j}$, where $I_t=0$ for $t\ge d$ and
+$I_t=\E\|P_tw_0\|^2\le2^{-t}+1/m$ for $t<d$; here $P_t=A_{i_{t-1}}\cdots A_{i_0}$.
+\end{lemma}
+\begin{proof}
+For $t\ge d$ this is \cite[Lemma~3.2]{oai-thorp}. For $t<d$ expand \cite[(3.1)]{oai-thorp} down to
+time $0$: $w_t=P_tw_0+\sum_{j=1}^{t}A_{i_{t-1}}\cdots A_{i_{t-j+1}}\xi_{t-j}$. The cross terms vanish exactly as in
+\cite[Lemma~3.2]{oai-thorp} ($P_tw_0$ is $\mathcal F_0$-measurable and each noise has conditional mean
+zero), and the $j$-th noise contributes $2^{-j}b_{t-j}$ because the $j-1$ later averages use distinct
+coordinates. Since $P_t$ is an orthogonal projection and $w_0=\delta_{c}-\frac1m\mathbf 1_{B_0}$,
+$\|P_tw_0\|^2=\langle w_0,P_tw_0\rangle\le\langle\delta_c,P_t\delta_c\rangle+\frac1{m^2}\langle\mathbf 1_{B_0},P_t\mathbf 1_{B_0}\rangle\le2^{-t}+\frac1m$
+(the middle cross term is $\le0$).
+\end{proof}
+
+\begin{lemma}[Contraction with local look-back]\label{lem:contraction}
+Fix $\theta\in(0,1)$ and put $\beta=(1-\theta)m/n$. For every $s\ge0$,
+\[
+b_s\le(1-\beta)E_s+\beta\eta_s,\qquad
+\eta_s=\frac{n}{2^{\sigma}}\exp\!\Bigl(-2^{\sigma+1}\theta^2\frac{m^2}{n^2}\Bigr),\quad\sigma=\min(s,d-1).
+\]
+\end{lemma}
+\begin{proof}
+Let $a=s-\sigma$ (so $a=0$ if $s<d-1$, and $a=s-d+1$ otherwise, as in \cite[Section~4]{oai-thorp}).
+The updates at times $a,\dots,s-1$ use the $\sigma$ distinct directions $i_a,\dots,i_{s-1}$, none equal
+to $i_s$, so they do not cross the halves $H_0,H_1$ of direction $i_s$, and conditional on
+$\mathcal F_a$ the two halves evolve independently. A free position at time $a$ is moved to a uniform
+point of the $\sigma$-dimensional subcube $Q(y)$ spanned by these directions; hence
+$\Pr\{y\in B_s\mid\mathcal F_a\}=|B_a\cap Q(y)|/2^{\sigma}$, where $Q(y)$ lies in the half opposite to
+the partner $x$ of $y$. The proof of \cite[(4.1)]{oai-thorp} applies verbatim and gives
+$\E[\sum_{x}w_s(x)^2\mathbf 1\{x^{(i_s)}\in B_s\}\mid\mathcal F_a]\ge\beta\,\E[\|w_s\|^2\mid\mathcal F_a]$
+on the $\mathcal F_a$-measurable event $G$ that every such subcube has
+$|B_a\cap Q|\ge(1-\theta)2^{\sigma}m/n$. Since $\|w_s\|^2\le1$, $b_s\le E_s-\beta(E_s-\Pr(G^c))$.
+For a random list $B_a$ is a uniform $m$-subset \cite[Section~4]{oai-thorp}, so each count is
+hypergeometric with $2^\sigma$ draws; Hoeffding's bound for sampling without replacement
+\cite[Thm.~4]{hoeffding1963} gives $\exp(-2\cdot2^\sigma\theta^2m^2/n^2)$ per subcube, and there are
+$n/2^\sigma$ subcubes.
+\end{proof}
+
+\begin{lemma}[Closed form]\label{lem:closed}
+Let $\gamma'\in(1-\beta/2,1)$, $\rho=(1-\beta)/(2\gamma'-1)<1$, let $s_0\le d$ and
+$\eta^*=\max_{s\ge s_0}\eta_s$. Then for all $t\ge0$
+\[
+E_t\le\frac{2}{1-\rho}\gamma'^{\,t-s_0}+\frac{\gamma'^{\,t-d}}{m(1-\rho)}+\eta^*.
+\]
+\end{lemma}
+\begin{proof}
+Call the right side $U_t$. For $t<s_0$, $U_t\ge2>1\ge E_t$. Let $t\ge s_0$ and assume $E_s\le U_s$
+for $s<t$. In Lemma~\ref{lem:identity} use $b_s\le E_s\le 1$ for $s<s_0$ and
+Lemma~\ref{lem:contraction} for $s\ge s_0$. The terms with $t-j<s_0$ contribute at most
+$\sum_{j>t-s_0}2^{-j}\le2^{-(t-s_0)}\le\gamma'^{\,t-s_0}$, and $I_t\le2^{-t}+\frac1m\le\gamma'^{\,t-s_0}+\frac1m\gamma'^{\,t-d}$
+for $t<d$. The remaining terms contribute at most
+$\sum_j2^{-j}\bigl[(1-\beta)U_{t-j}+\beta\eta^*\bigr]\le\rho\Bigl(\frac{2\gamma'^{\,t-s_0}}{1-\rho}+\frac{\gamma'^{\,t-d}}{m(1-\rho)}\Bigr)+(1-\beta)\eta^*+\beta\eta^*$,
+using $(1-\beta)\sum_{j\ge1}(2\gamma')^{-j}=\rho$. Adding up, $E_t\le U_t$ because
+$2+\frac{2\rho}{1-\rho}=\frac2{1-\rho}$ and $1+\frac{\rho}{1-\rho}=\frac1{1-\rho}$.
+\end{proof}
+
+\begin{lemma}[KL chain rule]\label{lem:kl}
+For a random tuple $(Z_1,\dots,Z_k)$ of distinct positions and $\sigma$-fields
+$\mathcal G_j\supseteq\sigma(Z_1,\dots,Z_{j-1})$ with $p_j=\mathcal L(Z_j\mid\mathcal G_j)$ supported on the
+$m_j$ free positions,
+$\|\mathcal L(Z)-U_{\mathrm{inj}}\|_{\TV}\le\bigl(\tfrac12\sum_j m_j\E\|p_j-U_{m_j}\|_2^2\bigr)^{1/2}$.
+\end{lemma}
+\begin{proof}
+The chain rule gives $D(\mathcal L(Z)\|U_{\mathrm{inj}})=\sum_j\E D(\mathcal L(Z_j\mid Z_{<j})\|U_{V\setminus Z_{<j}})$.
+Since the reference law is $Z_{<j}$-measurable, convexity of $D$ in its first argument lets us refine the
+conditioning to $\mathcal G_j$. Then $D(p\|U_m)\le\log(1+\chi^2)\le\chi^2=m\|p-U_m\|_2^2$, and Pinsker's
+inequality finishes the proof.
+\end{proof}
+
+\begin{proposition}\label{prop:stage1}
+Fix an integer $b\ge3$ and $c_b>\kappa(b)$, and put $T=\lfloor c_bd\rfloor$. For lists of length
+$k\le n-\lfloor n/b\rfloor$ chosen uniformly and independently of the shuffle,
+$\E_C\|\mathcal L(\Pi_T(c_1),\dots,\Pi_T(c_k)\mid C)-U_{\mathrm{inj}}\|_{\TV}\to0$, uniformly in such $k$.
+\end{proposition}
+\begin{proof}
+Every exposure stage has $m_j\ge n-k+1>n/b$. Apply Lemma~\ref{lem:kl} with $\mathcal G_j$ generated by the
+list and the exposed paths (as in \cite[Prop.~4.2]{oai-thorp}) and average over the list by Jensen:
+the left side is at most $n\,(\max_jE_T^{(j)}/2)^{1/2}$. Choose $\theta$ small and $\gamma'$ close to
+$1-(1-\theta)/(2b)$ so that $c_b\log_2(1/\gamma')>2$; then $\beta\ge(1-\theta)/b$ and $\rho<1$ for all
+$j$. Take $s_0=\lceil\log_2(Kd)\rceil$ with $K>\frac32b^2\ln2/\theta^2$. Then
+$\eta^*\le n\exp(-2Kd\theta^2/b^2)=o(n^{-2})$, $n^2\gamma'^{\,T-s_0}\to0$ since $s_0=O(\log d)$, and
+$n^2\gamma'^{\,T-d}/m\le bn\gamma'^{\,T-d}\to0$ because $(c_b-1)\log_2(1/\gamma')>2-\log_2(1/\gamma')>1$.
+Lemma~\ref{lem:closed} gives $n^2\max_jE_T^{(j)}\to0$.
+\end{proof}
+
+\section{Second stage: transfers}
+Fix $b$, sizes $\lfloor n/b\rfloor$ or $\lceil n/b\rceil$ for $b$ label blocks $M_1,\dots,M_b$ and
+$H_a=\mathrm{Sym}(M_a)$. For $\mu=q_d^{*T}$ with $T$ as in Proposition~\ref{prop:stage1}, averaging over
+a uniformly random ordered partition with these sizes (each complement is a uniform list of length
+$\le n-\lfloor n/b\rfloor$) gives a partition with $\delta_n:=\sum_a\|\mu|_{V\setminus M_a}-U_{\mathrm{inj}}\|_{\TV}\to0$.
+The trimming of \cite[Section~6, (6.2)]{oai-thorp} then gives $\nu=\mu(\cdot\mid E)$ with
+$\|\nu-\mu\|_{\TV}=1-M\le2\delta_n\to0$ and $\nu(gH_a)\le B|H_a|/|G|$, $B=2/M\le4$, for all $a$.
+For $\sigma>0$ let $C_\sigma=\sup_{s\ge1}\sum_{\lambda\vdash s}(f^\lambda)^{-\sigma}$.
+
+\begin{lemma}\label{lem:zeta}
+For every $\sigma>0$, $C_\sigma<\infty$ and $\sum_{\lambda\vdash s,\ \lambda\ne(s),(1^s)}(f^\lambda)^{-\sigma}\to0$.
+\end{lemma}
+\begin{proof}
+This is a special case of \cite[Thm.~2.6]{liebeck-shalev2004}. The elementary proof of
+\cite[Lemma~5.1]{oai-thorp} also works: its three cases give $f^\lambda\ge3^u$, $f^\lambda\ge2^{\lfloor s/16\rfloor}$
+and $f^\lambda\ge(4/e)^s$, and $\sum_u2p(u)3^{-\sigma u}<\infty$, $e^{3\sqrt s}2^{-\sigma\lfloor s/16\rfloor}\to0$,
+$e^{3\sqrt s}(4/e)^{-\sigma s}\to0$ for every fixed $\sigma>0$.
+\end{proof}
+
+\begin{proposition}\label{prop:transfer}
+For every irreducible $\rho$ of $S_n$ of degree $D$ and every $\sigma>0$:
+\begin{enumerate}
+\item[(O)] $\|\widehat\nu(\rho)\|_{\op}^2\le bBC_\sigma D^{-1+(2+\sigma)/b}$ \quad\cite[Prop.~6.1]{oai-thorp}
+with $D^{1/8},C_1$ replaced by $D^{1/b},C_\sigma$ (this form is also stated in \cite[Thm.~1.1, (1.3)]{oai-transfer});
+\item[(H)] $\|\widehat\nu(\rho)\|_{\HS}^2\le bBC_\sigma D^{-1+(2+\sigma)/b}$ \quad\cite[Thm.~1.1, (1.2)]{oai-transfer}.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(O): in the proof of \cite[Prop.~6.1]{oai-thorp}, every tensor type has a factor of degree
+$\le D^{1/b}$, block sizes play no role, and
+$\dim W_a\le\sum_{\dim\pi\le D^{1/b}}(\dim\pi)^{2+\sigma}(\dim\pi)^{-\sigma}\le C_\sigma D^{(2+\sigma)/b}$.
+(H) is stated in \cite{oai-transfer} for disjoint nonempty blocks of arbitrary sizes and every $u>0$; for the
+reader's convenience: if $e_\tau$ is the central idempotent of $\tau\in\widehat H_a$ and $P_\tau=\rho(e_\tau)$,
+Plancherel and $\|(\nu|_{C})*e_\tau\|_2^2=\langle\nu|_C,(\nu|_C)*e_\tau\rangle\le\nu(C)^2(\dim\tau)^2/|H_a|$
+on each coset $C$ give $D\|\widehat\nu(\rho)P_\tau\|_{\HS}^2\le B(\dim\tau)^2$; summing over the orthogonal
+decomposition $V_\rho=\bigoplus_aE_a$ of \cite[Prop.~6.1]{oai-thorp} yields (H).
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}
+Split $\lfloor cd\rfloor\ge\sum_i\lfloor c_id\rfloor$ with $c_i>\kappa(b_i)$; extra steps do not increase
+the distance to uniform.
+
+\emph{Frames.} \cite[Section~2]{oai-thorp} returns to the physical frame only after blocks whose length
+is a multiple of $d$, and $\lfloor c_id\rfloor$ is in general not a multiple of $d$. This is harmless.
+With $R$ the cyclic rotation of coordinates and $Y_t=R^tX_t$ \cite[Section~2]{oai-thorp}, the physical
+law of one block of length $T$ is $\mu(g)=\mu^{\mathrm{cyc}}(R^{-T}g)$, i.e.\ the cyclic-frame law
+left-multiplied by the fixed position permutation $R^T$. Left multiplication by a fixed $h\in S_n$ maps
+the marginal of any label list through the bijection $h$ of positions, which fixes $U_{\mathrm{inj}}$, so
+every marginal TV distance in Proposition~\ref{prop:stage1} is unchanged; and it maps each coset
+$gH_a$ to the coset $hgH_a$ of the same label-block subgroup, so the coset masses $\max_g\nu(gH_a)$
+(hence the trimming of Section~3 above and Proposition~\ref{prop:transfer}) are unchanged. We therefore
+apply Sections~2--3 above to the physical laws $\mu_i=q_d^{*\lfloor c_id\rfloor}$ directly, and the
+convolution $\mu_1*\cdots*\mu_r$ is the physical law $q_d^{*\sum_i\lfloor c_id\rfloor}$. Let $\mu_i=q_d^{*\lfloor c_id\rfloor}$ and $\nu_i$ its trimmed law (Section~3,
+with $b=b_i$). Choose $\sigma>0$ so small that $\epsilon:=\sum_i(1-(2+\sigma)/b_i)-\tau>0$, where
+$\tau=1$ in case (H) and $\tau=2$ in case (O). By the Plancherel bound \cite[(7.1)]{oai-thorp} and
+$\|XY\|_{\HS}\le\|X\|_{\HS}\|Y\|_{\op}$, for $\rho\ne\mathbf 1,\mathrm{sgn}$:
+\[
+D\Bigl\|\prod_i\widehat\nu_i(\rho)\Bigr\|_{\HS}^2\le
+\begin{cases}
+D\,\|\widehat\nu_1\|_{\HS}^2\prod_{i\ge2}\|\widehat\nu_i\|_{\op}^2\le A\,D^{-\epsilon}&\text{(H)},\\
+D^2\prod_i\|\widehat\nu_i\|_{\op}^2\le A\,D^{-\epsilon}&\text{(O)},
+\end{cases}
+\qquad A=\prod_i4b_iC_\sigma,
+\]
+and $\sum_{\rho\ne\mathbf 1,\mathrm{sgn}}D_\rho^{-\epsilon}\to0$ by Lemma~\ref{lem:zeta}. The sign
+coefficient of each $\nu_i$ is at most $(1-M_i)/M_i\to0$ \cite[Section~7]{oai-thorp}. Hence
+$\|\nu_1*\cdots*\nu_r-U\|_{\TV}\to0$, and
+$\|\mu_1*\cdots*\mu_r-U\|_{\TV}\le\sum_i(1-M_i)+\|\nu_1*\cdots*\nu_r-U\|_{\TV}\to0$.
+Translation invariance gives the same from every initial deck. \qed
+
+\begin{remark}
+In case (O) all factors are bounded through $\|B\|_{\HS}\le\sqrt D\|B\|_{\op}$, which costs one full
+power of $D$; this is why the main paper needs many factors. The companion's Hilbert--Schmidt bound
+removes that loss for one factor and reduces the requirement from $\sum e(b_i)>2$ to $\sum e(b_i)>1$.
+\end{remark}
+
+\section{Constants, certificate and loss ledger}\label{sec:constants}
+Corollary~\ref{cor:constants} is a finite optimisation. The script
+\texttt{scripts/constants\_certificate.py} enumerates all multisets with $\sum e(b_i)$ above the threshold
+(exact rationals) and evaluates $\sum\kappa(b_i)$ in \texttt{mpmath.iv} interval arithmetic. Completeness
+uses $L(b)\le1/((2b-1)\ln2)$, i.e.\ $\kappa(b)\ge2(2b-1)\ln2$. The certified optima are
+$(4,5)$ with $c_H\in[23.539413097,23.539413098]$ (runner-up $(3,3,4)$, $25.589$) and $(3,4,5,5)$ with
+$c_O\in[44.300608089,44.300608090]$ (runner-up $(4,4,4,5)$, $44.30299$). The slack conditions are exact:
+$(4,5)$ works for every $\sigma<2/9$ and $(3,4,5,5)$ for every $\sigma<2/59$. Since
+$\sum\kappa(b_i)=\sum\frac{\kappa(b_i)}{e(b_i)}e(b_i)$, every admissible multiset costs more than
+$\tau\cdot\min_{b\ge3\text{ integer}}\kappa(b)/e(b)=\tau\cdot2\kappa(4)=20.7636\ldots\tau$. Over real
+$b\ge3$ the fractional relaxation has infimum $\min_b\kappa(b)/e(b)=20.738\ldots$ (certified in
+$[20.73813,20.73818]$, minimiser $b^*\approx3.8647$). These are strict lower bounds for the present
+first-stage rates, not attained values: with these ingredients route~H cannot go below $20.738$ and
+route~O not below $41.476$.
+
+\begin{table}[h]\small
+\begin{tabular}{lrr}
+\toprule
+cumulative change (route H) & constant & step\\
+\midrule
+paper as written: $8\times200d$ & $1600$ & \\
+paper's own inequalities, minimal $T=(2+3/\log_2\frac{32}{31})d$ per factor & $539.98$ & $2.96$\\
+companion's two-factor transfer, $b=8$ (already in \cite[Cor.~11.4]{oai-frames}) & $134.99$ & $4.00$\\
+concentration $\theta\to0$: $\beta=1/16\to1/8$ & $68.44$ & $1.97$\\
+KL chain rule (need $n^2E_T\to0$, not $n^3E_T\to0$) & $46.96$ & $1.46$\\
+local look-back: offset $2d\to O(\log d)$ & $42.96$ & $1.09$\\
+block numbers $\{4,5\}$ instead of $\{8,8\}$ & $23.54$ & $1.82$\\
+\bottomrule
+\end{tabular}
+\caption{Where the constant goes (all values evaluated in interval arithmetic by \texttt{constants\_certificate.py}).
+The step $\times4$ is the family's own (it is how $512d$ is obtained in \cite{oai-frames}); the last four
+rows are this note's contribution. Route O (paper-only):
+$1600\to337.5$ (five factors suffice for the paper's Lemma~5.1) $\to171.1$ ($\theta\to0$) $\to117.4$ (KL)
+$\to107.4$ (look-back) $\to64.4$ (any $\sigma>0$, three factors with $b=8$) $\to44.30$ (blocks $\{3,4,5,5\}$).}\label{tab:ledger}
+\end{table}
+
+\section{Scope}
+Not claimed: an explicit $d_0$ (the constants $C_\sigma$ for small $\sigma$ are finite but
+not computed); any statement about the true leading constant (exact values $t_{\mathrm{mix}}(2)=3$,
+$t_{\mathrm{mix}}(3)=5$ are only unit tests); a Lean formalisation. Simulations of the energy recurrence
+(\texttt{energy\_lemma\_check.py}, \texttt{energy\_mc.py}) only illustrate Lemmas~\ref{lem:identity}--\ref{lem:closed}.
+
+\begin{thebibliography}{9}
+\bibitem{oai-thorp} OpenAI, \emph{Optimal-order mixing of the Thorp shuffle}, OpenAI Math Release preprint,
+September 26, 2026, \url{https://github.com/openai/math/tree/main/preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026}.
+\bibitem{oai-transfer} OpenAI, \emph{From partial permutation information to Fourier bounds}, OpenAI Math
+Release preprint, September 26, 2026.
+\bibitem{oai-frames} OpenAI, \emph{Random coordinate frames and partial permutation laws}, OpenAI Math
+Release preprint, September 26, 2026.
+\bibitem{hoeffding1963} W.~Hoeffding, Probability inequalities for sums of bounded random variables,
+J.~Amer.\ Statist.\ Assoc.\ 58 (1963), 13--30.
+\bibitem{liebeck-shalev2004} M.~W.~Liebeck and A.~Shalev, Fuchsian groups, coverings of Riemann surfaces,
+subgroup growth, random quotients and random walks, J.~Algebra 276 (2004), 552--601.
+\end{thebibliography}
+\end{document}

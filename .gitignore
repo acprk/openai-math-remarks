@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+!**/expected_output/*.out
+_build/
+.venv/

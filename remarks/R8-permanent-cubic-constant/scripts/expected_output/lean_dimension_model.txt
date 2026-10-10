@@ -1,0 +1,10 @@
+1408 lean 4205362 (136, 45) stated/this=1.315
+1408 leanBOX 2138934 (136, 45) stated/this=2.585
+5000 lean 4268907 (483, 160) stated/this=1.295
+5000 leanBOX 2131469 (485, 168) stated/this=2.594
+20000 lean 4280273 (1935, 644) stated/this=1.292
+20000 leanBOX 2135870 (1940, 670) stated/this=2.589
+lean-fixed 1408 5091307
+lean-fixed 5000 5133734
+lean-fixed 20000 5160365
+asym lean 4289904 asym leanBOX 2138400

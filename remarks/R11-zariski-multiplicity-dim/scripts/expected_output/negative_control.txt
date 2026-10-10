@@ -1,0 +1,3 @@
+e_b of row 5 plus one      b=305: direct A,R=False,False  valuations A,R=False,False  spectral max|diff|=0.573 over 138 chars -> REJECTED
+sign of row 100 flipped    b=8351: direct A,R=False,False  valuations A,R=False,False  spectral max|diff|=9.248 over 138 chars -> REJECTED
+NEGATIVE CONTROLS OK

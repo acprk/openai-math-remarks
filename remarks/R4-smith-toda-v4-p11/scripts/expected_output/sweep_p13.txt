@@ -1,0 +1,16 @@
+p=13 q=24 u4=2380 kcut4=103 W=391 jobs=819
+NONEMPTY ('v4 target k=1', 25, 2381, 2, ['a b c B^11', 'y z a b c B^10'], None)
+NONEMPTY ('v4 target k=2', 49, 2382, 2, ['x a c A^11 C^11 B', 'x y z a c A^11 C^11'], None)
+NONEMPTY ('v4 target k=12', 289, 2392, 3, ['b A^142 B^2', 'y z b A^142 B', 'y A^141 B^3'], None)
+NONEMPTY ('v4 target k=13', 313, 2393, 2, ['y a b A^154 B', 'y b c A^155'], None)
+NONEMPTY ('src (5,W)', 5, 391, 2, ['y a b B', 'y b c A'], None)
+NONEMPTY ('stem d=1 j=0', 6, 392, 4, ['a c A B', 'x y b c A', 'y z a c A', 'x y a b B'], None)
+(q+1,u5+1): dpcount=5 z3=5
+    y h[3,4) c h[1,4) h[0,4) b30^10
+    h[3,4) a b h[1,4) h[0,4) b30^10
+    y h[3,4) a b h[2,4) h[1,4) h[0,4) b30^9
+    a h[1,4) h[0,4) b30^11
+    y a h[2,4) h[1,4) h[0,4) b30^10
+k=p target A^N-divisible: True
+product w<u_{n+1} all: True
+6.10 s

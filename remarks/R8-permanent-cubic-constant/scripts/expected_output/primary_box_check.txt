@@ -1,0 +1,30 @@
+== K=6 Q=1 CH=32003 EX=2
+k=6 q=1 c=3 EX=2 char=32003: entries with nonzero [s^q t^q u^c] coefficient = 0 (0 <=> X in Gamma)
+rank X = 2 ; dim Z (proj) = 0 ; length Z (chart u=1) = 6 ; (q+1)^2 = 4
+len S/(I_Z+u) in degrees: affine-dim=0, sum of Hilbert fn = 6
+I_Z+(u) subset (s^{q+1},t^{q+1},u): 1
+generators of I_Z in deg<=k-1: 4 ; all in Ann(Lambda): 1
+== K=6 Q=2 CH=2 EX=2
+k=6 q=2 c=1 EX=2 char=2: entries with nonzero [s^q t^q u^c] coefficient = 0 (0 <=> X in Gamma)
+rank X = 0 ; dim Z (proj) = 0 ; length Z (chart u=1) = 15 ; (q+1)^2 = 9
+len S/(I_Z+u) in degrees: affine-dim=0, sum of Hilbert fn = 15
+I_Z+(u) subset (s^{q+1},t^{q+1},u): 1
+generators of I_Z in deg<=k-1: 6 ; all in Ann(Lambda): 1
+== K=7 Q=2 CH=2 EX=3
+k=7 q=2 c=2 EX=3 char=2: entries with nonzero [s^q t^q u^c] coefficient = 0 (0 <=> X in Gamma)
+rank X = 2 ; dim Z (proj) = 0 ; length Z (chart u=1) = 19 ; (q+1)^2 = 9
+len S/(I_Z+u) in degrees: affine-dim=0, sum of Hilbert fn = 19
+I_Z+(u) subset (s^{q+1},t^{q+1},u): 1
+generators of I_Z in deg<=k-1: 6 ; all in Ann(Lambda): 1
+== K=8 Q=3 CH=32003 EX=2
+k=8 q=3 c=1 EX=2 char=32003: entries with nonzero [s^q t^q u^c] coefficient = 0 (0 <=> X in Gamma)
+rank X = 0 ; dim Z (proj) = 0 ; length Z (chart u=1) = 28 ; (q+1)^2 = 16
+len S/(I_Z+u) in degrees: affine-dim=0, sum of Hilbert fn = 28
+I_Z+(u) subset (s^{q+1},t^{q+1},u): 1
+generators of I_Z in deg<=k-1: 8 ; all in Ann(Lambda): 1
+== K=8 Q=2 CH=32003 EX=4
+k=8 q=2 c=3 EX=4 char=32003: entries with nonzero [s^q t^q u^c] coefficient = 0 (0 <=> X in Gamma)
+rank X = 4 ; dim Z (proj) = 0 ; length Z (chart u=1) = 15 ; (q+1)^2 = 9
+len S/(I_Z+u) in degrees: affine-dim=0, sum of Hilbert fn = 15
+I_Z+(u) subset (s^{q+1},t^{q+1},u): 1
+generators of I_Z in deg<=k-1: 6 ; all in Ann(Lambda): 1

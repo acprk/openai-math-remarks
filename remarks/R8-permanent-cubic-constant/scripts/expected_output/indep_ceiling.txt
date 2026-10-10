@@ -1,0 +1,4 @@
+asymptotic ceiling: c^-1 >= 33065.4 e at beta=r/k=0.3919 ; stated/ceiling = 167.2x ; BOX(118800)/ceiling = 3.593
+(rank-family-only ceiling, i.e. old 'Lemma A': 29700.0 e at beta=0.3125)
+m=1408: ceiling c^-1 >= 30871.8 e at (k,q,r,codimUB)=(136, 44, 48, 7696) ; stated/ceiling=179.1x
+m=5000: ceiling c^-1 >= 31857.5 e at (k,q,r,codimUB)=(482, 151, 180, 87682) ; stated/ceiling=173.6x

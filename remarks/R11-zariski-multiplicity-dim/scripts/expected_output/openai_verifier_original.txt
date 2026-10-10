@@ -1,0 +1,88 @@
+{
+  "verification_passed": true,
+  "relation_file": "openai_explicit-relation.json",
+  "relation_file_sha256": "e5a3ad0b8901ac358374575dbaf7be9e03bb84063def63749f16618cf2ba1780",
+  "method": "Independent exact integer arithmetic; trial division of all six raw integers per row; no matrix or producer imported.",
+  "d": 177147,
+  "d_power_of_three": 11,
+  "D": 531441,
+  "support_size": 849,
+  "sum_e": "31041239413124627112654075418900567557860898694076654101041141141334524348338121235247269659966421215865800678626877368275641894156269075320",
+  "sum_abs_e": "1892431898010203012474989983575268070019952635103197029002616571637230005063390823411692715089718591779229223950319039006585461351701409796728",
+  "coefficient_gcd": "1",
+  "max_abs_e_digits": 140,
+  "positive_coefficients": 433,
+  "negative_coefficients": 416,
+  "raw_factorizations_performed": 5094,
+  "largest_raw_integer": 531440,
+  "largest_prime_divisor": 4441,
+  "first_product_nonzero_row_prime_count": 332,
+  "second_product_nonzero_row_prime_count": 516,
+  "first_product_residual_valuations": {},
+  "second_product_residual_valuations": {},
+  "product_conclusion": "Both products are positive rational numbers. Every prime valuation is zero, so unique factorization makes each product exactly 1.",
+  "chain_checks": {
+    "distinct_table_chains_checked": 3396,
+    "chain_length_histogram_unweighted": {
+      "1": 2,
+      "2": 1,
+      "3": 17,
+      "4": 99,
+      "5": 241,
+      "6": 445,
+      "7": 562,
+      "8": 664,
+      "9": 527,
+      "10": 391,
+      "11": 247,
+      "12": 103,
+      "13": 54,
+      "14": 23,
+      "15": 18,
+      "16": 2
+    },
+    "minimum_exponent": 2,
+    "maximum_exponent": 531441,
+    "all_weighted_degrees_one": true,
+    "all_ordinary_monomial_degrees_at_least_three": true,
+    "all_required_denominators_correct": true
+  },
+  "seed_construction": {
+    "side_convention": "Signed count is side 2 minus side 1: positive counts on side 2, negative counts on side 1; balancing squares on side 1.",
+    "initial_variable_counts": [
+      "7507645113214562795674651783463271144964088743024634807808384004266250971556887051176276321038941524685185294444022401289790561618493101036272",
+      "7631810070867061304125268085138873415195532337800941424212548568831589068950239536117265399678807209548648497158529910762893129195118177337552"
+    ],
+    "common_tail_variable_count_per_side": "106763921239013401640765364801948767674707811101057148220691887934041247703704723874554093386326052181530528518784629905824105936696759425671116",
+    "balancing_square_counts": [
+      "124164957652498508450616301675602270231443594776306616404164564565338097393352484940989078639865684863463202714507509473102567576625076301280",
+      "0"
+    ],
+    "balanced_dimension_before_final_cubes": "114395731309880462944890632887087641089903343438858089644904436502872836772654963410671358786004859391079177015943159816586999065891877603008668",
+    "common_final_cube_count": 2,
+    "ambient_dimension_s0": "114395731309880462944890632887087641089903343438858089644904436502872836772654963410671358786004859391079177015943159816586999065891877603008670",
+    "ambient_dimension_formula": "s0=4*sum_abs_e+2*sum_e+common_tail_variable_count_per_side+2",
+    "hessian_ranks": [
+      "124164957652498508450616301675602270231443594776306616404164564565338097393352484940989078639865684863463202714507509473102567576625076301280",
+      "0"
+    ],
+    "orders": [
+      2,
+      3
+    ]
+  },
+  "final_construction": {
+    "definition": "q_j=p_j+x^5+y^7; f_j is the sum of four disjoint copies of q_j, six cubes, one eleventh power, and one thirteenth power.",
+    "ambient_dimension": "457582925239521851779562531548350564359613373755432358579617746011491347090619853642685435144019437564316708063772639266347996263567510412034696",
+    "ambient_dimension_formula": "4*s0+16",
+    "hessian_ranks": [
+      "496659830609994033802465206702409080925774379105226465616658258261352389573409939763956314559462739453852810858030037892410270306500305205120",
+      "0"
+    ],
+    "orders": [
+      2,
+      3
+    ]
+  },
+  "scope": "This report verifies the finite relation and arithmetic of the indicated polynomial construction; it does not certify the topological or lattice-theoretic parts of the proof."
+}

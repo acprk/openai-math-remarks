@@ -1,0 +1,20 @@
+// Unit test for the Lemma-B counterexample: X = [[0,Y],[0,0]] (coordinate blocks n1,n2).
+// Claim: every adj entry of M = X + xI + yD has order >= k-2 at the vertex (x,y)=(0,0), F = prod(x+y*theta_i),
+// hence len Z_X >= C(k-1,2); and X in Gamma_D whenever 2q < k-2 (i.e. r>=3).
+// usage: Singular -q -c 'int K=10; int CH=32003;' bipartite_order.sing
+proc adjm(matrix AA, int n) { matrix B[n][n]; int ii; int jj; intvec rr; intvec cc; int a; int b;
+ for(ii=1;ii<=n;ii++){for(jj=1;jj<=n;jj++){ rr=0; cc=0; b=0; for(a=1;a<=n;a++){ if(a!=jj){b++; rr[b]=a;} } b=0; for(a=1;a<=n;a++){ if(a!=ii){b++; cc[b]=a;} }
+  B[ii,jj]=(-1)^(ii+jj)*det(submat(AA,rr,cc)); }}
+ return(B); }
+int k=K; int n1=k div 2; system("random",3);
+ring R=(CH),(x,y),ds;
+if (CH==2) { kill R; ring R=(2,a),(x,y),ds; minpoly=a^5+a^2+1; }
+matrix X[k][k]; int i; int j;
+for(i=1;i<=n1;i++){for(j=n1+1;j<=k;j++){X[i,j]=random(1,99);}}
+matrix M[k][k]=X; for(i=1;i<=k;i++){if (CH==2) {M[i,i]=x+a^i*y;} else {M[i,i]=x+(100*i+random(1,99))*y;}}
+ideal A = minor(M, k-1); int mo=1000; int o;
+for(i=1;i<=size(A);i++){ if (A[i]!=0) { o=ord(A[i]); if (o<mo) {mo=o;} } }
+printf("k=%s char=%s: min order of (k-1)-minors (=adj entries up to sign) = %s (claim >= k-2 = %s); order of F = %s; C(k-1,2)=%s", k, CH, mo, k-2, ord(det(M)), (k-1)*(k-2) div 2);
+ideal J=det(M); J=J+A;
+printf("local length of O/J at vertex = %s", vdim(std(J)));
+quit;

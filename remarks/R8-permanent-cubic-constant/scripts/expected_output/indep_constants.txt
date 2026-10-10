@@ -1,0 +1,11 @@
+stated: c^-1 = 5529600 e   (thm:main, m0=1408)
+asymptotic optimum: paper-tuned 4*2*31^3 = 238328 ;  BOX 4*29700 = 118800
+m=1408 paper: c^-1 = 262835.2 e   at k=136 q=45 r=46 Delta=945  (r-1)(d-1)=42480
+m=1408 BOX  : c^-1 = 125316.9 e   at k=136 q=46 r=44 Delta=2073  (r-1)(d-1)=89096
+   stated/paper-tuned = 21.038   paper-tuned/BOX = 2.0974   stated/BOX = 44.125
+m=5000 paper: c^-1 = 245792.8 e   at k=483 q=160 r=163 Delta=12558  (r-1)(d-1)=2034234
+m=5000 BOX  : c^-1 = 120334.0 e   at k=485 q=168 r=149 Delta=28076  (r-1)(d-1)=4155100
+   stated/paper-tuned = 22.497   paper-tuned/BOX = 2.0426   stated/BOX = 45.952
+m=20000 paper: c^-1 = 239999.2 e   at k=1935 q=644 r=647 Delta=206400  (r-1)(d-1)=133333754
+m=20000 BOX  : c^-1 = 119166.6 e   at k=1940 q=670 r=600 Delta=448301  (r-1)(d-1)=268531700
+   stated/paper-tuned = 23.040   paper-tuned/BOX = 2.0140   stated/BOX = 46.402

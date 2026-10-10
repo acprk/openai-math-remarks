@@ -1,0 +1,105 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Mbar}{\overline{\mathcal M}}
+
+\title[The colour budget of OpenAI's Pixton counterexample]{Re-checking the colour budget of OpenAI's\\ Pixton-completeness counterexample: genus $2.26\cdot10^{14}$}
+\author{[AUTHOR NAME]}
+\date{2026-10-09}
+
+\begin{document}
+\begin{abstract}\sloppy
+OpenAI's preprint \emph{A high-arity counterexample to Pixton completeness in Chow}
+(\texttt{openai/math}, family~053) constructs a tautological class $Y$ on $\Mbar_{g,n}$, $n=3\binom g3$,
+with $q_{g,n}(Y)=0$ in $\mathrm{CH}^*$ and $Y$ outside Pixton's original relation span, at $g=10^{60}$.
+The genus enters the argument only through a finite colour budget (Section~8 of the preprint).
+Transcribing that budget into exact integer inequalities and optimizing its two free parameters,
+we find that the same argument closes at $g=226{,}327{,}553{,}857{,}834\approx2.26\cdot10^{14}$
+(and at $g\approx9.38\cdot10^{13}$ when only the $3K+5$ colour blocks the preprint proves necessary are
+reserved). The argument is OpenAI's; we only re-check the budget, assuming the preprint is correct.
+\end{abstract}
+\maketitle
+
+\section{The budget}
+Fix $g$ and put $D_*=\binom g3$, $n=3D_*$. The preprint chooses integers $K$ and $m_0$, reserves
+$N_B$ disjoint blocks of $m_0$ colours (it takes $N_B=4K+20$), and lets $S_0$ be the remaining colours,
+so $|S_0|=g-N_Bm_0$. Put $C_K=\binom{2K}3$, $M_K=\max\{10K+3,C_K+1\}$, $e=2\lfloor m_0/4\rfloor$,
+$d_e=\binom e3$, and $t_{\max}=25(g-1)^2-1\ge t_b=25(b-1)^2-1$ for every vertex genus $b\le g$.
+Section~8 of \cite{OAI053} (\texttt{08-support.tex}:326--510), read as exact inequalities, requires:
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+& condition & source in \cite{OAI053}\\\midrule
+P1 & $K\ge5$ & $l\ge K$ regime, $b\ge5$ in Lemma \texttt{lem:large-vertex-test}\\
+P2 & $g>2K$ & unique large vertex, L370\\
+P3 & $4(g-K-2)>3g-3$ & at most three nonterminal expensive steps, L455\\
+P4 & $3g-2<(g-K)^2-1$ & $\dim S<(b-1)^2-1$ with $b\ge g-K+1$, L421--422\\
+P5 & $3gM_K+g(10K+2)+2KC_K+t_{\max}\le d_e/2$ & L401--435\\
+P6 & $C_K+1<11g$ & ordinary cost $\le11g$, L470\\
+P7 & $|S_0|\bigl(g(K-4)+2\bigr)>280g^2$ & final contradiction, L498--502\\
+P8 & $N_B\ge3K+5$ & block count, L448--458\\\bottomrule
+\end{tabular}
+\end{center}
+P5 is what eq.~\texttt{small-loss} and eq.~\texttt{large-test-threshold} jointly assert: more than
+$D_0-\text{loss}\ge D_0-d_e/2+t_b$ internal entries survive, which is the threshold of
+Lemma~\texttt{lem:large-vertex-test} (with $t_b\le d_e/2$). P7 is the exact form of the displayed
+difference $\frac{|S_0|}2(g(l-4)+2)-140g^2>0$ at $l\ge K$; the preprint bounds it via $|S_0|>0.9g$.
+The preprint's numerical facts ($C_K<1.334\cdot10^{15}$, $D_0>10^9g^2$, $m_0\ge128$, $|S_0|>0.9g$)
+serve only to verify P1--P8 at its parameters.
+
+\begin{lemma}\label{lem:only}
+Outside Section~8, the proof of the main theorem of \cite{OAI053} uses only $g\ge2$, the identity
+$n=3\binom g3$, and $\deg Y=2D_*<3g-3+n$, which holds for all $g\ge2$.
+\end{lemma}
+\begin{proof}[Justification]\sloppy
+We read Sections 1, 2, 7, 8 and searched all sections for \texttt{sufficiently large}, \texttt{10\^{}\{60\}},
+\texttt{g\textbackslash ge}, \texttt{g>}, \texttt{D\_*}, \texttt{3g-3}. The occurrences are $g\ge2$
+(\texttt{03-detector.tex}:224, 498, 686; \texttt{07-compactification.tex}:132), the degree bound
+(\texttt{02-strata.tex}:235), and one ``sufficiently large multiples of $K$'' that concerns a line bundle
+(\texttt{06-coefficient.tex}:474). The genus-$b$ hypotheses of the surface bound are P1, P2, P4.
+\end{proof}
+
+\begin{theorem}\label{thm:main}
+Assume the proof in \cite{OAI053} is correct. Then its main theorem (\texttt{thm:main}) and its cohomological corollary hold with
+\[
+ g=226{,}327{,}553{,}857{,}834,\qquad n=3\binom g3\approx5.80\cdot10^{42},
+\]
+using $K=568$, $m_0=49{,}723{,}541{,}408$ and $4K+20=2292$ reserved blocks. With $3K+5$ blocks they hold
+with $g=93{,}824{,}084{,}405{,}552$ ($K=567$, $m_0=27{,}644{,}793{,}412$). Each value is the least $g$
+satisfying P1--P8 with the corresponding block rule.
+\end{theorem}
+\begin{proof}
+\sloppy At these parameters P1--P8 hold, with the slacks listed in the file
+\texttt{verify\_points.txt} of the supplementary scripts;
+by Lemma~\ref{lem:only} nothing else depends on $g$. For minimality, note that for fixed $(K,N_B)$ a
+smaller $m_0$ only helps P7, so we may take $m_0=4j$ minimal for P5. P5 then reads $g\le G(j)$ and
+P2--P4, P6, P7 read $g\ge g_{\min}(j)$, with $G$ of order $j^{3/2}$ and $g_{\min}$ essentially linear in
+$j$. The least feasible $g$ is $g_{\min}(j^*)$ for the least $j^*$ with $g_{\min}(j^*)\le G(j^*)$.
+We computed it by exact integer bisection for every $K$ from $285$ (P7 needs $K-4>280$) up to the point
+where P6 alone exceeds the current optimum, for both block rules.
+\end{proof}
+
+\begin{remark}
+The minimum is governed by P5, which forces $m_0\approx2(300g^2)^{1/3}$ because $t_b\approx25g^2$, and
+by P7, which needs $|S_0|>280g/(K-4)$. Together they give
+$g^{1/3}\gtrsim2\cdot300^{1/3}N_B/(1-280/(K-4))$, minimized near $K\approx570$. Improving the genus
+further would require improving the preprint's bounds themselves, for instance $t_b$ or the
+$140g^2$ allowance. We do not attempt this.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{OAI053} OpenAI, \emph{A high-arity counterexample to Pixton completeness in Chow},
+ OpenAI Math Release preprint, September~24, 2026, \url{https://github.com/openai/math} (commit \texttt{fd4aeeb2}),
+ directory \texttt{preprints/A-high-arity-counterexample-to-Pixton-completeness-in-Chow-September-24-2026}.
+\bibitem{Pixton} A.~Pixton, \emph{Conjectural relations in the tautological ring of $\Mbar_{g,n}$}, arXiv:1207.1918.
+\bibitem{PPZ} R.~Pandharipande, A.~Pixton, D.~Zvonkine, \emph{Relations on $\Mbar_{g,n}$ via $3$-spin structures},
+ J.\ Amer.\ Math.\ Soc.\ 28 (2015), 279--309.
+\end{thebibliography}
+
+\noindent\emph{Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction;
+independent adversarial reviews were run by separate AI sessions and are not human peer review.}
+\end{document}

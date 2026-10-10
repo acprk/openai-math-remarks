@@ -1,0 +1,253 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs,mathrsfs}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{premise}[theorem]{Premise}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\1}{\mathbf 1}
+\emergencystretch=4em
+
+\title[A 17-vertex candidate in the Sidorenko construction]{Relaxing the colour-refinement condition in OpenAI's Sidorenko counterexample: a conditional 17-vertex, 30-edge instance}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \emph{A counterexample to Sidorenko's conjecture} uses the point--face incidence graph
+($35$ vertices, $66$ edges) of a $13$-point triangulated sphere satisfying four conditions (1)--(4).
+Condition (4), discrete colour refinement, is used in exactly one place: the pinning lemma. We show
+that pinning still works when the stable colouring is not discrete, provided every colour-preserving
+homomorphism is an automorphism. The reason is that the coefficient $C$ is invariant under
+automorphisms. A $7$-point, $10$-face triangulation satisfies (1)--(3) and this weaker condition. Its
+incidence graph $H_7$ has $17$ vertices and $30$ edges. \textbf{Conditionally} on the paper's rank-layer
+lemma (and its proof in Sections 4--7) holding for this complex with the same argument, $H_7$ is a
+counterexample to Sidorenko's conjecture. This conditional transfer is made at the level of the
+\TeX\ argument only and has no machine certificate. It is therefore \textbf{less certain than the
+original}, whose $35$-vertex statement is formalised in Lean.
+\end{abstract}
+\maketitle
+
+\noindent\textbf{Attribution.} The construction and its proof are OpenAI's work (family 161 of
+\url{https://github.com/openai/math}, commit \nolinkurl{08fcd618213aa43b0fcaff4526a8a48d66d02e55},
+\cite{oai}). This note changes only the choice of the finite complex and one lemma (pinning). It
+inherits every other step. Developed with AI assistance (Anthropic Claude, Opus 5.5) under
+[AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI sessions and are not
+human peer review.
+
+\medskip
+\noindent\fbox{\parbox{0.96\linewidth}{\textbf{Premise and confidence.}
+\begin{itemize}
+\item[(P)] Lemma 3.1 of \cite{oai} (rank-layer limit) and its proof in Sections 4--7 hold for the complex
+$K_7$ below, with the complex-dependent constants re-instantiated (Section~\ref{sec:premise}). This is
+\emph{assumed}, not re-proved line by line.
+\item The official Lean development certifies only the $13$-point/$22$-face complex (index types are fixed
+as \texttt{Fin 13}, \texttt{Fin 22}, \texttt{Fin 33}). Our instance has no machine certificate. Its
+reliability is lower than that of the original theorem.
+\item Unconditional and exactly checked: (1)--(3) for $K_7$; the colour-preserving homomorphisms of $H_7$;
+the coefficient values; the generalised pinning lemma (a short proof, Section~\ref{sec:pinning}).
+\end{itemize}}}
+
+\section{Statement}
+Let $K_7$ be the complex on points $\{0,\dots,6\}$ with the ten faces in Table~\ref{tab:k7}, and let
+$H_7=(I\sqcup J,\mathscr C)$ be its incidence graph: $|I|=7$, $|J|=10$, $|\mathscr C|=30$.
+\begin{theorem}\label{thm:main}
+Assume (P). There is a finite simple graph $G$ with $t(H_7,G)<p(G)^{30}$, where $p(G)$ is the edge density.
+\end{theorem}
+The original graph has $35$ vertices and $66$ edges \cite[Thm.~1.1]{oai}.
+
+\begin{table}[h]\small
+\begin{tabular}{cccccc}
+\toprule
+face $j$ & points & opposite faces on $\{i_1i_2\},\{i_1i_3\},\{i_2i_3\}$ & bits\\
+\midrule
+0&0\,1\,2&1, 2, 6&000\\ 1&0\,1\,6&0, 5, 7&001\\ 2&0\,2\,3&0, 3, 8&001\\ 3&0\,3\,4&2, 4, 8&011\\
+4&0\,4\,5&3, 5, 9&111\\ 5&0\,5\,6&4, 1, 7&011\\ 6&1\,2\,5&0, 7, 9&100\\ 7&1\,5\,6&6, 1, 5&110\\
+8&2\,3\,4&2, 9, 3&100\\ 9&2\,4\,5&8, 6, 4&110\\
+\bottomrule
+\end{tabular}
+\caption{The complex $K_7$. The edges of $H_7$ are the $30$ pairs (point, face containing it).}
+\label{tab:k7}
+\end{table}
+
+\section{Conditions (1)--(3) hold; (4) fails}
+\begin{proposition}\label{prop:k7}
+$K_7$ satisfies conditions (1)--(3) of \cite[Prop.~2.1]{oai}, with $11,13$ replaced by $5,7$:
+\begin{enumerate}
+\item each of the $|E|=15$ point pairs lies in exactly two faces, and the face-neighbour graph is connected
+(Euler characteristic $7-15+10=2$);
+\item for each bit position, each class has $5$ faces covering all $7$ points, and it has an exposure order in
+which every later face shares a pair with an earlier face and adds exactly one new point:
+\[\begin{array}{llll}
+\text{bit 1}=0:&0,1,2,3,5\ \ (\text{new } 6,3,4,5)&\text{bit 1}=1:&4,9,6,7,8\ \ (2,1,6,3)\\
+\text{bit 2}=0:&0,1,2,6,8\ \ (6,3,5,4)&\text{bit 2}=1:&3,4,5,7,9\ \ (5,6,1,2)\\
+\text{bit 3}=0:&0,6,7,9,8\ \ (5,6,4,3)&\text{bit 3}=1:&1,5,4,3,2\ \ (5,4,3,2);
+\end{array}\]
+\item every $a_e\ge1/3$, and $a_{\{1,6\}}=a_{\{3,4\}}=1$, $a_{\{2,3\}}=a_{\{5,6\}}=2/3$ (all other $a_e=1/3$).
+\end{enumerate}
+Condition (4) fails. The stable colouring has point classes $\{0\},\{1,4\},\{2,5\},\{3,6\}$ and face classes
+$\{012,045\},\{016,034\},\{023,056\},\{125,245\},\{156,234\}$. Moreover $\mathrm{Aut}(H_7)=\{\mathrm{id},\varphi\}$, where
+$\varphi$ acts on points by $(1\,4)(2\,5)(3\,6)$ and on faces by $j\mapsto(4,3,5,1,0,2,9,8,7,6)_j$.
+\end{proposition}
+\begin{proof}
+Direct verification from Table~\ref{tab:k7}. Two independent scripts check it exactly
+(\texttt{certificate/check\_v7.py}, \texttt{construction/verify3.py}).
+\end{proof}
+
+\section{Pinning without discreteness}\label{sec:pinning}
+We use the notation of \cite[Section~3]{oai}: base laws $A^{\mathrm{base}}$ with corner signs
+$\sigma_\kappa$ (exactly one negative), coefficients $C(a,b)$ of \cite[(3.9)]{oai}, and the scores $\mathcal Q$
+of \cite[Lemma~3.4]{oai}.
+
+\begin{lemma}[Pinning with ties]\label{lem:ties}
+Let $F=(P\sqcup Q,L)$ be a finite bipartite graph, and run colour refinement from the two part colours until
+it is stable (round $R$). Define the scores and $\mathcal Q$ exactly as in the proof of \cite[Lemma~3.4]{oai}.
+Then for every part-preserving map $f$ we have $\mathcal Q(f)\le\mathcal Q(\mathrm{id})$, with equality if and only if $f$
+preserves the stable colouring.
+\end{lemma}
+\begin{proof}
+The proof of \cite[Lemma~3.4]{oai} shows two things. If $f$ preserves the colours of round $t-1$, then
+$F_t(\mathrm{id})-F_t(f)=\sum_u\|h_t(f(u))-h_t(u)\|^2\ge0$, with equality if and only if $f$ also
+preserves the round-$t$ colours. And at the first round where a colour is not preserved, the loss outweighs
+all later gains. Discreteness was used only to conclude that every $f\ne\mathrm{id}$ has such a round. Without
+it, the maps with no such round are exactly the maps preserving the stable colouring, and they tie with the
+identity in every round.
+\end{proof}
+
+\begin{lemma}\label{lem:hom}
+If a part-preserving map $f=(a,b)$ is not a homomorphism $H\to H$, then $C(a,b)=0$.
+\end{lemma}
+\begin{proof}
+Some corner $(i,j)$ is sent to a non-incident type pair $(a(i),b(j))$. There the activation law is
+$S=\varnothing$ \cite[Section~3.3]{oai}, so $A_{a(i)b(j)}(\alpha,\beta)=0$ unless $\alpha=\beta=\varnothing$. Every term in
+\cite[(3.9)]{oai} has all labels nonempty.
+\end{proof}
+
+\begin{lemma}[Automorphism invariance]\label{lem:aut}
+For every automorphism $\varphi$ of $H$ (preserving the parts),
+$C(\varphi)=\bigl(\prod_\kappa\sigma_\kappa\bigr)(\theta/2)^{|\mathscr C|}=C(\mathrm{id})$.
+\end{lemma}
+\begin{proof}
+An automorphism permutes corners, pairs and faces compatibly, so $\varphi(U_e)=U_{\varphi(e)}$,
+$\varphi(M_\kappa)=M_{\varphi(\kappa)}$ and $\varphi(\Gamma_\kappa)=\Gamma_{\varphi(\kappa)}$. Relabelling the coordinate set by $\varphi^{-1}$
+gives $A^{\mathrm{base},\sigma}_{\varphi(\kappa)}(\alpha,\beta)=A^{\mathrm{base},\sigma\circ\varphi}_{\kappa}(\varphi^{-1}\alpha,\varphi^{-1}\beta)$, and hence
+$C_\sigma(\varphi)=C_{\sigma\circ\varphi}(\mathrm{id})$. The support-forcing Lemma~3.3 of \cite{oai} holds for every sign vector
+(its proof uses only (1) and the structure of $M_\kappa,\Gamma_\kappa$), with value $\prod_\kappa(\sigma\circ\varphi)_\kappa\,(\theta/2)^{|\mathscr C|}$. The
+product of the signs is unchanged by the permutation.
+\end{proof}
+
+\begin{proposition}\label{prop:maxhom}
+The colour-preserving part-preserving maps of $H_7$ number $2^6\cdot2^{10}=65536$. Exactly two of them are homomorphisms,
+namely $\mathrm{id}$ and $\varphi$.
+\end{proposition}
+\begin{proof}
+Exhaustive enumeration. Three implementations agree: \texttt{construction/verify3.py} (all $65536$ maps),
+\texttt{construction/pinexact.py} (variable elimination over all part-preserving maps and over all
+homomorphisms), and \texttt{certificate/check\_v7.py} (written independently from the \TeX: $32033$ point maps
+extend to homomorphisms; exactly two maximise $\mathcal Q$, with exact $C=-(\theta/2)^{30}$ each).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+In \cite[(3.21)]{oai}, replace $13,22,66$ by $7,10,30$. By Lemmas~\ref{lem:ties}--\ref{lem:aut} and
+Proposition~\ref{prop:maxhom}, the maximal-score part of the sum is $C(\mathrm{id})+C(\varphi)=-2(\theta/2)^{30}$. Every other
+map has score at most $\mathcal Q_*-\delta_*$ with $\delta_*>0$. Choosing $\rho$ with $B_*e^{-\rho\delta_*}<2(\theta/2)^{30}$ gives $t_0<0$. Dilution gives
+$t(W_\varepsilon)=1+\varepsilon^{7}t_0+o(1)$ and $t(W_\varepsilon^\top)=1+\varepsilon^{10}t_1+o(1)$, so the bracket of
+\cite[(3.25)]{oai} becomes $t_0+\varepsilon^3t_1+\varepsilon^{10}t_0t_1$. The crossed product and the finite-host transfer
+\cite[Prop.~3.5, Lemma~3.6]{oai} apply unchanged. All of these steps use Lemma~3.1, hence (P).
+\end{proof}
+
+\section{What the premise covers}\label{sec:premise}
+In \cite{oai}, condition (4) is cited only in the application of the pinning lemma (\texttt{kernel.tex} l.~455).
+Sections 4--7 use (1)--(3) and numbers derived from the complex. Re-instantiated for $K_7$, these are:
+$33\to15$ pairs; $22\to10$ faces in the slack bound \cite[\S7]{oai} ($22C_*\to10C_*$, so
+$D>M_*+20C_*$ suffices there); point degrees $(6,4,5,3,4,5,3)$, so $\sum_i\binom{2\deg i}{2}=242$ (was $618$); and the
+profile exponent bound $m^2-4m+242\le407$ for $m\le15$ (was $1575$). A separate review session checked these
+substitutions. We did \emph{not} re-derive Sections 4--7 for $K_7$; this is the content of (P).
+
+\section{Controls: smaller complexes}
+Removing (4), every sphere triangulation with $V\le6$ satisfying (2)--(3) fails for a definite reason.
+\begin{itemize}
+\item $V=4,5$ and the octahedron ($V=6$, \#2): $H$ is already a Sidorenko graph. A reflection (an involution of $H$
+splitting the faces into two halves glued along fixed points) and the Cauchy--Schwarz inequality reduce $H$ to a half with
+a part of size $\le4$ (or a dominating vertex), which is Sidorenko \cite{sidorenko1991,cfs2010}
+(\texttt{construction/survey.py}). The tetrahedron's $H$ has a part of size $4$.
+\item $V=6$, \#1 (faces $012,015,023,034,045,124,145,234$): the pinning step fails. Eight colour-preserving
+\emph{folding} homomorphisms have $C=+\theta^{22}/2^{24}$, which dominates $C(\mathrm{aut})=-\theta^{24}/2^{24}$ for small $\theta$. They form pairs with
+$\mathrm{vec}(f)+\mathrm{vec}(f')=2\,\mathrm{vec}(\mathrm{id})$ (counts of point, face and corner images), so by AM--GM no choice of priors and thinning weights the
+identity above both (\texttt{construction/fold1.py}). Whether this $H$ is Sidorenko is not decided here.
+\end{itemize}
+At $V=7$ the other two complexes behave differently. \#4 is Sidorenko by reflection. For \#5, generalised
+pinning is inconclusive ($270$ maximising homomorphisms against $|\mathrm{Aut}|=6$). So $K_7$ (\#3) is the smallest instance
+in the relaxed template for which this argument goes through. The same argument also works for $V=8$ (\#6) and $V=9$ (\#10).
+
+\section{$H_7$ is not in a known Sidorenko class}
+\begin{table}[h]\small
+\begin{tabular}{p{0.42\linewidth}p{0.5\linewidth}}
+\toprule
+class (positive theorem) & why $H_7$ is not covered\\
+\midrule
+trees, even cycles, complete bipartite; one part of size $\le4$ \cite{sidorenko1991} & parts $7,10$; cycles; min degree $3$\\
+vertex complete to the other part \cite{cfs2010} & max degrees $6<10$ and $3<7$\\
+weakly norming (needs regular parts, \cite{hatami2010}) & point degrees $3,3,4,4,5,5,6$\\
+Coregliano's degree-count criterion \cite{coregliano2024} & $10<\binom73=35$; reverse orientation also fails\\
+blow-ups \cite{conlonlee2021} & no twin vertices\\
+Cartesian products & $|V(H_7)|=17$ is prime\\
+subdivisions / even-path substitutions & min degree $3$\\
+reflection (symmetric gluing) & $\mathrm{Aut}=\mathbb Z/2$; $\varphi$ fixes only point $0$, and $H_7-0$ is connected\\
+strongly tree-decomposable \cite{cklee2018}, reflection trees, tree-arrangeable & first-step leaf test: $56$ candidate leaf sets, none passes (\texttt{classes/stdcheck.py})\\
+Szegedy's ``thick'' class & \textbf{not decided}\\
+\bottomrule
+\end{tabular}
+\caption{Location of $H_7$; invariants in \texttt{classes/invariants.py}. Conlon--Lee's further sufficient
+conditions (divisibility, $|B|\ge\binom{|A|}{r}$) were checked by the review session to fail as well.}
+\end{table}
+Also, a numerical search over $69$ step-kernel starts (\texttt{wsearch}) always converged to the constant kernel.
+The review session reports the same behaviour for the original graph: the counterexample kernel is a high-dimensional rank-layer kernel, not a small step function.
+
+\section{Relation to other work}
+The public repository \texttt{rohanarun/sidorenko-template-refinements} (2026-10-09, commit \texttt{4e1b9b6})
+keeps condition (4) and proves that, within that template, the $13$-point/$35$-vertex complex is minimal.
+For $V\le12$ they give exact cut-obstruction certificates. Their crossing-sum identity
+$\sum_{e\ni v}a_e=2$ forces point degree $\le6$, and $K_7$ attains this ($a_e=1/3$ on all six pairs at point $0$).
+Relaxing (4) is exactly what takes us past their template minimum. Appendix~\ref{app:lp} is an
+independent recomputation of their $V\le10$ range.
+
+\appendix
+\section{Independent LP certificates with (4) kept}\label{app:lp}
+\begin{lemma}\label{lem:ham}
+For a sphere triangulation, the admissible bit splits (both classes have spanning exposure orders) correspond
+bijectively, up to swapping the classes, to Hamiltonian cycles of the point graph. The cycle is the set of pairs
+separated by the split.
+\end{lemma}
+\begin{proof}
+An exposure order glues each new triangle along a boundary edge of a disc and adds a new vertex. Each class is
+therefore a triangulated disc with all $V$ points on its boundary, and the common boundary is a Hamiltonian
+cycle. Conversely, a Hamiltonian cycle bounds two discs with no interior vertices (Jordan). Reversing an
+ear decomposition of each disc gives exposure orders.
+\end{proof}
+Fractional (2)+(3) asks for a probability vector $w$ on Hamiltonian cycles covering every pair with mass $\ge1/3$. A
+rational certificate $y\ge0$ with $\sum_ey_e=1$ and $y(C)<1/3$ for every Hamiltonian cycle $C$ rules this out.
+\texttt{appendix\_lp/r6\_verify.py} enumerates all triangulations with $V\le10$ (plantri 5.8) and finds the discrete ones:
+$0,0,0,0,2,16,137$ for $V=4,\dots,10$. It certifies all $155$ in \texttt{fractions.Fraction} against every Hamiltonian cycle; the
+worst certified bounds are $1/5,2/7,2/7$ at $V=8,9,10$. As a positive control, the original complex is feasible with
+$t^*=1/3$. Restricting to point degree $\le6$ gives $0,1,4$ at $V=8,9,10$, the same as in
+\texttt{rohanarun}. An earlier run (\texttt{primary/}, plantri 5.5) covered $V\le12$ ($7881$ discrete complexes, all
+infeasible with exact certificates). Its $V=11,12$ part has not been re-run independently.
+
+\begin{thebibliography}{9}
+\bibitem{oai} OpenAI, \emph{A counterexample to Sidorenko's conjecture}, OpenAI Math Release preprint, September 23, 2026,
+\url{https://github.com/openai/math/tree/main/preprints/A-counterexample-to-Sidorenkos-conjecture-September-23-2026}.
+\bibitem{sidorenko1991} A.~Sidorenko, Inequalities for functionals generated by bipartite graphs, Diskret.\ Mat.\ 3 (1991); and A correlation inequality for bipartite graphs, Graphs Combin.\ 9 (1993).
+\bibitem{cfs2010} D.~Conlon, J.~Fox, B.~Sudakov, An approximate version of Sidorenko's conjecture, GAFA 20 (2010).
+\bibitem{hatami2010} H.~Hatami, Graph norms and Sidorenko's conjecture, Israel J.\ Math.\ 175 (2010).
+\bibitem{cklee2018} D.~Conlon, J.~H.~Kim, C.~Lee, J.~Lee, Some advances on Sidorenko's conjecture, J.\ London Math.\ Soc.\ 98 (2018).
+\bibitem{conlonlee2021} D.~Conlon, J.~Lee, Sidorenko's conjecture for blow-ups, Discrete Anal.\ (2021).
+\bibitem{coregliano2024} L.~N.~Coregliano, as cited in \cite[\S1]{oai} (Theorem~3.6 there).
+\end{thebibliography}
+\end{document}

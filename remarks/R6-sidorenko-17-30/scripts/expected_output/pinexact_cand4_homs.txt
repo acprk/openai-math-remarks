@@ -1,0 +1,1 @@
+R=2  max S=220000180  S(id)=220000180  #maximisers=48520  |Aut|=20  (homs only=1)

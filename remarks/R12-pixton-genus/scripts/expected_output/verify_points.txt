@@ -1,0 +1,30 @@
+== paper (g=10^60, K=10^5, m0=2000 g^(2/3), 4K+20): g=1000000000000000000000000000000000000000000000000000000000000 (~1.0000e+60), K=100000, m0=20000000000000000000000000000000000000000000, blocks=400020, |S0|=999999999991999600000000000000000000000000000000000000000000 (1.000 g)
+   P2  g > 2K                                                             slack = 1.000000e+60
+   P3  4(g-K-2) - (3g-3)                                                  slack = 1.000000e+60
+   P4  (g-K)^2-1 - (3g-2)                                                 slack = 1.000000e+120
+   P5  d_e/2 - (loss + t_max)   [eq. small-loss + large-test-threshold]   slack = 8.333331e+127
+   P6  11g - (C_K+1)                                                      slack = 1.100000e+61
+   P7  S0(g(K-4)+2) - 280g^2   [large-deficit contradiction]              slack = 9.971600e+124
+   P8  blocks - (3K+5)                                                    slack = 1.000150e+05
+   all conditions: True
+== this remark, paper's 4K+20 reservation: g=226327553857834 (~2.2633e+14), K=568, m0=49723541408, blocks=2292, |S0|=112361196950698 (0.496 g)
+   P2  g > 2K                                                             slack = 2.263276e+14
+   P3  4(g-K-2) - (3g-3)                                                  slack = 2.263276e+14
+   P4  (g-K)^2-1 - (3g-2)                                                 slack = 5.122416e+28
+   P5  d_e/2 - (loss + t_max)   [eq. small-loss + large-test-threshold]   slack = 9.984030e+19
+   P6  11g - (C_K+1)                                                      slack = 2.489603e+15
+   P7  S0(g(K-4)+2) - 280g^2   [large-deficit contradiction]              slack = 3.462651e+16
+   P8  blocks - (3K+5)                                                    slack = 5.830000e+02
+   all conditions: True
+   g-1 with optimal m0 feasible? False
+== this remark, the paper's own count 3K+5: g=93824084405552 (~9.3824e+13), K=567, m0=27644793412, blocks=1706, |S0|=46662066844680 (0.497 g)
+   P2  g > 2K                                                             slack = 9.382408e+13
+   P3  4(g-K-2) - (3g-3)                                                  slack = 9.382408e+13
+   P4  (g-K)^2-1 - (3g-2)                                                 slack = 8.802959e+27
+   P5  d_e/2 - (loss + t_max)   [eq. small-loss + large-test-threshold]   slack = 3.024399e+19
+   P6  11g - (C_K+1)                                                      slack = 1.032065e+15
+   P7  S0(g(K-4)+2) - 280g^2   [large-deficit contradiction]              slack = 2.636407e+16
+   P8  blocks - (3K+5)                                                    slack = 0.000000e+00
+   all conditions: True
+   g-1 with optimal m0 feasible? False
+ratio 10^60 / g = 4.418e+45 ; markings n = 3*C(g,3) = 5.7967e+42 vs 5.0000e+179
