@@ -1,0 +1,2 @@
+Q=24 N=2 dim=300: gamma_cert=0.211779 | (a) min positive eig H=1.000000 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-2.487e-17 (j=13.0) OK best gamma' in sector=0.213739
+Q=24 N=5 dim=53130: gamma_cert=0.211779 | (a) min positive eig H=0.517462 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-1.122e-15 (j=10.0) OK best gamma' in sector=0.213620

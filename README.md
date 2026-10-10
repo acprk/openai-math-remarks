@@ -23,12 +23,12 @@ All constructions and main arguments discussed here are **OpenAI's work**. Each 
 | R7 | 319 | [Hahn–Wilson counterexamples for every prime p ≥ 293](remarks/R7-hahn-wilson-p293/) (was 17,073,437) | explicit parameters | stage enumeration at p = 293; adversarial review |
 | R8 | 108 | [Permanent vs determinant cubic constant: 44× uniformly](remarks/R8-permanent-cubic-constant/), and a 167× ceiling for the method | constant + method limit | independent Sage checks; adversarial review |
 | R9 | 100 | [Bang half-area cylinder counterexample: 16,000,000 → 640 cylinders](remarks/R9-bang-cylinders-640/) | explicit parameters | exact LP + 1.1M exact points + interval area; adversarial review |
+| R10 | 269 | [Fermionic Laughlin gap on the sphere, explicit for every N ≥ 2](remarks/R10-laughlin-fermionic-explicit/): H_Q² ≥ 0.05947 H_Q for all Q ≥ 24 (was: γ < 0.046167 for Q ≥ Q_γ, non-explicit) | explicit parameters | Arb ball/Taylor-model certificates + rigorous ED; independent CG re-implementation; adversarial review |
 | R11 | 059 | [Zariski multiplicity counterexample (2 vs 3) in ambient dimension 1,802,976](remarks/R11-zariski-multiplicity-dim/) (was ≈ 4.6·10^143) | explicit parameters | OpenAI's own validator + independent big-integer check; adversarial review |
 | R12 | 053 | [Pixton completeness counterexample in genus ≈ 2.26·10^14](remarks/R12-pixton-genus/) (was 10^60) | explicit parameters | independent exact budget re-implementation; adversarial review |
 | R13 | 176 | [Second Kahn–Kalai conjecture: constant 2048e^50 ≈ 10^25 → 10^5](remarks/R13-kahn-kalai-constant/) | constant | Arb ball arithmetic re-implementation; adversarial review |
 | R14 | 196 | [Kaplansky zero-divisor counterexample over PG(2,16)](remarks/R14-kaplansky-zero-divisor-q16/) (was q = 128; 138 instead of 8,258 generators) | explicit parameters | independent PG(2,q) construction in Sage; adversarial review |
 
-In preparation: R10 (269, explicit fermionic Laughlin gap for all N).
 
 ## How these remarks were produced and checked
 

@@ -1,0 +1,192 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\FF}{\mathcal F}
+\newcommand{\LL}{\mathcal L}
+\newcommand{\Wh}{\widehat W}
+\title{An explicit fermionic Laughlin gap on the sphere for every particle number\\
+\normalsize A remark on OpenAI's ``A Fock-space inequality and the Laughlin spectral gap''}
+\author{[AUTHOR NAME]}
+\date{9 October 2026. Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI sessions and are not human peer review.}
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \cite{OAI} proves $H_Q^2\ge\gamma H_Q$ on the fermionic Fock
+space of the spherical $V_1$ Hamiltonian for every $\gamma<\gamma_*=0.046167$ and
+all $Q\ge Q_\gamma$, with $Q_\gamma$ non-explicit, and deduces the Laughlin gap $1/25$
+for $N\ge N_0$. We replace its only non-effective step (a transfer lemma) by a
+positivity check at the given flux, and certify every flux in ball arithmetic.
+Result: $H_Q^2\ge 0.05947\,H_Q$ for every integer $Q\ge24$, and
+$H_{N,3(N-1)}\ge0.05947\,(I-P_{\mathrm L})$ for every $N\ge2$.
+All ideas except Lemma~\ref{lem:R} and the bookkeeping of Proposition~\ref{prop:C}
+are OpenAI's.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+We use the notation of \cite{OAI}: $U_Q$ is spin $Q/2$ with lowering basis
+$e_0,\dots,e_Q$; $V_Q\subset\bigwedge^2U_Q$ is the spin-$(Q-1)$ summand with
+lowering basis $v_p$, $v_0=-e_0\wedge e_1$; $B_p=B(v_p)$ and
+$H_Q=\sum_{p=0}^{2Q-2}B_p^\dagger B_p$ on $\FF_Q=\bigoplus_N\bigwedge^NU_Q$
+(coefficient one per unordered pair projector; this is \texttt{LaughlinFock.hamiltonian}).
+
+\begin{theorem}\label{thm:A}
+For every integer $Q\ge24$, $H_Q^2\ge 0.05947\,H_Q$ on $\FF_Q$.
+More precisely $H_Q^2\ge\gamma_QH_Q$ with $\gamma_Q\ge0.136071$ ($24\le Q\le48$),
+$\ge0.166963$ ($49\le Q\le72$), $\ge0.079313$ ($73\le Q\le299$), $\ge0.059470$ ($Q\ge300$).
+\end{theorem}
+
+\begin{theorem}\label{thm:B}
+For every $N\ge2$ and $Q=3(N-1)$, $H_{N,Q}\ge 0.05947\,(I-P_{\mathrm L,N})$ on $\bigwedge^NU_Q$.
+\end{theorem}
+
+Theorem~\ref{thm:A} gives the Comparator statement \texttt{thm\_fock} with the explicit
+threshold $Q_\gamma=24$ for every $0<\gamma<\gamma_*$ (since $H^2-\gamma H=(H^2-\gamma_QH)+(\gamma_Q-\gamma)H$).
+Theorem~\ref{thm:B} is \cite[Cor.~1.2]{OAI} with $N_0=2$ and constant $0.05947>1/25$.
+
+\emph{Proof of Theorem~\ref{thm:B} from Theorem~\ref{thm:A}.} For $N\ge9$, $Q=3(N-1)\ge24$,
+so $H_{N,Q}^2\ge\gamma H_{N,Q}$ and $\operatorname{spec}H_{N,Q}\subset\{0\}\cup[\gamma,\infty)$.
+By \cite[Lemma~6.2]{OAI}, valid for all $N\ge2$, the kernel is $\mathbb C\Psi_{\mathrm L,N}$.
+For $2\le N\le8$ see \S\ref{sec:ED}. \qed
+
+\section{The comparison at a fixed flux}
+Fix $Q\ge24$ and the support $\mathcal S_t=\{(p,j):p\le7,\ j\le8,\ 0\le p+j-t\le8\}$, $t=0,\dots,7$,
+as in \cite[eq.~(F)]{OAI}. Let $\Gamma_t=F_tF_t^{\mathsf T}$ with $F_t$ rational, indexed by
+$\{B_t\}\cup\mathcal S_t$, and $K=\sum_t\sum_{m,m'}(\Gamma_t)_{mm'}O_m^\dagger O_{m'}$ with
+$O_{B_t}=B_t$, $O_{(p,j)}=c^\dagger_{p+j-t}c_jB_p$. Thus $K$ is a sum of squares, and
+$\mathcal K_Q=(2Q-1)\int K(g)\,dg\ge0$. The paper's seven rows are the case
+$\operatorname{rank}\Gamma_t\le1$. Let $\eta=\sum_t(\Gamma_t)_{00}$, $d_a=2Q-1$, $d_{3,z}=3Q-1-2z$,
+$d_D=4Q-1-2D$, and let $q_z(Q)$, $e_z^Q$, $E_D^Q$, $S^Q_r$, $\chi$, $n_D=\lfloor(D+1)^2/4\rfloor$ be as in \cite[\S\S3--5]{OAI}.
+All of these are evaluated at the given $Q$, with no limits.
+
+\begin{proposition}\label{prop:C}
+Let $s_z=q_z(Q)-(d_a/d_{3,z})e^Q_z$ for $z\in\{2,4,5,\dots,15\}$,
+$c_3=\sum_z\max(0,-s_z)(z+1)d_{3,z}/d_a$,
+$\delta_Q=\sum_{17\le z\le Q,\ z\ \mathrm{odd}}(d_{3,z}/d_a)|q_z(Q)|(z+1)$, and $C_D=(d_D/d_a)\chi-E_D^Q$.
+Suppose that for each $1\le D\le23$ there is $\rho_D\ge0$ with
+\begin{equation}\label{eq:four}
+ \Wh_b\bigl((S^Q)^{\mathsf T}C_DS^Q+\rho_DI\bigr)\Wh_b^{\dagger}\ \ge\ 0\quad\text{on }\textstyle\bigwedge^4U_Q,
+\end{equation}
+where $S^Q$ is the $\mathcal R_D\times\{b=(p,j,k):p+j+k=D,\ j<k\}$ matrix of the highest vectors
+$|D,D;r\rangle_Q$ in the orthonormal vectors $v_p\otimes(e_j\wedge e_k)$, and $\Wh_b$ maps $b\mapsto v_p\wedge e_j\wedge e_k$.
+Then $H_Q^2-\gamma H_Q\ge\mathcal K_Q\ge0$ on $\FF_Q$ with
+$\gamma=1-\eta-\delta_Q-c_3-\sum_Dn_D\rho_D$.
+\end{proposition}
+\begin{proof}
+By \cite[Lemma~2.1]{OAI}, $H^2=H+\LL_3(W_3(W_3^\dagger W_3-I)W_3^\dagger)+\LL_4(W_4W_4^\dagger)$.
+By the normal ordering \cite[(normal2)--(normal4)]{OAI} and Schur averaging \cite[\S4]{OAI},
+$\mathcal K_Q=\eta H+A_3+A_4$, where $A_3$ is given by \cite[(A3)]{OAI} and $A_4$ by \cite[(A4)]{OAI}.
+Their derivations hold at every $Q\ge24$, because all indices stay inside the representations.
+
+\emph{Three body.} Blocks $z=0,1,3$ are killed by $W_3$ \cite[Lemma~3.2]{OAI}. In block $z\le15$ the
+difference of coefficients is $s_z$. If $s_z<0$, the argument of \cite[Lemma~6.1]{OAI}
+(Cauchy--Schwarz on the highest vector and averaging) gives
+$\LL_3(W_3R_{3,z}W_3^\dagger)\le(z+1)(d_{3,z}/d_a)H$. Blocks $z\ge16$ have $e_z^Q=0$. Even
+ones are positive and odd ones cost at most $\delta_QH$, by the same lemma.
+
+\emph{Four body.} In spin block $D$ the target minus $A_4$ equals
+$d_a\int\LL_4\bigl(\sum_{r,s}(C_D)_{rs}|w_{Dr}\rangle\langle w_{Ds}|\bigr)(g)\,dg$
+\cite[proof of Prop.~5.3]{OAI}, where $w_{Dr}=\Wh_bS^{Q\,\mathsf T}e_r$. Inequality~\eqref{eq:four} says
+$\sum_{rs}(C_D)_{rs}|w_{Dr}\rangle\langle w_{Ds}|\ge-\rho_D\sum_b|u_b\rangle\langle u_b|$, $u_b=v_p\wedge e_j\wedge e_k$.
+Lift by $\LL_4$, which preserves positivity, and average. Since
+$\|B(u_b)\psi\|=\|c_kc_jB_p\psi\|\le\|B_p\psi\|$ and $d_a\int B_p(g)^\dagger B_p(g)\,dg=H$,
+the right side costs at most $n_D\rho_DH$, exactly as in \cite[Prop.~5.3]{OAI}. Blocks $D\notin[1,23]$ of the
+target are positive and have no $A_4$ part.
+\end{proof}
+
+\begin{remark}
+This replaces \cite[(3certificate), (4certificate), Lemma~5.2, Prop.~5.3]{OAI} and the
+``sufficiently large $Q$'' in the proof of \cite[Thm.~1.1]{OAI}. No limiting object and no transfer
+is used. A crude effectivisation of the transfer error of \cite[Lemma~5.2]{OAI} gives a constant $\ge10^{65}$ at $Q=24$ (estimate of the primary session, not re-derived here).
+\end{remark}
+
+\subsection*{Reductions of \eqref{eq:four}}
+Write $\Wh_b=\Delta'N\Lambda''$ with $N$ an integer, $Q$-independent matrix and $\Delta',\Lambda''$ positive diagonal.
+This follows from \cite[eq.~(pair)]{OAI}, since $v_p(x,y)\propto(x-y)\sqrt{\binom Qx\binom Qy}$.
+Hence $\operatorname{ran}\Wh_b^{\mathsf T}=\Lambda''\operatorname{ran}N^{\mathsf T}$ has an exact rational basis.
+By the compression lemma \cite[Lemma~5.1]{OAI}, \eqref{eq:four} is equivalent to
+(b-space) $B^{\mathsf T}(S^{\mathsf T}CS+\rho I)B>0$ for a basis $B$ of $\operatorname{ran}\Wh_b^{\mathsf T}$.
+Minimising $\|y\|$ over $y\in\operatorname{ran}\Pi$ with $S\Pi y=c$ shows that this is also equivalent to
+(r-space) $\rho G+GCG\ge0$ with $G=S\Pi S^{\mathsf T}$, $\Pi$ the projection onto $\operatorname{ran}\Wh_b^{\mathsf T}$.
+If $|J|=\operatorname{rank}G$ and $G_{JJ}>0$, the r-space form reduces to the $|J|\times|J|$ matrix
+$\rho G_{JJ}+G_{J\cdot}CG_{\cdot J}>0$. This needs $\operatorname{rank}G=\operatorname{rank}W_D$ (here $W_D$ has columns $w_{Dr}$).
+
+\begin{lemma}[Lemma R]\label{lem:R}
+For $Q\ge24$ and $1\le D\le23$, $\operatorname{rank}W_D=\mathrm{hw}(D)-\mathrm{zm}(D)$. Here
+$\mathrm{hw}(D)=c(D+1)-c(D)$, where $c(n)$ is the number of $4$-subsets of $\mathbb N$ with sum $n$, and
+$\mathrm{zm}(D)=p_4(D-17)-p_4(D-18)$, where $p_4$ counts partitions into at most $4$ parts.
+\end{lemma}
+\begin{proof}
+$\Wh$ is an intertwiner and the $|D,D;r\rangle_Q$ span the spin-$J$ highest-weight space of
+$V_Q\otimes\bigwedge^2U_Q$, $J=2Q-1-D$. So $\operatorname{span}\{w_{Dr}\}=\mathrm{HW}_J\cap\operatorname{ran}\Wh$.
+Now $\psi\perp\operatorname{ran}\Wh$ iff $B(v)\psi=0$ for all $v\in V_Q$ iff $H_{4,Q}\psi=0$, so
+$\operatorname{ran}\Wh=(\ker H_{4,Q})^\perp$ and $\operatorname{rank}W_D=\dim\mathrm{HW}_J(\bigwedge^4)-\dim\mathrm{HW}_J(\ker H_{4,Q})$.
+Weights of $\bigwedge^4U_Q$ are index sums. Spin $J$ corresponds to sum $D+1\le24\le Q$, giving $\mathrm{hw}(D)$.
+The divisibility argument of \cite[Lemma~6.2]{OAI} gives
+$\ker H_{4,Q}=\prod_{i<j}b_{ij}^3\cdot\operatorname{Sym}^4U_{Q-9}$. The prefactor is invariant, so spin $J$
+corresponds to deficit $D-17$ in $\operatorname{Sym}^4U_{Q-9}$, which gives $\mathrm{zm}(D)$.
+\end{proof}
+The values for $D=1,\dots,23$ are $0,0,0,0,1,0,1,1,2,1,3,2,4,3,5,4,6,5,7,6,8,7,9$.
+For the boxes only the upper bound $\operatorname{rank}\le\mathrm{hw}-\mathrm{zm}$ is needed: a lower rank would be detected by failure of $G_{JJ}>0$.
+On copies $r\ge17$ the matrix $C_D$ vanishes identically ($j+k\le16$ on the support), and $w_{D,1}=0$ for even $D$
+\cite[\S4]{OAI}. So these copies may be dropped.
+
+\section{Certificates}
+\textbf{Data.} Four rational $\Gamma$ (44-bit dyadic $F_t$), obtained by rounding float SDP solutions on
+flux windows $\{24,36,48\}$, $\{48,60,72\}$, $\{72,100,150,300\}$, $\{300,1000,10^8\}$.
+
+\textbf{Integer $24\le Q\le299$.} At $x=1/Q$ exactly, Arb balls (256 bits): $\eta$ exact; $e^Q_z$, $q_z(Q)$
+and the exact tail; $E^Q_D$ and $S^Q$ from closed-form coupling coefficients in $x$. Each $\rho_D$ is a rational chosen
+from a float eigenvalue and then certified by a strict ball $LDL^{\mathsf T}$ of the r-space matrix and of $G_{JJ}$.
+Independently, all 276 values were re-certified in the rank-free b-space form, which does not use Lemma~\ref{lem:R}.
+
+\textbf{$Q\ge300$.} Every quantity is analytic in $x\in[0,1/24]$. We use 168 boxes with rational endpoints forming an exact
+contiguous cover of $[0,1/300]$. Each quantity is expanded as $f(x_0+t)=\sum_{i<6}f_i(x_0)t^i+R$, with the coefficients
+from Arb power series at the exact centre and $|R|\le|F_6|h^6$, where $F_6$ is the order-6 series coefficient
+computed at the ball base point (it encloses $f^{(6)}(\xi)/6!$ on the box). Matrices are bounded below by
+$T_0+T_1t-(\sum_{i\ge2}\|T_i\|_Fh^i)I$, which is affine in $t$, so it suffices to certify the endpoints $t=\pm h$.
+The box $[0,1/50400]$ covers all $Q\ge50400$, so no limit is needed. The tail uses $z\le250$ exactly and
+$\sum_{z>250}6z(z+1)(2/3)^z$ \cite[Lemma~6.1]{OAI}.
+
+\section{Small particle numbers}\label{sec:ED}
+For $2\le N\le8$ ($Q\le21$) we work in the $L_z=0$ sector, which meets every multiplet because $QN/2\in\mathbb Z$.
+There $H$ is $\sqrt{\beta(S)\beta(S')}$ times an exact rational matrix. We certify
+$X=H-gI+\psi\psi^{\mathsf T}>0$ for a float vector $\psi$ by float Cholesky with Higham's backward
+error bound \cite[Thm.~10.3]{Higham} (with a $10\times$ safety factor). By Courant--Fischer this gives $\lambda_2\ge g$,
+and $\lambda_1=0$ is simple by \cite[Lemma~6.2]{OAI}. We get
+$g_N\ge0.9990,0.7847,0.6796,0.6083,0.5847,0.5477,0.5305$ for $N=2,\dots,8$.
+As an independent recheck we rebuilt $H$ from Clebsch--Gordan coefficients and verified
+$\#\{\lambda<g_N\}=1$ by $LDL^{\mathsf T}$ inertia. Lanczos with residuals gives the same gaps
+(e.g.\ $N=8$: $0.5315767947$, residual $4\cdot10^{-15}$).
+
+\section{Independent checks and limitations}
+(i) From Clebsch--Gordan coefficients we checked, at $Q=24,27$: the pair vectors against \cite[eq.~(pair)]{OAI};
+the coefficient-one normalisation against first quantisation; \cite[Lemma~2.1]{OAI} on $N=3,4$; and $q_z(Q)$.
+All agree to $10^{-15}$.
+(ii) We tested the full operator inequality $H^2-\gamma_QH-\mathcal K_Q\ge0$ directly on every spin
+sector, using the certified $\gamma_Q$ and the rational $\Gamma$: $(Q,N)\in\{24\}\times\{3,4,5\}$,
+$\{27,29\}\times\{3,4\}$, and $Q=49,66,73,100$ with $N=3$. Minimum eigenvalue $\ge-2\cdot10^{-15}$. A phase-flipped
+negative control fails by $-778$.
+(iii) Lemma~\ref{lem:R} was checked by exact rational rank at $Q=24,300,10^3,10^4,10^8$ and by float SVD.
+(iv) For five boxes we re-derived the Taylor coefficients by 13-node interpolation and checked the order-6 enclosures.
+We also re-certified points and integer fluxes in each box with the box's $\rho_D$, including the rank-free form.
+
+Not claimed: Lean formalisation; optimality (sector tests suggest $\gamma\approx0.21$ near $Q=24$);
+the planar statement. Related: the bosonic $V_0$ adaptation \cite{Shen} certifies $Q\ge3088$ ($N\ge1545$),
+with an analogous stable-rank formula. It leaves smaller $Q$ and $N$ open.
+
+\begin{thebibliography}{9}
+\bibitem{OAI} OpenAI, \emph{A Fock-space inequality and the Laughlin spectral gap}, preprint, 24 September 2026,
+\url{https://github.com/openai/math}, commit \texttt{adc7f124}, family 269.
+\bibitem{Shen} X.~Shen (curator), \emph{The bosonic Laughlin spectral gap: a candidate proof}, v0.1, 7 October 2026,
+\url{https://github.com/Shencongli/bosonic-laughlin-spectral-gap}.
+\bibitem{Higham} N.~J.~Higham, \emph{Accuracy and Stability of Numerical Algorithms}, 2nd ed., SIAM, 2002.
+\bibitem{Arb} F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic,
+IEEE Trans.\ Comput.\ 66 (2017), 1281--1292.
+\bibitem{Rougerie} N.~Rougerie, On the Laughlin function and its perturbations, S\'eminaire Laurent Schwartz (2019), Appendix~A.
+\end{thebibliography}
+\end{document}

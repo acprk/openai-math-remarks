@@ -1,0 +1,24 @@
+(0) 168 boxes, exact contiguous cover of [0,1/300], no FAIL records: True; box 0 = [0,1/50400] covers every Q >= 50400
+
+=== box #0: x in [0, 1/50400]  (Q in [50400.0, inf])  gamma_lo(box)=0.059470
+   tail  : c0=+1.488130e-02 c1=-1.137e+00 c6(interp)=+3.079e+03 max_nodes|c6|=3.091e+03 <= |F6|enclosure=7.199e+04: True
+   c3_2  : c0=-1.141218e-01 c1=+2.900e+01 c6(interp)=+8.335e+03 max_nodes|c6|=8.346e+03 <= |F6|enclosure=9.211e+06: True
+   c3_5  : c0=-1.977775e-04 c1=-2.251e+01 c6(interp)=+4.956e+05 max_nodes|c6|=4.956e+05 <= |F6|enclosure=5.022e+08: True
+   c3_7  : c0=-2.852192e-04 c1=-2.999e+01 c6(interp)=+1.651e+05 max_nodes|c6|=1.652e+05 <= |F6|enclosure=1.072e+10: True
+   c3_9  : c0=-1.501140e-04 c1=-1.530e+01 c6(interp)=-2.802e+04 max_nodes|c6|=2.805e+04 <= |F6|enclosure=5.808e+10: True
+   D=13 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=13 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=19 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=19 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=21 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=21 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=23 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=23 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+  (1) max_i |c_i(series) - c_i(interp)| h^i / |f| over all checked functions, i=0..5: 1.13e-48;  remainder-enclosure failures: 0
+  (2) r-space point x=1/100800 : fails=[] gamma=0.059521 >= box 0.059470: True
+  (2) r-space point x=1/50400 : fails=[] gamma=0.059532 >= box 0.059470: True
+  (2) integer Q=50400: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059532 >= box: True
+  (2) integer Q=50401: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059532 >= box: True
+  (2) integer Q=1000000: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059507 >= box: True
+  (2) integer Q=1000000000: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059470 >= box: True
+  (2) integer Q=1000000000000000: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059470 >= box: True

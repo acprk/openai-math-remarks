@@ -1,0 +1,45 @@
+(0) 168 boxes, exact contiguous cover of [0,1/300], no FAIL records: True; box 0 = [0,1/50400] covers every Q >= 50400
+
+=== box #1: x in [1/50400, 1/25200]  (Q in [25200.0, 50400.0])  gamma_lo(box)=0.059533
+   tail  : c0=+1.485876e-02 c1=-1.135e+00 c6(interp)=+3.058e+03 max_nodes|c6|=3.070e+03 <= |F6|enclosure=7.196e+04: True
+   c3_2  : c0=-1.135460e-01 c1=+2.903e+01 c6(interp)=+8.316e+03 max_nodes|c6|=8.327e+03 <= |F6|enclosure=9.215e+06: True
+   c3_5  : c0=-6.433538e-04 c1=-2.240e+01 c6(interp)=+4.956e+05 max_nodes|c6|=4.956e+05 <= |F6|enclosure=5.025e+08: True
+   c3_7  : c0=-8.802347e-04 c1=-2.999e+01 c6(interp)=+1.653e+05 max_nodes|c6|=1.654e+05 <= |F6|enclosure=1.073e+10: True
+   c3_9  : c0=-4.536608e-04 c1=-1.530e+01 c6(interp)=-2.807e+04 max_nodes|c6|=2.809e+04 <= |F6|enclosure=5.814e+10: True
+   D=13 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=13 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=19 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=19 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=21 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=21 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=23 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=23 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+  (1) max_i |c_i(series) - c_i(interp)| h^i / |f| over all checked functions, i=0..5: 1.14e-48;  remainder-enclosure failures: 0
+  (2) r-space point x=1/50400 : fails=[] gamma=0.059533 >= box 0.059533: True
+  (2) r-space point x=1/33600 : fails=[] gamma=0.059544 >= box 0.059533: True
+  (2) r-space point x=1/25200 : fails=[] gamma=0.059555 >= box 0.059533: True
+  (2) integer Q=25200: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059555 >= box: True
+  (2) integer Q=25201: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059555 >= box: True
+  (2) integer Q=50400: b-space (rank-free) ok=True fails=[]; r-space gamma=0.059533 >= box: True
+
+=== box #60: x in [1/840, 61/50400]  (Q in [826.2295081967213, 840.0])  gamma_lo(box)=0.060873
+   tail  : c0=+1.357666e-02 c1=-1.056e+00 c6(interp)=+1.843e+03 max_nodes|c6|=1.855e+03 <= |F6|enclosure=6.988e+04: True
+   c3_2  : c0=-7.839544e-02 c1=+3.102e+01 c6(interp)=+7.153e+03 max_nodes|c6|=7.165e+03 <= |F6|enclosure=9.471e+06: True
+   c3_5  : c0=-2.296368e-02 c1=-1.571e+01 c6(interp)=+4.970e+05 max_nodes|c6|=4.970e+05 <= |F6|enclosure=5.222e+08: True
+   c3_7  : c0=-3.596367e-02 c1=-2.995e+01 c6(interp)=+1.769e+05 max_nodes|c6|=1.771e+05 <= |F6|enclosure=1.126e+10: True
+   c3_9  : c0=-1.825251e-02 c1=-1.511e+01 c6(interp)=-3.073e+04 max_nodes|c6|=3.076e+04 <= |F6|enclosure=6.161e+10: True
+   D=13 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=13 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=19 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=19 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=21 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=21 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=23 GJ entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+   D=23 P entries (0,0),(m-1,m-1),(0,m-1): order-6 enclosure contains node/interp c6: True
+  (1) max_i |c_i(series) - c_i(interp)| h^i / |f| over all checked functions, i=0..5: 1.53e-48;  remainder-enclosure failures: 0
+  (2) r-space point x=1/840 : fails=[] gamma=0.060873 >= box 0.060873: True
+  (2) r-space point x=121/100800 : fails=[] gamma=0.060883 >= box 0.060873: True
+  (2) r-space point x=61/50400 : fails=[] gamma=0.060894 >= box 0.060873: True
+  (2) integer Q=827: b-space (rank-free) ok=True fails=[]; r-space gamma=0.060893 >= box: True
+  (2) integer Q=828: b-space (rank-free) ok=True fails=[]; r-space gamma=0.060891 >= box: True
+  (2) integer Q=840: b-space (rank-free) ok=True fails=[]; r-space gamma=0.060873 >= box: True

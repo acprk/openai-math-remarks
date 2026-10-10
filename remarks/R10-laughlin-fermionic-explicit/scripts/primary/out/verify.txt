@@ -1,0 +1,20 @@
+[int Q 24..299] r-space certified: 276/276  missing/failed: []
+[int Q 24..299] b-space (rank-free) recheck ok: 276/276  failed: []
+   segment Q in [24,48]  Gamma=gamma_24_36_48.json  min gamma_lo=0.136071 at Q=29
+   segment Q in [49,72]  Gamma=gamma_48_60_72.json  min gamma_lo=0.166963 at Q=66
+   segment Q in [73,299]  Gamma=gamma_72_100_150_300.json  min gamma_lo=0.079313 at Q=209
+   multiples of 3 (Laughlin flux, N=9..100): min gamma_lo=0.079315 at Q=210 (N=71)
+[Q>=300] 168 boxes, exact contiguous cover of [0,1/300]: True;  min gamma_lo=0.059470 on x in [0.000e+00,1.984e-05]
+   box at x=0 (Q -> infinity): gamma_lo=0.059470;  box at x=1/300: gamma_lo=0.059846
+[ED] N=2 Q=3 dim(Lz=0)=2 gap_float=1.000000 certified g_N=0.9990 (Cholesky err bound 1.4e-15 < tau 2.5e-04: True)
+[ED] N=3 Q=6 dim(Lz=0)=5 gap_float=0.785714 certified g_N=0.7847 (Cholesky err bound 2.2e-14 < tau 2.5e-04: True)
+[ED] N=4 Q=9 dim(Lz=0)=18 gap_float=0.680604 certified g_N=0.6796 (Cholesky err bound 4.9e-13 < tau 2.5e-04: True)
+[ED] N=5 Q=12 dim(Lz=0)=73 gap_float=0.609317 certified g_N=0.6083 (Cholesky err bound 1.2e-11 < tau 2.5e-04: True)
+[ED] N=6 Q=15 dim(Lz=0)=338 gap_float=0.585780 certified g_N=0.5847 (Cholesky err bound 3.4e-10 < tau 2.7e-04: True)
+[ED] N=7 Q=18 dim(Lz=0)=1656 gap_float=0.548749 certified g_N=0.5477 (Cholesky err bound 1.0e-08 < tau 2.6e-04: True)
+[ED] N=8 Q=21 dim(Lz=0)=8512 gap_float=0.531577 certified g_N=0.5305 (Cholesky err bound 3.3e-07 < tau 2.7e-04: True)
+[cross-check] 22 (Q,N) sectors checked (Jordan-Wigner), violations: 0
+
+Theorem A (Fock): for every integer Q>=24, H_Q^2 >= gamma H_Q on F_Q with gamma = 0.059470 (> 1/25: True)
+Theorem B (Laughlin, all N>=2): H_(N,3(N-1)) >= 0.059470 (I - P_L)  (> 1/25: True)
+ALL CHECKS PASSED

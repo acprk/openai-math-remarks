@@ -1,0 +1,10 @@
+Q=24 N=3 dim=2300: gamma_cert=0.211779 | (a) min positive eig H=0.604651 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-9.919e-17 (j=9.0) OK best gamma' in sector=0.213597
+Q=25 N=3 dim=2600: gamma_cert=0.196072 | (a) min positive eig H=0.602837 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-8.869e-17 (j=28.5) OK best gamma' in sector=0.213719
+Q=27 N=3 dim=3276: gamma_cert=0.145717 | (a) min positive eig H=0.599640 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-1.457e-16 (j=28.5) OK best gamma' in sector=0.213591
+Q=28 N=3 dim=3654: gamma_cert=0.136994 | (a) min positive eig H=0.598224 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-1.139e-16 (j=25.0) OK best gamma' in sector=0.213563
+Q=29 N=3 dim=4060: gamma_cert=0.136071 | (a) min positive eig H=0.596913 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-6.603e-17 (j=31.5) OK best gamma' in sector=0.213553
+Q=33 N=3 dim=5984: gamma_cert=0.181052 | (a) min positive eig H=0.592506 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-7.831e-17 (j=13.5) OK best gamma' in sector=0.213649
+Q=34 N=3 dim=6545: gamma_cert=0.199625 | (a) min positive eig H=0.591575 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-1.108e-16 (j=42.0) OK best gamma' in sector=0.213696
+Q=36 N=3 dim=7770: gamma_cert=0.212446 | (a) min positive eig H=0.589877 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-1.396e-16 (j=39.0) OK best gamma' in sector=0.213694
+Q=38 N=3 dim=9139: gamma_cert=0.210336 | (a) min positive eig H=0.588366 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-2.321e-16 (j=48.0) OK best gamma' in sector=0.213686
+Q=40 N=3 dim=10660: gamma_cert=0.209018 | (a) min positive eig H=0.587013 OK | (b) min_j lambda_min(H^2-gH-K_Q)=-8.842e-17 (j=44.0) OK best gamma' in sector=0.213679

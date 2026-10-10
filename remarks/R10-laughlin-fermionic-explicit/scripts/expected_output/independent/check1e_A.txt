@@ -1,0 +1,2 @@
+Q=24 N=5 dim=53130 HWtotal=1394 gamma_cert=0.211779 (file data/gamma_24_36_48.json) | min_J lambda_min(H^2-gH-K_Q) = -1.339e-15 | min positive eig H = 0.517462 best gamma' in sector = 0.213620 OK
+Q=24 N=3 dim=2300 HWtotal=72 gamma_cert=0.211779 (file data/gamma_24_36_48.json) | min_J lambda_min(H^2-gH-K_Q) = -7.783e+02 | min positive eig H = 0.604651 best gamma' in sector = -613.342596 VIOLATION

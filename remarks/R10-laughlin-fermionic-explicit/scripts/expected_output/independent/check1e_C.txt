@@ -1,0 +1,4 @@
+Q=49 N=3 dim=19600 HWtotal=300 gamma_cert=0.175908 (file data/gamma_48_60_72.json) | min_J lambda_min(H^2-gH-K_Q) = -1.601e-16 | min positive eig H = 0.582343 best gamma' in sector = 0.178201 OK
+Q=66 N=3 dim=47905 HWtotal=545 gamma_cert=0.166963 (file data/gamma_48_60_72.json) | min_J lambda_min(H^2-gH-K_Q) = -2.485e-16 | min positive eig H = 0.577092 best gamma' in sector = 0.178152 OK
+Q=73 N=3 dim=64824 HWtotal=666 gamma_cert=0.085458 (file data/gamma_72_100_150_300.json) | min_J lambda_min(H^2-gH-K_Q) = -4.944e-16 | min positive eig H = 0.575658 best gamma' in sector = 0.095814 OK
+Q=100 N=3 dim=166650 HWtotal=1250 gamma_cert=0.089643 (file data/gamma_72_100_150_300.json) | min_J lambda_min(H^2-gH-K_Q) = -5.366e-16 | min positive eig H = 0.572042 best gamma' in sector = 0.095960 OK

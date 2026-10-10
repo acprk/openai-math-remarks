@@ -1,0 +1,21 @@
+N=2 Q=3 Lz=0 dim=2 nnz=4 ||H-H^T||(before sym)=ok
+  (i) eigsh lowest: 0.0000000000 (res 0.0e+00), 1.0000000000 (res 0.0e+00)
+  (ii) #eig < g_cert=0.999: 1 (need 1)   (iii) #eig < 1e-6: 1 (need 1), #eig < -1e-6: 0 (need 0)   gap(eigsh) - res = 1.000000 >= g_cert: True   OK
+N=3 Q=6 Lz=0 dim=5 nnz=23 ||H-H^T||(before sym)=ok
+  (i) eigsh lowest: -0.0000000000 (res 6.7e-16), 0.7857142857 (res 6.9e-16), 1.0476190476 (res 4.1e-16), 1.5476190476 (res 5.0e-16)
+  (ii) #eig < g_cert=0.7847: 1 (need 1)   (iii) #eig < 1e-6: 1 (need 1), #eig < -1e-6: 0 (need 0)   gap(eigsh) - res = 0.785714 >= g_cert: True   OK
+N=4 Q=9 Lz=0 dim=18 nnz=198 ||H-H^T||(before sym)=ok
+  (i) eigsh lowest: 0.0000000000 (res 7.8e-16), 0.6806042469 (res 2.1e-15), 0.7132867133 (res 1.2e-15), 1.1200604746 (res 1.2e-15)
+  (ii) #eig < g_cert=0.6796: 1 (need 1)   (iii) #eig < 1e-6: 1 (need 1), #eig < -1e-6: 0 (need 0)   gap(eigsh) - res = 0.680604 >= g_cert: True   OK
+N=5 Q=12 Lz=0 dim=73 nnz=1509 ||H-H^T||(before sym)=ok
+  (i) eigsh lowest: 0.0000000000 (res 1.5e-15), 0.6093170812 (res 1.8e-15), 0.6365987042 (res 1.6e-15), 0.7409053360 (res 2.7e-15)
+  (ii) #eig < g_cert=0.6083: 1 (need 1)   (iii) #eig < 1e-6: 1 (need 1), #eig < -1e-6: 0 (need 0)   gap(eigsh) - res = 0.609317 >= g_cert: True   OK
+N=6 Q=15 Lz=0 dim=338 nnz=12554 ||H-H^T||(before sym)=ok
+  (i) eigsh lowest: -0.0000000000 (res 1.9e-15), 0.5857799673 (res 2.8e-15), 0.5867147601 (res 2.6e-15), 0.5998779343 (res 2.4e-15)
+  (ii) #eig < g_cert=0.5847: 1 (need 1)   (iii) #eig < 1e-6: 1 (need 1), #eig < -1e-6: 0 (need 0)   gap(eigsh) - res = 0.585780 >= g_cert: True   OK
+N=7 Q=18 Lz=0 dim=1656 nnz=99928 ||H-H^T||(before sym)=ok
+  (i) eigsh lowest: 0.0000000000 (res 2.9e-15), 0.5487487546 (res 2.5e-15), 0.5719455718 (res 5.3e-14), 0.5736147097 (res 6.5e-14)
+  (ii) #eig < g_cert=0.5477: 1 (need 1)   (iii) #eig < 1e-6: 1 (need 1), #eig < -1e-6: 0 (need 0)   gap(eigsh) - res = 0.548749 >= g_cert: True   OK
+N=8 Q=21 Lz=0 dim=8512 nnz=787164 ||H-H^T||(before sym)=ok
+  (i) eigsh lowest: 0.0000000000 (res 4.4e-15), 0.5315767947 (res 3.6e-15), 0.5423831886 (res 3.8e-15), 0.5538054369 (res 1.7e-13)
+  (ii) #eig < g_cert=0.5305: 1 (need 1)   (iii) #eig < 1e-6: 1 (need 1), #eig < -1e-6: 0 (need 0)   gap(eigsh) - res = 0.531577 >= g_cert: True   OK

@@ -1,0 +1,20 @@
+
+(a) Q=24: max |v_p(CG) - v_p(paper eq.pair)| over all p,i<j, and |norm-1| = 2.22e-16
+
+(b) Q=24 N=3: max|H_first-quantised - sum_p B_p^dag B_p| = 4.44e-16  (||H||=2.267)
+
+(c) N=3: max|H^2 - (H + W3(W3^dag W3 - I)W3^dag)| = 8.88e-16
+
+(c) N=4: relative residual of H^2 psi - (H + L3(W3(W3^dag W3-I)W3^dag) + L4(W4W4^dag)) psi, 5 random psi = 3.61e-16
+
+(d) Q=24: max_z |<hw_z, (W3^dag W3 - I) hw_z> - q_z(Q) (eq. q)| = 4.44e-16
+
+(a) Q=27: max |v_p(CG) - v_p(paper eq.pair)| over all p,i<j, and |norm-1| = 2.22e-16
+
+(b) Q=27 N=3: max|H_first-quantised - sum_p B_p^dag B_p| = 4.44e-16  (||H||=2.265)
+
+(c) N=3: max|H^2 - (H + W3(W3^dag W3 - I)W3^dag)| = 8.88e-16
+
+(c) N=4: relative residual of H^2 psi - (H + L3(W3(W3^dag W3-I)W3^dag) + L4(W4W4^dag)) psi, 5 random psi = 3.49e-16
+
+(d) Q=27: max_z |<hw_z, (W3^dag W3 - I) hw_z> - q_z(Q) (eq. q)| = 4.44e-16
