@@ -4,6 +4,9 @@
 > - The result is **conditional**. It assumes that Lemma 3.1 (rank-layer limit) of the original paper, together
 >   with its proof in Sections 4–7, holds for the 7-point complex below by the same argument after the
 >   complex-dependent constants are re-instantiated. We did not re-derive Sections 4–7 for this complex.
+>   A separate AI session audited every complex-dependent line of Sections 4–7 for K₇ and found no use of the
+>   13-point complex beyond conditions (1)–(3) and constants
+>   ([PREMISE-AUDIT.md](PREMISE-AUDIT.md)). This lowers the risk of the premise but is not a proof of it.
 > - The original 35-vertex theorem is formalised in Lean, but that formalisation is hard-coded to the
 >   13-point / 22-face complex (`Fin 13`, `Fin 22`, `Fin 33`). **Our instance carries over only at the
 >   level of the TeX argument and has no machine certificate. Its reliability is lower than the original's.**
@@ -65,6 +68,10 @@ on points. Of the 2⁶·2¹⁰ = 65 536 colour-preserving maps, exactly two are 
    ρ large, dilution with exponents ε⁷ and ε¹⁰, the crossed product, and the finite host (Prop. 3.5, Lemma 3.6).
    All of them use Lemma 3.1, hence premise (P).
 
+**Quantitative pinning margin.** An independent LP re-implementation (`certificate/pin_margin.py`) finds scores
+under which every non-automorphism homomorphism scores at least δ* = 3/22 ≈ 0.136 below the identity (scores
+normalised to [−1, 1]). The integer-rounded scores are checked exactly over all 7⁷ point maps.
+
 Lines changed relative to the original: `complex.tex` Table 1 and Prop. 2.1(4); `kernel.tex` L383–450 (the
 pinning lemma, generalised) and L454–510 (its application: one maximiser → two). The constants 13/22/66 become
 7/10/30 throughout. In the tail section, 618 → 242, 22C* → 10C*, and 1575 → 407 (note §4).
@@ -116,7 +123,7 @@ been re-run independently.
 ## Reproduce
 
 ```bash
-cd scripts && PY=python3 ./run_all.sh     # ~1-3 min, single thread; prints OK for 12 outputs
+cd scripts && PY=python3 ./run_all.sh     # ~1-3 min, single thread; prints OK for 14 outputs
 ```
 Requirements: Python 3.10 with networkx, numpy and scipy (HiGHS); a C compiler; network access for plantri.
 
@@ -126,6 +133,8 @@ Requirements: Python 3.10 with networkx, numpy and scipy (HiGHS); a C compiler; 
 | `construction/verify3.py`, `pinexact.py` | Primary checks. Enumerates the 65 536 colour-preserving maps (2 are homomorphisms) and runs exact max-score elimination over all part-preserving maps and over all homomorphisms. |
 | `construction/survey.py`, `fold1.py` | Controls: Sidorenko-by-reflection cases; the V=6 folding obstruction. |
 | `classes/invariants.py`, `stdcheck.py` | Invariants for the class table; the strong tree-decomposability first-step test. |
+| `certificate/pin_margin.py` | Independent pinning margin: LP over homomorphisms (column generation), δ* = 3/22, integer scores checked over all V^V point maps. |
+| `premise_audit/rank_layer_audit.py` | Recomputes every complex-dependent constant of Sections 4–7, for the paper's complex (calibration) and for K₇. See [PREMISE-AUDIT.md](PREMISE-AUDIT.md). |
 | `appendix_lp/r6_verify.py` | Appendix: V ≤ 10 enumeration, exact dual certificates, and the paper's 13-point complex as positive control. |
 | `numerics/wsearch*.py` | Heuristic kernel search (PyTorch, hours). **Not re-run**; logs in `expected_output/*_RECORDED.log`. |
 
@@ -150,7 +159,8 @@ independent adversarial reviews were run by separate AI sessions and are not hum
 
 ## What is NOT claimed
 
-- Not an unconditional theorem: premise (P) is assumed, and there is no Lean.
+- Not an unconditional theorem: premise (P) is assumed, and there is no Lean. The line-by-line audit in
+  PREMISE-AUDIT.md is an AI audit, not a proof.
 - Not minimality of 17/30 among all Sidorenko counterexamples. It is only the smallest instance in the relaxed
   template for which *this* argument works: V=6 #1 and V=7 #5 are undecided.
 - Not the template minimality with (4) kept, which is rohanarun's result; we only cross-check it for V ≤ 10.

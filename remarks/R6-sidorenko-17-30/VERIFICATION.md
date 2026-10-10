@@ -1,7 +1,7 @@
 # VERIFICATION — R6 (Sidorenko, conditional 17/30)
 
 All runs: 2026-10-09, CPython 3.10.12, networkx 3.4.2, scipy 1.15.3, one core.
-`scripts/run_all.sh` reproduced all 12 expected outputs (`OK` ×12, about 75 s wall time).
+`scripts/run_all.sh` reproduced all 14 expected outputs (`OK` ×14, about 95 s wall time).
 
 ## 1. Who checked what
 
@@ -15,7 +15,8 @@ All runs: 2026-10-09, CPython 3.10.12, networkx 3.4.2, scipy 1.15.3, one core.
 | Location outside known Sidorenko classes | `survey.py` (reflection test) | `invariants.py`, `stdcheck.py` (56 leaf sets, none passes) | full table incl. Conlon–Lee and Coregliano | not covered by any class checked; **Szegedy thick class undecided** |
 | Controls: V=4,5, V=6 #2, V=7 #4 Sidorenko; V=6 #1 folding; V=7 #5 inconclusive | `survey.py`, `fold1.py`, `pinexact.py` | — | V=6 and V=5 controls re-run | consistent |
 | Kernel search (69 starts) → constant kernel | — | `numerics/wsearch*.py` (logs recorded, not re-run in this build) | yes | heuristic only |
-| Premise (P): Sections 4–7 transfer to K₇ | — | — | constants re-instantiated (618→242, 22C*→10C*, 1575→407) | **assumed, not machine-checked** |
+| Generalised pinning, quantitative margin | `pinexact.py` | `certificate/pin_margin.py` (LP + integer check over all 7⁷ point maps): δ* = 3/22 | — | exact check of the rounded scores, holds |
+| Premise (P): Sections 4–7 transfer to K₇ | — | `premise_audit/rank_layer_audit.py` recomputes every complex-dependent constant; calibrated on the paper's complex | line-by-line audit (PREMISE-AUDIT.md): 21 places, none uses structure beyond (1)–(3) and constants (618→242, 1575→407, 1641→437, 44C*→20C*) | **assumed; audited, not proved or machine-checked** |
 | Appendix: with (4) kept, V ≤ 10 infeasible | `primary/` (plantri 5.5, V ≤ 12, 7881 complexes) | `appendix_lp/r6_verify.py` (plantri 5.8, dart face-tracing, Hamiltonian-cycle splits cross-checked by brute force for V ≤ 10, `Fraction` certificates) | — | V ≤ 10: 155/155 certified; V = 11, 12 primary only |
 | Positive control: the paper's 13-point complex | `primary/sidsearch` | `r6_verify.py`: (1) holds, (4) discrete, 1756 splits, paper bits admissible, t* = 1/3 feasible | — | passes |
 
@@ -50,7 +51,9 @@ Hamiltonian cycle.
 ## 5. Open gaps
 
 - **GAP-1 (main):** premise (P). Lemma 3.1 and Sections 4–7 have not been re-derived or formalised for K₇. The
-  official Lean is hard-coded to the 13/22/33 complex.
+  official Lean is hard-coded to the 13/22/33 complex. A line-by-line AI audit (PREMISE-AUDIT.md) found no
+  dependence on the 13-point complex beyond conditions (1)–(3) and constants; this narrows the gap but does not
+  close it.
 - **GAP-2:** whether H₇ lies in Szegedy's thick-graph class is not decided. A proof that H₇ is Sidorenko (by any route) would refute (P) or the argument here.
 - **GAP-3:** V = 11, 12 of the appendix (970 + 6756 complexes) rely on the primary computation only.
 - **GAP-4:** V=6 #1 and V=7 #5 are undecided. So 17/30 is the smallest size for which *this argument* works,

@@ -12,6 +12,8 @@ mkdir -p out
 # 1. main certificate for K_7 (independent of construction/ code): (1)-(3), stable colouring,
 #    Aut(H_7), generalised pinning over all homomorphisms, exact C(f)
 (cd certificate && $PY check_v7.py) > out/check_v7.txt
+(cd certificate && $PY pin_margin.py 3) > out/pin_margin_v7.txt
+(cd premise_audit && $PY rank_layer_audit.py) > out/rank_layer_audit.txt
 # 2. construction-side checks (primary code)
 (cd construction && $PY verify3.py 3)               > out/verify3.txt
 (cd construction && $PY pinexact.py 3 cands.txt 1)  > out/pinexact_v7_homs.txt
