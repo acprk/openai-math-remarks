@@ -24,7 +24,7 @@ Choice of M for a given p: take the least odd M ≥ 11 with (M−3)³ > p. That 
 
 ## Attribution
 
-The construction, the theorem and its proof are OpenAI's work: family 319, preprint `preprints/Counterexamples-to-the-Hahn-Wilson-conjecture-at-height-two-September-26-2026/` in https://github.com/openai/math (local snapshot at commit `08fcd618213aa43b0fcaff4526a8a48d66d02e55`; all line numbers below refer to `build/sections/*.tex` and `build/main.tex` at that commit). This remark only re-selects the parameters R₀, B₀, M of Proposition `op:operator` and checks that every step of the paper still goes through.
+The construction, the theorem and its proof are OpenAI's work: family 319, preprint `preprints/Counterexamples-to-the-Hahn-Wilson-conjecture-at-height-two-September-26-2026/` in https://github.com/openai/math (local snapshot at commit `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`; all line numbers below refer to `build/sections/*.tex` and `build/main.tex` at that commit). This remark only re-selects the parameters R₀, B₀, M of Proposition `op:operator` and checks that every step of the paper still goes through.
 
 Author: [AUTHOR NAME]. Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI sessions and are not human peer review.
 

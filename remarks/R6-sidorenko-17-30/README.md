@@ -149,7 +149,7 @@ plantri (G. Brinkmann, B. D. McKay et al.), Apache License 2.0, https://users.ce
 
 The original construction and proof are OpenAI's work: family 161,
 [`preprints/A-counterexample-to-Sidorenkos-conjecture-September-23-2026`](https://github.com/openai/math/tree/main/preprints/A-counterexample-to-Sidorenkos-conjecture-September-23-2026),
-[github.com/openai/math](https://github.com/openai/math) at commit `08fcd618213aa43b0fcaff4526a8a48d66d02e55`.
+[github.com/openai/math](https://github.com/openai/math) at commit `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`.
 This remark only replaces the finite complex and generalises the pinning lemma. The new mathematical content is
 small: Lemmas 3.1–3.3 of the note, essentially "C is invariant under automorphisms". We regard it as a
 parameter-level variation of the original method that crosses a template boundary.

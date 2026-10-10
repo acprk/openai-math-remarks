@@ -2,7 +2,7 @@
 
 Date: 2026-10-09. Host: Linux x86_64. Python 3.12 with python-flint 0.9.0 (Arb), numpy 2.5.3, scipy 1.18.1, mpmath 1.4.1. At most 4 single-threaded processes. No Lean was run.
 
-Pins: openai/math `adc7f1241b42e322a6451854ab7e4b4c146bf78a`. The preprint directory, `LaughlinFock.lean` and `docs/269.md` are unchanged at HEAD `08fcd618…`, and the local checkout has no modifications.
+Pins: openai/math `adc7f1241b42e322a6451854ab7e4b4c146bf78a`. The preprint directory, `LaughlinFock.lean` and `docs/269.md` are unchanged at HEAD `fd4aeeb2…`, and the local checkout has no modifications.
 
 ## Who did what
 

@@ -44,7 +44,7 @@ Against the main paper's 1600d it is ×67.97, but ×4 of that is the family's ow
 
 The original construction and proof are OpenAI's work: family 238 of
 [github.com/openai/math](https://github.com/openai/math), commit
-`08fcd618213aa43b0fcaff4526a8a48d66d02e55`, in particular
+`fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`, in particular
 `preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026/` (main paper) and
 `preprints/From-partial-permutation-information-to-Fourier-bounds-September-26-2026/` (companion; its
 Theorem 1.1, estimate (1.2), is the Hilbert–Schmidt transfer used in route H, stated there for any

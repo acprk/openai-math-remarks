@@ -54,7 +54,7 @@ python3 scripts/small_d_exact.py
 
 ## 4. Duplicate search (2026-10-09)
 
-- **openai/math (HEAD 08fcd61):** every family-238 preprint was searched for explicit constants. Found:
+- **openai/math (HEAD fd4aeeb):** every family-238 preprint was searched for explicit constants. Found:
   1600d (main paper), 2048d (*Conditional information…*), 32800d and 512d (*Random coordinate frames…*,
   Cor. 11.4), and 16,040,400d and larger (*Conditional permutations…*). The remaining siblings state only
   "an absolute number of sweeps".

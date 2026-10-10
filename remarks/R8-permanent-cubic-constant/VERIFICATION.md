@@ -33,7 +33,7 @@
   - Conjecture A\* was not written down in REPORT. The formulation in the note is ours.
 
 ## 4. Paper Prop. 7.3 vs Lean slice size; follow-up literature (added 2026-10-09)
-Sources: openai/math local checkout at `08fcd618`. The files `lean/OAI/Algebra/Determinantal/*`, `lean/ComparatorChallenges/PermanentCubic.lean` and the family-108 preprint are unchanged since `adc7f124` (`git log adc7f124..HEAD` on these paths is empty).
+Sources: openai/math local checkout at `fd4aeeb2`. The files `lean/OAI/Algebra/Determinantal/*`, `lean/ComparatorChallenges/PermanentCubic.lean` and the family-108 preprint are unchanged since `adc7f124` (`git log adc7f124..HEAD` on these paths is empty).
 
 | # | Question | Finding |
 |---|---|---|

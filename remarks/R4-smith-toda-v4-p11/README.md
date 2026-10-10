@@ -33,7 +33,7 @@ Context: the classical constructions give V(1), V(2), V(3) for p > 2, 4, 6, and 
 
 ## Attribution
 
-The construction and proof are OpenAI's work: family 308, preprint `preprints/A-finite-Smith-Toda-complex-V4-at-the-prime-1009-September-23-2026/` in https://github.com/openai/math (local snapshot at commit `08fcd618213aa43b0fcaff4526a8a48d66d02e55`; line numbers refer to `build/sections/*.tex`). This remark only (i) replaces the numerical value 1009 by a general prime p and (ii) replaces three finite inequalities by machine enumeration at p = 11, 13, 17.
+The construction and proof are OpenAI's work: family 308, preprint `preprints/A-finite-Smith-Toda-complex-V4-at-the-prime-1009-September-23-2026/` in https://github.com/openai/math (local snapshot at commit `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`; line numbers refer to `build/sections/*.tex`). This remark only (i) replaces the numerical value 1009 by a general prime p and (ii) replaces three finite inequalities by machine enumeration at p = 11, 13, 17.
 
 Author: [AUTHOR NAME]. Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI sessions and are not human peer review.
 

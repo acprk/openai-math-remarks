@@ -21,7 +21,7 @@ Within the threshold-Kneser mechanism, (86,41,13) is the smallest choice. `minN.
 
 ## Attribution
 
-The construction and proof are OpenAI's work: family 197, preprint `preprints/A-Counterexample-to-Kaplanskys-Direct-Finiteness-Conjecture-in-Odd-Characteristic-September-26-2026/` in https://github.com/openai/math (local snapshot at commit `08fcd618213aa43b0fcaff4526a8a48d66d02e55`; line numbers refer to `build/sections/*.tex` there). The graph and fitting polynomial are the threshold-Kneser specialization of Haviv and Golovnev–Haviv that the paper itself cites. This remark only changes the parameters (N, k, s) and the definition of p.
+The construction and proof are OpenAI's work: family 197, preprint `preprints/A-Counterexample-to-Kaplanskys-Direct-Finiteness-Conjecture-in-Odd-Characteristic-September-26-2026/` in https://github.com/openai/math (local snapshot at commit `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`; line numbers refer to `build/sections/*.tex` there). The graph and fitting polynomial are the threshold-Kneser specialization of Haviv and Golovnev–Haviv that the paper itself cites. This remark only changes the parameters (N, k, s) and the definition of p.
 
 Author: [AUTHOR NAME]. Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI sessions and are not human peer review.
 

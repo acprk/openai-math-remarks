@@ -35,7 +35,7 @@ The limiting gain (×1.29) comes from re-solving the preprint's SDP with a large
 
 ## Attribution
 
-The model, the Fock-space comparison method, the normal-ordered square (Lemma 2.1), the spin formulas (Lemmas 3.1–3.3), the comparison operators (eq. (F)), the Bessel step (Prop. 5.3), the tail lemma (Lemma 6.1) and the kernel lemma (Lemma 6.2) are **OpenAI's work**. They come from family 269 of [github.com/openai/math](https://github.com/openai/math), commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a` (unchanged at `08fcd618213aa43b0fcaff4526a8a48d66d02e55`):
+The model, the Fock-space comparison method, the normal-ordered square (Lemma 2.1), the spin formulas (Lemmas 3.1–3.3), the comparison operators (eq. (F)), the Bessel step (Prop. 5.3), the tail lemma (Lemma 6.1) and the kernel lemma (Lemma 6.2) are **OpenAI's work**. They come from family 269 of [github.com/openai/math](https://github.com/openai/math), commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a` (unchanged at `fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`):
 
 - [`preprints/A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026`](https://github.com/openai/math/tree/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/A-Fock-space-inequality-and-the-Laughlin-spectral-gap-September-24-2026) (`build/sections/0[1-8]-*.tex`)
 - `lean/ComparatorChallenges/LaughlinFock.lean` (`thm_fock`, `sorry` in the challenge file) and `lean/docs/269.md`
