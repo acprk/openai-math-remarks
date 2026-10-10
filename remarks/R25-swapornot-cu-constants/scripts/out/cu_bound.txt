@@ -1,0 +1,20 @@
+u=1: exact region m<=55: sup at m*=6, Z in [3.2847222222, 3.2847222223]
+  DP/recursion region 55<m<=400: max bound 2.039271 at m=56; value at M1: 2.005063
+  tail check (K1=2, M1=400): T(M1) <= 2.054831 vs C=3.2848: OK  [S1=0.0025, G1=7.58e-3, G2=2.29e-10]
+RESULT u=1: C_u <= 3.2848  (exact-region sup 3.284722 at m=6; sup attained in exact region); tail proved
+u=1/2: exact region m<=55: sup at m*=8, Z in [5.9061465497, 5.9061465498]
+  DP/recursion region 55<m<=400: max bound 2.428254 at m=56; value at M1: 2.116374
+  tail check (K1=4, M1=400): T(M1) <= 2.280570 vs C=5.9062: OK  [S1=0.0581, G1=1.39e-2, G2=2.92e-5]
+RESULT u=1/2: C_u <= 5.9062  (exact-region sup 5.906147 at m=8; sup attained in exact region); tail proved
+u=3/10: exact region m<=55: sup at m*=14, Z in [13.0732169915, 13.0732169916]
+  DP/recursion region 55<m<=400: max bound 3.871009 at m=56; value at M1: 2.554528
+  tail check (K1=7, M1=400): T(M1) <= 3.083811 vs C=13.0733: OK  [S1=0.2681, G1=1.69e-2, G2=4.04e-3]
+RESULT u=3/10: C_u <= 13.0733  (exact-region sup 13.073217 at m=14; sup attained in exact region); tail proved
+u=1/5: exact region m<=55: sup at m*=22, Z in [34.5870288005, 34.5870288006]
+  DP/recursion region 55<m<=400: max bound 11.561959 at m=56; value at M1: 3.940681
+  tail check (K1=10, M1=400): T(M1) <= 10.322035 vs C=34.5871: OK  [S1=0.7802, G1=4.26e-2, G2=5.51e-2]
+RESULT u=1/5: C_u <= 34.5871  (exact-region sup 34.587029 at m=22; sup attained in exact region); tail proved
+u=3/20: exact region m<=55: sup at m*=30, Z in [89.3331732895, 89.3331732896]
+  DP/recursion region 55<m<=1000: max bound 69.593086 at m=56; value at M1: 4.364984
+  tail check (K1=14, M1=1000): T(M1) <= 10.822273 vs C=89.3332: OK  [S1=1.1069, G1=1.67e-2, G2=2.03e-2]
+RESULT u=3/20: C_u <= 89.3332  (exact-region sup 89.333173 at m=30; sup attained in exact region); tail proved

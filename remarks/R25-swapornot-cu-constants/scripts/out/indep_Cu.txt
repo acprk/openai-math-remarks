@@ -1,0 +1,48 @@
+exact region: all partitions of m <= 50 enumerated (1295970 shapes), counts = p(m) and sum f^2 = m! checked for every m
+exact rational check: Z_1(6) = 473/144  (== 473/144: True)
+Lemma B unit test (all lambda |- m <= 24, exact rationals): identity holds; 7313 shapes, 0 violations
+
+== u = 1  (M0=50, ME=120, M1=600)
+  exact region: sup over m<=50 at m*=6: Z_u(m*) in [3.2847222222, 3.2847222223]; next largest m<=50 <= 3.166667
+  DP region 50<m<=120: max bound 2.043553 at m=51
+  1-D region 120<m<=600: max bound 2.017246 at m=121; bound at M1: 2.003361
+  weight spot-check vs mpmath.iv: 153 samples, 0 violations
+  tail (Lemma T, K=17, tau=1/10): T(M1) <= 2.003361 vs C = 3.2848: OK  [A=0.0017, (b)=1.46e-31, (c1)=1.29e-09, (c2)=8.12e-21]
+  RESULT u=1: C_u = Z_u(6) in [3.2847222222, 3.2847222223]  (VERIFIED)
+
+== u = 1/2  (M0=50, ME=120, M1=600)
+  exact region: sup over m<=50 at m*=8: Z_u(m*) in [5.9061465497, 5.9061465498]; next largest m<=50 <= 5.842071
+  DP region 50<m<=120: max bound 2.462676 at m=51
+  1-D region 120<m<=600: max bound 2.336627 at m=141; bound at M1: 2.092386
+  weight spot-check vs mpmath.iv: 153 samples, 0 violations
+  tail (Lemma T, K=44, tau=1/10): T(M1) <= 2.093084 vs C = 5.9062: OK  [A=0.0461, (b)=1.54e-31, (c1)=7.52e-05, (c2)=2.21e-09]
+  RESULT u=1/2: C_u = Z_u(8) in [5.9061465497, 5.9061465498]  (VERIFIED)
+
+== u = 3/10  (M0=50, ME=150, M1=600)
+  exact region: sup over m<=50 at m*=14: Z_u(m*) in [13.0732169915, 13.0732169916]; next largest m<=50 <= 12.924468
+  DP region 50<m<=150: max bound 4.053970 at m=51
+  1-D region 150<m<=600: max bound 3.857438 at m=196; bound at M1: 2.473102
+  weight spot-check vs mpmath.iv: 242 samples, 0 violations
+  tail (Lemma T, K=50, tau=1/10): T(M1) <= 2.646706 vs C = 13.0733: OK  [A=0.2225, (b)=1.53e-19, (c1)=7.63e-03, (c2)=8.27e-05]
+  RESULT u=3/10: C_u = Z_u(14) in [13.0732169915, 13.0732169916]  (VERIFIED)
+
+== u = 1/5  (M0=50, ME=250, M1=1000)
+  exact region: sup over m<=50 at m*=22: Z_u(m*) in [34.5870288005, 34.5870288006]; next largest m<=50 <= 34.332276
+  DP region 50<m<=250: max bound 11.753292 at m=51
+  1-D region 250<m<=1000: max bound 8.059078 at m=324; bound at M1: 3.162930
+  weight spot-check vs mpmath.iv: 691 samples, 0 violations
+  tail (Lemma T, K=50, tau=1/10): T(M1) <= 4.725881 vs C = 34.5871: OK  [A=0.5239, (b)=7.93e-14, (c1)=2.42e-02, (c2)=1.43e-05]
+  RESULT u=1/5: C_u = Z_u(22) in [34.5870288005, 34.5870288006]  (VERIFIED)
+
+== u = 3/20  (M0=50, ME=300, M1=1000)
+  exact region: sup over m<=50 at m*=30: Z_u(m*) in [89.3331732895, 89.3331732896]; next largest m<=50 <= 89.241495
+  DP region 50<m<=300: max bound 52.276652 at m=51
+  1-D region 300<m<=1000: max bound 46.623290 at m=441; bound at M1: 5.305362
+  weight spot-check vs mpmath.iv: 949 samples, 0 violations
+  tail (Lemma T, K=50, tau=1/10): T(M1) <= 26.745931 vs C = 89.3332: OK  [A=1.1082, (b)=4.00e-09, (c1)=1.25e-01, (c2)=1.30e-03]
+  RESULT u=3/20: C_u = Z_u(30) in [89.3331732895, 89.3331732896]  (VERIFIED)
+
+== u = 1/10: lower bound only: max_m<=50 Z(m) at m=50: Z in [562.0737331731, 562.0737331732]  => C_(1/10) >= 562.0737
+
+SUMMARY: u=1: m*=6 ok, u=1/2: m*=8 ok, u=3/10: m*=14 ok, u=1/5: m*=22 ok, u=3/20: m*=30 ok
+ALL VERIFIED

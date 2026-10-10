@@ -1,0 +1,4 @@
+e* > 3.03456: True;  e* > 3.03457: False
+198*log2(32/31) > 8: True
+198*log2(32/31) > 9: True
+=> eps_n = Theta(n^(-e*)), e* in (3.03456, 3.03457); stated exponent 5/2 is not sharp

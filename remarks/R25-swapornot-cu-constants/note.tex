@@ -1,0 +1,244 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Cat}{\mathrm{Cat}}
+
+\title[Exact reciprocal-degree constants in family 238]{The reciprocal-degree constants $C_u$ of the
+Thorp-shuffle transfer (openai/math family 238): exact values, and the exponent of $\varepsilon_n$}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+Family 238 of the openai/math repository proves optimal-order mixing of the Thorp shuffle. Its
+coset-to-Fourier transfer has the constant
+$C_u=\sup_{m\ge1}\sum_{\lambda\vdash m}f_\lambda^{-u}$, where $f_\lambda$ is the degree of the Specht module.
+The family proves only $C_u<\infty$. We determine $C_u$ exactly for $u\in\{1,\tfrac12,\tfrac3{10},\tfrac15,\tfrac3{20}\}$:
+the supremum is attained at $m=6,8,14,22,30$, and $C_1=473/144$. The proofs are computer-assisted, and
+each is carried out twice by two different methods. We also note that the main paper's
+$\varepsilon_n=O(n^{-5/2})$ is in fact $\Theta(n^{-e^*})$ with $e^*=99\log_2(32/31)-\frac32=3.03456\ldots$. Both results are bookkeeping: they fill in
+constants that the original arguments leave implicit and add no new technique.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+For $\lambda\vdash m$ let $f_\lambda$ be the number of standard Young tableaux of shape $\lambda$, and put
+\[Z_u(m)=\sum_{\lambda\vdash m}f_\lambda^{-u},\qquad C_u=\sup_{m\ge1}Z_u(m)\qquad(u>0).\]
+This is the constant of \cite[degrees.tex, eq.~(l:degree-all-powers-equation); introduction.tex l.~14]{oai-transfer}.
+It is also the constant $C_1$ of \cite[main.tex l.~420--424, Lemma \texttt{lem:reciprocal-degrees}]{oai-thorp}, and the constant $C_\sigma$ of
+remark R5 of this collection. Liebeck--Shalev \cite{LS04} and Gamburd \cite{Gam06} show $Z_u(m)\to2$, so
+$C_u<\infty$, but no value is given there or in family~238.
+
+\begin{theorem}\label{thm:main}
+The supremum $C_u$ is attained, at the $m^*$ below, and
+\[
+\begin{array}{c|ccccc}
+u & 1 & 1/2 & 3/10 & 1/5 & 3/20\\\hline
+m^* & 6 & 8 & 14 & 22 & 30\\
+C_u=Z_u(m^*) & \tfrac{473}{144} & 5.90614654\ldots & 13.07321699\ldots & 34.58702880\ldots & 89.33317328\ldots
+\end{array}
+\]
+Each value is enclosed in an interval of width $<10^{-10}$; see \S\ref{sec:cert}.
+In addition, $C_{1/10}\ge Z_{1/10}(50)>562.0737$.
+\end{theorem}
+
+\begin{corollary}
+In \cite[Prop.~6.1, eq.~(h-12)]{oai-thorp}, $A=\sqrt{32C_1}=\sqrt{946}/3=10.2524\ldots$. In the transfer
+bounds $\|\hat f(\rho)\|_{\mathrm{HS}}^2\le bBC_uD^{-1+(u+2)/b}$ of \cite[Thm.~1.1]{oai-transfer}, the
+displayed values of $C_u$ may be substituted for $u\in\{1,\frac12,\frac3{10},\frac15,\frac3{20}\}$.
+\end{corollary}
+
+\begin{remark}[Growth as $u\to0$]
+We have $\sum_\lambda f_\lambda^2=m!$, so $f_\lambda\le\sqrt{m!}$ and $C_u\ge\max_m p(m)(m!)^{-u/2}$. Using
+$\log p(m)\sim\pi\sqrt{2m/3}$ and Stirling's formula, this gives
+$\log C_u\ge(\pi^2/6+o(1))/(u\log(1/u))$. Hence $C_u$ is not polynomial in $1/u$. We claim no matching
+upper bound.
+\end{remark}
+
+\begin{proposition}[$\varepsilon_n$]\label{prop:eps}
+The quantity $\varepsilon_n=\frac{n^{3/2}}2\sqrt{(31/32)^{198d}+32e^{-n/256}}$, $n=2^d$, of
+\cite[main.tex l.~381--389, eq.~(h-8)]{oai-thorp} satisfies, for every $d\ge15$,
+\[\tfrac12n^{-e^*}\le\varepsilon_n\le\tfrac{\sqrt2}{2}n^{-e^*},\qquad e^*=99\log_2(32/31)-\tfrac32\in(3.03456,3.03457).\]
+The paper states $O(n^{-5/2})$. That bound comes from replacing $198\log_2(32/31)=9.0691\ldots$ by $8$
+(l.~401).
+\end{proposition}
+\begin{proof}
+We have $(31/32)^{198d}=n^{-198\log_2(32/31)}$. For $d\ge15$ the second term under the root is the smaller
+one; this is certified for $15\le d\le199$, and beyond that $n/256$ grows faster than $d$. The bounds on
+$e^*$ are certified twice: by interval arithmetic, and by exact integer comparisons
+$2^{495q-p}\gtrless31^{99q}$ (scripts \texttt{eps\_n\_exponent.py} and \texttt{independent/indep\_eps.py}).
+\end{proof}
+The sharper exponent has no effect on the theorems of \cite{oai-thorp}, which only use $\varepsilon_n\to0$.
+
+\section{Route A (primary computation)}
+\begin{lemma}[Ballot peeling]\label{lem:A}
+Let $\lambda=(L,\mu)\vdash m$, $k=m-L$ and $j=\min(k,L)$. Then $f_\lambda\ge f_\mu f_{(L,j)}$. Moreover
+$f_{(L,j)}=\binom mk\frac{m-2k+1}{m-k+1}$ if $k\le L$, and $f_{(L,j)}=\Cat(L)$ if $k\ge L$.
+\end{lemma}
+\begin{proof}[Sketch]
+Merge a standard tableau $T$ of $\mu$ with a word $w$ in $L$ letters $\mathsf U$ and $k$ letters $\mathsf D$. The
+$i$-th $\mathsf D$ receives the label of the box of $T$ that contains $i$. If the $i$-th $\mathsf D$ follows the
+$\min(i,L)$-th $\mathsf U$, the result is standard for every $T$, because the box containing $i$ lies in column
+$\le\min(i,L)$. Different pairs $(T,w)$ give different tableaux. The admissible words are counted by the
+ballot numbers.
+\end{proof}
+Route A uses the following inputs:
+\begin{itemize}
+\item exact enumeration for $m\le55$, with the hook formula and MPFI intervals;
+\item a three-index recursion over (size, first row, number of rows) for $55<m\le M_E$, using Lemma~\ref{lem:A}
+and conjugation symmetry, in IEEE double arithmetic inflated by $1+2^{-40}$ per stage;
+\item a one-dimensional recursion
+$Z_u(m)\le2\bigl(1+\sum_{L\ge\lceil\sqrt m\rceil}f_{(L,\min(k,L))}^{-u}R_u(m-L,L)\bigr)$ up to $M_1$;
+\item an analytic tail for $m>M_1$: the terms are bounded by $Z_u(k)$ for $k\le K$, by
+$C\bigl((m+1)/\binom m{K+1}\bigr)^u$ for $K<k\le m/2$ (at most $m/2$ terms; Lemma~\ref{lem:A} gives $f_{(L,k)}\ge\binom mk/(k+1)$), and by a geometric series in $\Cat(L)$ for $k>m/2$.
+\end{itemize}
+The parameters $(M_E,M_1,K)$ are $(120,400,\lceil2/u\rceil)$ for $u\ge\frac15$ and $(200,1000,14)$ for
+$u=\frac3{20}$. Every majorant for $m>55$ is below $Z_u(m^*)$; the largest is $69.59$ at $m=56$, for
+$u=\frac3{20}$. The output is in \texttt{scripts/expected\_output/cu\_bound.txt}.
+
+\section{Route B (independent re-verification)}\label{sec:B}
+Route B was written separately and shares no code with route A. It also uses a different peeling inequality
+and a different tail. The overall architecture (exact region, conjugation-symmetric three-index recursion,
+oriented one-dimensional recursion, tail) is the same elementary one as in route A.
+
+\begin{lemma}[First-row identity and bound]\label{lem:B}
+Let $\lambda=(L,\mu)\vdash m$, $k=m-L\ge1$, $b=\mu_1$, and let $\mu'_j$ be the column lengths of $\mu$. Then
+\[f_\lambda=\binom mk\frac{f_\mu}{\Pi},\qquad \Pi=\prod_{j=1}^{b}\Bigl(1+\frac{\mu'_j}{L-j+1}\Bigr),\]
+and
+\[\Pi\le\Bigl(1+\frac{k(H_L-H_{L-b})}{b^2}\Bigr)^b\le\min\Bigl\{\Bigl(\frac mL\Bigr)^L,\ \exp\frac{k}{L-\min(k,L)+1}\Bigr\}.\]
+\end{lemma}
+\begin{proof}
+\emph{Identity.} The hooks of the boxes below the first row are the hooks of $\mu$. The box $(1,j)$ has
+hook $L-j+1+\mu'_j$, where $\mu'_j=0$ for $j>b$. So the hook formula gives
+$f_\lambda=\frac{m!}{k!}f_\mu/\prod_{j\le L}(L-j+1+\mu'_j)$, and this product equals $L!\,\Pi$.
+
+\emph{First bound.} By AM--GM,
+$\Pi\le\bigl(1+\frac1b\sum_j\mu'_jw_j\bigr)^b$ with $w_j=1/(L-j+1)$. The sequence $(\mu'_j)$ is
+nonincreasing and $(w_j)$ is nondecreasing, so Chebyshev's sum inequality gives
+$\sum_j\mu'_jw_j\le\frac1b\bigl(\sum_j\mu'_j\bigr)\bigl(\sum_{j\le b}w_j\bigr)=\frac kb(H_L-H_{L-b})$.
+
+\emph{Second bound.} Since $H_L-H_{L-b}\le b/(L-b+1)$, the middle term is at most
+$(1+\frac{k}{b(L-b+1)})^b$.
+\begin{itemize}
+\item This is at most $e^{k/(L-b+1)}$, and $b\le\min(k,L)$.
+\item It is also at most $(1+k/b)^b$. The function $t\mapsto t\log(1+k/t)$ is increasing, so this is at most
+$(1+k/L)^L=(m/L)^L$.\qedhere
+\end{itemize}
+\end{proof}
+
+Write $E_u(k,a,c)$ for the sum of $f^{-u}$ over $\lambda\vdash k$ with $\lambda_1=a$ and $\ell(\lambda)=c$. Then
+$E_u(k,a,c)=E_u(k,c,a)$. For $a\ge c\ge2$, Lemma~\ref{lem:B} gives
+\begin{equation}\label{eq:dpB}
+E_u(k,a,c)\le\binom ka^{-u}\sum_{b\le\min(a,k-a)}\Bigl(1+\frac{(k-a)(H_a-H_{a-b})}{b^2}\Bigr)^{ub}E_u(k-a,b,c-1).
+\end{equation}
+Orient $\lambda$ so that $L=\lambda_1\ge\ell(\lambda)$; then $L\ge\lceil\sqrt m\rceil$. This gives
+\begin{equation}\label{eq:1dB}
+Z_u(m)\le2\Bigl(1+\sum_{L=\lceil\sqrt m\rceil}^{m-1}\binom mL^{-u}\Pi^*(m,L)^u\,R_u(m-L,L)\Bigr).
+\end{equation}
+Here $\Pi^*$ is the minimum in Lemma~\ref{lem:B}, and
+$R_u(k,L)=\sum\{f_\mu^{-u}:\mu\vdash k,\ \mu_1\le L,\ \ell(\mu)\le L-1\}\le Z_u(k)$.
+
+\begin{lemma}[Tail, route B]\label{lem:T}
+Let $u>0$ and $0<\tau<2/3$. Let $M,K$ be integers with $u(K+1)\ge1+1/M$ and $3K\le M$. Put
+\begin{gather*}
+\kappa=1-\tau/2-\tau^2/2,\qquad c_\tau=\min\{(1-\tau)\log\tfrac1{1-\tau},\ \tfrac13\log3\},\qquad s_m=\lceil\sqrt m\rceil,\\
+h(x)=(8x)^{u/2}e^{-u\kappa x},\qquad \rho_s=(1+1/s)^{u/2}e^{-u\kappa}.
+\end{gather*}
+Assume $\rho_{s_M}<1$ and $M\ge(1+u/2)/(uc_\tau)$. For $m\ge M$ let
+\[T(m)=2\Bigl[1+\sum_{k=1}^{K}\binom mk^{-u}e^{\frac{uk}{m-2k+1}}Z_u(k)+Ce^u\frac m3\binom m{K+1}^{-u}
++C\Bigl(\frac{h(s_m)}{1-\rho_{s_m}}+m(8m)^{u/2}e^{-uc_\tau m}\Bigr)\Bigr].\]
+If $Z_u(k)\le C$ for all $k<M$ and $T(M)\le C$, then $Z_u(m)\le T(M)$ for all $m\ge M$.
+\end{lemma}
+\begin{proof}
+We induct on $m$. Apply \eqref{eq:1dB} with $R_u\le Z_u(k)\le C$, where $k=m-L$, and split into three ranges.
+
+\emph{(a) $k\le K$.} Here $k\le m/3$, so $k\le L$. Lemma~\ref{lem:B} gives $\Pi\le e^{k/(m-2k+1)}$.
+
+\emph{(b) $K<k\le m/3$.} Here $m-2k+1>k$, so $\Pi\le e$. Also $\binom mk\ge\binom m{K+1}$, and there are at
+most $m/3$ such terms.
+
+\emph{(c) $k>m/3$, i.e.\ $s_m\le L<2m/3$.} Lemma~\ref{lem:B} gives $\Pi\le(m/L)^L$. Robbins' bound
+$\binom mL\ge(8L(m-L)/m)^{-1/2}e^{mH(L/m)}$ \cite[Ch.~10, Lemma~7]{MS77} then gives
+$\binom mL(L/m)^L\ge(8L)^{-1/2}e^{g(L)}$, where $g(L)=(m-L)\log\frac m{m-L}$.
+\begin{itemize}
+\item For $L\le\tau m$: from $-\log(1-t)\ge t+t^2/2$ we get $g(L)\ge\kappa L$. The terms are $\le Ch(L)$, and
+$h(L+1)/h(L)\le\rho_{s_m}$, so their sum is at most $Ch(s_m)/(1-\rho_{s_m})$.
+\item For $\tau m<L<2m/3$: $g/m$ is concave in $t=L/m$, so $g\ge c_\tau m$. There are fewer than $m$ terms.
+\end{itemize}
+Hence $Z_u(m)\le T(m)$.
+
+It remains to show that $T$ is nonincreasing in $m\ge M$. Range (a) is clear. Range (b): the ratio of
+consecutive values is at most $\exp(1/m-u(K+1)/(m+1))\le1$. Range (c), first piece: it is monotone in $s_m$,
+and $h$ is decreasing. Range (c), second piece: the logarithmic derivative is
+$(1+u/2)/m-uc_\tau\le0$. So $Z_u(m)\le T(m)\le T(M)\le C$.
+\end{proof}
+
+\section{Certificates}\label{sec:cert}
+
+\subsection*{Route B arithmetic}
+\begin{itemize}
+\item \emph{Exact region $m\le50$.} We enumerate the partitions and compute $f_\lambda$ by the branching rule.
+The counts are checked against Euler's recurrence for $p(m)$, and $\sum f^2=m!$ is checked.
+\item For $u=p/q$, each $f^{-u}$ is enclosed between exact integer $q$-th roots
+$\lfloor(2^{80q}/f^p)^{1/q}\rfloor$ and $\lceil\cdot\rceil$, divided by $2^{80}$. The enclosures are summed as
+integers. No floating point and no MPFR are used here.
+\item \emph{Recursions.} \eqref{eq:dpB} is run up to $M_E$ and \eqref{eq:1dB} up to $M_1$. Arithmetic is IEEE
+double; every weight and every stage is inflated by $1+2^{-30}$ ($\ln$ of the factor $\approx9.3\cdot10^{-10}$). The tables of $\ln n!$ and $H_n$ are computed at 40 digits, so the remaining error in a log-weight is a few ulp of numbers $\le700$, i.e.\ $\lesssim5\cdot10^{-13}$, and the margin is $>10^3$. This step assumes IEEE-754 arithmetic and NumPy/libm \texttt{exp}, \texttt{log}, \texttt{log1p} accurate to a few ulp; it is not a formal interval computation (route A's weights are MPFI). A random sample of 2188 weights was recomputed in \texttt{mpmath.iv}, with
+0 violations.
+\item \emph{Tail.} Lemma~\ref{lem:T} is evaluated in \texttt{mpmath.iv}. The constant $C$ is $Z_u(m^*)$
+rounded up at the 4th decimal.
+\end{itemize}
+
+\subsection*{Results}
+\begin{center}
+\begin{tabular}{c|cc|cc|cc}
+\toprule
+& \multicolumn{2}{c|}{max bound, $m>55$ (A)} & \multicolumn{2}{c|}{max bound, $m>50$ (B)} & $T(M_1)$ (A) & $T(M_1)$ (B)\\
+$u$ & value & at $m$ & value & at $m$ & & \\\midrule
+$1$ & 2.0393 & 56 & 2.0436 & 51 & 2.055 & 2.004\\
+$1/2$ & 2.4283 & 56 & 2.4627 & 51 & 2.281 & 2.094\\
+$3/10$ & 3.8710 & 56 & 4.0540 & 51 & 3.084 & 2.647\\
+$1/5$ & 11.562 & 56 & 11.753 & 51 & 10.322 & 4.726\\
+$3/20$ & 69.593 & 56 & 52.277 & 51 & 10.83 & 26.75\\\bottomrule
+\end{tabular}
+\end{center}
+Route B parameters $(M_E,M_1)$ are $(120,600)$, $(120,600)$, $(150,600)$, $(250,1000)$, $(300,1000)$. In
+the tail the script takes the best of $\tau\in\{\frac1{20},\frac1{10},\frac15,\frac3{10}\}$ and $K\le50$; it selects $\tau=\frac1{10}$ throughout and $K=17,44,50,50,50$. In both routes every bound for $m\ne m^*$ is strictly below the lower
+endpoint of the enclosure of $Z_u(m^*)$, and the two routes give identical enclosures of $Z_u(m^*)$.
+
+\begin{remark}[Not covered]
+For $u=1/10$, route A gives $C_{1/10}\le1267.27$ (with $M_E=450$, $M_1=2500$). This upper bound is not sharp
+and was not re-verified by route B: the unconstrained one-dimensional step loses too much at
+$M_E\le400$. We do not claim it. Only the lower bound $C_{1/10}>562.0737$ is confirmed by both routes.
+\end{remark}
+
+\section{Context and triviality}
+These constants were computed for an internal project, ``H-1'': full-domain CCA security of swap-or-not
+\cite{HMR12} in $O(\log N+\lambda)$ fixed rounds, obtained via the transfer of \cite{oai-transfer}. An
+internal audit showed that the asymptotic H-1 statement follows in a few lines from the family's own
+corollary (``$7n/8$-label error $o(1)$ $\Rightarrow\mu*\mu\to U$''), HMR's Theorem~3, and submultiplicativity
+of total variation. The explicit constants improve that trivial route only by a factor of 3--5. We
+therefore make no claim about swap-or-not here. What remains is a computation of constants that the
+family leaves as ``finite''.
+
+\begin{thebibliography}{9}
+\bibitem{oai-thorp} OpenAI, \emph{Optimal-order mixing of the Thorp shuffle}, openai/math family 238,
+\url{https://github.com/openai/math}, commit \texttt{fd4aeeb2ee4f}, 2026.
+\bibitem{oai-transfer} OpenAI, \emph{From partial permutation information to Fourier bounds}, openai/math family 238, same commit.
+\bibitem{LS04} M.~W. Liebeck and A.~Shalev, Fuchsian groups, coverings of Riemann surfaces, subgroup growth,
+random quotients and random walks, \emph{J. Algebra} 276 (2004), 552--601.
+\bibitem{Gam06} A.~Gamburd, Poisson--Dirichlet distribution for random Belyi surfaces, \emph{Ann. Probab.} 34 (2006), 1827--1848.
+\bibitem{MS77} F.~J. MacWilliams and N.~J.~A. Sloane, \emph{The Theory of Error-Correcting Codes}, North-Holland, 1977.
+\bibitem{HMR12} V.~T. Hoang, B.~Morris, P.~Rogaway, An enciphering scheme based on a card shuffle, CRYPTO 2012.
+\end{thebibliography}
+
+\medskip\noindent\emph{Acknowledgement.} Developed with AI assistance (Anthropic Claude, Opus 5.5) under
+[AUTHOR NAME]'s direction. Independent adversarial reviews were run by separate AI sessions; they are not human
+peer review.
+\end{document}
