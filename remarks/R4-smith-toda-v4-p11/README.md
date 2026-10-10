@@ -87,6 +87,7 @@ for p in 19 23 29 31 37 41 43 47; do /usr/bin/python3 main/may308.py $p | tail -
 ## What is NOT claimed
 
 * **We do not claim that OpenAI's p = 1009 proof is correct.** We did not re-verify the homotopy theory (§3 adjusted-filtration injectivity, §4 Frobenius left-hand side, §5 extension of powers, appendix pairing). The remark transfers whatever that proof establishes to all p ≥ 11.
+* The §4 Frobenius vanishing (rows k = 2 and k = p−1) was checked by computing the actual Ext over the reduced-power algebra only at p = 5 and p = 7, where both rows are 0 (VERIFICATION.md, layer 5). At p = 11 only the finite tables are checked.
 * The nonexistence at p = 2, 3, 5, 7 is taken from the literature: Toda, Ravenel Thm 7.6.1, Nave Thm 1.2/1.3. The one exception is the p = 2 lemma, which is our own half-page argument and has not been checked by a human. Toda 1971 itself was not retrieved; its p = 2 and p = 3 statements are cited through Nave 2010 (p. 493) and Ravenel (§1.3). At p = 7 our enumeration also shows that the mechanism of the manuscript fails, consistent with Nave.
 * We do not claim a ring structure on V(4). (The original does not either.)
 * "Verbatim" means: the same sequence of lemmas, with the numerical instantiation replaced by the symbolic one. At p = 11, 13, 17 three sub-arguments are replaced by finite machine checks. Those checks are exact enumerations, cross-validated by two independent implementations (direct recursion and DP; z3 and DP).

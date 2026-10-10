@@ -17,7 +17,7 @@ All constructions and main arguments discussed here are **OpenAI's work**. Each 
 |---|---|---|---|---|
 | R1 | 170 | [r(4,t) = t³/(log t)^{2+o(1)}](remarks/R1-ramsey-r4t/): OpenAI's existing Lean proof already covers s = 4 | consequence + Lean (`main_four`) | Lean kernel replay; adversarial review |
 | R3 | 197 | [Odd-characteristic Kaplansky counterexample made explicit](remarks/R3-kaplansky-odd-explicit/): m ≈ 10^360 → 6·10^24, explicit 25-digit prime | explicit parameters | independent re-implementation; adversarial review |
-| R4 | 308 | [Smith–Toda V(4) exists if and only if p ≥ 11](remarks/R4-smith-toda-v4-p11/) ("only if" unconditional; "if" conditional on the p = 1009 manuscript) | explicit parameters | two independent enumerations; adversarial review |
+| R4 | 308 | [Smith–Toda V(4) exists if and only if p ≥ 11](remarks/R4-smith-toda-v4-p11/) ("only if" unconditional; "if" conditional on the p = 1009 manuscript) | explicit parameters | two independent enumerations; adversarial review; actual Ext at p = 5, 7 |
 | R5 | 238 | [Thorp shuffle: 1600d → 24d](remarks/R5-thorp-24d/) (45d from the main paper alone) | constant | interval certificates (twice); adversarial review |
 | R6 | 161 | [A Sidorenko counterexample with 17 vertices and 30 edges](remarks/R6-sidorenko-17-30/) (conditional; premise audited line by line; original 35/66) | smaller counterexample | exact pinning enumeration; adversarial review |
 | R7 | 319 | [Hahn–Wilson counterexamples for every prime p ≥ 293](remarks/R7-hahn-wilson-p293/) (was 17,073,437) | explicit parameters | stage enumeration at p = 293; adversarial review |

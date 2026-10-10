@@ -83,9 +83,27 @@ Note: Nave 2010 also states that Theorem 1.3 is "the best result possible using 
 
 The hits were only the two openai/math READMEs, an overlap index (mrconter1/vibemathed), and generic conjecture lists (The-Last-Math-Competition 00000004934: "for sufficiently large primes all exist", no bound). The OpenAI p = 1009 introduction says only that Nave's obstructions "leave room for V(4) at a sufficiently large prime" (00-introduction.tex L37–40).
 
+## Layer 5: actual Ext, bypassing §4 (2026-10-09). Verdict: **§4 conclusion confirmed at p = 5 and p = 7; not computed at p = 11**
+
+Layers 1–3 check only the May E₁ page, which is an upper bound. At k = 2 and k = p−1 the E₁ page is non-empty, and the manuscript removes these rows with the §4 Frobenius-kernel argument (`frob:k2`, `frob:kpminus1`). We computed the actual cohomology directly, by a minimal resolution over the reduced-power algebra P, using the `ext` crate of spectralsequences/sseq. This calculation does not use the manuscript's argument. Program and build instructions: `scripts/ext/`.
+
+dim Ext_P^{s,w} at the v₄-target bidegrees (s, w) = (qk+1, u₄+k):
+
+| p | k = 1 | k = 2 | k = 3 … p−2 | k = p−1 | k = p | run |
+|---|---|---|---|---|---|---|
+| 5 | 1 | **0** | 0 | **0** | 2 | ~10 s |
+| 7 | 1 | **0** | 0, 0, 0 | **0** | 1 | 4662 s, 9.3 GB |
+
+* At p = 5 and p = 7, the two rows that §4 must kill have actual cohomology 0. The intermediate rows are 0 as well, which agrees with the E₁ emptiness.
+* k = 1 has dimension 1. The E₁ page has two monomials, acb and acybz, and acb is not a d₁-cycle (layer 2). The manuscript removes the surviving class with the v₅ relation and an injectivity argument, which we did not check here.
+* k = p is non-zero. The manuscript handles it topologically (§5), not by vanishing.
+* p = 7 is below the range of the theorem: there the construction already fails at the V(3) product (layer 1). The point is that the §4 algebra contains no hidden "p large" input, at least at p = 5 and 7.
+* Sanity checks: h₁₀, h₁₁, b₁₀ and b₁₁ have dimension 1, and h₁₀² = 0. The p = 5 numbers agree between this sseq commit and a later one.
+* **p = 11 was not completed in time for this record.** For the k = 2 row (s = 41, w = 1466), probes at s ≤ 41 took 18.6 s (w ≤ 150), 50 s (w ≤ 300) and 2094 s / 3.4 GB (w ≤ 600), which extrapolates to roughly three days on 8 threads. The k = p−1 row (s = 201) is out of reach with this method on our hardware. At p = 11, §4 is therefore supported only by the finite tables (check (D), layers 1–2) and by the uniform behaviour at p = 5, 7.
+
 ## GAPs
 
-1. **The correctness of the p = 1009 manuscript itself is not verified.** That covers §3 adjusted-filtration injectivity, §4 Frobenius left-hand side, §5 extension of powers, and the appendix pairing. The value of the remark rests entirely on it.
+1. **The correctness of the p = 1009 manuscript itself is not verified.** That covers §3 adjusted-filtration injectivity, §4 Frobenius left-hand side, §5 extension of powers, and the appendix pairing. The value of the remark rests entirely on it. Layer 5 checks the *conclusion* of §4 by direct computation at p = 5 and p = 7 only; it does not check §4 at p = 11 or p = 1009, and it says nothing about §3, §5 or the appendix.
 2. "All p-dependent steps are listed" rests on human-style reading by one adversarial reviewer plus grep. There was no second reviewer for this specific point.
 3. Nonexistence at p = 3 rests on Toda 1971, cited through Nave 2010 and Ravenel; the original was not retrieved and its theorem numbers are unchecked. Nonexistence at p = 5 rests on Ravenel's Theorem 7.6.1 computation, which is published but was not re-derived here.
 4. Policy note: by the project's internal criterion this is a parameter generalisation of the original argument. It is reported under the T-OPT (constant/threshold optimisation) heading.

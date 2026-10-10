@@ -1,0 +1,15 @@
+resolved through s=86, t=4896 in 4662.401259566s
+sanity Ext^(1,w=1) = 1
+sanity Ext^(1,w=7) = 1
+sanity Ext^(2,w=7) = 1
+sanity Ext^(2,w=49) = 1
+sanity Ext^(1,w=8) = 0
+sanity Ext^(2,w=2) = 0
+Ext^(s=13, w=401) [t=4812] dim = 1
+Ext^(s=25, w=402) [t=4824] dim = 0
+Ext^(s=37, w=403) [t=4836] dim = 0
+Ext^(s=49, w=404) [t=4848] dim = 0
+Ext^(s=61, w=405) [t=4860] dim = 0
+Ext^(s=73, w=406) [t=4872] dim = 0
+Ext^(s=85, w=407) [t=4884] dim = 1
+4664.36 s 9252248 KB
