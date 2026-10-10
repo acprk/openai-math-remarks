@@ -51,7 +51,7 @@ Smaller complexes give smaller constants.
 | 21 | Ta L682–686 | 6𝒞 is an integer because 3a_e is an integer | identical (3 bits) | b(3) |
 
 T = `transverse.tex`, O = `orbits.tex`, Pl = `planted.tex`, Ta = `tail.tex`, line numbers at openai/math commit
-`08fcd618213aa43b0fcaff4526a8a48d66d02e55`.
+`fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb`.
 
 **Substitutions for a written K₇ version.** 33 → 15, 35 → 17, 66 → 30, 22 → 10, "eleven / thirteen / ten" →
 "five / seven / four", 618 → 242, 1575 → 407, 1641 → 437, 33M → 15M, 44C* → 20C*, β_D^{-35} → β_D^{-17}.
