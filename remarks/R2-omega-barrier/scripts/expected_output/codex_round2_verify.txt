@@ -1,0 +1,10 @@
+union: 18496 exact checks, PASS
+C: 700416 exact checks, PASS
+D_sufficient: 65536 exact checks, PASS
+phi_tangent: 2016 exact checks, PASS
+cw_uniform: 62 exact checks, PASS
+sandwich: 10000 exact checks, PASS
+cw_support: 62 exact checks, PASS
+mixed_square: 100 exact checks, PASS
+Polynomial identities and rational constants: PASS
+No floating-point arithmetic or unresolved comparisons.

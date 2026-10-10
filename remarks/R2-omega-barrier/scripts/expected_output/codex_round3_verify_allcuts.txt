@@ -1,0 +1,17 @@
+2 2 15 1.9999 2.0001 2.4669
+<site-packages>/scipy/optimize/_slsqp_py.py:435: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+<site-packages>/scipy/optimize/_slsqp_py.py:439: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  g = append(wrapped_grad(x), 0.0)
+3 16 81 3.4669 3.4670 3.9396
+4 54 235 4.9396 4.9397 5.4138
+5 128 509 6.4138 6.4139 6.8885
+6 250 943 7.8885 7.8886 8.3635
+7 432 1569 9.3635 9.3636 9.8386
+8 686 2427 10.8386 10.8387 11.3138
+9 1024 3549 12.3138 12.3139 12.7891
+10 1458 4975 13.7891 13.7892 14.2645
+11 2000 6737 15.2645 15.2646 15.7398
+12 2662 8875 16.7398 16.7400 17.2152
+{'states': 365, 'partitions': 11539, 'optimizations': 28674, 'nonunique': 0}
+rc=0

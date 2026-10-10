@@ -1,0 +1,8 @@
+OpenAI Lemma 4.2 tripling degeneration (support)               cases=   144 failures=0
+alternating k-sector chains k=3,5,7 (support)                  cases=   720 failures=0
+scalar peeling C(n,n) ~> 1 (+) C(n-1,n-1)                      cases=    28 failures=0
+truncated convolution ~> big CW_{n-2} (support)                cases=    37 failures=0
+zero/rest partition support S_0 = {000,011,101,112}            cases=    28 failures=0
+D-adapted bivariate product: grade<i+j vanish, grade=i+j is C  cases=  7600 failures=0
+(D) two-stage weights keep exactly grades (i,i,2i), i<min      cases=   241 failures=0
+ALL PASS

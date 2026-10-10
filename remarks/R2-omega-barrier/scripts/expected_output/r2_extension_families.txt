@@ -1,0 +1,23 @@
+(A) transfer along a+b=const                         checks=   38400 failures=0
+(B) B_X(m) determinant filtration                    checks=   38400 failures=0
+(C) bivariate grading, shared output                 checks=  107811 failures=0
+(D) full direct sum [P P]^t >= sum P^t               checks=   14641 failures=0
+unequal 3-sector chain                               checks=  207360 failures=0
+5-sector alternating chain                           checks=  252105 failures=0
+Kronecker restriction                                checks=    6561 failures=0
+(F) Fourier filtering with cost                      checks=    1728 failures=0
+(O) P(a,b) <= ab                                     checks=   22500 failures=0
+(L) P(a,b) >= max(a,b)                               checks=   22500 failures=0
+(5) sandwich lower: P^9 >= (ab(a+b-1))^4             checks=   22500 failures=0
+(5) sandwich upper: (3(a+b)-2)^4/4^4 >= P^3          checks=   22500 failures=0
+(4) P(a,b) >= a+b-1                                  checks=   22500 failures=0
+(13) wrap-around P^t >= n                            checks=     399 failures=0
+(24) T_2 (x) C(n,n) sufficient condition             checks=     399 failures=0
+(6) scalar peeling P_n^t >= 1 + P_{n-1}^t            checks=     398 failures=0
+(16) small CW laser                                  checks=     397 failures=0
+(21) constant 2*8^4 > 9^4                            checks=       1 failures=0
+zero/rest laser head q<=15                           checks=      15 failures=0
+zero/rest laser tail constant (22/9+1/256)^4 < (27/8)^3 checks=       1 failures=0
+zero/rest tail: F(q+1,q+1)^3 > (27/8) q^4            checks=     384 failures=0
+(A2) slack closed form (R1)                          checks=   21181 failures=0
+ALL PASS

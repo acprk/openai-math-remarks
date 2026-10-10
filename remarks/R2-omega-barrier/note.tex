@@ -1,0 +1,382 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs,longtable,url}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\degen}{\mathrel{\rightsquigarrow}}
+\DeclareMathOperator{\rank}{R}
+
+\title[The axioms behind $\omega\le 9/4$ stop at $9/4$]{Remark on OpenAI's $\omega\le 9/4$:\\
+the profile axioms stop exactly at $9/4$, and an enlarged constraint system still does}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+
+\begin{abstract}
+OpenAI's preprint ``An Upper Bound of $9/4$ for the Matrix Multiplication
+Exponent'' (openai/math, family~107) obtains $\omega\le 9/4$ from six
+properties (positivity, symmetry, boundary values, concavity, tripling, and
+a rank bound) of a symmetrized profile $P(a,b)$ of the polynomial-multiplication
+tensors. We give a self-contained proof that these six properties cannot
+yield any exponent below $9/4$. The profile
+$P^*(a,b)=\phi(m)\bigl(M+\tfrac{m-1}{2}\bigr)$, with $m=\min(a,b)$,
+$M=\max(a,b)$ and $\phi(m)=\prod_{j<m}(1+\tfrac1{3j})$, is the pointwise least
+profile satisfying the first five properties. It satisfies the rank
+bound exactly at $t=3/4$. The least-element observation itself is not new: it
+was recorded publicly on 2026-10-07 in the GitHub repository
+\texttt{eliottcassidy2000/math} (THM-4568). It was also noted numerically on
+2026-10-08 in \texttt{GasStationManager/SafeVerifyAgent}. Our proof of the
+rank bound uses only the elementary inequality $\phi(m)^3\le 2m-1$.
+
+The second part reports joint work with an OpenAI Codex session. A
+\emph{balanced assignment}
+$\lambda^*(C(a,b)^\pi)=P^*(a,b)^{3/4}$, $\lambda^*(\text{dot}_m)=m^{3/4}$,
+$\lambda^*(T_m)=m^{9/4}$ satisfies, at all sizes, a substantially larger
+system of valid character inequalities. These include several new
+degenerations of polynomial multiplication. Hence that system cannot force
+$\omega<9/4$ either. We state precisely which families are proved for all
+sizes, which are checked only on finite ranges, and which routes remain open.
+$\lambda^*$ is \emph{not} claimed to be a tensor character.
+\end{abstract}
+
+\maketitle
+
+\section{Setting and attribution}
+
+All tensor constructions and the proof of $\omega\le 9/4$ are OpenAI's
+work~\cite{OAI}. We quote line numbers of \texttt{build/paper.tex} at
+openai/math commit \texttt{adc7f1241b42}, which is unchanged at
+\texttt{08fcd618213a}. For a character $\lambda$ with mean dot-product
+exponent $t=(p_X+p_Y+p_Z)/3$, the paper defines the symmetrized profile of
+$C(a,b)=\sum_{i<a,j<b}x_iy_jz_{i+j}$ (l.~420--422):
+\[
+P(a,b)=\Bigl(\prod_{\pi\in S_3}\lambda_\pi(C(a,b))\Bigr)^{1/(6t)}.
+\]
+The passage from characters to the exponent uses exactly the following
+properties of $P$ and nothing else.
+\begin{itemize}
+\item[(Pos)] $P(a,b)>0$ (l.~427, l.~611).
+\item[(S)] $P(a,b)=P(b,a)$ (l.~427, l.~611).
+\item[(B)] $P(1,b)=b$ (l.~427, l.~611).
+\item[(C)] $2P(a,b)\ge P(a,b+1)+P(a,b-1)$ for $a\ge1,b\ge2$ (Lemma~4.1,
+l.~442--447; hypothesis at l.~612).
+\item[(T)] $P(a,3h+a-1)\ge 3P(a,h)$ for $a,h\ge1$ (Lemma~4.2, l.~526--530;
+hypothesis at l.~613).
+\item[(U$_t$)] $P(a,b)\le(a+b-1)^{1/t}$ (l.~428). Only the diagonal case
+$P(a,a)\le(2a-1)^{1/t}$ is used (l.~657).
+\end{itemize}
+Lemma~5.1 (Diagonal growth, l.~610--650) takes (Pos), (S), (B), (C), (T) as
+its only hypotheses. The proof of the main theorem (l.~652--660) adds only
+(U$_t$). The character-existence lemma (l.~198--202, Appendix~A) is used
+afterwards, only to pass from ``$t\le 3/4$ for every character'' to
+$\nu\le 9/4$. It places no further constraint on~$P$.
+
+The Lean formalization in the same repository has the same structure.
+\path{structure ScalarProfile} has exactly the six fields above
+(\path{Growth/Profile.lean}, l.~23--33). The theorem
+\path{meanExponent_le_three_quarters} reaches the exponent only through
+\path{toScalarProfile} and \path{ScalarProfile.exponent_le_three_quarters}
+(\path{Polynomial/Inequalities.lean}, l.~97--114). These paths are relative
+to \path{lean/OAI/LinearAlgebra/MatrixMultiplication/AuxiliarySeparation/}.
+\emph{Related work.} Independent formal checks of~\cite{OAI} include
+\cite{SEL}, which extends the proof to all fields, and \cite{SVA}. The
+latter also observes numerically (\S2d) that the least feasible diagonal
+equals the bound in the paper's proof. Earlier ``limits of the method''
+results concern the laser method and Coppersmith--Winograd tensors
+\cite{AFLG,Alm,CVZb}. They do not apply to the profile argument, which is
+built on the spectral framework \cite{Str88,CVZ,LG14}. This remark
+complements \cite{SEL}: \cite{SEL} shows that the $9/4$ argument works over
+every field, and we show that its profile axioms cannot go below $9/4$.
+
+We write $\mathrm{Ax}(t)$ for the system (Pos), (S), (B), (C), (T), (U$_t$).
+Every character satisfies $1/3\le t\le 1$ (l.~211--234).
+
+\section{The least profile}
+
+Put $\phi(1)=1$, $\phi(m)=\prod_{j=1}^{m-1}\bigl(1+\frac1{3j}\bigr)
+=\frac{\Gamma(m+1/3)}{\Gamma(4/3)\Gamma(m)}$, and
+\[
+P^*(a,b)=\phi(m)\Bigl(M+\frac{m-1}{2}\Bigr),\qquad m=\min(a,b),\ M=\max(a,b).
+\]
+Its diagonal values are $1,\frac{10}3,\frac{56}9,\frac{770}{81},\dots$, and
+$P^*(a,a)=\frac{3a-1}{2}\phi(a)\sim\frac{3}{2\Gamma(4/3)}a^{4/3}$.
+
+\begin{theorem}[least profile; recorded earlier in \cite{EC}]\label{thm:main}
+The following hold.
+\begin{enumerate}
+\item[(i)] $P^*$ satisfies (Pos), (S), (B), (C), (T), and also (U$_{3/4}$).
+Equality holds in (U$_{3/4}$) only at $(1,1)$.
+\item[(ii)] Every $P$ satisfying (Pos), (S), (B), (C), (T) satisfies
+$P\ge P^*$ pointwise.
+\item[(iii)] Hence, for $t>0$, $\mathrm{Ax}(t)$ is satisfiable if and only if $t\le 3/4$.
+In particular no argument that uses only these properties of the profile can
+give $t<3/4$, that is, $\omega<9/4$. Every inequality in the proof of
+Lemma~5.1, up to and including \eqref{eq:H}, is an equality for $P^*$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) (Pos), (S) and (B) are immediate.
+
+\emph{(C).} Fix $a$ and put $f(b)=P^*(a,b)$. For $b\ge a$, $f$ is linear
+with slope $\phi(a)$. For $b+1\le a$, the increment is
+$\delta(b)=f(b+1)-f(b)=\phi(b)\bigl(\frac{a}{3b}+\frac23\bigr)$. The
+inequality $\delta(b+1)\le\delta(b)$ is equivalent to
+$(3b+1)(a+2b+2)\le(a+2b)(3b+3)$, which is $2(a-b-1)\ge0$. This holds for
+$b\le a-2$, which is the range needed. At the junction,
+$\delta(a-1)=\phi(a-1)\frac{3a-2}{3(a-1)}=\phi(a)$, so the increments are
+non-increasing everywhere. They are also positive.
+
+\emph{(T).} Since $3h+a-1\ge a$, the left side is
+$\phi(a)\bigl(3h+\frac32(a-1)\bigr)$. If $h\ge a$, the right side is
+$3\phi(a)(h+\frac{a-1}2)$, so equality holds. If $h<a$, put
+$L(a')=\phi(a')(3h+\frac32(a'-1))$ and $R(a')=3\phi(h)(a'+\frac{h-1}{2})$ for
+$a'\ge h$. Then $L(h)=R(h)$, and
+\[
+L(a'+1)-L(a')=\phi(a')\Bigl(2+\frac{h}{a'}\Bigr),\qquad R(a'+1)-R(a')=3\phi(h).
+\]
+At $a'=h$ the two increments are equal. The left increment is non-decreasing
+in $a'$: its forward difference is
+$\phi(a')\frac{2(a'+1-h)}{3a'(a'+1)}\ge0$. Hence $L(a)\ge R(a)$, with equality
+exactly when $h\ge a-1$.
+
+\emph{(U$_{3/4}$).} By induction, $\phi(m)^3\le 2m-1$. The base case is
+$m=1$. The inductive step $(1+\frac1{3m})^3\le\frac{2m+1}{2m-1}$ is
+equivalent to $(2m+1)(3m)^3-(2m-1)(3m+1)^3=9m^2+7m+1>0$. Since
+$M+m-1\ge M+\frac{m-1}2$ and $M+m-1\ge 2m-1$,
+\[
+P^*(a,b)\le\Bigl(M+\frac{m-1}{2}\Bigr)(2m-1)^{1/3}\le (a+b-1)^{4/3}.
+\]
+For $m\ge2$ the first inequality is strict. For $m=1$ and $M\ge2$ the second
+is strict. Alternatively, Wendel's inequality
+$\Gamma(m+\frac13)/\Gamma(m)\le m^{1/3}$~\cite{Wendel} gives
+$\phi(m)^3\le\Gamma(4/3)^{-3}m\approx1.4043\,m\le 2m-1$ for $m\ge2$.
+
+(ii) We follow the paper's own chain (l.~617--639). For fixed $a$, (C) makes
+$\Delta_{a,h}=P(a,h+1)-P(a,h)$ non-increasing in $h$. Write $D_a=P(a,a)$.
+Lemma~5.1's proof gives
+\begin{equation}\label{eq:H}
+D_a\ \ge\ \frac{3a-1}{2}\prod_{m=1}^{a-1}\Bigl(1+\frac1{3m}\Bigr)=P^*(a,a).
+\end{equation}
+Off the diagonal, take $b>a$ and $h\ge a$. By (T) and (C),
+\[
+2P(a,h)\le P(a,3h+a-1)-P(a,h)=\sum_{k=h}^{3h+a-2}\Delta_{a,k}\le(2h+a-1)\Delta_{a,h},
+\]
+so $P(a,h+1)\ge P(a,h)\frac{2h+a+1}{2h+a-1}$. Telescoping from $h=a$ to
+$b-1$ gives
+\[
+P(a,b)\ge D_a\cdot\frac{2b+a-1}{3a-1}\ge P^*(a,b).
+\]
+By (S) the same bound holds for $b<a$. This off-diagonal step was also given
+by an auditor in~\cite{EC} and in~\cite[Codex round~3, (1)]{SUPP}.
+
+(iii) If $0<t\le3/4$, then $(a+b-1)^{1/t}\ge(a+b-1)^{4/3}$, so $P^*$
+satisfies $\mathrm{Ax}(t)$ by~(i). Conversely, Lemma~5.1 gives
+$a^{4/3}\le P(a,a)\le(2a-1)^{1/t}$ for every $a$, which forces $t\le 3/4$.
+The tightness statements follow from the equality cases in~(i): $P^*$
+satisfies $\Delta_{a,a}=\phi(a)$, equality in (T) at $h=a$, and equality in
+the diagonal recursion. Only the last two simplifications in the paper,
+$(1+\frac1{3m})^3\ge1+\frac1m$ and $\frac{3a-1}{2}\ge a$, are strict. They
+lose the constant $\frac3{2\Gamma(4/3)}\approx1.68$ but not the exponent.
+\end{proof}
+
+\section{What the barrier does and does not say}
+
+\begin{enumerate}
+\item It concerns the \emph{axiom system} $\mathrm{Ax}(t)$, not tensors.
+Theorem~\ref{thm:main} does not say that some character has profile $P^*$.
+It does not say that $\omega=9/4$. It does not say that polynomial
+multiplication tensors can never prove $\omega<9/4$.
+\item To go below $9/4$ with this approach, one needs a further valid
+inequality for characters that every profile in the feasible set at
+$t=3/4$ violates. That set contains $P^*$ and, by (ii), only profiles
+$\ge P^*$. Alternatively, one needs information that the symmetrized profile
+does not see.
+\item The formal values below are not claimed to come from a character. If
+some character $\lambda$ had $\lambda(T_m)=m^{9/4}$ for some $m\ge2$, then by
+multiplicativity and $\lambda\le\rank$ we would get
+$\rank(T_{m^k})\ge m^{9k/4}$ for all $k$, so $\omega\ge 9/4$. Together with~\cite{OAI} this
+would give $\omega=9/4$; compare Strassen's spectral characterisation of
+$\omega$~\cite{Str88}. Nothing here proves or refutes this.
+\end{enumerate}
+
+\section{An enlarged constraint system (joint work with OpenAI Codex)}\label{sec:enlarged}
+
+In three rounds on 2026-10-09, an OpenAI Codex session (model
+\texttt{gpt-6-astra}, Codex CLI v0.157.0) and we searched for \emph{valid}
+character inequalities that might exclude the balanced assignment
+\begin{gather*}
+p_X=p_Y=p_Z=t=\tfrac34,\qquad
+\lambda^*(C(a,b)^\pi)=P^*(a,b)^{3/4}\ (\pi\in S_3),\\
+\lambda^*(B_L(m))=m^{3/4},\qquad \lambda^*(\langle e,h,l\rangle)=(ehl)^{3/4}.
+\end{gather*}
+The constructions in rows A--D, F, the two scalar-target rows, the
+single-block row, the $T_m$ rows, CW and zero/rest of
+Table~\ref{tab} were proposed and proved by Codex. The scope discipline in
+the table is also Codex's. We supplied $P^*$ as the witness; it had been found
+earlier and independently in~\cite{EC}. We also supplied the unequal-$h$
+chain and Kronecker rows; the equal-$h$ chain and its tangent-line argument
+are already in~\cite{EC} (``gadget barrier''). We independently re-checked
+every row as indicated. The transcripts are
+reproduced in~\cite{SUPP}.
+
+\begin{theorem}[enlarged barrier; Codex and us]\label{thm:enlarged}
+$\lambda^*$ satisfies every inequality of every family marked \textbf{P} in
+Table~\ref{tab}, for all sizes and parameters. It also satisfies every
+consequence obtained by adding or multiplying these numerical inequalities,
+by optimizing the entropy vector $q$ separately for each leg permutation, or
+by mixing them in a linear program. Hence this system cannot force $t<3/4$.
+\end{theorem}
+
+Here ``valid'' means that the inequality holds for \emph{every} character,
+via an explicit restriction or degeneration together with additivity,
+multiplicativity and the shared-leg inequality (paper Cor.~3.2). The
+validity proofs are in the paper, in~\cite{SUPP}, or (for odd-$k$
+chains) the following weighting. Give the even-position sectors, which are
+copies of $C$, weight $0$. Give the odd-position sectors, which are copies of
+$C^\sigma$, weight $+1$ on $Y$ and $-1$ on $Z$. This generalizes l.~544--548.
+The ``tensor'' column records only finite coefficient or support checks,
+which add evidence but are not proofs. The status column concerns ``$\lambda^*$
+satisfies the family''. An invalid inequality that $\lambda^*$ satisfies
+would not weaken the barrier. The
+balanced lift turns each nonsymmetrized entropy inequality into its
+symmetrized form: with all $\lambda_\pi$ equal, optimizing
+$e^{\frac34H(q)}\prod_iF_i^{\frac34q_i}$ gives $(\sum_iF_i)^{3/4}$.
+
+{\small
+\begin{longtable}{p{0.08\textwidth}p{0.46\textwidth}p{0.06\textwidth}p{0.29\textwidth}}
+\caption{Valid inequality families and the status of ``$\lambda^*$
+satisfies them''. \textbf{P}: proved for all sizes. \textbf{E}: exact check
+on a finite range only. \textbf{IC}: interval-certified finite recipe
+search. Tensor = verification of the underlying degeneration.}\label{tab}\\
+\toprule
+id & inequality (source tensor relation) & status & evidence \\ \midrule
+paper & (C), (T) and their unsymmetrized entropy forms, any $q$ per $\pi$ &
+\textbf{P} & Thm.~\ref{thm:main}; balanced-lift reduction\\
+chain & $P(a,\sum_{i\le k}h_i+\frac{(k-1)(a-1)}2)\ge\sum P(a,h_i)$ (odd
+$k$, alternating $C$/$C^\sigma$ sectors sharing $X$; $k=3$, equal $h_i$ is
+Lemma~4.2) & \textbf{P} & tangent line $\phi(a)(b+\frac{a-1}2)\ge P^*(a,b)$
+(equal $h_i$: \cite{EC}); E for $k=3,5$; tensor ($k\le7$): ours\\
+A & $mP(a,b)\ge\sum_{i\in I}P(a+m-1-2i,b-m+1+2i)$ (via
+$C(a,b)\otimes B_Z(m)$, apolar filtration) & \textbf{P} & Jensen along
+$a+b=$const; slack formula re-checked (E); tensor: Codex (780 coeff.)\\
+B & $mP(a,b)\ge\sum_{i<\min(b,m)}P(a,b+m-1-2i)$ (via $C(a,b)\otimes B_X(m)$;
+$m=2$ is Lemma~4.1) & \textbf{P} & Jensen; tensor: ours + Codex\\
+C & $P(a,b)P(c,d)\ge\sum_{i+j=k}P(a+c-1-2i,b+d-1-2j)$ (bivariate
+$D$-filtration, shared output) & \textbf{P} & proof in Codex round~2; E;
+tensor: ours + Codex\\
+D & $[P(a,b)P(c,d)]^t\ge\sum_{i<r}P(a+c-1-2i,b+d-1-2i)^t$, $r=\min(a,b,c,d)$ (full direct sum)
+& \textbf{P} & rational certificate $[\,\cdot\,]^3\ge rS^3$; E; tensor: ours\\
+F & $(2M-1)P(Ma,Mb)\ge MP(a,b)$ (Fourier filtering, cost kept) & \textbf{P}
+& monotonicity\\
+O,L & $\max(a,b)\le P(a,b)\le ab$ (outer product; dots) & \textbf{P} &
+$\phi(a)\le 2a/3$\\
+wrap & $P(n,n)^t\ge n$ ($C(n,n)\ge\mathbb C[\mathbb Z_n]\cong\langle
+n\rangle$) & \textbf{P} & $\phi(n)^3\ge n$\\
+peel & $P(n,n)^t\ge1+P(n-1,n-1)^t$ ($C(n,n)\degen1\oplus C(n-1,n-1)$) &
+\textbf{P} & $f_n/n$ non-decreasing; tensor: ours\\
+CW & $P(n,n)^t\ge(27/4)^{1/3}(n-2)^t$ ($C(n,n)\degen CW_{n-2}\ge cw_{n-2}$,
+standard laser) & \textbf{P} & AM--GM; tensor (support): ours\\
+scalar & any tensor product of generators $\degen\langle N\rangle$: $N\le
+\lambda^*$ & \textbf{P} & $(d_Xd_Yd_Z)^{1/3}\le P^{*3/4}$\\
+1-block & monomial degeneration (in convolution/group coordinates) of any
+product of $C$'s, dots and matrix factors to \emph{one}
+$\langle e,h,l\rangle$ & \textbf{P} & abelian-group lemma $ehl\le|G|$\\
+$T\to C$ & $T_m\degen\bigoplus_sC(a_s,b_s)^{\pi_s}$ (any basis change) &
+\textbf{P} & flattening sandwich, $m^{1/4}>9/8$\\
+$T\otimes C$ & $T_m\otimes C(n,n)\degen\bigoplus C$'s, $m\ge2$ &
+\textbf{P} & sufficient condition (24) of round~2\\
+0/rest & laser on $\{000,011,101,112\}$ partition of $C(n,n)$, any child
+value $\le$ border rank & \textbf{P} & entropy dual; head $q\le15$ interval,
+tail rational\\
+Kron & $P(a+(a'-1)N,b+(b'-1)N)\ge P(a,b)P(a',b')$, $N=a+b-1$ & E & $a,b,a',b'\le9$\\
+interval & recursive consecutive-interval laser recipes, $n\le30$; all root
+cuts, $n\le12$ & IC & Codex round~3; re-run by us\\
+\bottomrule
+\end{longtable}
+}
+
+\begin{remark}[open routes]
+The following are \emph{not} covered by Theorem~\ref{thm:enlarged}:
+\begin{itemize}
+\item full direct sums of several matrix blocks extracted from powers of
+$C(n,n)$, especially after non-monomial changes of basis;
+\item higher-power repartitionings other than the families above;
+\item $T\otimes C$ relations outside the sufficient condition (for example
+pure convolution, or very unbalanced $(a,b)$), and targets that contain
+products of several $C$'s or matrix factors;
+\item relations that genuinely use asymmetry ($\lambda_\pi$ unequal) at
+$t=3/4$.
+\end{itemize}
+The uniform quantum functionals give
+$\mathcal Q(C(a,b))=(ab(a+b-1))^{1/3}$, but on matrix tensors they have total
+degree $2$ rather than $9/4$. So they do not close the first route
+(Codex round~3, \S7).
+\end{remark}
+
+\section{Computational certificates}
+The repository's \texttt{scripts/} directory contains four programs, each
+with its expected output. All decisions use exact rationals, except where a
+floating-point step is noted.
+\begin{itemize}
+\item \texttt{r2\_profile\_axioms.py} checks (i) exhaustively for
+$a,b\le200$ ($b<800$ for (C)). It also checks the equality cases, the
+tightness of every step of Lemma~5.1, both induction identities, and Wendel's
+bound with an interval-certified constant.
+\item \texttt{r2\_extension\_families.py} is an independent re-implementation
+of the inequality checks for Table~\ref{tab}, about $0.9\times10^6$ exact
+comparisons in total. The $3/4$-powers are bracketed by integer fourth roots.
+\item \texttt{r2\_tensor\_constructions.py} verifies the underlying
+degenerations at the coefficient level for small sizes. These are the paper's
+tripling degeneration, the alternating $k$-sector chains ($k\le7$), peeling, the CW and zero/rest supports, and the
+$D$-adapted bivariate products ($7600$ basis-pair products) behind B, C, D
+and Lemma~4.1. A mutation test confirms that the checks detect deliberate
+errors.
+\item \texttt{r2\_least\_profile\_lp.py} (floating point; not a proof) runs
+an LP that minimizes $P(n,n)$ under (S), (B), (C), (T) on a $(4n-1)^2$ grid.
+The minimum agrees with $P^*(n,n)$ to $10^{-13}$ for $n\le12$.
+\end{itemize}
+
+\begin{thebibliography}{99}
+\bibitem{OAI} OpenAI, \emph{An Upper Bound of $9/4$ for the Matrix
+Multiplication Exponent}, OpenAI Math Release preprint, October 2, 2026,
+\url{https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Matrix-Multiplication-Nine-Fourths-October-2-2026/build/paper.tex}.
+\bibitem{EC} \texttt{eliottcassidy2000/math}, THM-4568, ``The growth lemma
+behind omega $\le$ 9/4 (openai/math \#107) is exactly sharp'', commit
+\texttt{450388a22f72}, 2026-10-07,
+\url{https://github.com/eliottcassidy2000/math/blob/5966360a9c69b6bb0f3da39dc219f4a6c5dc3244/01-canon/theorems/THM-4568-the-nine-fourths-growth-lemma-is-exactly-sharp.md}.
+\bibitem{SVA} \texttt{GasStationManager/SafeVerifyAgent},
+\path{audits/mm94-intake/READ-F.md}, \S2d, commit \texttt{af3b9e1e8853},
+2026-10-08.
+\bibitem{SEL} S.~Navot et al., \texttt{selanavot/matrix-multiplication-all-fields},
+$\omega\le9/4$ over arbitrary fields, commit \texttt{08481ef22bca}, 2026.
+\bibitem{SUPP} This remark, \texttt{proofs/}: reports of the three
+Claude--Codex rounds with the validity proofs, 2026-10-09.
+\bibitem{Str88} V.~Strassen, The asymptotic spectrum of tensors,
+\emph{J. Reine Angew. Math.} 384 (1988), 102--152.
+\bibitem{CVZ} M.~Christandl, P.~Vrana, J.~Zuiddam, Universal points in the
+asymptotic spectrum of tensors, \emph{J. Amer. Math. Soc.} 36 (2023), 31--79.
+\bibitem{CVZb} M.~Christandl, P.~Vrana, J.~Zuiddam, Barriers for fast matrix
+multiplication from irreversibility, \emph{Theory Comput.} 17 (2021).
+\bibitem{AFLG} A.~Ambainis, Y.~Filmus, F.~Le Gall, Fast matrix
+multiplication: limitations of the Coppersmith--Winograd method, STOC 2015.
+\bibitem{Alm} J.~Alman, Limits on the universal method for matrix
+multiplication, CCC 2019.
+\bibitem{LG14} F.~Le Gall, Powers of tensors and fast matrix multiplication,
+ISSAC 2014.
+\bibitem{Wendel} J.~G.~Wendel, Note on the gamma function, \emph{Amer. Math.
+Monthly} 55 (1948), 563--564.
+\end{thebibliography}
+
+\bigskip\noindent\emph{AI assistance.} Developed with AI assistance
+(Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction, together with
+an OpenAI Codex session (gpt-6-astra) for Section~\ref{sec:enlarged}.
+Independent adversarial reviews were run by separate AI sessions and are not
+human peer review.
+\end{document}

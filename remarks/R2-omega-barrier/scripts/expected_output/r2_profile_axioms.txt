@@ -1,0 +1,24 @@
+(Pos) P*>0                                              checks=   40000 failures=0
+(S) symmetry                                            checks=   40000 failures=0
+(U) P*^3 <= (a+b-1)^4                                   checks=   40000 failures=0
+(U) equality only at (1,1)                              checks=   40000 failures=0
+(C) concavity in b                                      checks=  159600 failures=0
+monotone in b (not an axiom)                            checks=  159600 failures=0
+(T) tripling                                            checks=   40000 failures=0
+(T) equality iff h >= a-1                               checks=   40000 failures=0
+(B) P*(1,b)=b                                           checks=     809 failures=0
+H_a = phi(a) (eq. normalized-growth tight)              checks=     200 failures=0
+Delta_{a,a} = H_a                                       checks=     200 failures=0
+2D_a = P(a,4a-1)-D_a                                    checks=     200 failures=0
+P(a,4a-1)-D_a = (3a-1)Delta_{a,a}                       checks=     200 failures=0
+eq. diagonal-rec equality                               checks=     199 failures=0
+strict: phi(a)^3 > a                                    checks=     199 failures=0
+phi(m)^3 <= 2m-1                                        checks=     809 failures=0
+phi(m)^3 >= m                                           checks=     809 failures=0
+upper step identity = 9m^2+7m+1                         checks=     809 failures=0
+lower step identity = 9m^2+m                            checks=     809 failures=0
+row recursion tight on P* (h>=a)                        checks=   99900 failures=0
+(T) h<a increment >= 0                                  checks=   19900 failures=0
+D_1..D_6 = ['1', '10/3', '56/9', '770/81', '3185/243', '12376/729']
+Wendel check phi(m)^3 <= m/Gamma(4/3)^3 (m<810), failures=0; Gamma(4/3)^-3 <= 1.404350509688
+ALL PASS

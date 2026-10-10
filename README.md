@@ -16,6 +16,7 @@ All constructions and main arguments discussed here are **OpenAI's work**. Each 
 | ID | OpenAI family | Remark | Kind | Verification |
 |---|---|---|---|---|
 | R1 | 170 | [r(4,t) = t³/(log t)^{2+o(1)}](remarks/R1-ramsey-r4t/): OpenAI's existing Lean proof already covers s = 4 | consequence + Lean (`main_four`) | Lean kernel replay; adversarial review |
+| R2 | 107 | [The 9/4 barrier persists under an enlarged system of inequalities](remarks/R2-omega-barrier/) (the least profile itself is prior work: eliottcassidy2000/math THM-4568) | method limit (extension) | exact rational checks; independent re-implementation; adversarial review |
 | R3 | 197 | [Odd-characteristic Kaplansky counterexample made explicit](remarks/R3-kaplansky-odd-explicit/): m ≈ 10^360 → 6·10^24, explicit 25-digit prime | explicit parameters | independent re-implementation; adversarial review |
 | R4 | 308 | [Smith–Toda V(4) exists if and only if p ≥ 11](remarks/R4-smith-toda-v4-p11/) ("only if" unconditional; "if" conditional on the p = 1009 manuscript) | explicit parameters | two independent enumerations; adversarial review; actual Ext at p = 5, 7 |
 | R5 | 238 | [Thorp shuffle: 1600d → 24d](remarks/R5-thorp-24d/) (45d from the main paper alone) | constant | interval certificates (twice); adversarial review |
@@ -33,7 +34,7 @@ All constructions and main arguments discussed here are **OpenAI's work**. Each 
 
 ## How these remarks were produced and checked
 
-Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction. Each result was checked in three layers:
+Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction. One remark (R2) also used OpenAI GPT-6 Astra via Codex; the R2 README states which parts. Each result was checked in three layers:
 
 1. the primary computation;
 2. an independent re-implementation, which did not reuse the primary code;

@@ -1,0 +1,16 @@
+rank upper (cubed): 6400 exact comparisons, PASS
+outer product upper: 6400 exact comparisons, PASS
+dot product lower: 6400 exact comparisons, PASS
+monotonicity: 6400 exact comparisons, PASS
+tripling: 6400 exact comparisons, PASS
+separate concavity: 6320 exact comparisons, PASS
+concavity at zero: 80 exact comparisons, PASS
+A transfer: 75000 exact comparisons, PASS
+B higher dot: 75000 exact comparisons, PASS
+C bivariate shared output: 39609 exact comparisons, PASS
+D full direct sum: 10000 exact comparisons, PASS
+F Fourier with cost: 1000 exact comparisons, PASS
+apolar leading/zero coefficients: 780, PASS
+bivariate adapted-basis products: 1296, PASS
+All displayed witnesses and the coordinate-weight identity: PASS
+No floating-point comparisons; no unresolved root intervals.
