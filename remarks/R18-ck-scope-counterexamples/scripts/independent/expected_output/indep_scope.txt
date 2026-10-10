@@ -1,0 +1,34 @@
+Part 1: interval certificates
+[q=4 uniform, |A|=1  (= 1/4-biased bit)] w=0.25 lam=0.1  m=-0.5
+   I(f;Y)            in [0.00481700696933, 0.00481700696933]
+   psi(lam*r_m)      <= 0.00444575410525   -> refined bound (A) violated: True
+   psi(lam) (CK)     >= 0.00500836684636   -> plain CK curve respected: True
+   Hellinger loss    in [0.00546448802612, 0.00546448802612]
+   1-sqrt(1-lam^2)   in [0.00501256289338, 0.00501256289338]  -> (B) violated: True
+[q=3 uniform, |A|=1] w=0.333333333333 lam=0.1  m=-0.333333333333
+   I(f;Y)            in [0.0049340779218, 0.0049340779218]
+   psi(lam*r_m)      <= 0.00480701021409   -> refined bound (A) violated: True
+   psi(lam) (CK)     >= 0.00500836684636   -> plain CK curve respected: True
+   Hellinger loss    in [0.00520031655019, 0.00520031655019]
+   1-sqrt(1-lam^2)   in [0.00501256289338, 0.00501256289338]  -> (B) violated: True
+[p-biased bit, p=0.3] w=0.3 lam=0.2  m=-0.4
+   I(f;Y)            in [0.0193294123183, 0.0193294123183]
+   psi(lam*r_m)      <= 0.0188545985528   -> refined bound (A) violated: True
+   psi(lam) (CK)     >= 0.0201355135507   -> plain CK curve respected: True
+   Hellinger loss    in [0.0207665893736, 0.0207665893736]
+   1-sqrt(1-lam^2)   in [0.0202041028867, 0.0202041028867]  -> (B) violated: True
+Part 2: Taylor expansions in lam (exact)
+   I(f;Y)            = ( 1/2 ) lam^2 + O(lam^3)
+   psi(lam r)        = ( r**2/2 ) lam^2 + O(lam^4)
+   Hellinger loss    = ( 1/(2*sqrt(1 - m**2)) ) lam^2 + O(lam^3)
+   1-sqrt(1-lam^2)   = ( 1/2 ) lam^2 + O(lam^4)
+   => (A) fails for small lam iff r_m < 1 iff H(m) < log 2 iff m != 0;
+      (B) fails for small lam iff 1/sqrt(1-m^2) > 1 iff m != 0.
+Part 3: largest lam with a violation (high precision root finding), for w = mu(A)
+   w=0.25: (A) violated for 0<lam<0.43647647 ;  (B) violated for 0<lam<0.32272579
+   w=0.3333: (A) violated for 0<lam<0.34953435 ;  (B) violated for 0<lam<0.33746108
+   w=0.4: (A) violated for 0<lam<0.27815127 ;  (B) violated for 0<lam<0.3442118
+   w=0.1: (A) violated for 0<lam<0.62758859 ;  (B) violated for 0<lam<0.26231321
+Part 4: control - f = AND on the uniform {-1,1}^2 cube (same law as q=4, |A|=1) under product bit flips
+   rho=0.1: I = 0.0033451 <= psi(rho r_m) = 0.00444575 : True
+            Hellinger loss = 0.00386403 <= 1-sqrt(1-rho^2) = 0.00501256 : True

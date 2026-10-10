@@ -1,0 +1,2 @@
+T = 21/40, 2T-1 = 0.0500; min over 4e6 sampled pairs of |<x,y>| - (2T-1) = 4.79e-04 (>= 0 expected)
+diameter bound sqrt(2 - 2(2T-1)^2) = sqrt(399/200) = 1.412445  (vs sqrt 2 = 1.414214)

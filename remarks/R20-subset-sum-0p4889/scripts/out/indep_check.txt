@@ -1,0 +1,30 @@
+Part 1: filtering moments (arb, N=192, strips 0.4 / 0.34)
+  main  eta=0.5176 tau=0.48888 : log2 I1 < 0.517078797022 , log2 I2 < 0.516960383245   (c < 0.50198, crude strip exponents 15.66 14.58, outer err 1.9e-23 9.0e-24)
+        need log2 max I < eta - slack - 48 eps = 0.5174995200 : True ; margin > 0.0004207
+  dense eta=0.50001 tau=0.47409 : log2 I1 < 0.493598280852 , log2 I2 < 0.499710378479   (c < 0.50198, crude strip exponents 15.87 13.80, outer err 2.2e-23 5.3e-24)
+        need log2 max I < eta - slack - 48 eps = 0.4999095200 : True ; margin > 0.0001991
+  paper eta=0.51772 tau=0.48996 : log2 I1 < 0.514974048351 , log2 I2 < 0.514851451273   (c < 0.47058, crude strip exponents 14.21 13.66, outer err 6.9e-24 4.8e-24)
+        paper bound 0.5168 holds: True
+
+Part 2: alias side, exact rationals + arb entropies
+  prelim  1/2-delta+zeta+1e-5                  < 0.4888250000   ok
+  lists   rep+(1-mu)/2+mu h(s/2)-g mu          < 0.4887769817   ok
+  pairs   rep+1-mu+2mu h(s/2)-g mu-eta+guard   < 0.4888560287   ok
+  gen     rep+mu+1/4+guard                     < 0.3413897147   ok
+  P' sampling rep+gamma mu/2                   < 0.01996560465   ok
+  checksum tau_run+20eps                       < 0.4888802000   ok
+  trial division eta/2                         < 0.2588000000   ok
+  sparse  h(mu)+mu+guard  (< eta)              < 0.5164557620   ok
+  coverage: K sigma mu = 0.49989 < 1/2 True ; theta = 0.02240492908439857 < theta' True ; gamma < sigma(1-theta') = 0.371412 True ; Markov 1-theta/theta' = 0.008631456442541253
+  max component exponent 0.48888020 ; claim 0.4889 ; gap 1.98e-05
+
+Part 3: Proposition C via kernels of all endomorphisms (numpy)
+  (Z/4)^2 :   15 subgroups (as kernels) ; violations of |K cap G[p]|^e M >= p^{ke}: 0 ; equality: 8
+  (Z/4)^3 :  129 subgroups (as kernels) ; violations of |K cap G[p]|^e M >= p^{ke}: 0 ; equality: 58
+  (Z/8)^2 :   37 subgroups (as kernels) ; violations of |K cap G[p]|^e M >= p^{ke}: 0 ; equality: 14
+  (Z/16)^2 :   83 subgroups (as kernels) ; violations of |K cap G[p]|^e M >= p^{ke}: 0 ; equality: 26
+  (Z/9)^2 :   23 subgroups (as kernels) ; violations of |K cap G[p]|^e M >= p^{ke}: 0 ; equality: 14
+  (Z/27)^2 :   76 subgroups (as kernels) ; violations of |K cap G[p]|^e M >= p^{ke}: 0 ; equality: 38
+  (Z/25)^2 :   45 subgroups (as kernels) ; violations of |K cap G[p]|^e M >= p^{ke}: 0 ; equality: 32
+
+INDEPENDENT CHECK PASSES: True

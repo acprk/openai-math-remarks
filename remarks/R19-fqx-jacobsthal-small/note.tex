@@ -1,0 +1,158 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\F}{\mathbb F}
+
+\title[{Jacobsthal's function in $\F_q[x]$: the first two values}]{A remark on Jacobsthal's function in $\F_q[x]$: \\ the first two values}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \emph{A quadratic bound for Jacobsthal's function} (family 021 of the OpenAI
+mathematics repository) proves $h(k)\ll k^2/(\log\log 3k)^2$ for the integer Jacobsthal function.
+We record the elementary first cases of the analogous quantity in the polynomial ring $\F_q[x]$.
+Let $K_q(m)$ be the least number of distinct monic irreducibles of a polynomial $M$ for which some
+``interval'' $f+\{g:\deg g<m\}$ contains no polynomial coprime to $M$. We show $K_q(1)=q$ and
+$K_q(2)=2q-1$ for every prime power $q$, characterise the extremal configurations for $q\ge3$, and
+list exact values for a few further small cases computed in two independent ways. The arguments are
+short counting arguments; nothing from the integer proof is used.
+\end{abstract}
+\maketitle
+
+\noindent\textbf{Attribution and scope.} The integer problem and its solution are OpenAI's work
+(family 021 of \url{https://github.com/openai/math}, commit
+\nolinkurl{fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb}) \cite{oai}. This note is only a function-field
+analogue in the smallest cases. It says nothing about the integer problem and nothing about the
+asymptotics of $K_q(m)$ in $m$. Developed with AI assistance (Anthropic Claude, Opus~5.5) under
+[AUTHOR NAME]'s direction; the independent adversarial review was run by a separate AI session and
+is not human peer review.
+
+\section{Definitions}
+Let $q$ be a prime power and $V_m=\{g\in\F_q[x]:\deg g<m\}$ (so $|V_m|=q^m$; $\deg 0=-\infty$).
+For $M\ne0$ let $j(M)$ be the least $m\ge0$ such that every coset $f+V_m$, $f\in\F_q[x]$, contains
+an element coprime to $M$, and put $h_q(k)=\max\{j(M):\omega(M)\le k\}$, where $\omega$ counts
+distinct monic irreducible factors. Dually,
+\[
+ K_q(m)=\min\{\omega(M): \exists f\ \forall g\in V_m:\ \gcd(f+g,M)\ne1\},
+\]
+so that $h_q(k)\le m$ if and only if $K_q(m)>k$. (The zero polynomial is not coprime to $M$, and
+nonzero constants are coprime to every $M$; both conventions are as for integers.)
+
+\begin{lemma}[covering model]\label{lem:model}
+Fix $m\ge1$. $K_q(m)$ equals the minimum, over sets $\mathcal P$ of monic irreducibles of degree $<m$
+with a residue $r_P$ chosen for each $P\in\mathcal P$, of
+$|\mathcal P|+\#\{g\in V_m: g\not\equiv r_P \pmod P\ \forall P\in\mathcal P\}$.
+\end{lemma}
+\begin{proof}
+If $\deg P\ge m$ then $P$ divides at most one element of $f+V_m$, since the difference of two
+distinct elements is nonzero of degree $<m$. If $\deg P<m$ then $P\mid f+g$ iff $g\equiv-f\pmod P$.
+Hence any admissible $M$ for $f$ gives a configuration of the stated cost, with $r_P=-f\bmod P$.
+Conversely, given a configuration and the set $U$ of uncovered points, choose distinct monic
+irreducibles $Q_u$ ($u\in U$) of degree $\ge m$ not in $\mathcal P$, and by the Chinese remainder
+theorem choose $f$ with $f\equiv-r_P\pmod P$ for $P\in\mathcal P$ and $f\equiv-u\pmod{Q_u}$ for
+$u\in U$. Then $M=\prod_{\mathcal P}P\prod_U Q_u$ works and $\omega(M)$ equals the cost.
+\end{proof}
+
+\section{The first two values}
+\begin{theorem}\label{thm:main}
+For every prime power $q$: $K_q(1)=q$ and $K_q(2)=2q-1$. Equivalently $h_q(k)=1$ for $1\le k\le q-1$,
+$h_q(k)=2$ for $q\le k\le 2q-2$, and $h_q(2q-1)\ge3$. For $q\ge3$, a configuration attains
+$K_q(2)$ if and only if it uses all $q$ linear primes with residues $r_{x-a}=g^*(a)$
+$(a\in\F_q)$ for some $g^*\in V_2$ (equivalently, after replacing $f$ by an element of the same
+coset, $x^q-x$ divides $f$), and in addition exactly $q-1$ primes of degree $\ge2$, each dividing a
+different one of the $q-1$ elements not covered by the linear primes, and no other prime factor.
+\end{theorem}
+\begin{proof}
+$m=1$: there are no primes of degree $<1$, so all $q$ points of $V_1$ are uncovered
+(Lemma~\ref{lem:model}); the cost is $q$.
+
+$m=2$: identify $g=c_0+c_1x\in V_2$ with $(c_0,c_1)\in\F_q^2$. The only primes of degree $<2$ are
+$x-a$, $a\in\F_q$, and $x-a$ with residue $r$ covers the line $\ell_a(r)=\{c_0+ac_1=r\}$. Lines with
+different $a$ have different slopes, so any two meet in exactly one point. If $\ell\ge1$ such lines
+are used, each line after the first meets the first one in an already covered point, so at most
+$q+(\ell-1)(q-1)$ points are covered and the cost is at least
+\[
+ \ell+q^2-q-(\ell-1)(q-1)=q^2-1-\ell(q-2)\ \ge\ q^2-1-q(q-2)=2q-1,
+\]
+using $\ell\le q$ (the count uses only the intersections with the first line, so it does not
+depend on the order of the lines); with $\ell=0$ the cost is $q^2\ge2q-1$. For the upper bound take
+$f=x^q-x$, $M=\prod_{a\in\F_q}(x-a)\cdot\prod_{c\in\F_q^\times}P_c$, where $P_c$ is an irreducible
+factor of $x^q-x+c$. Since $x^q-x+c$ has no root in $\F_q$, $\deg P_c\ge2$, and the $P_c$ are
+pairwise distinct because $P_c\mid (c-c')$ would follow otherwise. An element $f+c_0+c_1x$ with
+$c_1\ne0$, or with $c_1=0=c_0$, has a root in $\F_q$; the remaining elements are $x^q-x+c$,
+$c\ne0$, each divisible by $P_c$. Hence $\omega(M)=2q-1$.
+
+Equality for $q\ge3$: the coefficient $q-2$ is positive, so $\ell=q$, and every line must meet the
+union of the previous ones in exactly one point. If three of the lines were not concurrent, the
+third would meet the first two in two distinct covered points; hence all $q$ lines pass through one
+point $g^*$, i.e.\ $r_{x-a}=g^*(a)$ for all $a$. Since $r_{x-a}=-f(a)$, translating $f$ by $g^*\in V_2$ (which does not
+change the coset) gives $(f+g^*)(a)=0$ for all $a$, i.e.\ $x^q-x\mid f+g^*$. Conversely such a
+configuration covers $1+q(q-1)$ points and costs $q+(q-1)=2q-1$.
+\end{proof}
+
+\begin{remark}
+For $q=2$ the characterisation fails: the coefficient $q-2$ vanishes, and extremal configurations exist with $\ell=1$ (one line, two
+further primes) as well as with $\ell=2$. Also, linear primes alone
+never cover $V_2$: $q$ lines with distinct slopes cover at most $q^2-q+1<q^2$ points.
+\end{remark}
+
+\section{Exact small values}
+Lemma~\ref{lem:model} turns $K_q(m)$ into a finite set-cover problem. Two independent programs
+compute it exactly: an integer program solved with CP-SAT (OR-tools), and a separate exhaustive
+branch-and-bound written with its own finite-field and polynomial arithmetic. They agree on:
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+$q\backslash m$ & 1 & 2 & 3 & 4 & 5\\
+\midrule
+2 & 2 & 3 & 4 & 6 & 9\\
+3 & 3 & 5 & 8 & & \\
+4 & 4 & 7 & & & \\
+5 & 5 & 9 & & & \\
+7 & 7 & 13 & & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+($q=4$: branch-and-bound and SageMath only, since the CP-SAT script handles prime $q$.)
+A SageMath script verifies the explicit construction of Theorem~\ref{thm:main} for
+$q\in\{2,3,4,5,7,8,9\}$ by actual factorisation, and confirms the equality characterisation for
+$q\in\{3,4,5\}$ by enumerating all residue vectors. The values $K_2(4)=6$, $K_2(5)=9$, $K_3(3)=8$
+exceed $m(q-1)+1$, so the pattern $K_q(m)=m(q-1)+1$ suggested by $m\le2$ does not continue.
+No general formula for $m\ge3$ is claimed.
+
+\begin{remark}[related finite geometry]
+The bound $K_q(2)\ge2q-1$ is close in spirit to Jamison's theorem and the Brouwer--Schrijver bound on
+affine blocking sets \cite{jam} (covering all points of $\mathrm{AG}(2,q)$ but one needs $2q-2$ lines).
+Here the lines must have pairwise distinct directions and a missed point costs one prime, which
+makes the count elementary.
+\end{remark}
+
+\section*{Novelty}
+To our knowledge (search of GitHub and arXiv up to 2026-10-09), the polynomial-ring analogue of
+Jacobsthal's function has not been studied. Kalmynin and Konyagin \cite{KK} study a
+``polynomial analogue'' that is different: shifts of integer polynomial sequences. The function-field
+short-interval literature (e.g.\ \cite{powerfree}) treats powerfree polynomials. The community
+repository \texttt{jdb19937/jacobsthal} improves the integer bound of \cite{oai} by a power of
+$\log k$ and does not consider $\F_q[x]$.
+
+\begin{thebibliography}{9}
+\bibitem{oai} OpenAI, \emph{A quadratic bound for Jacobsthal's function}, September 25, 2026,
+\url{https://github.com/openai/math} (family 021).
+\bibitem{KK} A.~B. Kalmynin and S.~V. Konyagin, \emph{A polynomial analogue of Jacobsthal function},
+Izv. Math. \textbf{88} (2024), 225--235; arXiv:2302.00459.
+\bibitem{jam} R.~E. Jamison, \emph{Covering finite fields with cosets of subspaces}, J. Combin. Theory
+Ser. A \textbf{22} (1977), 253--266; A.~E. Brouwer and A. Schrijver, \emph{The blocking number of an
+affine space}, J. Combin. Theory Ser. A \textbf{24} (1978), 251--253.
+\bibitem{powerfree} \emph{Short interval results for powerfree polynomials over finite fields},
+arXiv:2310.02495.
+\end{thebibliography}
+\end{document}

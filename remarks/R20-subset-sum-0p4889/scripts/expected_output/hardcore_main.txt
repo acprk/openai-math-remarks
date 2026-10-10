@@ -1,0 +1,12 @@
+configuration = main  N = 128
+eta = 0.5176  tau = 0.48888  lambda = 8.323 8.132  kappa_f, kappa_g = 1.034 1.0339
+Delta = 0.02872  Gamma = 0.46016  a = Delta/Gamma in 0.06241307371 0.06241307371
+inner quadrature error bounds: Z_f 1.22e-24  P 5.05e-20  Y 7.74e-19
+||f_beta||^2 < 1.54570923301  ||g_beta||^2 < 1.58564103955  c = sup|Q-1| on strip < 0.565322671147
+strip exponents E1 < 18.9973  E2 < 17.6715  outer quadrature errors < 3.26e-15 1.3e-15
+RIGOROUS  log2 I1 < 0.517078797022   log2 I2 < 0.516960383245
+finite-circle constant (Lemma 3.2 analogue) C_fin = C_cont + 0.0001 < 0.517178797
+MSE exponent  -eta + C_fin + 48 eps < -0.00042072298  (must be < 0): True
+domination: 1 < lambda1 <= 10: True   lambda2 (4a+3) < 26.426172 < 30: True   lambda2 > 1: True
+checksum run-time exponent tau + 20 eps = 0.4888802 < claimed exponent 0.4889 : True
+CERTIFIED: True

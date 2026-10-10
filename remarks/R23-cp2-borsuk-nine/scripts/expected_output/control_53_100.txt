@@ -1,0 +1,10 @@
+9 points read from P9.txt
+chart 0 depth 1 R=0.5 boxes 16 accepted 0 remaining 16
+chart 0 depth 2 R=0.25 boxes 256 accepted 0 remaining 256
+chart 0 depth 3 R=0.125 boxes 4096 accepted 545 remaining 3551
+chart 0 depth 4 R=0.0625 boxes 56816 accepted 43626 remaining 13190
+chart 0 depth 5 R=0.03125 boxes 211040 accepted 196270 remaining 14770
+chart 0 depth 6 R=0.015625 boxes 236320 accepted 226131 remaining 10189
+chart 0 depth 7 R=0.0078125 boxes 163024 accepted 157220 remaining 5804
+FAIL: centre with max_i h_i <= 0 (certificate impossible at this T): 0 [ 0.67578125  0.30859375 -0.26171875  0.08984375]
+exit code 1

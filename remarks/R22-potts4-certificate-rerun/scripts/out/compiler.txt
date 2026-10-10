@@ -1,0 +1,2 @@
+Ubuntu clang version 17.0.6 (++20231209124227+6009708b4367-1~exp1~20231209124336.77)
+mode a: exit 0, wall time 176 s

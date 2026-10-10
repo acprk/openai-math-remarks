@@ -1,0 +1,2 @@
+sl2 ranks d0..d3: [0, 3, 0, 0] (paper/support: (0,3,0,0))
+sl3 ranks d0..d3: [0, 8, 20, 35] (paper/support: (0,8,20,35))

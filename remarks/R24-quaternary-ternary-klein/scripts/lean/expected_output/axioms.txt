@@ -1,0 +1,110 @@
+Build completed successfully (8983 jobs).
+GeneralNorm.alternatingProduct_odd_torsion : ∀ (N : ℕ) [inst : NeZero N] (hu : 1 < N),
+  Odd N →
+    ∀ (x : CyclicRing.Elem (↥CyclotomicRings.GaussianRing) N),
+      x * CyclicRing.ringStar x = CyclicRing.scalar N ↑N →
+        ∃ m, 0 < m ∧ Odd m ∧ GeneralNorm.alternatingValue N ⋯ x ^ m = 1
+GeneralNorm.alternatingProduct_eq_one_of_two_primes : ∀ (N : ℕ) [inst : NeZero N] (hu : 1 < N),
+  Odd N →
+    ∀ (x : CyclicRing.Elem (↥CyclotomicRings.GaussianRing) N),
+      x * CyclicRing.ringStar x = CyclicRing.scalar N ↑N →
+        ∀ (p q : PrimeComponentsN.PrimeIndex N), p ≠ q → GeneralNorm.alternatingValue N ⋯ x = 1
+EisensteinNorm.alternatingProduct_coprime_three_torsion : ∀ (N : ℕ) [inst : NeZero N] (hu : 1 < N),
+  ¬3 ∣ N →
+    ∀ (x : CyclicRing.Elem (↥CyclotomicRingsW.EisensteinRing) N),
+      x * CyclicRing.ringStar x = CyclicRing.scalar N ↑N →
+        ∃ m, 0 < m ∧ m.Coprime 3 ∧ EisensteinNorm.alternatingValue N ⋯ x ^ m = 1
+GeneralNorm.master_lemma : ∀ (N : ℕ) [inst : NeZero N],
+  1 < N →
+    Odd N →
+      ∀ {ι : Type u_1} (s : Finset ι) (x₀ : CyclicRing.Elem (↥CyclotomicRings.GaussianRing) N),
+        x₀ * CyclicRing.ringStar x₀ = CyclicRing.scalar N ↑N →
+          ∀ (x : ι → CyclicRing.Elem (↥CyclotomicRings.GaussianRing) N),
+            (∀ j ∈ s, x j * CyclicRing.ringStar (x j) = CyclicRing.scalar N ↑N) →
+              ∀ (t : ι → ↥CyclotomicRings.GaussianRing),
+                (∀ j ∈ s, t j ≠ 0) →
+                  (∀ j ∈ s, ∃ r, t j = (1 + CyclotomicRings.gaussianI) * r) →
+                    ∀ (y : ι → CyclicRing.Elem (↥CyclotomicRings.GaussianRing) N),
+                      (∀ j ∈ s, x j = x₀ + CyclicRing.scalar N (t j) * y j) →
+                        ∀ (e : ↥CyclotomicRings.GaussianRing),
+                          (∃ r, e = 1 + (1 + CyclotomicRings.gaussianI) * r) →
+                            ∀ (W : CyclicRing.Elem (↥CyclotomicRings.GaussianRing) N),
+                              ∑ j ∈ s, y j =
+                                  CyclicRing.scalar N e * GeneralNorm.Jelem N +
+                                    CyclicRing.scalar N (1 + CyclotomicRings.gaussianI) * W →
+                                False
+EisensteinNorm.master_lemma : ∀ (N : ℕ) [inst : NeZero N],
+  1 < N →
+    ¬3 ∣ N →
+      ∀ {ι : Type u_1} (s : Finset ι) (x₀ : CyclicRing.Elem (↥CyclotomicRingsW.EisensteinRing) N),
+        x₀ * CyclicRing.ringStar x₀ = CyclicRing.scalar N ↑N →
+          ∀ (x : ι → CyclicRing.Elem (↥CyclotomicRingsW.EisensteinRing) N),
+            (∀ j ∈ s, x j * CyclicRing.ringStar (x j) = CyclicRing.scalar N ↑N) →
+              ∀ (t : ι → ↥CyclotomicRingsW.EisensteinRing),
+                (∀ j ∈ s, t j ≠ 0) →
+                  (∀ j ∈ s, ∃ r, t j = EisensteinNorm.lam * r) →
+                    ∀ (y : ι → CyclicRing.Elem (↥CyclotomicRingsW.EisensteinRing) N),
+                      (∀ j ∈ s, x j = x₀ + CyclicRing.scalar N (t j) * y j) →
+                        ∀ (e : ↥CyclotomicRingsW.EisensteinRing),
+                          (∃ c r, e = ↑c + EisensteinNorm.lam * r ∧ ¬3 ∣ c) →
+                            ∀ (W : CyclicRing.Elem (↥CyclotomicRingsW.EisensteinRing) N),
+                              ∑ j ∈ s, y j =
+                                  CyclicRing.scalar N e * EisensteinNorm.Jelem N +
+                                    CyclicRing.scalar N EisensteinNorm.lam * W →
+                                False
+GeneralNorm.QuaternaryQ.not_exists_perfect_quaternary : ∀ (m : ℕ) [inst : NeZero m],
+  1 < m →
+    Odd m →
+      ¬∃ a,
+          (∀ (j : ZMod (2 * m)), a j = 1 ∨ a j = -1 ∨ a j = Complex.I ∨ a j = -Complex.I) ∧
+            ∀ (τ : ZMod (2 * m)), τ ≠ 0 → ∑ j, a j * (starRingEnd ℂ) (a (j + τ)) = 0
+GeneralNorm.MenonT1.not_exists_perfect_binary_array : ∀ (N : ℕ) [inst : NeZero N],
+  1 < N →
+    Odd N →
+      ¬∃ f,
+          (∀ (g : ZMod 2 × ZMod 2 × ZMod N), f g = 1 ∨ f g = -1) ∧
+            ∀ (τ : ZMod 2 × ZMod 2 × ZMod N), τ ≠ 0 → ∑ g, f g * f (g + τ) = 0
+GeneralNorm.MenonT1.not_exists_menon_C2_C2_square : ∀ (u : ℕ) [inst : NeZero u],
+  1 < u →
+    Odd u →
+      ¬∃ f,
+          (∀ (g : ZMod 2 × ZMod 2 × ZMod (u ^ 2)), f g = 1 ∨ f g = -1) ∧
+            ∀ (τ : ZMod 2 × ZMod 2 × ZMod (u ^ 2)), τ ≠ 0 → ∑ g, f g * f (g + τ) = 0
+EisensteinNorm.TernaryT3.not_exists_perfect_ternary : ∀ (m : ℕ) [inst : NeZero m],
+  1 < m →
+    ¬3 ∣ m →
+      ¬∃ a,
+          (∀ (j : ZMod (3 * m)), a j ^ 3 = 1) ∧ ∀ (τ : ZMod (3 * m)), τ ≠ 0 → ∑ j, a j * (starRingEnd ℂ) (a (j + τ)) = 0
+@RankOne.theoremF_gaussian : ∀ {p q : ℕ},
+  Nat.Prime p →
+    Nat.Prime q →
+      p ≠ 2 →
+        q ≠ 2 →
+          p ≠ q →
+            ∀ [inst : NeZero p] [inst_1 : NeZero q] [inst_2 : NeZero (p * q)]
+              (x : CyclicRing.Elem (↥CyclotomicRings.GaussianRing) (p * q)),
+              x * CyclicRing.ringStar x = CyclicRing.scalar (p * q) ↑(p * q) →
+                ∀ (g : ZMod (p * q)),
+                  (CyclicRing.augmentation (p * q)) x * x.coeff g =
+                    (RankOne.pushforward p x).coeff g.cast * (RankOne.pushforward q x).coeff g.cast
+'OAI.CirculantHadamard.GeneralNorm.alternatingProduct_odd_torsion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OAI.CirculantHadamard.EisensteinNorm.alternatingProduct_coprime_three_torsion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OAI.CirculantHadamard.GeneralNorm.master_lemma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.CirculantHadamard.EisensteinNorm.master_lemma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.CirculantHadamard.GeneralNorm.QuaternaryQ.not_exists_perfect_quaternary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OAI.CirculantHadamard.GeneralNorm.MenonT1.not_exists_perfect_binary_array' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OAI.CirculantHadamard.GeneralNorm.MenonT1.not_exists_menon_C2_C2_square' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OAI.CirculantHadamard.EisensteinNorm.TernaryT3.not_exists_perfect_ternary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OAI.CirculantHadamard.RankOne.theoremF_gaussian' depends on axioms: [propext, Classical.choice, Quot.sound]

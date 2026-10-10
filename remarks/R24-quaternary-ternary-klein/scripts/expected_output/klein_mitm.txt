@@ -1,0 +1,3 @@
+P=C9: |{x in {-2..2}^P : xx*=9}| = 90; perfect binary arrays on C2xC2xC9 = 0
+P=C3xC3: |{x in {-2..2}^P : xx*=9}| = 792; perfect binary arrays on C2xC2xC3xC3 = 15552
+  direct autocorrelation check of the first array found: perfect

@@ -1,0 +1,17 @@
+Part 1 (exact): max |E[detect], r=1  - p'/2| = 1.11e-16 (identity); max E[detect]/(2p'/2), r=2 = 0.7771 (must be <=1)
+Part 2: p, r0, s, exact extinction, Chernoff bound (proof), Markov/harmonic bound (paper):
+   p=0.30 r0=74 s=1204 exact=1.304e-01 chernoff=4.939e-01 harmonic=9.853e-01
+   p=0.30 r0=148 s=1204 exact=1.622e-02 chernoff=2.486e-01 harmonic=8.634e-01
+   p=0.10 r0=1999 s=2303 exact=1.204e-29 chernoff=5.006e-01 harmonic=1.126e+00
+   p=0.10 r0=3999 s=2303 exact=0.000e+00 chernoff=2.503e-01 harmonic=1.038e+00
+   p=0.05 r0=15999 s=2996 exact=0.000e+00 chernoff=5.004e-01 harmonic=1.168e+00
+   p=0.05 r0=31999 s=2996 exact=0.000e+00 chernoff=2.502e-01 harmonic=1.094e+00
+Part 3: log2 r*(p): paper vs new vs lower bound log2(1/(4p))
+   p=0.1  paper log2 r*~116.9 (r0~2^56.9)   new log2 r*~27.1 (r0=4.04e+03)   lower log2 r*>=1.3
+      exponents: paper r* ~ p^-35.2, new r* ~ p^-8.17
+   p=0.01  paper log2 r*~186.2 (r0~2^91.5)   new log2 r*~47.1 (r0=4.04e+06)   lower log2 r*>=4.6
+      exponents: paper r* ~ p^-28.0, new r* ~ p^-7.08
+   p=0.0001  paper log2 r*~347.8 (r0~2^172.3)   new log2 r*~86.9 (r0=4.04e+12)   lower log2 r*>=11.3
+      exponents: paper r* ~ p^-26.2, new r* ~ p^-6.54
+   p=1e-08  paper log2 r*~647.8 (r0~2^322.3)   new log2 r*~166.7 (r0=4.04e+24)   lower log2 r*>=24.6
+      exponents: paper r* ~ p^-24.4, new r* ~ p^-6.27

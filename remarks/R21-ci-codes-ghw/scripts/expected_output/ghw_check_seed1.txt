@@ -1,0 +1,6 @@
+type (2, 2) q 11 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+type (2, 3) q 11 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+type (3, 3) q 11 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+type (2, 4) q 7 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+type (2, 2, 2) q 7 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+tests 534 violations 0

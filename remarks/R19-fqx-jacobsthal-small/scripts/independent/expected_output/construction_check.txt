@@ -1,0 +1,10 @@
+q=2: construction omega(M)=3 (2q-1=3), all 4 elements of f+V_2 non-coprime: True
+q=3: construction omega(M)=5 (2q-1=5), all 9 elements of f+V_2 non-coprime: True
+q=4: construction omega(M)=7 (2q-1=7), all 16 elements of f+V_2 non-coprime: True
+q=5: construction omega(M)=9 (2q-1=9), all 25 elements of f+V_2 non-coprime: True
+q=7: construction omega(M)=13 (2q-1=13), all 49 elements of f+V_2 non-coprime: True
+q=8: construction omega(M)=15 (2q-1=15), all 64 elements of f+V_2 non-coprime: True
+q=9: construction omega(M)=17 (2q-1=17), all 81 elements of f+V_2 non-coprime: True
+q=3: residue vectors attaining 2q-1 with all q lines: 9, of which non-affine: 0 (affine total 9)
+q=4: residue vectors attaining 2q-1 with all q lines: 16, of which non-affine: 0 (affine total 16)
+q=5: residue vectors attaining 2q-1 with all q lines: 25, of which non-affine: 0 (affine total 25)

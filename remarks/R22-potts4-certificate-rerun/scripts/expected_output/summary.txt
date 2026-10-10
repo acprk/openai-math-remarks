@@ -1,0 +1,27 @@
+== 1. upstream hashes ==
+OK   checks/certificate.cpp
+OK   checks/certificate-source.txt
+OK   checks/full-runs.json
+OK   checks/verify.py
+OK   checks/small_polynomials.py
+OK   checks/logs/mode-a.log
+OK   checks/logs/mode-a-ubsan.log
+OK   checks/logs/mode-b.log
+OK   checks/logs/paper-mode-a.log
+OK   checks/logs/paper-mode-b.log
+OK   checks/logs/paper-small-polynomials.json
+== 2. archived traces vs upstream ==
+OK   full-run-2026-10-07-gcc9.5-O3-mode-a.trace == upstream mode-a.log
+OK   spot-2026-10-09-clang17-O2-mode-a.trace == upstream mode-a.log
+OK   spot-2026-10-09-gcc12-O1-mode-a.trace == upstream mode-a.log
+OK   full-run-2026-10-07-gcc9.5-O3-mode-b.trace == upstream mode-b.log
+OK   upstream paper-mode-a.log = mode-a.log + timing lines
+OK   upstream paper-mode-b.log = mode-b.log + timing lines
+OK   upstream mode-a-ubsan.log == mode-a.log
+OK   spot-2026-10-09-clang17-O2-mode-b-prefix.trace (8 lines) is a prefix of upstream mode-b.log
+== 3. fresh run of mode a ==
+done 4479 19 lp=2074 lt=166
+OK   fresh mode-a trace == upstream mode-a.log
+== 5. small_polynomials.py ==
+OK   small_polynomials.py output equals upstream paper-small-polynomials.json
+     minima: [('H+1/2', '19/50'), ('F', '0'), ('G', '87/1000'), ('(3-Euler)H', '0')]

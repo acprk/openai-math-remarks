@@ -1,0 +1,15 @@
+type (3, 3) q 11 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+type (3, 4) q 13 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+type (2, 2, 2) q 7 : CI instances 6 | Cartesian GHW == mu_r for all (d,r): True
+type (2, 2, 2, 2) q 5 : CI instances 0 | Cartesian GHW == mu_r for all (d,r): True
+tests 516 violations 0
+((2, 2, 2), 'equal') 114
+((2, 2, 2), 'r1: mu==CMSS') 6
+((2, 2, 2), 'r1: mu>CMSS') 12
+((3, 3), 'equal') 156
+((3, 3), 'r1: mu==CMSS') 12
+((3, 3), 'r1: mu>CMSS') 12
+((3, 4), 'equal') 241
+((3, 4), 'r1: mu==CMSS') 12
+((3, 4), 'r1: mu>CMSS') 18
+((3, 4), 'strict') 5

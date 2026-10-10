@@ -1,0 +1,224 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amssymb,amsmath,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\CP}{\mathbb{CP}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Herm}{Herm}
+\DeclareMathOperator{\diam}{diam}
+
+\title{The complex projector set of $\CP^2$ has Borsuk number nine}
+\author{[AUTHOR NAME]}
+\date{October 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's family-156 preprint shows that the projector image of $\mathbb{RP}^3$ in
+$\R^9$ cannot be covered by ten sets of smaller diameter. The complex analogue,
+the projector image $X$ of $\CP^2$ in the eight-dimensional space of trace-one
+Hermitian $3\times3$ matrices, is a natural candidate for an eight-dimensional
+counterexample. We record that it is not one: $b(X)=9$. The lower bound is the
+verbatim complex transfer of the preprint's odd-map argument. The upper bound
+is an explicit cover by nine caps, certified on all of $\CP^2$ by a
+branch-and-bound computation in outward-rounded interval arithmetic and,
+independently, in exact integer arithmetic. The result is a negative one. Since $\CP^n$ for
+$n\ge3$ lives in dimension $\ge15$, it closes the route of complex projective
+projector sets for counterexamples in dimension $<9$. The mathematics is elementary.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+For a unit vector $u\in\C^3$ write $P_u=uu^*$. Let
+\[
+ X=\{P_u:\ u\in\C^3,\ |u|=1\}\subset\{A\in\Herm_3(\C):\tr A=1\}\cong\R^8,
+\]
+with the Frobenius metric $\|A\|_F^2=\tr(A^*A)$. Since $\tr(P_uP_v)=|\langle u,v\rangle|^2$,
+\begin{equation}\label{eq:dist}
+ \|P_u-P_v\|_F^2=2-2|\langle u,v\rangle|^2 ,
+\end{equation}
+so $\diam X=\sqrt2$, attained exactly at orthogonal pairs. For a bounded set $Y$ of positive diameter, $b(Y)$ is the least number of subsets of
+diameter $<\diam Y$ that cover $Y$.
+
+\begin{theorem}\label{thm:main}
+$b(X)=9$. Explicitly, there are nine points $p_1,\dots,p_9\in\C^3$ (listed in
+the accompanying file \texttt{P9.txt}) such that the nine closed caps
+\[
+ C_i=\Big\{P_u\in X:\ |\langle u,p_i\rangle|^2\ \ge\ \tfrac{21}{40}\,|p_i|^2\Big\}
+\]
+cover $X$ and each has diameter at most $\sqrt{399/200}<\sqrt2$. Conversely
+$X$ cannot be covered by eight sets of diameter $<\sqrt2$.
+\end{theorem}
+
+Since $X$ spans an $8$-dimensional affine space, $9=8+1$ is exactly Borsuk's
+bound, so $X$ is not a Borsuk counterexample.
+
+\section{Lower bound: $b(X)\ge 9$}
+This is the complex form of the preprint's strict-gap
+reduction (\texttt{geometry.tex}, \texttt{lem:cover-to-map}), of its odd
+extension (\texttt{extension.tex}, \texttt{lem:positive-extension},
+\texttt{lem:signed-extension}) and of the first sentence of its
+Proposition \texttt{thm:label-bound}. The proofs carry over line by line. We
+indicate the only changes.
+
+\begin{proposition}\label{prop:lower}
+If $X$ is covered by $m$ sets of diameter $<\sqrt2$, then $m\ge 9$.
+\end{proposition}
+\begin{proof}
+\emph{Step 1 (reduction).} As in the preprint (proof of \texttt{lem:cover-to-map}),
+enlarge the sets to relatively open sets $U_i$ of diameter $<\sqrt2$ and take a
+continuous partition of unity on $\CP^2$ subordinate to their preimages. This gives
+continuous $f=(f_1,\dots,f_m):\CP^2\to\Delta^{m-1}$ such that, with
+$S(x)=\{i:f_i(x)>0\}$, orthogonal lines $x\perp y$ have $S(x)\cap S(y)=\varnothing$.
+(If $i\in S(x)\cap S(y)$ then $P_x,P_y\in U_i$ would be at distance $\sqrt2$
+by \eqref{eq:dist}.) Only continuity is needed below.
+
+\emph{Step 2 (extension).} Put $H(v)=|v|^2f([v])$ for $v\ne0$, $H(0)=0$; it is
+continuous because $\|H(v)\|_1=|v|^2$. For positive semidefinite $Q\in\Herm_3$ let
+\[
+ E(Q)=3\int_{S(\C^3)}H(Q^{1/2}u)\,d\mu(u),
+\]
+with $\mu$ the $U(3)$-invariant probability measure on the unit sphere of $\C^3$.
+The map $E$ is continuous, since $Q\mapsto Q^{1/2}$ is continuous on the PSD
+cone. It is positively homogeneous and coordinatewise nonnegative. Since
+$\int uu^*\,d\mu=\tfrac13I$, it satisfies $\sum_iE(Q)_i=3\int\langle Qu,u\rangle
+d\mu=\tr Q$. As in the preprint, $\{i:E(Q)_i>0\}=\bigcup_{x\subseteq \operatorname{ran}Q}S(x)$.
+This uses only that $Q^{1/2}$ maps the sphere onto a set spanning every line of
+$\operatorname{ran}Q$, and that nonempty open subsets of the sphere have positive measure.
+
+\emph{Step 3 (odd map).} For $A\in\Herm_3$ write $A=A_+-A_-$ with $A_\pm\succeq0$
+supported on the orthogonal positive and negative spectral subspaces, and put
+$F(A)=E(A_+)-E(A_-)$. Every line in $\operatorname{ran}A_+$ is orthogonal to
+every line in $\operatorname{ran}A_-$. By Step~1 the two vectors therefore have disjoint
+supports, so $\|F(A)\|_1=\tr A_++\tr A_-=\tr|A|$. Moreover $F$ is continuous and
+odd ($A_\pm$ are exchanged under $A\mapsto-A$). Hence $A\mapsto F(A)$ restricts to a
+continuous odd map from $\{A\in\Herm_3:\tr|A|=1\}\cong S^{8}$ (as
+$\dim_\R\Herm_3=9$) to $\{y\in\R^m:\|y\|_1=1\}\cong S^{m-1}$. By the
+Borsuk--Ulam theorem, $m-1\ge8$.
+\end{proof}
+
+\begin{remark}[What is and is not analogous]
+For real $k\times k$ symmetric matrices the same argument gives $m\ge k(k+1)/2$,
+which is again Borsuk's bound $d+1$. The preprint's counterexample comes from
+excluding the \emph{equality case} $m=N_4=10$ on $\mathbb{RP}^3$, by a long
+degree-theoretic and combinatorial argument (\texttt{topology.tex},
+\texttt{six-labels.tex}, \texttt{ten-labels.tex}). Note that $\CP^2$ is the complex
+analogue of $\mathbb{RP}^2$ ($k=3$, six labels), where the preprint does not exclude
+equality. The complex analogue of the $k=4$ witness is $\CP^3\subset\R^{15}$, which
+is irrelevant for the dimension record. The point of Theorem~\ref{thm:main} is only that the
+single complex projector set of dimension below $9$ that is not a round sphere,
+namely $X$ in $\R^8$, is not a counterexample. ($\CP^1$, $\mathbb{HP}^1$ and $\mathbb{OP}^1$ give round
+spheres $S^2,S^4,S^8$ in $\R^3,\R^5,\R^9$, for which $b=d+1$. $\mathbb{HP}^2$ lives in $\R^{14}$.)
+\end{remark}
+
+\section{Upper bound: nine caps}
+\begin{lemma}[Caps]\label{lem:cap}
+Let $p,x,y\in\C^3$ be unit vectors with $|\langle x,p\rangle|^2\ge T$ and
+$|\langle y,p\rangle|^2\ge T$, where $T>\tfrac12$. Then
+$|\langle x,y\rangle|\ge 2T-1$, and hence
+$\|P_x-P_y\|_F^2\le 2-2(2T-1)^2$.
+\end{lemma}
+\begin{proof}
+Write $x=ap+x'$ and $y=bp+y'$ with $x',y'\perp p$. Then $|a|^2\ge T$ and $|x'|^2=1-|a|^2\le1-T$,
+and likewise for $y$. Hence $|\langle x,y\rangle|=|a\bar b+\langle x',y'\rangle|\ge|a||b|-|x'||y'|\ge
+T-(1-T)$. Apply \eqref{eq:dist}.
+\end{proof}
+
+With $T=21/40$ this gives $\diam C_i\le\sqrt{2-2/400}=\sqrt{399/200}\approx1.41244$.
+It remains to show that the caps cover $X$. Because the condition is
+homogeneous, this is the statement
+\begin{equation}\label{eq:cover}
+ \forall x\in\C^3\setminus\{0\}:\qquad
+ \max_{1\le i\le 9}\ h_i(x)>0,\qquad
+ h_i(x)=|\langle x,p_i\rangle|^2-T\,|p_i|^2|x|^2 .
+\end{equation}
+
+\begin{proposition}[computer-assisted]\label{prop:cert}
+\eqref{eq:cover} holds for the nine points of \texttt{P9.txt} with $T=21/40$,
+and also with $T=263/500=0.526$.
+\end{proposition}
+
+\emph{Domain.} Every point of $\CP^2$ has a representative with $x_j=1$ and
+$|x_k|\le1$ for $k\ne j$: divide by the coordinate of largest modulus. Then
+$(\operatorname{Re}x_k,\operatorname{Im}x_k)_{k\ne j}\in[-1,1]^4$. So it suffices to prove
+\eqref{eq:cover} on three boxes $[-1,1]^4$ (one per chart $j$). Each
+$h_i$ is a real quadratic polynomial in the four free coordinates.
+
+\emph{Primary certificate} (\texttt{cert\_interval.py}). Branch and bound with
+16-way splitting. On each box, $\operatorname{Re}$ and $\operatorname{Im}$ of
+$\langle x,p_i\rangle$ are linear forms, enclosed in interval arithmetic; their
+squares and $|x|^2$ are enclosed termwise. A box is accepted when the lower
+endpoint of the enclosure of some $h_i$ is $>0$. Every IEEE-754 operation is
+followed by an outward \texttt{nextafter} step, so all enclosures are rigorous.
+The data $p_i$ are exact binary64 numbers, and $T|p_i|^2$ is computed exactly as a
+rational and then enclosed. For $T=21/40$: $1\,897\,683$ accepted leaves
+(minimum half-width $2^{-12}$), under a minute on one core.
+
+\emph{Independent certificate} (\texttt{independent/cert\_exact.py},
+standard library only). We use exact integer arithmetic throughout. For a quadratic $H$ and a
+box $c\pm r$, it uses the exact expansion $H(c+d)=H(c)+\nabla H(c)\cdot d+d^{\mathsf T}Qd$
+and the lower bound
+\[
+ H(c)-\sum_k|\partial_kH(c)|r_k+\sum_k\min(Q_{kk},0)r_k^2-\sum_{k\ne l}|Q_{kl}|r_kr_l .
+\]
+Boxes are bisected along the widest coordinate. For $T=21/40$: $16\,876$ leaves,
+maximal depth $36$, about 4\,s.
+
+\emph{A symmetric configuration is not enough.} For the Hesse SIC (orbit of
+$(0,1,-1)/\sqrt2$ under the Heisenberg group) every overlap of the basis vector $e_1$ with the nine SIC lines is $0$ or $\tfrac12$,
+so its maximal overlap is exactly $\tfrac12$ and its caps only reach the borderline $T=\tfrac12$, i.e.\ diameter $\sqrt2$.
+A perturbed, computer-found configuration is therefore used.
+
+\emph{Sharpness and control.} Numerical minimization gives
+$\min_x\max_i |\langle \hat x,\hat p_i\rangle|^2\approx0.526055$ for these points.
+Both certificates succeed at $T=0.526$. At $T=0.53$ the primary code stops with an
+explicit violating point
+$x=(1,\,0.67578125+0.30859375i,\,-0.26171875+0.08984375i)$, whose normalized
+maximal overlap is $0.52950<0.53$. Deleting the ninth point also makes the code
+fail immediately, as Proposition~\ref{prop:lower} predicts for any eight caps with $T>\tfrac12$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Proposition~\ref{prop:lower} gives $b(X)\ge9$. Proposition~\ref{prop:cert} and
+Lemma~\ref{lem:cap} give nine closed caps that cover $X$, each of diameter
+$\le\sqrt{399/200}<\sqrt2$.
+\end{proof}
+
+\section{Provenance, scope and what is not claimed}
+The nine points were found by a heuristic max--min search (soft-min objective,
+L-BFGS-B). The search is not part of the proof. The certificate concerns only the
+fixed exact numbers in \texttt{P9.txt}.
+
+\begin{itemize}
+\item We do not determine the best covering threshold
+$\max_{p_1..p_9}\min_x\max_i|\langle\hat x,\hat p_i\rangle|^2$ (it is at least $0.526$),
+nor whether symmetric configurations (SIC/MUB/Clifford-equivariant) work. An earlier
+exploratory computation suggested that Clifford-equivariant nine-covers have
+margin at most $0.005$. That computation is not used here.
+\item Nothing about dimensions $\le 8$ in general follows. The note shows only that this
+particular candidate set does not give a Borsuk counterexample in $\R^8$.
+\item The lower bound is a direct transfer of the preprint's argument. The upper
+bound is an elementary covering-radius computation. We do not claim new
+methods.
+\item There is no Lean formalization.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{OAI156} OpenAI, \emph{A nine-dimensional counterexample to Borsuk's covering assertion},
+OpenAI Math Release preprint, family 156, September 23, 2026,
+\url{https://github.com/openai/math} (commit \texttt{fd4aeeb2}).
+\bibitem{Kalai} G. Kalai, \emph{Some old and new problems in combinatorial geometry I: Around Borsuk's problem},
+in: Surveys in Combinatorics 2015, arXiv:1505.04952.
+\bibitem{Matousek} J. Matou\v{s}ek, \emph{Using the Borsuk--Ulam theorem}, Springer, 2003.
+\bibitem{Hatcher} A. Hatcher, \emph{Algebraic Topology}, Cambridge University Press, 2002.
+\bibitem{Moore} R. E. Moore, R. B. Kearfott, M. J. Cloud, \emph{Introduction to Interval Analysis}, SIAM, 2009.
+\end{thebibliography}
+
+\bigskip\noindent\small Developed with AI assistance (Anthropic Claude, Opus 5.5) under
+[AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI
+sessions and are not human peer review.
+\end{document}

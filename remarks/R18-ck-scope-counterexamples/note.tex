@@ -1,0 +1,155 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}
+
+\title[Scope of the sharp contraction bounds]{A remark on the scope of the sharp binary-information\\ and Hellinger contraction bounds}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's family 119 proves, on the \emph{uniform} binary cube with independent bit-flip noise, a
+sharp soft-channel contraction (which implies the Courtade--Kumar conjecture), a refined Boolean
+bound depending on the output bias, and the Hellinger conjecture for every output bias. The
+statements are made only for the uniform binary cube, and nothing claimed there is contradicted
+here. We record that the natural extensions of the refined Boolean bound, of the soft-channel
+contraction, and of the Hellinger bound to other finite product spaces (uniform $q$-ary
+coordinates with $q\ge3$, or $p$-biased bits with $p\neq\frac12$), \emph{with the standard
+resampling noise operator} (the Bonami--Beckner operator; the $q$-ary symmetric channel parametrised
+by its correlation), are false, already in dimension one and for small noise. Whether the failure
+persists depends on the noise model: with independent bit flips applied to $p$-biased bits, an
+exhaustive check in dimensions up to three found no violation. The reason is a second-order computation: on such spaces a single
+coordinate can carry a Boolean function of any mean, and its information and Hellinger loss grow
+like $\lambda^2/2$ and $\lambda^2/(2\sqrt{1-m^2})$, while the conjectured curves grow like
+$\lambda^2r_m^2/2$ and $\lambda^2/2$. The plain Courtade--Kumar curve is not contradicted.
+\end{abstract}
+\maketitle
+
+\noindent\textbf{Attribution and scope.} The theorems discussed are OpenAI's work: family 119 of
+\url{https://github.com/openai/math} (commit \nolinkurl{fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb}),
+preprints \cite{oai-ck} and \cite{oai-hel}. Both state their results only for the uniform measure on
+$\{-1,1\}^n$; this note concerns only extensions that those preprints do not claim, so it points
+out a boundary of applicability, not an error. Developed with AI assistance (Anthropic Claude,
+Opus~5.5) under [AUTHOR NAME]'s direction; the independent adversarial review was run by a separate
+AI session and is not human peer review.
+
+\section{The statements and their natural extensions}
+Logarithms are natural. For $r\in[-1,1]$ let $H(r)$ be the entropy of a sign with mean $r$,
+$\psi(r)=\log2-H(r)$, and let $\psi^{-1}$ be its increasing inverse on $[0,1]$. For a Boolean
+$f$ of mean $m$ put $r_m=\psi^{-1}(H(m))$, so $r_m<1$ when $m\ne0$. On the uniform cube with
+correlation-$\rho$ bit-flip noise, \cite{oai-ck} proves
+\begin{equation}\label{eq:soft}
+I(T_\rho u)\le\psi\bigl(|\rho|\,\psi^{-1}(I(u))\bigr)\qquad\text{(Theorem 1.1)},
+\end{equation}
+\begin{equation}\label{eq:refined}
+I(f(X);Y)\le\psi(|\rho|\,r_m)\le\psi(|\rho|)\qquad\text{(Corollary 1.2)},
+\end{equation}
+and \cite{oai-hel} proves
+\begin{equation}\label{eq:hel}
+\sqrt{1-m^2}-\E\sqrt{1-(T_\rho f)^2}\le1-\sqrt{1-\rho^2}\qquad\text{(Theorem 1.1)}.
+\end{equation}
+For a Boolean $u=f$ one has $I(f)=H(m)$, so \eqref{eq:soft} specialises to the first inequality
+of \eqref{eq:refined}.
+
+\emph{The extension.} Let $(\Omega,\mu)$ be a finite probability space, $X\sim\mu^{\otimes n}$, and
+let $R_\lambda$ ($0\le\lambda\le1$) resample each coordinate independently: $Y_i=X_i$ with
+probability $\lambda$, otherwise $Y_i$ is a fresh sample of $\mu$. For $\Omega=\{-1,1\}$ with
+uniform $\mu$ this is the bit-flip channel with $\rho=\lambda$, and $R_\lambda$ is the standard
+noise operator of the $q$-ary and $p$-biased settings (for $q$-ary symmetric noise with symbol
+error probability $\varepsilon$, $\lambda=1-\varepsilon q/(q-1)$ is its correlation). Replace
+$T_\rho$ by $R_\lambda$ and $|\rho|$ by $\lambda$ in \eqref{eq:soft}--\eqref{eq:hel}.
+
+\section{One-dimensional counterexamples}
+Take $n=1$, a set $A\subset\Omega$ with $\mu(A)=w\notin\{0,\tfrac12,1\}$ and $f=2\cdot1_A-1$, so
+$m=2w-1\ne0$. Examples: $\Omega=\{1,\dots,q\}$ uniform with $|A|=1$ ($q\ge3$), or a $p$-biased bit
+with $A=\{1\}$, $p\ne\frac12$. Since $\E[f(X)\mid Y]=\lambda f(Y)+(1-\lambda)m$,
+\[
+I(f(X);Y)=H(m)-\E H\bigl(m+\lambda(f-m)\bigr),\qquad
+L_{\rm Hel}=\sqrt{1-m^2}-\E\sqrt{1-(m+\lambda(f-m))^2}.
+\]
+
+\begin{proposition}\label{prop:main}
+As $\lambda\to0$,
+\[
+I(f(X);Y)=\tfrac{\lambda^2}{2}+O(\lambda^3),\qquad
+\psi(\lambda r_m)=\tfrac{\lambda^2r_m^2}{2}+O(\lambda^4),
+\]
+\[
+L_{\rm Hel}=\frac{\lambda^2}{2\sqrt{1-m^2}}+O(\lambda^3),\qquad
+1-\sqrt{1-\lambda^2}=\tfrac{\lambda^2}{2}+O(\lambda^4).
+\]
+Consequently, for $m\ne0$ and all sufficiently small $\lambda>0$, the extensions of
+\eqref{eq:refined} (first inequality), of \eqref{eq:soft} with $u=f$, and of \eqref{eq:hel} fail.
+\end{proposition}
+\begin{proof}
+Write $\delta=\lambda(f-m)$; then $\E\delta=0$ and $\E\delta^2=\lambda^2(1-m^2)$. For a smooth
+$\Phi$, $\Phi(m)-\E\Phi(m+\delta)=-\tfrac12\Phi''(m)\E\delta^2+O(\lambda^3)$. With
+$\Phi=H$, $H''(m)=-1/(1-m^2)$ gives $\lambda^2/2$. With $\Phi(t)=\sqrt{1-t^2}$,
+$\Phi''(m)=-(1-m^2)^{-3/2}$ gives $\lambda^2/(2\sqrt{1-m^2})$. Finally $\psi(x)=x^2/2+O(x^4)$, and
+$r_m<1$ because $H(m)<\log2$ for $m\ne0$. Compare the coefficients of $\lambda^2$.
+\end{proof}
+
+\begin{remark}[mechanism]
+For a general concave profile $\Phi$ the same computation gives the coefficient
+$\tfrac12(1-m^2)|\Phi''(m)|$, against $\tfrac12|\Phi''(0)|$ for a balanced coordinate. For the
+entropy, $(1-m^2)|H''(m)|=1$ for every $m$, so the plain Courtade--Kumar curve $\psi(\lambda)$ is
+matched to second order but not exceeded; for $\sqrt{1-t^2}$ the left side is
+$(1-m^2)^{-1/2}>1$. On the uniform binary cube a function depending on one coordinate has mean
+$0$ or $\pm1$, so no such witness exists there, in agreement with \cite{oai-ck,oai-hel}.
+Equivalently: at $n=1$ the whole variance of $f$ lies in the $\lambda$-eigenspace of $R_\lambda$,
+whereas on the uniform cube a biased Boolean function cannot put all its variance at level one.
+For instance $f=\mathrm{AND}$ on $\{-1,1\}^2$ is measure-isomorphic to the case $q=4$, $|A|=1$,
+but under independent bit flips with $\rho=0.1$ it gives $I=0.003345<0.004446$ and Hellinger loss
+$0.003864<0.005013$; the violation needs the resampling kernel.
+\end{remark}
+
+\begin{remark}[other noise models]
+The conclusion depends on the noise model, not only on the space. For the $q$-ary symmetric channel
+parametrised by $\rho=1-2\varepsilon$ the violation is larger; parametrised by $\rho=\Pr[Y=X]$ it
+disappears (that parametrisation is degenerate at $\rho=0$). For independent bit flips
+($Y=X\oplus Z$) applied to $p$-biased bits, the adversarial reviewer checked every Boolean function on
+$n\le3$ for $19$ values of $p$ and $25$ values of $\rho$ and found no violation of any of the three
+inequalities; at $n=1$ the coefficient of $\rho^2$ is $(1-m^2)/2$, e.g.\ $0.375<r_m^2/2=0.444$ for $w=\tfrac14$.
+\end{remark}
+
+\section{Certified witnesses}
+Interval arithmetic (mpmath \texttt{iv}, 50 digits, with exact rational inputs) certifies:
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+setting & $\lambda$ & $I(f;Y)$ & $\psi(\lambda r_m)\le$ & $L_{\rm Hel}$ & $1-\sqrt{1-\lambda^2}$\\
+\midrule
+$q=4$, $|A|=1$ ($w=\tfrac14$) & $1/10$ & $0.0048170$ & $0.0044458$ & $0.0054645$ & $0.0050126$\\
+$q=3$, $|A|=1$ ($w=\tfrac13$) & $1/10$ & $0.0049341$ & $0.0048070$ & $0.0052003$ & $0.0050126$\\
+$p$-biased, $p=\tfrac{3}{10}$ & $1/5$ & $0.0193294$ & $0.0188546$ & $0.0207666$ & $0.0202041$\\
+\bottomrule
+\end{tabular}
+\end{center}
+In each row both extensions fail, while $I(f;Y)<\psi(\lambda)$. High-precision root finding gives
+the violation windows: for $w=\tfrac14$, the refined bound fails for $0<\lambda<0.43648$ and the
+Hellinger bound for $0<\lambda<0.32273$; for $w=\tfrac13$, $0<\lambda<0.34953$ and
+$0<\lambda<0.33746$.
+
+\section{What is not claimed}
+We do not claim that \cite{oai-ck} or \cite{oai-hel} contain an error; both restrict to the uniform
+binary cube. The counterexamples concern the resampling noise operator only. We do not claim anything about the plain Courtade--Kumar inequality
+$I(f(X);Y)\le\psi(\lambda)$ on general product spaces; our examples respect it, and whether it holds
+in that generality is not addressed here. The counterexamples are elementary; we record them only
+because the extensions are natural and a reader might expect them to hold.
+
+\begin{thebibliography}{9}
+\bibitem{oai-ck} OpenAI, \emph{Sharp binary-information contraction on the discrete cube},
+September 24, 2026, \url{https://github.com/openai/math} (family 119).
+\bibitem{oai-hel} OpenAI, \emph{Hellinger contraction with arbitrary Boolean output bias},
+September 24, 2026, \url{https://github.com/openai/math} (family 119).
+\end{thebibliography}
+\end{document}

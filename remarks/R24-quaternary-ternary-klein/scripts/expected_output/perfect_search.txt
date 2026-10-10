@@ -1,0 +1,14 @@
+q=4 G=Z6 x Z1 x Z1 |G|=6 visited=1024 perfect(normalised a(0)=0)=0
+q=4 G=Z10 x Z1 x Z1 |G|=10 visited=262144 perfect(normalised a(0)=0)=0
+q=4 G=Z14 x Z1 x Z1 |G|=14 visited=67108864 perfect(normalised a(0)=0)=0
+q=4 G=Z2 x Z1 x Z1 |G|=2 visited=4 perfect(normalised a(0)=0)=2
+q=4 G=Z4 x Z1 x Z1 |G|=4 visited=64 perfect(normalised a(0)=0)=8
+q=4 G=Z8 x Z1 x Z1 |G|=8 visited=16384 perfect(normalised a(0)=0)=32
+q=3 G=Z6 x Z1 x Z1 |G|=6 visited=243 perfect(normalised a(0)=0)=0
+q=3 G=Z12 x Z1 x Z1 |G|=12 visited=177147 perfect(normalised a(0)=0)=0
+q=3 G=Z15 x Z1 x Z1 |G|=15 visited=4782969 perfect(normalised a(0)=0)=0
+q=3 G=Z3 x Z1 x Z1 |G|=3 visited=9 perfect(normalised a(0)=0)=6
+q=3 G=Z9 x Z1 x Z1 |G|=9 visited=6561 perfect(normalised a(0)=0)=54
+q=2 G=Z2 x Z2 x Z3 |G|=12 visited=2048 perfect(normalised a(0)=0)=0
+q=2 G=Z2 x Z2 x Z5 |G|=20 visited=524288 perfect(normalised a(0)=0)=0
+q=2 G=Z2 x Z2 x Z1 |G|=4 visited=8 perfect(normalised a(0)=0)=4

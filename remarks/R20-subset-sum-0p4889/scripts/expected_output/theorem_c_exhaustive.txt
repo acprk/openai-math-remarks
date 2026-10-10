@@ -1,0 +1,8 @@
+G = (Z/4)^2 :   15 subgroups ; violations 0 ; min (|K cap G[p]|^e M / p^{ke}) = 1 ; equality cases 8 ; free quotients (G/K = (Z/p^e)^s) 8, equality <=> free: ok ; averaged corollary ok
+G = (Z/4)^3 :  129 subgroups ; violations 0 ; min (|K cap G[p]|^e M / p^{ke}) = 1 ; equality cases 58 ; free quotients (G/K = (Z/p^e)^s) 58, equality <=> free: ok ; averaged corollary ok
+G = (Z/8)^2 :   37 subgroups ; violations 0 ; min (|K cap G[p]|^e M / p^{ke}) = 1 ; equality cases 14 ; free quotients (G/K = (Z/p^e)^s) 14, equality <=> free: ok ; averaged corollary ok
+G = (Z/16)^2 :   83 subgroups ; violations 0 ; min (|K cap G[p]|^e M / p^{ke}) = 1 ; equality cases 26 ; free quotients (G/K = (Z/p^e)^s) 26, equality <=> free: ok ; averaged corollary ok
+G = (Z/9)^2 :   23 subgroups ; violations 0 ; min (|K cap G[p]|^e M / p^{ke}) = 1 ; equality cases 14 ; free quotients (G/K = (Z/p^e)^s) 14, equality <=> free: ok ; averaged corollary ok
+G = (Z/27)^2 :   76 subgroups ; violations 0 ; min (|K cap G[p]|^e M / p^{ke}) = 1 ; equality cases 38 ; free quotients (G/K = (Z/p^e)^s) 38, equality <=> free: ok ; averaged corollary ok
+G = (Z/25)^2 :   45 subgroups ; violations 0 ; min (|K cap G[p]|^e M / p^{ke}) = 1 ; equality cases 32 ; free quotients (G/K = (Z/p^e)^s) 32, equality <=> free: ok ; averaged corollary ok
+ALL PROPOSITION C CHECKS PASS: True

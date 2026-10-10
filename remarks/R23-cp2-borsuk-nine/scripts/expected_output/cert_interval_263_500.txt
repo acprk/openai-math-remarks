@@ -1,0 +1,50 @@
+9 points read from P9.txt
+chart 0 depth 1 R=0.5 boxes 16 accepted 0 remaining 16
+chart 0 depth 2 R=0.25 boxes 256 accepted 0 remaining 256
+chart 0 depth 3 R=0.125 boxes 4096 accepted 594 remaining 3502
+chart 0 depth 4 R=0.0625 boxes 56032 accepted 44000 remaining 12032
+chart 0 depth 5 R=0.03125 boxes 192512 accepted 180546 remaining 11966
+chart 0 depth 6 R=0.015625 boxes 191456 accepted 185258 remaining 6198
+chart 0 depth 7 R=0.0078125 boxes 99168 accepted 96857 remaining 2311
+chart 0 depth 8 R=0.00390625 boxes 36976 accepted 35981 remaining 995
+chart 0 depth 9 R=0.001953125 boxes 15920 accepted 15398 remaining 522
+chart 0 depth 10 R=0.0009765625 boxes 8352 accepted 8132 remaining 220
+chart 0 depth 11 R=0.00048828125 boxes 3520 accepted 3466 remaining 54
+chart 0 depth 12 R=0.000244140625 boxes 864 accepted 863 remaining 1
+chart 0 depth 13 R=0.0001220703125 boxes 16 accepted 16 remaining 0
+chart 0: accepted boxes 571111
+chart 1 depth 1 R=0.5 boxes 16 accepted 0 remaining 16
+chart 1 depth 2 R=0.25 boxes 256 accepted 0 remaining 256
+chart 1 depth 3 R=0.125 boxes 4096 accepted 686 remaining 3410
+chart 1 depth 4 R=0.0625 boxes 54560 accepted 41517 remaining 13043
+chart 1 depth 5 R=0.03125 boxes 208688 accepted 193062 remaining 15626
+chart 1 depth 6 R=0.015625 boxes 250016 accepted 240636 remaining 9380
+chart 1 depth 7 R=0.0078125 boxes 150080 accepted 145405 remaining 4675
+chart 1 depth 8 R=0.00390625 boxes 74800 accepted 72162 remaining 2638
+chart 1 depth 9 R=0.001953125 boxes 42208 accepted 40058 remaining 2150
+chart 1 depth 10 R=0.0009765625 boxes 34400 accepted 32542 remaining 1858
+chart 1 depth 11 R=0.00048828125 boxes 29728 accepted 28139 remaining 1589
+chart 1 depth 12 R=0.000244140625 boxes 25424 accepted 24118 remaining 1306
+chart 1 depth 13 R=0.0001220703125 boxes 20896 accepted 20009 remaining 887
+chart 1 depth 14 R=6.103515625e-05 boxes 14192 accepted 13827 remaining 365
+chart 1 depth 15 R=3.0517578125e-05 boxes 5840 accepted 5819 remaining 21
+chart 1 depth 16 R=1.52587890625e-05 boxes 336 accepted 336 remaining 0
+chart 1: accepted boxes 858316
+chart 2 depth 1 R=0.5 boxes 16 accepted 0 remaining 16
+chart 2 depth 2 R=0.25 boxes 256 accepted 0 remaining 256
+chart 2 depth 3 R=0.125 boxes 4096 accepted 567 remaining 3529
+chart 2 depth 4 R=0.0625 boxes 56464 accepted 42092 remaining 14372
+chart 2 depth 5 R=0.03125 boxes 229952 accepted 214364 remaining 15588
+chart 2 depth 6 R=0.015625 boxes 249408 accepted 240744 remaining 8664
+chart 2 depth 7 R=0.0078125 boxes 138624 accepted 134489 remaining 4135
+chart 2 depth 8 R=0.00390625 boxes 66160 accepted 63592 remaining 2568
+chart 2 depth 9 R=0.001953125 boxes 41088 accepted 39017 remaining 2071
+chart 2 depth 10 R=0.0009765625 boxes 33136 accepted 31294 remaining 1842
+chart 2 depth 11 R=0.00048828125 boxes 29472 accepted 27933 remaining 1539
+chart 2 depth 12 R=0.000244140625 boxes 24624 accepted 23445 remaining 1179
+chart 2 depth 13 R=0.0001220703125 boxes 18864 accepted 18086 remaining 778
+chart 2 depth 14 R=6.103515625e-05 boxes 12448 accepted 12155 remaining 293
+chart 2 depth 15 R=3.0517578125e-05 boxes 4688 accepted 4674 remaining 14
+chart 2 depth 16 R=1.52587890625e-05 boxes 224 accepted 224 remaining 0
+chart 2: accepted boxes 852676
+CERTIFIED: max_i |<x,p_i>|^2 > 263/500 |p_i|^2 |x|^2 for all x in C^3\0 (9 points); accepted leaf boxes 2282103; boxes examined 2434240

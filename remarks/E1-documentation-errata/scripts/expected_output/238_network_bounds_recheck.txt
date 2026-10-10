@@ -1,0 +1,11 @@
+H(1/8)         upper=0.791401931  claimed<0.791402  OK=True
+H(13/50)       upper=1.098068598  claimed<1.098069  OK=True
+H(1)           upper=1.958068598  claimed<1.958069  OK=True
+bracket(7/25)  upper=0.904053756  claimed<0.904054  OK=True
+bracket(1)     upper=0.515373557  claimed<0.515374  OK=True
+tail true/2 = 2.357e-03  vs bound 2.358e-03
+H_float(0.125) = 0.791401384
+H_float(0.26) = 1.098068051
+H_float(1) = 1.958068051
+slopes: 4*h3 = 7/3  2*h2 = 3/2
+25/(36 ln2) = 1.0018715561728913 < 25/24 = 1.0416666666666667

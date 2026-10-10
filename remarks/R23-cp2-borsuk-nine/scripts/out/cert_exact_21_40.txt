@@ -1,0 +1,4 @@
+chart 0: accepted leaf boxes 6199
+chart 1: accepted leaf boxes 4482
+chart 2: accepted leaf boxes 6195
+CERTIFIED (exact integers): max_i |<x,p_i>|^2 > 21/40 |p_i|^2 |x|^2 on C^3\0; leaves 16876, nodes 33749, max depth 36

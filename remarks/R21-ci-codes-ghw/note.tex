@@ -1,0 +1,252 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amssymb,amsmath,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Fb}{\overline{\mathbb F}_q}
+\newcommand{\Car}{\mathrm{Car}}
+
+\title[Generalized Hamming weights of complete-intersection codes]{A remark on generalized Hamming weights of\\ complete-intersection codes: the planar and split cases}
+\author{[AUTHOR NAME]}
+\date{2026-10-09}
+
+\begin{document}
+\begin{abstract}
+Camps Moreno, Salizzoni and San-Jos\'e conjectured (arXiv:2608.19978, Conjecture~3.1) that among
+evaluation codes $C_d(X)$ on reduced complete intersections $X\subset\mathbb P^n(\F_q)$ of a fixed
+type, the projective Cartesian code has the smallest $r$-th generalized Hamming weight, for every $d$
+and every $r$. For $r=1$ this is known to be equivalent to the Cayley--Bacharach conjecture CB12 of
+Eisenbud--Green--Harris. We record that the same residual argument works for every $r$: the
+Eisenbud--Green--Harris (EGH) conjecture for the type of $X$ implies the inequality for all $r$ and
+$d$. Since EGH is a theorem in two variables and when all but the first two generators split into
+linear forms, the conjecture holds, for all $r$ and $d$ and over every $\F_q$, for every reduced
+complete intersection in $\mathbb P^2$ and for every complete intersection whose generators of the
+$n-2$ largest degrees are products of linear forms. The argument is an assembly of known
+ingredients; we claim nothing beyond these two cases.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+
+Let $q$ be a prime power, $S=\F_q[x_0,\dots,x_n]$, and let $X=\{P_1,\dots,P_N\}\subset\mathbb P^n(\F_q)$
+be a set of $\F_q$-rational points whose vanishing ideal is a complete intersection,
+$I_X=(f_1,\dots,f_n)$ with $f_i$ homogeneous of degree $a_i$ and $2\le a_1\le\dots\le a_n$; then
+$N=\prod a_i$. Put
+\[
+ s:=\sum_{i=1}^n (a_i-1),\qquad B(a):=\prod_{i=1}^n\{0,1,\dots,a_i-1\}\subset\mathbb Z_{\ge0}^n .
+\]
+The code $C_d(X)\subseteq\F_q^N$ is the image of $S_d\to\F_q^N$, $f\mapsto (f(v_1),\dots,f(v_N))$ for
+fixed representatives $v_j$ of $P_j$; its $r$-th generalized Hamming weight is
+$d_r(C)=\min\{|\operatorname{supp}D|: D\le C,\ \dim D=r\}$ \cite{Wei}.
+
+\begin{definition}
+A \emph{down-set} of $B(a)$ is a subset $\mathcal D\subseteq B(a)$ with $\beta\in\mathcal D$, $\beta'\le\beta$
+(componentwise) $\Rightarrow \beta'\in\mathcal D$. For $m\in\mathbb Z$ and $r\ge1$ put
+\[
+ \mu_r(a,m):=\min\bigl\{|\mathcal D| : \mathcal D\subseteq B(a)\text{ a down-set},\ \#\{\beta\in\mathcal D:|\beta|>m\}\ge r\bigr\},
+\]
+where $|\beta|=\sum\beta_i$ (and $\mu_r=\infty$ if no such $\mathcal D$ exists).
+\end{definition}
+
+For $A_1,\dots,A_n\subseteq\F_q$ with $|A_i|=a_i$ (so $q\ge a_n$), the projective Cartesian set is
+$X_\Car=\{[1:\alpha_1:\dots:\alpha_n]:\alpha_i\in A_i\}$, a reduced complete intersection of type $a$ with
+$f_i=\prod_{\alpha\in A_i}(x_i-\alpha x_0)$.
+
+We say that \emph{EGH holds for $X$} if the following holds over $K=\Fb$: for every linear form
+$\ell\in K[x]_1$ that does not vanish at any point of $X$, every homogeneous ideal $J$ of
+$R:=K[x]/(\ell)\cong K[y_1,\dots,y_n]$ containing the images $\bar f_1,\dots,\bar f_n$ has the Hilbert
+function of a homogeneous ideal containing $y_1^{a_1},\dots,y_n^{a_n}$. This is implied by the EGH
+conjecture \cite{EGH93,EGH96} for $n$ variables and degrees $a$ (note that $\bar f_1,\dots,\bar f_n$ is a
+regular sequence in $R$, see the proof of Lemma~\ref{lem:downset}).
+
+\begin{theorem}\label{thm:main}
+If EGH holds for $X$, then for every $d\ge1$ and every $1\le r\le\dim C_d(X)$,
+\[
+ d_r\bigl(C_d(X)\bigr)\ \ge\ \mu_r(a,\,s-1-d)\ =\ d_r\bigl(C_d(X_\Car)\bigr).
+\]
+\end{theorem}
+
+\noindent (The Cartesian code exists when $q\ge a_n$; the bound $d_r(C_d(X))\ge\mu_r(a,s-1-d)$ holds regardless.)
+
+\begin{corollary}\label{cor:uncond}
+Conjecture~3.1 of \cite{CMSS} holds, for every $q\ge a_n$, every $d\ge1$ and every $r$, in the following cases (and $d_r(C_d(X))\ge\mu_r(a,s-1-d)$ holds for every $q$):
+\begin{enumerate}
+\item[(G1)] $n=2$: $X$ is any reduced complete intersection of $\F_q$-points in $\mathbb P^2$;
+\item[(G3)] $n\ge3$ and $f_3,\dots,f_n$ split into linear factors over $\Fb$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+For (G1), $R$ has two variables, and EGH in two variables holds over every field
+\cite{Richert,CavigliaMaclagan}. For (G3), the images $\bar f_3,\dots,\bar f_n$ are again products of linear
+forms, and \cite[Cor.~4.4]{Abedelfatah} (stated over an arbitrary field, with $a_1\le\dots\le a_n$, so the
+split generators are those of the $n-2$ largest degrees; ties may be reordered) gives EGH for every
+homogeneous ideal of $R$ containing $\bar f_1,\dots,\bar f_n$. (For $n\ge4$ the induction behind
+\cite[Cor.~4.4]{Abedelfatah} applies \cite[Thm.~4.2]{Abedelfatah} with EGH in $n-1$ variables only to
+ideals containing the images of $f_1,\dots,f_{n-1}$ modulo a linear factor of $f_n$; these images are
+again regular with the last $n-3$ of them split, so the inductive hypothesis suffices.) Apply
+Theorem~\ref{thm:main}.
+\end{proof}
+
+Before this remark the following cases were known. For $r=1$: in $\mathbb P^2$ \cite{CMSS,GLS}; in
+$\mathbb P^3$, by combining the $r=1$ equivalence \cite[Prop.~6.8]{CSTPV} with CB12 in $\mathbb P^3$
+\cite[Cor.~4.4]{GK13}, \cite[Cor.~A]{CavigliaDeStefani}; and for $d<a_1$ in every $\mathbb P^n$
+\cite[Thm.~2.3]{CMSS}. For all $r$: $d=1$ \cite[Thm.~2.5]{CMSS} (equigenerated case earlier in
+\cite[Cor.~6.6]{CSTPV}); $d=s-1$, where $d_r=r+1=\mu_r(a,0)$ \cite[Prop.~9]{GCSV}; $d\ge s$, where the code is
+the whole space; and (implicitly, through the footprint bound \cite[Thm.~4.9]{GSMBVV} and
+\cite{BeelenDatta}) the case where the initial ideal of $I_X$ is $(x_1^{a_1},\dots,x_n^{a_n})$. See
+Remark~\ref{rem:known}.
+
+\section{Proof}
+
+\begin{lemma}[{\cite[Thm.~4.5]{GSMBVV}}]\label{lem:dr}
+For $Y\subseteq X$ write $h_Y(t)=\dim_{\F_q}(S/I_Y)_t$. Then
+\[
+ d_r(C_d(X))=\min\{|\Gamma| : \Gamma\subseteq X,\ h_X(d)-h_{X\setminus\Gamma}(d)\ge r\}.
+\]
+\end{lemma}
+\begin{proof}
+The kernel of $S_d\to C_d(X)$ is $(I_X)_d$, and the codewords supported in $\Gamma$ form the image of
+$(I_{X\setminus\Gamma})_d$, of dimension $h_X(d)-h_{X\setminus\Gamma}(d)$. An $r$-dimensional subcode
+supported in $\Gamma$ exists iff this dimension is $\ge r$.
+\end{proof}
+
+\begin{lemma}[Cayley--Bacharach, {\cite{DGO}, \cite[CB7]{EGH96}}]\label{lem:cb}
+For $\Gamma\subseteq X$ and every $t$,
+$h_X(t)-h_{X\setminus\Gamma}(t)=|\Gamma|-h_\Gamma(s-1-t)$ (with $h_\Gamma(u)=0$ for $u<0$).
+\end{lemma}
+
+All Hilbert functions above are unchanged by extending scalars to $K=\Fb$, since they are ranks of
+evaluation matrices with entries in $\F_q$; from now on we work over $K$.
+
+\begin{lemma}\label{lem:downset}
+Assume EGH holds for $X$ and let $\emptyset\ne\Gamma\subseteq X$. There is a down-set
+$\mathcal D\subseteq B(a)$ with $|\mathcal D|=|\Gamma|$ and $h_\Gamma(m)=\#\{\beta\in\mathcal D:|\beta|\le m\}$ for
+all $m$.
+\end{lemma}
+\begin{proof}
+Choose $\ell\in K[x]_1$ vanishing at no point of $X$ ($K$ is infinite). Since $I_\Gamma$ is radical with
+associated primes the ideals of the points of $\Gamma$, $\ell$ is a nonzerodivisor on $S_K/I_\Gamma$, so
+$A:=S_K/(I_\Gamma+(\ell))$ has Hilbert function $\Delta h_\Gamma(t)=h_\Gamma(t)-h_\Gamma(t-1)$, and
+$\sum_t\Delta h_\Gamma(t)=|\Gamma|$. Moreover $V(f_1,\dots,f_n,\ell)=X\cap V(\ell)=\emptyset$, so
+$(f_1,\dots,f_n,\ell)$ is primary to the irrelevant ideal and $f_1,\dots,f_n,\ell$ is a regular sequence
+in the $(n+1)$-variable ring $S_K$; hence $\bar f_1,\dots,\bar f_n$ is a regular sequence in $R$, of degrees
+$a$, contained in the image $J$ of $I_\Gamma$ (because $I_X\subseteq I_\Gamma$). By EGH there is a
+homogeneous ideal $J'\supseteq(y_1^{a_1},\dots,y_n^{a_n})$ with $H_{R/J'}=H_{R/J}=H_A$. Its initial ideal
+$M$ (for any monomial order) has the same Hilbert function and still contains the pure powers. The
+exponents of the standard monomials of $M$ form a down-set $\mathcal D\subseteq B(a)$, and
+$\#\{\beta\in\mathcal D:|\beta|=t\}=H_A(t)=\Delta h_\Gamma(t)$. Summing over $t$ gives both claims.
+\end{proof}
+
+\begin{proof}[Proof of the inequality in Theorem~\ref{thm:main}]
+Let $\Gamma$ attain the minimum in Lemma~\ref{lem:dr}. By Lemma~\ref{lem:cb} with $m:=s-1-d$,
+$r\le h_X(d)-h_{X\setminus\Gamma}(d)=|\Gamma|-h_\Gamma(m)$. With $\mathcal D$ from
+Lemma~\ref{lem:downset}, $|\Gamma|-h_\Gamma(m)=\#\{\beta\in\mathcal D:|\beta|>m\}$, so
+$\#\{\beta\in\mathcal D:|\beta|>m\}\ge r$ and $d_r(C_d(X))=|\Gamma|=|\mathcal D|\ge\mu_r(a,m)$.
+\end{proof}
+
+\begin{proposition}\label{prop:cart}
+$d_r(C_d(X_\Car))=\mu_r(a,s-1-d)$ for all $d\ge1$ and $1\le r\le\dim C_d(X_\Car)$.
+\end{proposition}
+\begin{proof}
+$X_\Car$ satisfies the hypothesis of (G3) for $n\ge3$ and of (G1) for $n=2$ (and EGH is trivial for $n=1$),
+so ``$\ge$'' follows from the first part. For ``$\le$'', enumerate $A_i=\{\alpha_{i,0},\dots,\alpha_{i,a_i-1}\}$
+and identify $B(a)$ with $X_\Car$ via $\beta\mapsto P_\beta=[1:\alpha_{1,\beta_1}:\dots:\alpha_{n,\beta_n}]$.
+Let $\mathcal D$ attain $\mu_r(a,m)$, $m=s-1-d$, and let $\Gamma=\{P_\beta:\beta\in\mathcal D\}$. For
+$\gamma\in B(a)$ put
+\[
+ G_\gamma:=x_0^{\,d-s+|\gamma|}\prod_{i=1}^n\ \prod_{j=\gamma_i+1}^{a_i-1}(x_i-\alpha_{i,j}x_0),
+ \qquad \deg G_\gamma=d\ \text{ when } |\gamma|\ge s-d,\ \text{i.e. } |\gamma|>m .
+\]
+$G_\gamma(P_\beta)\ne0$ iff $\beta\le\gamma$. For $\gamma\in\mathcal D$ with $|\gamma|>m$, $G_\gamma$ therefore vanishes
+outside $\{P_\beta:\beta\le\gamma\}\subseteq\Gamma$ (down-set), and these codewords are linearly independent
+(order them by a linear extension of $\le$; the matrix $(G_\gamma(P_\beta))$ is triangular with nonzero
+diagonal). They span a subcode of dimension $\ge r$ supported in $\Gamma$, so
+$d_r(C_d(X_\Car))\le|\mathcal D|$.
+\end{proof}
+This recovers, in the present normalization, the generalized Hamming weights of affine Cartesian
+codes computed by Beelen and Datta \cite{BeelenDatta} (the code $C_d(X_\Car)$ is the affine Cartesian
+code of polynomials of degree $\le d$).
+
+\section{Remarks}
+
+\begin{remark}[What was known, and how small the step is]\label{rem:known}
+(i) For $r=1$, the equivalence of the minimum-distance statement with CB12 of \cite{EGH96} is
+\cite[Prop.~6.8]{CSTPV} (also noted in \cite[\S3]{CMSS}); EGH implies CB12 by the Artinian-reduction
+argument of \cite{EGH96}. Theorem~\ref{thm:main} is that same argument run with ``$\ge r$'' in
+place of ``$\ge1$''. The only point needing care is that the EGH output must be read as a down-set
+\emph{inside the box} $B(a)$ whose profile above degree $m$ is counted, and that the Cartesian code attains
+the resulting bound (Proposition~\ref{prop:cart}). (ii) Hilbert functions of subsets of complete
+intersections via EGH were studied by Cooper \cite{Cooper12}; the $r=1$ statement (CB12) for complete
+intersections in $\mathbb P^3$ is \cite[Cor.~4.4]{GK13} and \cite[Cor.~A]{CavigliaDeStefani}, the latter
+with a partial result in $\mathbb P^n$ \cite[Thm.~B]{CavigliaDeStefani}. (iii) If the
+initial ideal of $I_X$ is $(x_1^{a_1},\dots,x_n^{a_n})$, the footprint bound \cite[Thm.~4.9]{GSMBVV} already
+gives Theorem~\ref{thm:main}'s inequality for all $r$. (iv) Any further known case of EGH transfers in the
+same way, e.g.\ the degree conditions of \cite{CavigliaMaclagan} and of \cite[Thm.~A]{CDeS20}
+($a_i\ge\sum_{j<i}(a_j-1)$ for $i\ge3$, which would cover all reduced complete intersections of types
+$(2,2,2)$, $(2,2,3)$, $(2,3,3)$, $(2,3,4)$ in $\mathbb P^3$), or Cooper's cases in three variables. We have
+not audited the field hypotheses of these and claim only (G1) and (G3).
+\end{remark}
+
+\begin{remark}[Relation to OpenAI family 200]
+The manuscript \emph{Commuting Division-Coefficient Forms and the Artinian Eisenbud--Green--Harris
+Conjecture} in \href{https://github.com/openai/math}{github.com/openai/math} (family 200) claims EGH over
+fields of characteristic $0$. Codes live in characteristic $p$, so that claim gives nothing for
+Conjecture~3.1 over $\F_q$, and Corollary~\ref{cor:uncond} does not use it. What Theorem~\ref{thm:main}
+does show is that a characteristic-free proof of EGH would settle Conjecture~3.1 for all $r$ and $d$;
+in characteristic $0$, if family 200 is correct, the same argument gives the corresponding inequality
+for the generalized minimum distance function \cite{GSMBVV} of every reduced complete intersection of
+$K$-points, $K$ of characteristic $0$. We have not verified family 200.
+\end{remark}
+
+\begin{remark}[Strictness]
+The inequality can be strict for non-Cartesian $X$: in the computations below, type $(3,4)$ in
+$\mathbb P^2(\F_{13})$ produced pairs $(d,r)$ with $d_r(C_d(X))>\mu_r$.
+\end{remark}
+
+\section{Computations}
+Two independent programs (a Sage brute force over supports, and a pure-Python program using the
+column matroid and exhaustive down-set enumeration, with complete intersections certified by a
+Hilbert-function test and an exact count of rational points) compared $d_r(C_d(X))$ with
+$\mu_r(a,s-1-d)$ for random reduced complete intersections of types $(2,2)$--$(4,4)$ and $(2,5)$, $(3,5)$
+in $\mathbb P^2$, and types $(2,2,2)$ (not necessarily split), and split types $(2,2,2)$, $(2,2,3)$, $(2,3,3)$ in
+$\mathbb P^3$, over prime fields $\F_7$--$\F_{17}$, for all $1\le d\le s$ and all $r$: $1050+1424$ pairs
+$(d,r)$. A third program, written by the adversarial reviewer, added exhaustive searches over $\F_2$,
+$\F_3$, $\F_4$ and random instances over $\F_4$, $\F_5$, $\F_8$, $\F_9$ and larger fields, including reducible
+curves and unions of lines (3011 instances, 38\,189 pairs $(d,r)$). No violation was found, Cartesian codes attained
+$\mu_r$ in every case, and the deliberately mis-shifted bound $\mu_r(a,s-d)$ was violated, confirming that
+the test detects the shift. Lemma~\ref{lem:cb} and the down-set conclusion of Lemma~\ref{lem:downset}
+were also tested directly on random subsets. Scripts and outputs accompany this note.
+
+\medskip\noindent\emph{Acknowledgement.} Developed with AI assistance (Anthropic Claude, Opus 5.5) under
+[AUTHOR NAME]'s direction; independent adversarial reviews were run by separate AI sessions and are not
+human peer review.
+
+\begin{thebibliography}{99}
+\bibitem{Abedelfatah} A.~Abedelfatah, On the Eisenbud--Green--Harris conjecture, Proc. Amer. Math. Soc. 143 (2015), 105--115; arXiv:1212.2653.
+\bibitem{BeelenDatta} P.~Beelen and M.~Datta, Generalized Hamming weights of affine Cartesian codes, Finite Fields Appl. 51 (2018), 130--145; arXiv:1706.02114.
+\bibitem{CMSS} E.~Camps Moreno, F.~Salizzoni and R.~San-Jos\'e, Generalized Hamming weights of codes arising from complete intersections, arXiv:2608.19978 (2026).
+\bibitem{CavigliaDeStefani} G.~Caviglia and A.~De~Stefani, A Cayley--Bacharach theorem for points in $\mathbb P^n$, Bull. Lond. Math. Soc. 53 (2021); arXiv:2006.14717.
+\bibitem{CDeS20} G.~Caviglia and A.~De~Stefani, The Eisenbud--Green--Harris conjecture for fast-growing degree sequences, arXiv:2007.15467.
+\bibitem{CavigliaMaclagan} G.~Caviglia and D.~Maclagan, Some cases of the Eisenbud--Green--Harris conjecture, Math. Res. Lett. 15 (2008), 427--433; arXiv:math/0611488.
+\bibitem{Cooper12} S.~M.~Cooper, Subsets of complete intersections and the EGH conjecture, in: Progress in Commutative Algebra 1, de Gruyter, 2012, 167--198.
+\bibitem{CSTPV} S.~M.~Cooper, A.~Seceleanu, \c{S}.~O.~Toh\u{a}neanu, M.~Vaz Pinto and R.~H.~Villarreal, Generalized minimum distance functions and algebraic invariants of Geramita ideals, Adv. in Appl. Math. 112 (2020), 101940; arXiv:1812.06529.
+\bibitem{DGO} E.~D.~Davis, A.~V.~Geramita and F.~Orecchia, Gorenstein algebras and the Cayley--Bacharach theorem, Proc. Amer. Math. Soc. 93 (1985), 593--597.
+\bibitem{EGH93} D.~Eisenbud, M.~Green and J.~Harris, Higher Castelnuovo theory, Ast\'erisque 218 (1993), 187--202.
+\bibitem{EGH96} D.~Eisenbud, M.~Green and J.~Harris, Cayley--Bacharach theorems and conjectures, Bull. Amer. Math. Soc. 33 (1996), 295--324.
+\bibitem{GCSV} M.~Gonz\'alez-Sarabia, E.~Camps, E.~Sarmiento and R.~H.~Villarreal, The second generalized Hamming weight of some evaluation codes arising from a projective torus, arXiv:1611.06405.
+\bibitem{GK13} A.~V.~Geramita and M.~Kreuzer, On the uniformity of zero-dimensional complete intersections, J. Algebra 391 (2013), 82--92.
+\bibitem{GLS} L.~Gold, J.~Little and H.~Schenck, Cayley--Bacharach and evaluation codes on complete intersections, J. Pure Appl. Algebra 196 (2005), 91--99.
+\bibitem{GSMBVV} M.~Gonz\'alez-Sarabia, J.~Mart\'inez-Bernal, R.~H.~Villarreal and C.~E.~Vivares, Generalized minimum distance functions, J. Algebraic Combin. 50 (2019), 317--346; arXiv:1707.03285.
+\bibitem{Richert} B.~P.~Richert, A study of the lex plus powers conjecture, J. Pure Appl. Algebra 186 (2004), 169--183.
+\bibitem{Tohaneanu} \c{S}.~O.~Toh\u{a}neanu, Commutative Algebra Methods for Coding Theory, de Gruyter, 2024.
+\bibitem{Wei} V.~K.~Wei, Generalized Hamming weights for linear codes, IEEE Trans. Inform. Theory 37 (1991), 1412--1418.
+\end{thebibliography}
+\end{document}

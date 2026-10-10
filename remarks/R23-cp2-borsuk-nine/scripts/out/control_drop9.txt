@@ -1,0 +1,4 @@
+8 points read from controls_P8_drop9.txt
+chart 0 depth 1 R=0.5 boxes 16 accepted 0 remaining 16
+FAIL: centre with max_i h_i <= 0 (certificate impossible at this T): 0 [ 0.75  0.75 -0.25 -0.25]
+exit code 1

@@ -1,0 +1,191 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}
+\newcommand{\F}{\mathbb F}
+\newcommand{\cV}{\mathcal V}
+
+\title[The rank threshold of the latent alphabet gadget]{A remark on the rank threshold of the latent alphabet gadget\\ in \emph{The Unique Games Theorem}}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+Lemma~3.1 of OpenAI's preprint \emph{The Unique Games Theorem} constructs, for every $p>0$, a
+noise gadget with nonlinear change probability at most $p$ that is detected with probability at
+least $1/8$ by every linear family whose restriction to the output space has rank at least a
+threshold $r_*$; the preprint only asserts that $r_*$ exists. When its proof is made explicit, the
+threshold it certifies is about $p^{-16}$ (about $p^{-23.1}$ with its effective recipe). We show
+that the \emph{same} construction satisfies the lemma with $r_*\le\lceil1.5\,p^{-3}\rceil+1$, and
+that every gadget satisfying the lemma has $r_*\ge1/(4p)$. The two changes are bookkeeping: the
+final enlargement step, which squares the threshold, is unnecessary, and the paper's harmonic
+potential with a Markov bound is replaced by an exponential supermartingale.
+\end{abstract}
+\maketitle
+
+\noindent\textbf{Attribution and scope.} The gadget, its construction and its analysis are OpenAI's
+work: family 102 of \url{https://github.com/openai/math} (commit
+\nolinkurl{fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb}), preprint \cite{oai}, Section~3
+(\texttt{build/sections/02-latent.tex}). We change only the final packaging and the choice of
+parameters in the rank-survival argument, and add an elementary lower bound. We take the
+correctness of the preprint's lemmas as given. The community presentation \cite{lgb} already takes
+the output space equal to the block output (for $\ell$ divisible by $3$) and so avoids the
+enlargement step; we acknowledge it below. Developed with AI assistance (Anthropic Claude,
+Opus~5.5) under [AUTHOR NAME]'s direction; the independent adversarial review was run by a separate
+AI session and is not human peer review.
+
+\section{The quantity}
+Following \cite[Lemma 3.1]{oai}, for $p\in(0,1)$ let $r_*(p)$ be the least integer $r$ such that for
+every sufficiently large $\ell$ there are a finite binary space $\cV\supseteq K=\F_2^\ell$, a map
+$C:\cV\to K$ with $C(x+k)=C(x)+k$, and a law $\mu$ on $\cV$ with
+$\Pr_{x,a\sim\mu}[C(x+a)\ne C(x)]\le p$, such that every $G\le\cV^*$ with $\dim(G|_K)\ge r$
+satisfies $\Pr_{a\sim\mu}[\exists g\in G:\ g(a)\ne0]\ge\frac18$.
+
+\section{Lower bound}
+\begin{proposition}\label{prop:lower}
+$r_*(p)\ge1/(4p)$. More precisely, any such gadget with change probability $p$ and any
+$r\le\ell$ for which the detection property holds satisfy $r\,p'/2\ge\frac18\prod_{i<r}\bigl(1-\frac{2^i-1}{2^\ell-1}\bigr)$, where $p'=p\,2^\ell/(2^\ell-1)$.
+\end{proposition}
+\begin{proof}
+For $\sigma\in K^*$ put $F_\sigma(x)=(-1)^{\sigma(C(x))}$. Equivariance gives
+$F_\sigma(x+k)=(-1)^{\sigma(k)}F_\sigma(x)$, so its Fourier coefficient $\hat F_\sigma(h)$ vanishes
+unless $h|_K=\sigma$; by Parseval $\nu_\sigma(h)=\hat F_\sigma(h)^2$ is a probability law on
+$\cV^*$. With $\hat\mu(h)=\E_a(-1)^{h(a)}$,
+$s_\sigma:=\E_{x,a}F_\sigma(x)F_\sigma(x+a)=\sum_h\nu_\sigma(h)\hat\mu(h)$, and
+$\Pr[C(x+a)=C(x)]=\E_{\sigma\in K^*}s_\sigma$. Since $s_0=1$,
+$\E_{\sigma\ne0}(1-s_\sigma)\le p'$, and $1-s_\sigma=2\E_{h\sim\nu_\sigma}\Pr_a[h(a)=1]$.
+Draw $\sigma_1,\dots,\sigma_r$ independently uniform in $K^*\setminus0$, then $h_i\sim\nu_{\sigma_i}$,
+and let $G=\mathrm{span}(h_i)$. Detection by $G$ means $h_i(a)=1$ for some $i$, so by the union
+bound $\E[\Pr_a(\text{detect})]\le rp'/2$. On the event that the $\sigma_i$ are linearly independent,
+$\dim(G|_K)=r$ because $h_i|_K=\sigma_i$, and detection is at least $\frac18$. Letting
+$\ell\to\infty$ with $r=r_*$ fixed gives $r_*\ge1/(4p)$.
+\end{proof}
+
+\section{Upper bound for the same construction}
+We use the notation of \cite[\S3]{oai}: $F=\F_{2^d}$, $B=F^3$ of binary dimension $b=3d$,
+$\theta=1/(q^2+q+1)$ with $q=2^d$, the height-$s$ tree $P_s$, its noise $\xi_s$, the quotient
+$(V_0,B,\overline C,\nu)$, lifts, the filtration $\mathcal F_j$, and the indicator $B_j$ that the
+current domain $S_j$ is nongeneric of positive rank.
+
+\begin{theorem}\label{thm:upper}
+$r_*(p)\le\lceil1.5\,p^{-3}\rceil+1$ for every $p\in(0,1)$; for output dimensions $\ell$ divisible
+by $3$ the threshold $\lceil1.5\,p^{-3}\rceil-1$ suffices.
+\end{theorem}
+
+\noindent\emph{Parameters.} $r_0=\lceil1.5\,p^{-3}\rceil-1\ge1$,
+$\varepsilon_0=1/\bigl(120(\ln(1/p)+1)2^{r_0}\bigr)$, $d\ge d_0(p)$ such that $3d\ge r_0$,
+$\theta\le0.01$, $2^{r_0}\theta\le1/120$, and a uniform rank-$r$ subspace of $B^*$ is nongeneric
+with probability at most $\varepsilon_0$ for each $1\le r\le r_0$, the last condition being
+verified through the explicit union bound in the proof of \cite[Lemma 3.6]{oai},
+$\bigl[\binom{2^r-1}{2}q^{-2}+\binom{2^r-1}{3r+1}(6r+3)q^{-1}\bigr]/\bigl(1-(2^r-1)q^{-3}\bigr)\le\varepsilon_0$.
+That bound and the other three conditions are monotone in $d$, so they persist for all $d\ge d_0$.
+(The true nongeneric fraction need not be monotone in $d$; this is why we use the bound.) Finally
+$s=\lceil\ln(1/p)/\theta\rceil$. None of $r_0,\varepsilon_0$ depends on $d$.
+
+\begin{proof}
+\emph{Change probability.} By \cite[Lemma 3.7]{oai}, $p_s\le(1-\theta)^s\le e^{-\theta s}\le p$.
+
+\emph{Detection for $\ell=3d$, $K=B$.} Let $G_0\le V_0^*$ with $\dim(G_0|_B)\ge r_0$. Choose an
+$r_0$-dimensional $S\le G_0|_B$ and a linear section $\sigma:S\to G_0$ of restriction; then
+$\psi_z=\sigma(z)\circ q_0$ is a lift on $P_s$ with domain $S$ in the sense of \cite[eq.\ (3.16)]{oai},
+exactly as in the paper's argument after \cite[Prop.~3.9]{oai}, except that the domain is $S$ rather
+than all of $B^*$. Follow the random leaf path as in the proof of \cite[Prop.~3.9]{oai}, starting
+from $S_0=S$ (not necessarily generic) and producing $S_j$ of rank $r_j$. The paper's estimates give,
+conditionally on $\mathcal F_j$: if $S_j$ is generic then $r_j-r_{j+1}\le1$ and
+$\Pr[r_{j+1}<r_j]\le3r_j\theta$; for every $S_j$, $\Pr[r_{j+1}<r_j]\le2^{r_j}\theta$; and
+$\E[B_{j+1}\mid\mathcal F_j,A_j]\le\varepsilon_0$.
+
+Call step $j$ \emph{bad} if a loss occurs at step $j$ and either $j=0$ or $B_j=1$. Then
+\[
+\Pr[\text{some step }j<s\text{ is bad}]\le2^{r_0}\theta+s\theta\,2^{r_0}\varepsilon_0
+\le\tfrac1{120}+\tfrac{\ln(1/p)+\theta}{120(\ln(1/p)+1)}\le\tfrac1{60}.
+\]
+Let $\tilde r_j$ equal $r_j$ up to the first bad step and stay constant afterwards, and
+$W_j=e^{-3\theta j}/(\tilde r_j+1)$. At a step $j\ge1$ before the first bad step with $S_j$ generic
+and $r=r_j\ge1$, a loss of exactly one occurs with conditional probability $\pi\le3r\theta$, so
+\[
+\E\Bigl[\tfrac1{\tilde r_{j+1}+1}\Bigm|\mathcal F_j\Bigr]=\tfrac1{r+1}+\tfrac{\pi}{r(r+1)}\le\tfrac{1+3\theta}{r+1}\le\tfrac{e^{3\theta}}{r+1};
+\]
+at a nongeneric step, or at $j=0$, $\tilde r_{j+1}=\tilde r_j$ by construction, and $r=0$ is
+absorbing. Hence $(W_j)$ is a supermartingale and
+\[
+\Pr[r_s=0,\ \text{no bad step}]\le e^{3\theta s}\E W_s\le\frac{e^{3\theta s}}{r_0+1}
+\le\frac{p^{-3}e^{3\theta}}{1.5\,p^{-3}}\le\tfrac23e^{0.03}<0.687,
+\]
+using $\theta s\le\ln(1/p)+\theta$. So $\Pr[r_s=0]<0.687+1/60<0.704<3/4$. On survival, the leaf family
+of rank $r_s\ge1$ detects the independent uniform leaf symbol with probability at least $\frac12$
+\cite[proof of Prop.~3.9]{oai}, and such a detection is a detection of $\xi_s$ by the original
+family. Hence $G_0$ detects $\nu$ with probability at least $\frac14\cdot\frac12=\frac18$.
+
+\emph{Other $\ell$.} For $\ell=3d+e$, $e\in\{1,2\}$, $d\ge d_0(p)$, put $\cV'=V_0\oplus\F_2^e$,
+$K'=B\oplus\F_2^e$, $C'(x,y)=(\overline C(x),y)$, and noise $\nu\otimes\delta_0$. Equivariance and the
+change probability are inherited. If $G\le\cV'^*$ has $\dim(G|_{K'})\ge r_0+2$, the projections
+$g_V$ of its elements to $V_0^*$ form a space with $\dim(\cdot|_B)\ge r_0$, and $g(a,0)=g_V(a)$;
+so $G$ detects with probability at least $\frac18$.
+\end{proof}
+
+\begin{remark}[where the original loses]
+\leavevmode
+\begin{enumerate}
+\item \emph{Enlargement} (\cite{oai}, proof of Lemma~3.1, lines 674--745). The paper detects only
+families whose restriction is all of $B^*$, then enlarges $B$ to an arbitrary $K$ via injections,
+with $r_*=b+2=3d+2$. Since $d$ must exceed about $3r_0^2$ (the union bound in \cite[Lemma~3.6]{oai}),
+this squares the threshold: $r_*\approx9r_0^2$. The descent above works from any $r_0$-dimensional
+domain, so $r_*=r_0$ ($+2$ for padding). For $\ell\in3\mathbb Z$ this simplification already appears
+in \cite{lgb}.
+\item \emph{Harmonic potential and Markov} (\cite{oai}, lines 534--612). The paper bounds the
+expected harmonic drop by $4\theta$ per level and applies Markov's inequality at $\frac12$, so it
+needs $s\theta\le H_{r_0}/8$ and hence $H_{r_0}\gtrsim8\ln(1/p)$, i.e.\ $r_0\approx e^{8-\gamma}p^{-8}$
+(exponent $8=4\times2$). The supermartingale $e^{-3\theta j}/(r_j+1)$ uses the per-level loss rate
+$3r\theta$ directly and gives $r_0\approx1.5\,p^{-3}$.
+\item \emph{Limit of this route.} For the extremal chain allowed by the estimate
+$\Pr[\text{loss}]\le3r\theta$ (loss exactly one with probability $3r\theta$), the extinction
+rank after $s$ steps is close to $\mathrm{Bin}(r_0,p^3)$, and the detection probability is then about
+$\E[1-2^{-r_s}]\approx1-e^{-r_0p^3/2}$; so an argument that uses only this estimate (and the leaf
+bound) needs $r_0\ge(2\ln\frac87+o(1))p^{-3}\approx0.267\,p^{-3}$. Our constant $1.5$ is within a
+factor $5.6$ of this. This is a limit of the proof method only, not a lower bound on $r_*$:
+$3r\theta$ is an upper bound on the loss rate. Exact computations of the chain are in the scripts.
+\end{enumerate}
+\end{remark}
+
+\section{Numbers}
+The thresholds certified by each argument (the paper's union bound is used to fix $d$ where needed):
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+& $p=10^{-1}$ & $p=10^{-2}$ & $p=10^{-4}$ & $p=10^{-8}$\\
+\midrule
+paper, main text ($r_*=3d+2$) & $2^{77.7}$ & $2^{130.9}$ & $2^{237.2}$ & $2^{449.8}$\\
+paper, effective recipe & $2^{116.9}$ & $2^{186.2}$ & $2^{347.8}$ & $2^{647.8}$\\
+harmonic analysis, no enlargement & $2^{37.3}$ & $2^{63.9}$ & $2^{117.0}$ & $2^{223.3}$\\
+Theorem~\ref{thm:upper} & $2^{10.6}$ & $2^{20.5}$ & $2^{40.4}$ & $2^{80.3}$\\
+lower bound $1/(4p)$ & $2^{1.3}$ & $2^{4.6}$ & $2^{11.3}$ & $2^{24.6}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Asymptotically the exponents of $1/p$ are $16$ (main text), $16/\ln2\approx23.1$ (effective recipe),
+$8$, $3$, and $1$. The truth for this gadget lies between $p^{-1}$ and $p^{-3}$.
+
+\section*{What is not claimed}
+We do not claim the order of $r_*(p)$; the gap between $p^{-1}$ and $p^{-3}$ remains. We do not
+claim any change to the Unique Games reduction beyond the size of its alphabet parameters (which
+depend on $r_*$ through $\eta=2^{-r_*}/16$ in later sections); in particular the final alphabet remains
+astronomically large. The paper's effective algorithm picks $d$ by exact enumeration and could
+certify smaller $d$ than the union bound; our "before" numbers are the thresholds certified by the
+paper's own proof. No Lean formalisation.
+
+\begin{thebibliography}{9}
+\bibitem{oai} OpenAI, \emph{The Unique Games Theorem}, September 23, 2026,
+\url{https://github.com/openai/math} (family 102), Section 3.
+\bibitem{lgb} \texttt{lgboim/unique-games-short-proof}, \emph{The Unique Games Theorem: an 11-page
+self-contained proof and a faithful presentation of OpenAI's proof}, GitHub, October 9, 2026.
+\end{thebibliography}
+\end{document}

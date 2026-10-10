@@ -1,0 +1,274 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\eps}{\epsilon}
+
+\title[Subset Sum: the exponent $0.49$ re-tuned to $0.4889$]{A remark on the exponent of the $O(2^{0.49n})$ Subset Sum algorithm: $0.4889$, and $0.4741$ for dense instances}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+The OpenAI Math Release preprint \emph{Subset Sum in Time $O(2^{0.49n})$} gives a randomized worst-case
+algorithm for Subset Sum with running time $O(2^{0.49n})$. \textbf{Assuming that preprint is correct},
+we show that its method gives $O(2^{0.4889n})$ in the same model. The changes are: re-optimized
+parameters, a one-parameter variant of the alias-extraction step (the shared block is split in
+proportion $\sigma=0.38$ instead of $1/2$, at the cost of exponentially many trials), and new
+eighth-order filtering densities with two different tilting exponents. The new filtering moments are
+certified rigorously with interval arithmetic. For instances with $\max\{t,a_i\}\le2^{n/2}$ the
+checksum alone gives $O(2^{0.4741n})$. This is a re-tuning of the original method, not a new
+method; a heuristic limit of the same framework is about $0.4798$. We also record an elementary fact
+about finite abelian $p$-groups (Proposition~\ref{prop:C}): homomorphic reductions of
+$(\Z/p^e)^k$, $e\ge2$, cannot replace the random-prime collision bound used in the preprint.
+\end{abstract}
+\maketitle
+
+\noindent\textbf{Attribution and premise.} The algorithm, its analysis and all lemmas we cite are
+OpenAI's work: family 138 of \url{https://github.com/openai/math} (commit
+\nolinkurl{fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb}), preprint \cite{oai}. \emph{We take the
+correctness of \cite{oai} as given}; it has no formal proof and, to our knowledge, no published
+peer review. We refer to its statements by number (Theorem~1.1, Proposition~2.4, Lemma~2.5,
+Proposition~3.1, Lemma~3.2, Theorem~4.1, Lemma~4.2, Theorem~5.1, Lemma~5.2). This note only changes
+parameters and one sampling rule, and redoes the bookkeeping. Developed with AI assistance (Anthropic
+Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews were run by
+separate AI sessions and are not human peer review.
+
+\section{Statements}
+The model is exactly that of \cite[Section~1.1]{oai}: a word RAM with word length
+$w=\lceil4(n+b+\log_2(n+2))\rceil$, where $b$ is the maximum bit length of the input.
+
+\begin{theorem}\label{thm:main}
+Assume Theorem~1.1 of \cite{oai} and its proof. There is a uniform randomized algorithm for Subset
+Sum that halts on every execution, answers correctly with probability at least $2/3$, and for every
+fixed $c$ runs on every execution in at most $C_c2^{0.4889n}$ word operations on inputs with $b\le n^c$
+and $n\ge N_c$.
+\end{theorem}
+
+\begin{corollary}[dense instances]\label{cor:dense}
+Under the same premise, if moreover $\max\{t,a_1,\dots,a_n\}\le2^{n/2}$, the time bound improves to
+$O(2^{0.4741n})$. With the filtering densities of \cite{oai} the same argument gives about
+$2^{0.4748n}$ (numerical value $0.47474$); \cite{oai} does not state a dense-case bound.
+\end{corollary}
+
+\begin{proposition}\label{prop:C}
+Let $G=(\Z/p^e)^k$ with $p$ prime, $e\ge1$, and let $K\le G$ have index $M$. Write
+$G[p]=\{g:pg=0\}$. Then
+\[
+|K\cap G[p]|\ \ge\ p^k\,M^{-1/e},
+\]
+with equality if and only if $G/K\cong(\Z/p^e)^s$ for some $s$. Consequently, for every probability
+distribution on subgroups $K$ of index at most $M$ (equivalently, on homomorphisms $\psi$ from $G$ onto
+groups of order at most $M$, with $K=\ker\psi$) there is $0\ne g\in G[p]$ with
+\[
+\Pr[g\in K]\ \ge\ \frac{p^kM^{-1/e}-1}{p^k-1}.
+\]
+\end{proposition}
+
+For $e\ge2$ and $M\le p^{k}$ the right side is of order $M^{-1/e}$, far above the $\approx M^{-1}$
+that a random prime modulus achieves for a fixed nonzero integer in \cite[Lemma~2.5]{oai}. So the
+step of \cite[Section~5]{oai} that bounds visited pairs through Lemma~2.5 has no direct analogue for
+subset sum over $(\Z/p^e)^k$ when the modulus is replaced by a homomorphic reduction. This is an
+obstruction to one proof step, not a lower bound for any problem.
+
+\section{Alias extraction with an unbalanced shared block}\label{sec:alias}
+Fix
+\begin{gather*}
+\eta=0.5176,\quad \sigma=\tfrac{19}{50},\quad \mu=0.0877,\quad m=50\lfloor\mu n/50\rfloor,\\
+\gamma=0.3714,\quad \delta=0.0112,\quad \theta'=0.0226,\quad K=15,
+\end{gather*}
+so that $\sigma m\in\Z$. Write $h$ for the binary entropy and $\rho=(1-h(\sigma))\mu$. Everything not
+mentioned below is as in \cite[Section~5]{oai} (with $.0567,\ .48925,\ .51772,\ 17$ replaced by
+$\mu,\gamma,\eta,K$).
+
+\smallskip\noindent\emph{Trials.} A trial draws $M,F$ as in \cite{oai}. The representations use the
+event $|J\cap M|=\sigma m$ instead of $|J\cap M|=m/2$. In layer $k\in\{0,\dots,\sigma m\}$ left masks
+have size $k$ and right masks size $\sigma m-k$, so $N_L=2^l\binom mk$, $N_R=2^r\binom m{\sigma m-k}$,
+balanced as in \cite[(5.6)]{oai}. For every target $s$ and carry $q$ the procedure runs
+\[
+T=n^{10}\Bigl\lceil 2^m\big/\tbinom m{\sigma m}\Bigr\rceil=2^{\rho n+O(\log n)}
+\]
+independent trials (instead of $n^{10}$). This number is a fixed function of $n$.
+
+\smallskip\noindent\emph{Cumulative caps (repair A).} In \cite{oai} each filtered list and each
+visited-pair count is capped at $2^{\lceil\tau n\rceil}$; with polynomially many trials this bounds the
+total work. With $T$ exponential we instead impose one budget $2^{\lceil\tau_0n\rceil}$,
+$\tau_0=0.48888$, on the \emph{total} number of emitted filtered records and one on the \emph{total}
+number of visited pairs, summed over all $s,q$, trials and layers. The procedure fails as soon as a
+budget would be exceeded.
+
+\begin{lemma}[sizes]\label{lem:sizes}
+Without any assumption on the input other than the guard $b\le2^{10^{-5}n}$ of \cite[(5.1)]{oai},
+\begin{align*}
+\log_2\E[\text{total filtered records}]&\le\bigl(\rho+\tfrac{1-\mu}2+\mu h(\tfrac\sigma2)-\gamma\mu\bigr)n+O(\log n)
+\ <\ 0.488777\,n,\\
+\log_2\E[\text{total visited pairs}]&\le\bigl(\rho+1-\mu+2\mu h(\tfrac\sigma2)-\gamma\mu-\eta+10^{-5}\bigr)n+O(\log n)
+\ <\ 0.488857\,n,
+\end{align*}
+and list generation costs $2^{(\rho+\mu+1/4)n+O(\log n)}\operatorname{poly}(b)\le2^{(\rho+\mu+1/4+10^{-5})n+O(\log n)}<2^{0.3414n}$ on every execution.
+\end{lemma}
+\begin{proof}
+For one trial and one layer the computation is that of \cite[(5.8), (5.11)]{oai}, with
+$\binom mk\binom m{\sigma m-k}\le2^{m(h(k/m)+h(\sigma-k/m))}\le2^{2mh(\sigma/2)}$ by concavity of $h$.
+In particular a filtered list has expected length at most
+$2\sqrt{N_LN_R}/P'\le2^{(n-m)/2+mh(\sigma/2)-\gamma m+O(1)}$, and a fixed raw pair is visited with
+probability at most $\operatorname{poly}(n)(b+\log n)2^{-\eta n}\cdot2^{1-\gamma m}$ by
+\cite[Lemma~2.5]{oai} and the uniform residue $j'$; the factor $b+\log n\le2^{10^{-5}n}\operatorname{poly}(n)$ is the
+guard term, which the visited-pair exponent must carry (repair B). Multiply by $T$ and by the
+polynomial number of $(s,q,k)$. Generation per trial is $2^{m+\lceil\max(l,r)/2\rceil}\operatorname{poly}(n+b)$ as in
+\cite[(5.7)]{oai}. The numerical values are certified in \texttt{chain\_check.py}.
+\end{proof}
+By Markov's inequality each budget is exceeded with probability
+$2^{(0.488857-0.48888)n+O(\log n)}=o(1)$. Coupling the capped and uncapped procedures as in
+\cite[end of Section~5]{oai} transfers the coverage statement below.
+
+\begin{lemma}[coverage]\label{lem:coverage}
+Assume $\E_{|V|=\lfloor n/2\rfloor}d(V)\le\delta n$ and the event of \cite[Lemma~5.2]{oai} (which here
+holds with probability $1-o(1)$ because $h(\mu)+\mu+10^{-5}=0.516456<\eta$). Then, with probability
+$1-o(1)$, the uncapped procedure recovers every alias of every target.
+\end{lemma}
+\begin{proof}
+Fix an alias $I$ and its carry. In one trial $J=I\triangle F$ is uniform and independent of $M$, so
+$\Pr[|J\cap M|=\sigma m]=\binom m{\sigma m}2^{-m}$ and, conditionally, $S=J\cap M$ is a uniform
+$\sigma m$-subset of $[n]$. Since $K\sigma\mu=0.49989<1/2$, a uniform $\lfloor n/2\rfloor$-set contains
+$K=15$ disjoint sets with the law of $S$ for large $n$; superadditivity of deficiency
+\cite[Lemma~2.2]{oai} gives $\E d(S)\le\delta n/15$. With $\theta=\delta/(15\sigma\mu)=0.022405$,
+Markov's inequality gives
+$\Pr[d(S)\le\theta'\sigma m]\ge1-\theta/\theta'-o(1)\ge0.0086-o(1)$.
+(Taking $\theta'=\theta$ would make this bound vacuous; a margin $\theta'>\theta$ is needed.)
+On this event the signed reduced weights of subsets of $S$ take at least $2^{\sigma(1-\theta')m}$
+values, so some layer has $B\ge2^{\sigma(1-\theta')m}/(\sigma m+1)\ge2^{\gamma m}$ distinct weights,
+because $\gamma<\sigma(1-\theta')=0.371412$. From here the argument of \cite[(5.17) and the Cauchy--Schwarz step after it]{oai} is
+unchanged: with probability at least $1/(8K_0n^2)$ over $(P',j')$ some representation survives the
+smaller modulus and is visited. Hence one trial recovers $I$ with probability at least
+$p_1=\binom m{\sigma m}2^{-m}\cdot0.008/(8K_0n^2)$, and $T$ independent trials miss it with
+probability at most $e^{-p_1T}\le e^{-n^{7}}$. A union bound over the $(nN_0+1)2^n$ pairs (target,
+subset) finishes the proof.
+\end{proof}
+
+The preliminary search \cite[Proposition~2.4]{oai} is used with $0.01004$ replaced by $\delta$: the
+Chebyshev threshold becomes $\delta-1.5\cdot10^{-5}$, and when it returns \textsc{continue} with
+non-negligible probability the hypothesis of Lemma~\ref{lem:coverage} holds. As in the paper, the cap must also
+absorb the $+\tfrac12$ in $\log_2|\Sigma(U)|\le(\tfrac12-\delta+1.5\cdot10^{-5})n+\tfrac12$, so we cap at
+$2^{\lceil0.488825n\rceil}$.
+
+The prime $P'$ is now drawn $2^{\rho n}\operatorname{poly}(n)$ times (once per layer, trial, target and
+carry). With the bounded sampler of \cite[Section~6]{oai} ($n^3$ candidates, trial division up to
+$2^{(\gamma m+1)/2}$) this costs $2^{(\rho+\gamma\mu/2)n+O(\log n)}=2^{0.01997n+O(\log n)}$ in total, and
+the failure term of the coupling \cite[(6.4)]{oai} becomes $2^{\rho n}\operatorname{poly}(n)e^{-c_0n^2}=o(1)$.
+
+\section{New filtering densities and the checksum}\label{sec:checksum}
+In \cite[Section~3]{oai} replace $r,s$ by the degree-$8$ cosine polynomials with coefficients
+\begin{align*}
+(r_j)&=(-1.0691,\,-0.569,\,0.4495,\,0.4334,\,0.3313,\,-0.1504,\,-0.1634,\,0.0317),\\
+(s_j)&=(-0.882,\,0.6245,\,0.4375,\,-0.2822,\,0.2331,\,0.2563,\,-0.1326,\,-0.1861),
+\end{align*}
+and the single tilt $\kappa=1.0315$ by $f_*=f^{\kappa_f}/\!\int f^{\kappa_f}$, $g_*=g^{\kappa_g}/\!\int g^{\kappa_g}$
+with $\kappa_f=1.034$, $\kappa_g=1.0339$. Nothing in \cite[Sections~3--4]{oai} uses $\kappa_f=\kappa_g$:
+$D,\ D-A,\ D-E$ are still relative entropies, and the score identities of \cite[Appendix~A]{oai} become
+\[
+u=L+(\kappa_f-1)B_f+(\kappa_g-1)B_g-H,\qquad v=(2-\kappa_f)B_f+(2-\kappa_g)B_g-2L+H,
+\]
+with $B_f,B_g$ the $K_x$-means of $\log_2f(x+\cdot)$, $\log_2g$, and $H=H_f+H_g$. Run
+Theorem~4.1 with $(\eta,\tau)=(0.5176,\tau_0)$, $\tau_0=0.48888$ (repair C: the checksum must be
+certified at the exponent at which it is run, not at the headline $0.4889$), and with the constants
+$8.5,8.3$ of \cite[(3.6), (4.22)--(4.24)]{oai} replaced by $\lambda_1=8.323$, $\lambda_2=8.132$.
+
+\begin{proposition}\label{prop:moments}
+With these data, $\Delta=\eta-\tau_0$, $a=\Delta/(2\tau_0-\eta)$ and $M(x)^2=2+2\cos x$,
+\[
+\log_2\!\int_{\mathbb T}M^2\,2^{\lambda_1(\Delta-u)}<0.5170788,\qquad
+\log_2\!\int_{\mathbb T}M^2\,2^{\lambda_2(av-u)}<0.5169604 .
+\]
+\end{proposition}
+\begin{proof}[Certificate]
+As in \cite[Appendix~A]{oai}: trapezoid sums in interval arithmetic, the analytic trapezoid bound of
+Trefethen--Weideman \cite{tw} for the inner integrals (strip $0.5$), and an analytic strip of half-width
+$2\beta=0.38$ for the outer integrands, using
+$|Q(z)-1|\le\|f(\cdot+iy/2)-1\|_2\|g(\cdot-iy/2)-1\|_2<0.5654$. Script
+\texttt{hardcore\_certificate.py} (mpmath intervals, $N=128$); an independent implementation
+(python-flint balls, $N=192$, strips $0.4$ and $0.34$, scores computed from the definitions of $D,A,E$,
+its own strip bounds) gives the same bounds to $12$ digits. This agreement is expected, since both
+evaluate the same integrals with quadrature errors below $10^{-14}$; the independence is in the
+code, the arithmetic library and the error analysis.
+\end{proof}
+Lemma~3.2 of \cite{oai} needs only bounded coefficients ($\sum|r_j|=3.1978$, $\sum|s_j|=3.0343$), so
+the finite-circle moments are below $2^{0.51718}$ for $P\ge P_0$. The two domination steps
+\cite[(4.22)--(4.23)]{oai} need $1<\lambda_1\le10$ and $\lambda_2(4a+3)<30$; here
+$\lambda_2(4a+3)=26.43$. The error exponent of \cite[(4.25)]{oai} becomes
+$-\eta+0.51718+48\eps<-0.00042$, and the checksum runs in $2^{(\tau_0+20\eps)n+O(\sqrt n)}$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Assemble as in \cite[Section~6]{oai}. On every guarded execution the exponents of the components are
+$0.488825$ (preliminary cap), $0.48888$ (cumulative alias budgets), $0.3414$ (generation),
+$0.01997$ (sampling the primes $P'$),
+$\tau_0+20\eps=0.4888802$ (checksum) and $\eta/2$ (trial division for $P$); the largest is
+$0.4888802<0.4889$, and the gap $1.98\cdot10^{-5}$ absorbs $\operatorname{poly}(n+b+2)$ when $b\le n^c$.
+Correctness is that of \cite{oai}, with Lemmas~\ref{lem:sizes}--\ref{lem:coverage} in place of
+Theorem~5.1 and Proposition~\ref{prop:moments} in place of Proposition~3.1.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:dense}]
+Take $\eta_d=0.50001$ and $P=2^{\lceil\eta_dn\rceil}$; Theorem~4.1 needs no primality. After the
+isolation step of \cite[Lemma~2.1]{oai} every transformed subset sum and target lies in
+$[0,2^{n/2+O(\log n)})$, which is contained in $[0,P)$ for large $n$, so the modular bins are exact and no aliases exist. Run
+Theorem~4.1 for the $O(n^2)$ targets with $(\eta_d,\tau)=(0.50001,0.47409)$ and
+$(\lambda_1,\lambda_2)=(8.447,8.236)$ (the checksum must run strictly below the claimed exponent,
+since its time is $2^{(\tau+20\eps)n+O(\sqrt n)}$); the certified moments are $<2^{0.4997104}$, the error
+exponent is $-\eta_d+0.4998104+48\eps<-0.00019$, $\lambda_2(4a+3)=26.61<30$, and the threshold test of
+\cite[Section~6]{oai} decides. The time is $2^{0.4740902n+O(\sqrt n)}\operatorname{poly}(n+b)=O(2^{0.4741n})$.
+\end{proof}
+
+\section{Proof of Proposition~\ref{prop:C}}
+Since $G$ is homocyclic, $G[p]=p^{e-1}G$ and $|G[p]|=p^k$. Let $\pi:G\to G/K$. Then
+$\pi(G[p])=p^{e-1}(G/K)$. Write $G/K\cong\bigoplus_j\Z/p^{a_j}$ with $1\le a_j\le e$ and let
+$s=\#\{j:a_j=e\}$. Then $p^{e-1}(G/K)$ has order $p^s$, and $M=|G/K|\ge p^{es}$, with equality iff all
+$a_j=e$. Hence $|K\cap G[p]|=|\ker\pi|_{G[p]}|=p^k/p^s\ge p^kM^{-1/e}$, with the stated equality case.
+For the second claim, $\sum_{0\ne g\in G[p]}\Pr[g\in K]=\E|K\cap G[p]|-1\ge p^kM^{-1/e}-1$ (the bound is
+decreasing in $M$, so index $\le M$ suffices), and the maximum is at least the average. \qed
+
+The script \texttt{theorem\_c\_exhaustive.py} checks the inequality, the equality cases and the
+averaged bound over all subgroups of $(\Z/p^e)^k$ for $(p^e,k)\in\{(4,2),(4,3),(8,2),(16,2),(9,2),(27,2),(25,2)\}$;
+the independent script enumerates the same subgroups as kernels of all endomorphisms.
+The fact is elementary and we do not claim it is new.
+
+\section{Where the gain comes from, and the limit of the framework}
+At the paper's operating point, the alias side and the checksum are both tight
+(\cite[(5.8), (5.11)]{oai}: $0.489909$, $0.489849$; checksum $0.48996$). Numerically (not certified),
+re-optimizing $(\lambda,\eta,\mu,\delta)$ with the paper's densities gives $0.48977$; the
+$\sigma$-variant brings the alias side to $0.48911$; the new densities move the checksum curve
+$\tau_{cs}(\eta)$ down by about $7\cdot10^{-4}$ (at $\eta=0.5176$: $0.48955\to0.48882$), giving
+$0.48881$, certified here with margin at $\tau_0=0.48888$. In terms of the saving below the
+meet-in-the-middle exponent $1/2$: $0.0100\to0.0111$; the running-time ratio is $2^{0.0011n}$.
+
+These are parameter choices and one small variant inside the same proof; no new idea is involved.
+A heuristic calculation (CONST-OPT notes, not part of this remark) puts the limit of this framework
+near $0.4798$: as $\delta\to0$ the alias side tends to $0.48803$, and an idealized checksum meets the
+alias-count lower bound $1-\eta$ near $\eta\approx0.520$. The paper uses $49.5\%$ of the
+heuristic headroom $1/2-0.4798$, this note $55\%$. Going substantially below $0.4889$ would need a new
+ingredient (more selective filters or a less wasteful representation), not further tuning.
+
+\smallskip\noindent\emph{Not claimed.} No explicit $N_c$: with $\eps=10^{-8}$ the bounds take effect
+only for astronomically large $n$ (already in \cite{oai}). Nothing is formalized. Related work: Ye and
+Li \cite{yeli} independently obtain $O(2^{0.499999n})$ by a different method; Chen, Jin, Randolph and
+Servedio \cite{cjrs} save a polynomial factor.
+
+\begin{thebibliography}{9}
+\bibitem{oai} OpenAI, \emph{Subset Sum in Time $O(2^{0.49n})$}, OpenAI Math Release preprint, October 4, 2026,
+\url{https://github.com/openai/math/tree/main/preprints/Subset-Sum-in-Time-2-power-0-49n-October-4-2026}.
+\bibitem{tw} L.~N.~Trefethen and J.~A.~C.~Weideman, The exponentially convergent trapezoidal rule,
+\emph{SIAM Review} 56 (2014), 385--458.
+\bibitem{yeli} L.~Ye and B.~Li, Subset Sum via Partial Match, arXiv:2610.10446 (2026).
+\bibitem{cjrs} X.~Chen, Y.~Jin, T.~Randolph and R.~A.~Servedio, Subset sum in time $2^{n/2}/\mathrm{poly}(n)$,
+arXiv:2301.07134 (2023).
+\end{thebibliography}
+\end{document}

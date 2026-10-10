@@ -1,0 +1,7 @@
+H(1/8)         in [0.7914013842, 0.7914013842]  claim <0.791402  OK=True
+H(13/50)       in [1.0980680509, 1.0980680509]  claim <1.098069  OK=True
+H(1)           in [1.9580680509, 1.9580680509]  claim <1.958069  OK=True
+bracket(7/25)  upper=0.9040532085  claim <0.904054  OK=True
+bracket(1)     upper=0.5153730100  claim <0.515374  OK=True
+tail bound used: 3.552713678800501e-15
+ALL FIVE OK

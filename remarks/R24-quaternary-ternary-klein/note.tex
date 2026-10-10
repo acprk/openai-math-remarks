@@ -1,0 +1,162 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+\title[Norm-$m$ form of the alternating-product argument]{Remark R24: the alternating-product
+argument of the circulant Hadamard proof for norm $m$, and three
+parallel applications (quaternary, three-phase, Klein four-group)}
+\author{[AUTHOR NAME]}
+\date{9 October 2026}
+
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \emph{The circulant Hadamard conjecture} (family 179 of
+\texttt{github.com/openai/math}) proves that an element $x\in\Z[i][C_{u^2}]$ with
+$xx^*=u^2$ has an alternating product of character values that is a root of unity of
+odd order, and combines this with a first-order $2$-adic comparison. The
+proposition holds for every $x$ with $xx^*=u^2$, and squareness is not used in it.
+We record that the same argument, with $u^2$ replaced by any $m$ and the comparison
+done once, gives: no perfect quaternary sequence of length $2m$ ($m>1$ odd); no
+perfect three-phase sequence of length $3m$ ($m>1$, $3\nmid m$); no perfect binary
+array on $C_2\times C_2\times C_{u^2}$ ($u>1$ odd); and a rank-one identity for
+$x\in\Z[i][C_{pq}]$ with $xx^*=pq$. All four are checked in Lean~4 on top of
+the upstream formalization, using only the three standard axioms. \textbf{These are parallel
+generalizations}: the method and almost all of the proof are the preprint's. We
+claim no new idea.
+\end{abstract}
+\maketitle
+
+\section{Statements}
+Throughout, a function $a:G\to\C$ on a finite abelian group is \emph{perfect} if
+$\sum_{g}a(g)\overline{a(g+s)}=0$ for all $s\neq0$. For $R\in\{\Z,\Z[i],\Z[\omega]\}$
+and $N\ge1$ write $R[C_N]$ for the group ring, $x^*$ for the involution
+$g\mapsto g^{-1}$ combined with complex conjugation on $R$, and $J=\sum_g g$.
+
+\begin{proposition}[Prop$'$, Prop$''$]\label{prop}
+Let $N>1$. Let $x\in\Z[i][C_N]$ with $xx^*=N$ and $N$ odd, or $x\in\Z[\omega][C_N]$
+with $xx^*=N$ and $3\nmid N$. Then the alternating product
+$\Delta(x)=\prod_{S}x_S^{(-1)^{|S|}}$ of~\cite[\S3]{OAI179} is a root of unity.
+For each prime $p\mid N$ its order is a power of $p$, so the order is odd, resp.\ prime to $3$.
+If $N$ has at least two distinct prime divisors, then $\Delta(x)=1$.
+\end{proposition}
+
+For $\Z[i]$ and $N=u^2$ this is \cite[Prop.~3.4, \texttt{prop:alternating}]{OAI179}.
+The preprint itself says that the proposition ``applies to every $x\in\Z[i][P]$
+satisfying $xx^*=u^2$'' (\texttt{introduction.tex} l.~191,
+\texttt{contradiction.tex} l.~3). Its proof uses the norm only through the facts
+that every character value has absolute value $\sqrt N$ and that $N$ is a unit away
+from the primes dividing~$N$. Both facts hold for any $N$. Over $\Z[\omega]$, the localization layer
+has to be redone at a prime above $3$ with $\lambda=1-\omega$, but the argument does not change.
+
+\begin{theorem}[Master Lemma, sum form]\label{gml}
+Let $(\mathcal O,\lambda,\ell)=(\Z[i],1+i,2)$ with $N>1$ odd, or
+$(\Z[\omega],1-\omega,3)$ with $N>1$, $3\nmid N$. Let $x_0$ and $x_j$ ($j\in s$) lie in
+$\mathcal O[C_N]$ with $xx^*=N$. Assume $x_j=x_0+t_jy_j$ with $0\neq t_j\in\lambda\mathcal O$, and
+$\sum_j y_j=eJ+\lambda W$ with $e\equiv c\pmod\lambda$, $c\in\Z$, $\ell\nmid c$. Then this is
+impossible.
+\end{theorem}
+
+For $\Z[i]$, $N=u^2$, $|s|=2$ this is the argument of \cite[\S4]{OAI179}.
+
+\begin{theorem}\label{main}
+\begin{enumerate}
+\item[(Q)] For odd $m>1$ there is no perfect $a:\Z/2m\to\{\pm1,\pm i\}$.
+\item[(T3)] For $m>1$, $3\nmid m$, there is no perfect $a:\Z/3m\to\{1,\omega,\omega^2\}$.
+\item[(T1)] For odd $N>1$ there is no perfect $f:C_2\times C_2\times C_N\to\{\pm1\}$.
+Equivalently, there is no Menon--Hadamard difference set in $C_2\times C_2\times C_{u^2}$, $u>1$ odd.
+For non-square $N$ this is trivial, since $(\sum f)^2=4N$.
+\item[(F)] Let $p\neq q$ be odd primes and $x\in\Z[i][C_{pq}]$ with $xx^*=pq$. Then
+$\varepsilon(x)\,x(g)=\pi_p(x)(g\bmod p)\cdot\pi_q(x)(g\bmod q)$ for all $g$. Here $\varepsilon$ is
+the augmentation and $\pi_p$ the push-forward to $C_p$. The statement is vacuous unless
+$p\equiv q\equiv1\pmod 4$, since $\varepsilon(x)\overline{\varepsilon(x)}=pq$.
+\end{enumerate}
+\end{theorem}
+
+\section{Why this is a parallel generalization}
+The new ingredient for each alphabet is a one-line normalization. The rest is the
+preprint's argument with $u^2$ replaced by $m$.
+\begin{itemize}
+\item (Q) Split $\Z/2m=C_2\times C_m$ and write $h=H_0+ZH_1$. Every element of
+$\{\pm1,\pm i\}$ is $\equiv1\pmod{1+i}$, so $c=(H_0+H_1)/(1+i)$ and
+$d=(H_0-H_1)/(1+i)$ lie in $\Z[i][C_m]$ and have norm $m$. Moreover $d=c+(i-1)H_1$ with
+$H_1\equiv J\pmod{1+i}$. Theorem~\ref{gml} then applies with one index, $t=i-1$ and $e=1$. The
+preprint needs two comparisons; here one suffices.
+\item (T3) Write $h=H_0+ZH_1+Z^2H_2$ and $c_r=h(r)/(1-\omega)$ for $r\in\{1,\omega,\omega^2\}$.
+Then $c_\omega-c_1=\lambda y_1$, $c_{\omega^2}-c_1=\lambda y_2$ and $y_1+y_2\equiv2\omega^2J$.
+Apply Theorem~\ref{gml} over $\Z[\omega]$ with $e=2\omega^2$.
+\item (T1) Write $h=\sum X^aY^bH_{ab}$ and $x_{\alpha\beta}=h(\alpha,\beta)/2\in\Z[C_N]$, which have norm $N$.
+The three differences $x_{\alpha\beta}-x_{11}=-2b_j$ satisfy $\sum b_j\equiv J\pmod 2$.
+Apply Theorem~\ref{gml} with three indices and $t=-2$.
+\item (F) By Prop$'$, $\Delta=1$ for two primes. This reads
+$\hat x(1)\hat x(\chi\psi)=\hat x(\chi)\hat x(\psi)$ for primitive $\chi$ on $C_p$ and $\psi$ on $C_q$.
+Relabelling by units of $\Z/pq$ gives all character pairs, and Fourier inversion on
+$C_p\times C_q$ finishes the proof.
+\end{itemize}
+By the gate used in our project (``could an expert write this down in an afternoon
+from the original paper?''), the answer is yes. The 2-adic descent, the rigidity statements and the
+classification of admissible normalizations are not on the proof path of Q, T1, T3
+or F, and they are not part of this remark.
+
+\section{Formal verification}
+The Lean files in \texttt{scripts/lean/OAI/LinearAlgebra/CirculantHadamard/}
+(\texttt{GeneralNorm/}: 7 files; \texttt{Eisenstein/}: 8 files; \texttt{RankOne/}: 2 files;
+4085 lines) are added on top of \texttt{openai/math} commit
+\texttt{fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb}. They do not modify any upstream file
+and import 15 unmodified upstream modules of the 179 formalization. The toolchain is Lean
+\texttt{v4.34.1} with the upstream \texttt{lake-manifest.json} (Mathlib
+\texttt{d13f23b723b8a846827a245b89c10fc7d3f11612}). \texttt{Checks.lean} prints the
+statements and axioms of Prop$'$, Prop$''$, both Master Lemmas, Q, T1 (both forms),
+T3 and F. Each depends only on \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}. The equivalence of perfect binary arrays with Menon--Hadamard
+difference sets is standard and is not formalized.
+
+\section{Computational sanity checks}
+These are independent of the Lean development and share no code with the paper artifacts.
+They are unit tests only; the theorems rest on the proofs.
+Exhaustive search (normalized $a(0)=1$) finds no perfect quaternary sequence
+of length $6,10,14$ and no perfect three-phase sequence of length $6,12,15$. As
+positive controls it finds $2,8,32$ quaternary sequences of length $2,4,8$ and $6,54$
+three-phase sequences of length $3,9$. A meet-in-the-middle over the four
+normalized components finds no perfect binary array on $C_2\times C_2\times C_9$. On
+$C_2\times C_2\times C_3\times C_3$ it finds $15552$, which is consistent with the known
+$(36,15,6)$ Menon difference sets there~\cite{Menon}; one of them was checked directly.
+
+\section{What is not claimed}
+We claim no new method, and this remark makes no claim about individual lengths. Many lengths in
+these families are excluded by self-conjugacy~\cite{Turyn,ADM,MaNg}, by field descent, or appear in
+the tables of~\cite{Arasu}. For T1, Turyn's exponent bound already excludes
+$C_2\times C_2\times C_{u^2}$ whenever some prime $p\mid u$, $p^a\parallel u$, is self-conjugate
+modulo $2(u/p^a)^2$. This covers all prime powers $u$ and all odd $u<39$. Theorem~(F) is proved only for two
+distinct odd primes and $\Z[i]$. Correctness depends on the Lean kernel and on the
+faithfulness of the Lean statements; the reduction from difference sets to perfect arrays is not formalized.
+Related work by the same authors is in preparation.
+
+\section*{Acknowledgement and AI disclosure}
+The method is OpenAI's~\cite{OAI179}. Developed with AI assistance (Anthropic Claude,
+Opus 5.5) under [AUTHOR NAME]'s direction; independent adversarial reviews were run
+by separate AI sessions and are not human peer review.
+
+\begin{thebibliography}{9}
+\bibitem{OAI179} OpenAI, \emph{The circulant Hadamard conjecture}, preprint,
+September 23, 2026, \url{https://github.com/openai/math}, commit
+\texttt{fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb},
+\texttt{preprints/The-circulant-Hadamard-conjecture-September-23-2026/}; Lean:
+\texttt{lean/OAI/LinearAlgebra/CirculantHadamard/}.
+\bibitem{Turyn} R.~J. Turyn, Character sums and difference sets, \emph{Pacific J. Math.} 15 (1965), 319--346.
+\bibitem{Arasu} K.~T. Arasu, Sequences and arrays with desirable correlation properties, in
+\emph{Information Security, Coding Theory and Related Combinatorics}, IOS Press, 2011, 136--171.
+\bibitem{ADM} K.~T. Arasu, W.~de~Launey and S.~L. Ma, On circulant complex Hadamard matrices,
+\emph{Des. Codes Cryptogr.} 25 (2002), 123--142.
+\bibitem{MaNg} S.~L. Ma and W.~S. Ng, On non-existence of perfect and nearly perfect sequences,
+\emph{Int. J. Inf. Coding Theory} 1 (2009), 15--38.
+\bibitem{Menon} P.~K. Menon, On difference sets whose parameters satisfy a certain relation,
+\emph{Proc. Amer. Math. Soc.} 13 (1962), 739--745.
+\end{thebibliography}
+\end{document}

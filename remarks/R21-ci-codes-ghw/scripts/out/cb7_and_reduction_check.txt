@@ -1,0 +1,9 @@
+type (2, 2) p=11: CIs 3
+type (2, 3) p=11: CIs 3
+type (3, 3) p=11: CIs 3
+type (3, 4) p=13: CIs 2
+type (2, 5) p=13: CIs 2
+type (2, 2, 2) p=7: CIs 3
+type (2, 2, 3) p=11: CIs 2
+CB7 identity checks 3280 failures 0
+down-set profile checks 720 failures 0

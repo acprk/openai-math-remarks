@@ -1,0 +1,13 @@
+G1  P^2 type (2, 2) p=11: instances 6; Cartesian GHW == mu_r for all (d,r): True
+G1  P^2 type (2, 3) p=11: instances 6; Cartesian GHW == mu_r for all (d,r): True
+G1  P^2 type (3, 3) p=11: instances 6; Cartesian GHW == mu_r for all (d,r): True
+G1  P^2 type (2, 4) p=13: instances 6; Cartesian GHW == mu_r for all (d,r): True
+G1  P^2 type (3, 4) p=13: instances 6; Cartesian GHW == mu_r for all (d,r): True
+G1  P^2 type (2, 5) p=13: instances 4; Cartesian GHW == mu_r for all (d,r): True
+G1  P^2 type (3, 5) p=17: instances 2; Cartesian GHW == mu_r for all (d,r): True
+G1  P^2 type (4, 4) p=17: instances 2; Cartesian GHW == mu_r for all (d,r): True
+G3  P^3 type (2, 2, 2) (f3 = product of planes) p=7: instances 6; Cartesian GHW == mu_r: True
+G3  P^3 type (2, 2, 3) (f3 = product of planes) p=11: instances 4; Cartesian GHW == mu_r: True
+G3  P^3 type (2, 3, 3) (f3 = product of planes) p=13: instances 2; Cartesian GHW == mu_r: True
+total (d,r) tests 1424 | violations 0 | equality 1307 | strict 117
+teeth control (wrong shift m=s-d): violations 988 (must be > 0)

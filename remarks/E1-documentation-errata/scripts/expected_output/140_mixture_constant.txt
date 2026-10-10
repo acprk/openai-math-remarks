@@ -1,0 +1,9 @@
+grid points: 6364
+parameter triples (D',n,j), 1<=j<n<D'<=40: 9880
+violations of log2 C <= (b-1)/2: 0
+smallest slack (b-1)/2 - log2 C = 0.5000 at D'=40, n=39, j=1 (log2 C = -0.0000)
+D'=40 n=38 j= 1:  log2 C =  -0.0385   (b-1)/2 =   1.0   stated: D' = 40
+D'=40 n=38 j=20:  log2 C =  -0.4715   (b-1)/2 =   1.0   stated: D' = 40
+D'=40 n=30 j= 5:  log2 C =  -0.1117   (b-1)/2 =   5.0   stated: D' = 40
+D'=40 n=20 j=10:  log2 C =   2.3277   (b-1)/2 =  10.0   stated: D' = 40
+D'=40 n= 3 j= 1:  log2 C =  13.5250   (b-1)/2 =  18.5   stated: D' = 40

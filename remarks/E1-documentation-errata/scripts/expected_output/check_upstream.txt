@@ -1,0 +1,174 @@
+openai/math commit: fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb
+
+== 266-A  N(6)=3 verification archive ==
+  contents of The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/: README.md The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026.pdf build 
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/introduction.tex:154: proved, in \cref{sec:rounding}. The accompanying execution and build archives,
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/introduction.tex:155: identified in \texttt{verification/computation/README.md}, preserve the evidence for
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/introduction.tex:156: the fresh run documented in Section~\ref{execute:observed}. This proof
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/introduction.tex:157: uses that run. The separate September 7 execution reported in the source
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:16: The accompanying \texttt{verification/code/} directory contains the seven unchanged
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:17: source files \texttt{seed.cpp}, \texttt{covout.cpp}, \texttt{ub.cpp},
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:18: \texttt{patchx.cpp}, \texttt{atlas.cpp}, \texttt{stageB.cpp}, and
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:19: \texttt{stageC.cpp}. Their byte lengths and full SHA-256 digests are
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:20: listed in \texttt{verification/code/extraction.json}. The source hashes were checked
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:119: \texttt{verification/code/proof\_run.py} runner was used in this execution and
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:381: \texttt{verification/\allowbreak computation/README.md} preserves the numerical data and records
+  preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/build/sections/execution.tex:390: \texttt{verification/REPRODUCE.md} gives rebuild and
+  files named seed.cpp                     in tree: 0
+  files named covout.cpp                   in tree: 0
+  files named ub.cpp                       in tree: 0
+  files named patchx.cpp                   in tree: 0
+  files named atlas.cpp                    in tree: 0
+  files named stageB.cpp                   in tree: 0
+  files named stageC.cpp                   in tree: 0
+  files named extraction.json              in tree: 0
+  files named proof_run.py                 in tree: 0
+  files named REPRODUCE.md                 in tree: 0
+  files named run.json                     in tree: 0
+  files named status.json                  in tree: 0
+  files named build-manifest.json          in tree: 0
+  paths under The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/verification: 0
+  lean/docs/266.md:11: 
+  lean/docs/266.md:12: The selected statement does not establish the paper's upper bound of three or its computer-assisted exclusion of four arbitrary bases.
+  lean/docs/266.md:13: 
+
+== 266-B  Exact-Fourier listing path ==
+  contents of Exact-Fourier-certificates-for-complex-Hadamard-matrices-of-order-six-September-24-2026/: Exact-Fourier-certificates-for-complex-Hadamard-matrices-of-order-six-September-24-2026.pdf README.md build verification 
+  preprints/Exact-Fourier-certificates-for-complex-Hadamard-matrices-of-order-six-September-24-2026/build/paper.tex:235: \texttt{verification/verify.py}. The accompanying wrapper
+  preprints/Exact-Fourier-certificates-for-complex-Hadamard-matrices-of-order-six-September-24-2026/build/paper.tex:273: \lstinputlisting[style=certificate,caption={Complete exact verifier},label={lst:verifier}]{certificate/verify.py}
+  preprints/Exact-Fourier-certificates-for-complex-Hadamard-matrices-of-order-six-September-24-2026/build/sections/04-mixed.tex:217: \texttt{data} in Appendix~\ref{app:code}, also supplied in the companion
+  preprints/Exact-Fourier-certificates-for-complex-Hadamard-matrices-of-order-six-September-24-2026/build/sections/04-mixed.tex:218: file \texttt{certificate/verify.py}. Each record has the form
+  Exact-Fourier-certificates-for-complex-Hadamard-matrices-of-order-six-September-24-2026/verification/verify.py present: 1
+  any path */certificate/verify.py in tree: 0
+
+== 095  verify_certificate.py ==
+  contents of Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/: README.md build nonliftable-hyperbolicity.pdf 
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:536: \paragraph{Reproducible calculation.}
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:537: The accompanying source file \texttt{verify\_certificate.py}
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:538: reconstructs the monomial blocks, bases, differentiated products,
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:539: and every displayed minor using exact integer arithmetic modulo
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:540: seven.  It also verifies the ranks in weights six through nine
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:541: at the very same specialization
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:542: \eqref{eq:certificate-point} and tangent
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:543: \eqref{eq:certificate-tangent-moments}.  This supplies an
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:544: independent reproduction of the finite calculation; the explicit
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:545: minors and the characteristic-zero argument above establish the
+  preprints/Hyperbolicity-Cones-Without-Semidefinite-Lifts-October-5-2026/build/source/appendix-certificate.tex:546: lemma without relying on the program.
+  files named verify_certificate.py        in tree: 3
+    (elsewhere: preprints/Snaky-in-21-Maker-moves-September-25-2026/verification/supporting/route25/verify_certificate.py)
+    (elsewhere: preprints/Snaky-in-21-Maker-moves-September-25-2026/verification/supporting/route35/verify_certificate.py)
+    (elsewhere: preprints/Snaky-in-21-Maker-moves-September-25-2026/verification/verify_certificate.py)
+  lean/docs/095.md:1: # Hyperbolicity cones without semidefinite lifts
+  lean/docs/095.md:2: 
+  lean/docs/095.md:3: The following describes the scope of the Lean formalization related to the following accompanying paper(s):
+  lean/docs/095.md:4: 
+  lean/docs/095.md:5: - [A nonspectrahedral hyperbolicity cone](../../preprints/A-Nonspectrahedral-Hyperbolicity-Cone-September-24-2026/nonspectrahedral-hyperbolicity-cone.pdf)
+
+== 318  support/ tree ==
+  contents of A-rational-obstruction-to-strong-chromatic-splitting-at-height-three-September-25-2026/: README.md SUPPORT-COVERAGE.md build paper.pdf 
+  preprints/A-rational-obstruction-to-strong-chromatic-splitting-at-height-three-September-25-2026/SUPPORT-COVERAGE.md:7: `support/r-ce/ce_certificate.py` constructs the trivial-coefficient Chevalley--Eilenberg matrices \(d_0,\ldots,d_3\) for \(\mathfrak{sl}_2\) and \(\mathfrak{sl}_3\) from matrix commutators. It uses exact integers and rational `Fraction` arithmetic. Its complete generated arrays and transcript are `support/r-ce/ce_certificate.json` and `support/r-ce/ce_certificate.txt`.
+  preprints/A-rational-obstruction-to-strong-chromatic-splitting-at-height-three-September-25-2026/SUPPORT-COVERAGE.md:15: Exact artifact and source-locator identities are listed in [SUPPORT-COVERAGE.json](SUPPORT-COVERAGE.json).
+  preprints/A-rational-obstruction-to-strong-chromatic-splitting-at-height-three-September-25-2026/build/sections/08-elementary-background.tex:58: The script \texttt{support/r-ce/ce\_certificate.py} generates these
+  preprints/A-rational-obstruction-to-strong-chromatic-splitting-at-height-three-September-25-2026/build/sections/08-elementary-background.tex:59: integer matrices and evaluates the specified minors by fraction-free
+  files named ce_certificate.py            in tree: 0
+  files named ce_certificate.json          in tree: 0
+  files named ce_certificate.txt           in tree: 0
+  files named BUILDING.md                  in tree: 0
+  files named SUPPORT-COVERAGE.json        in tree: 0
+
+== 222  certificate/original_certificate.py ==
+  contents of Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/: Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026.pdf README.md build 
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9466: The accompanying file \texttt{certificate/original\_certificate.py} is the
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9467: unaltered code printed in the appendix.  From the manuscript directory,
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9468: run
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9469: \begin{quote}\ttfamily
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9470: python3 certificate/original\_certificate.py
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9471: \end{quote}
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9472: with NumPy installed and assertions enabled; do not use \texttt{-O}.
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9473: The certificate requires IEEE binary64 arithmetic with round-to-nearest
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9474: operations as described above.  Its interval checkpoints are printed to
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9475: standard output.  The accompanying reproducibility record identifies the
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9476: software versions, source hashes, and saved output of a complete run.
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9481: standard error; the actual output is retained with the certificate.
+  preprints/Microscopic-jamming-in-the-negative-spherical-perceptron-September-24-2026/build/main.tex:9482: The separate return-observer record from September 24, which leaves
+  files named original_certificate.py      in tree: 0
+
+== 238  support/network_bounds.py ==
+  contents of Routing-densities-and-representation-contraction-for-Thorp-sweeps-September-26-2026/: README.md build paper.pdf 
+  preprints/Routing-densities-and-representation-contraction-for-Thorp-sweeps-September-26-2026/build/sections/04-certificate.tex:294: ...The accompanying script \texttt{support/network\_bounds.py} checks exactly these five rational inequalities; it does not test the probabilistic or asymptotic arguments.
+  files named network_bounds.py            in tree: 0
+
+== 227  numerics-*.py ==
+  contents of Cutoff-throughout-the-high-temperature-Sherrington-Kirkpatrick-phase-September-24-2026/: README.md build paper.pdf 
+  preprints/Cutoff-throughout-the-high-temperature-Sherrington-Kirkpatrick-phase-September-24-2026/build/appendices/scalar-certificate.tex:291: The supplementary files \nolinkurl{numerics-interval.py} and
+  preprints/Cutoff-throughout-the-high-temperature-Sherrington-Kirkpatrick-phase-September-24-2026/build/appendices/scalar-certificate.tex:292: \nolinkurl{numerics-cross-errors.py} implement these operations and the
+  preprints/Cutoff-throughout-the-high-temperature-Sherrington-Kirkpatrick-phase-September-24-2026/build/appendices/scalar-certificate.tex:293: error transfers below; their use is not needed to specify the
+  preprints/Cutoff-throughout-the-high-temperature-Sherrington-Kirkpatrick-phase-September-24-2026/build/appendices/scalar-certificate.tex:294: certificate.
+  files named numerics-interval.py         in tree: 0
+  files named numerics-cross-errors.py     in tree: 0
+
+== 107  lean/docs/107.md ==
+  lean/docs/107.md:5: - [Complex Matrix Multiplication Below 2.258 and Rectangular Bounds](../../preprints/Complex-Matrix-Multiplication-Below-2.258-and-Rectangular-Bounds-September-24-2026/Complex-Matrix-Multiplication-Below-2.258-and-Rectangular-Bounds-September-24-2026.pdf)
+  lean/docs/107.md:6: - [Staggered extraction for exact matrix multiplication over every field](../../preprints/Staggered-extraction-for-exact-matrix-multiplication-over-every-field-September-24-2026/Staggered-extraction-for-exact-matrix-multiplication-over-every-field-September-24-2026.pdf)
+  lean/docs/107.md:10: The formalized results bound the complex matrix-multiplication exponent by $\omega(\mathbb C)\le9/4$, the dual exponent by $\alpha>0.465$, and the rectangular exponent at aspect ratio $0.709$ by $\omega(\mathbb C;1,0.709,1)<2.092$. The dual exponent is the supremum of rectangular aspect ratios attainable with exponent $2$. The arithmetic model counts additions, subtractions, and multiplications in finite division-free programs, with arbitrary positive exponent slack. The square bound implies the paper's weaker $2.258$ headline bound.
+  links to Matrix-Multiplication-Nine-Fourths in lean/docs/107.md: 0
+  'Lean' mentions in Nine-Fourths README.md: 0
+  lean/ComparatorChallenges/MatrixMultiplication.lean:118: theorem complex_omega_le_nine_quarters :
+
+== 026  lean/docs/026.md ==
+  lean/docs/026.md:9: The formalized supplement proves that the indices $n$ for which $p_n/n<p_{n+1}/(n+1)$ have positive lower asymptotic density, where $p_n$ is the $n$th prime. Thus the normalized prime sequence has a positive-density set of increases. This is the prime-ratio corollary associated with the paper's theorem on a positive lower density of large prime gaps.
+  lean/docs/026.md:15: | Positive lower density of prime-ratio increases | [PrimeGaps.lean](../ComparatorChallenges/PrimeGaps.lean) |
+  lean/ComparatorChallenges/PrimeGaps.lean:36: theorem large_gaps_and_ratio_density :
+  lean/ComparatorChallenges/PrimeGaps.lean:37:     (∀ C : ℝ, 0 < C →
+  lean/ComparatorChallenges/PrimeGaps.lean:38:       ∃ c : ℝ, 0 < c ∧ ∃ N₀ : ℕ, ∀ N : ℕ, N₀ ≤ N →
+  lean/ComparatorChallenges/PrimeGaps.lean:39:         c * (N : ℝ) ≤ ((LargePrimeGaps.largeGapIndices C N).card : ℝ)) ∧
+  lean/ComparatorChallenges/PrimeGaps.lean:40:     0 < lowerAsymptoticDensity ratioIncreaseIndices := by
+  lean/ComparatorChallenges/PrimeGaps.lean:41:   sorry
+
+== 099  lean/docs/099.md ==
+  lean/docs/099.md:15: It also gives a finite histogram embedding with distortion at most $\exp(C\sqrt{\log d\,\log\log d})$ for all strings of length at most $d$, uniformly over finite alphabets, including the empty string. Thus the lower and upper exponential scales agree up to absolute constants.
+  lean/docs/099.md:16: 
+  lean/docs/099.md:17: The formalization gives two lower-bound constructions for the $\ell_1$ distortion of ordinary edit distance on binary words. For every sufficiently large length cap $d$, each construction supplies a finite set of at least two binary words of one common length at most $d$ whose least $\ell_1$ distortion is at least $\exp(c\sqrt{\log d\,\log\log d})$ for an absolute $c>0$.
+  lean/docs/099.md:18: 
+  lean/docs/099.md:19: The selected statements are the binary lower bounds. The paper's constant-distortion binary conversion and the companion upper embedding theorem are outside them.
+
+== 103  environment.tex ==
+  preprints/Exact-Derandomization-of-Logarithmic-Space-L-equals-RL-equals-BPL-September-23-2026/build/sections/environment.tex:90: For the third assertion, in the unrestricted distribution the hit count
+  preprints/Exact-Derandomization-of-Logarithmic-Space-L-equals-RL-equals-BPL-September-23-2026/build/sections/environment.tex:91: has mean $q\pi_a$ and variance at most $q\pi_a$, by pairwise
+  preprints/Exact-Derandomization-of-Logarithmic-Space-L-equals-RL-equals-BPL-September-23-2026/build/sections/environment.tex:92: independence. Chebyshev's inequality bounds the stated lower-tail event
+  preprints/Exact-Derandomization-of-Logarithmic-Space-L-equals-RL-equals-BPL-September-23-2026/build/sections/environment.tex:93: by $4/(q\pi_a)$. Conditioning on frame success increases this probability
+  preprints/Exact-Derandomization-of-Logarithmic-Space-L-equals-RL-equals-BPL-September-23-2026/build/sections/environment.tex:94: by at most $1/q_{\rm fr}$.
+
+== 142  CONTENTS.md ==
+  CONTENTS.md:3427: ... randomness, integer-factorization or primitive-root oracle, or GRH assumption is required.
+  preprints/Deterministic-Polynomial-Factorization-over-Prime-Fields-October-4-2026/build/main.tex:56: Hecke zero-free theorem from the companion paper \emph{Primitive roots for
+  preprints/Deterministic-Polynomial-Factorization-over-Prime-Fields-October-4-2026/build/main.tex:57: every admissible integer base}.
+  preprints/Deterministic-Polynomial-Factorization-over-Prime-Fields-October-4-2026/build/sections/10-analytic.tex:9: \begin{theorem}[\cite{OpenAIPrimitive26}, Theorem~1.2]\label{analytic:hecke}
+  lean/docs/029.md present: 0   lean/docs/142.md present: 0
+
+== 140  Lemma s:mixture ==
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:40: measures on \(S(E)\),
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:41: \begin{equation}\label{s:mixture-domination}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:42:  \Law(v)\le2^{D'}(\nu_0+\nu_1).
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:43: \end{equation}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:85: \]
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:86: Let \(f_{A,B}\) denote the normalized beta density. The beta integral
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:87: decreases when either positive shape parameter increases. For
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:88: \(q\ge1/2\),
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:89: \[
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:90:  \frac{f_{\alpha,\beta_0}(q)}{f_{\alpha_*,\beta_0}(q)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:91:  =\frac{\mathrm B(\alpha_*,\beta_0)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:92:         {\mathrm B(\alpha,\beta_0)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:93:        q^{-(\alpha_*-\alpha)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:94:  \le2^{\alpha_*-\alpha}\le2^{D'}.
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:95: \]
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:96: For \(q<1/2\),
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:97: \[
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:98:  \frac{f_{\alpha,\beta_0}(q)}{f_{\alpha,\beta_1}(q)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:99:  =\frac{\mathrm B(\alpha,\beta_1)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:100:         {\mathrm B(\alpha,\beta_0)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:101:        (1-q)^{-(\beta_1-\beta_0)}
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:102:  \le2^{\beta_1-\beta_0}\le2^{D'}.
+  preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/build/sections/07-beta-mixture.tex:103: \]
+
+done

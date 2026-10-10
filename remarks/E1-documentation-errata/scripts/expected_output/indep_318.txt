@@ -1,0 +1,2 @@
+sl2: ranks d0..d3 = [0, 3, 0, 0]  expected [0, 3, 0, 0]  match=True  dim H^0..H^3 = [1, 0, 0, 1]
+sl3: ranks d0..d3 = [0, 8, 20, 35]  expected [0, 8, 20, 35]  match=True  dim H^0..H^3 = [1, 0, 0, 1]

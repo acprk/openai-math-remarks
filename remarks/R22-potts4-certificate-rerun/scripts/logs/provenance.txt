@@ -1,0 +1,30 @@
+Provenance of the archived traces (host: Intel Xeon Gold 6230R, Ubuntu 22.04.5, Linux 6.8.0; Boost 1.86 headers).
+The traces themselves contain only deterministic counts; the facts below are what the runner recorded locally.
+They cannot be re-checked by a reader except by re-running (mode a takes 3-6 CPU minutes; mode b 20-45).
+
+full-run-2026-10-07-gcc9.5-O3-mode-a.trace / -mode-b.trace
+  compiler : g++ (GCC) 9.5.0
+  command  : (in verification/) g++ -std=c++17 -O3 -UNDEBUG checks/certificate.cpp -o artifacts/certificate
+  binary   : sha256 a18f5b856af61d51a710d894204990364dfa06d4228c450332a8ebf88d1a7814
+             (re-built bit-for-bit on 2026-10-09 with the same command in a copy of verification/)
+  mtimes   : binary 2026-10-07 10:10:57; mode-a trace closed 10:26:44 (= +15m47.5s, the logged real time of mode a);
+             mode-b trace closed 11:57:06 (= +90m22.1s, the logged real time of mode b)
+  timing   : full-run-2026-10-07-time.txt, first block = mode a (real 15m47.517s, user 5m51.153s),
+             second block = mode b (real 90m22.174s, user 45m6.364s); exit status was not logged,
+             but both traces end with the `done` line, which is printed only after the traversal completes
+
+spot-2026-10-09-clang17-O2-mode-a.trace
+  compiler : Ubuntu clang version 17.0.6 (++20231209124227+6009708b4367-1~exp1~20231209124336.77)
+  command  : clang++ -std=c++17 -O2 -UNDEBUG certificate.cpp -o cert_clang17_O2
+  binary   : sha256 81c07968eaf86a38b57a5a664195e0ec8fa97cfb68013dfea04133fc4270efcb
+  timing   : real 3m1.947s, user 2m53.722s, exit 0
+
+spot-2026-10-09-gcc12-O1-mode-a.trace
+  compiler : g++-12 (Ubuntu 12.3.0-1ubuntu1~22.04.3) 12.3.0
+  command  : g++-12 -std=c++17 -O1 -UNDEBUG certificate.cpp -o cert_gcc12_O1
+  binary   : sha256 48848b70505156126ce874b5176cd722cf72fc5d5dcac25f97ef8d2406172284
+  timing   : real 4m31.186s, user 4m0.071s, exit 0
+
+spot-2026-10-09-clang17-O2-mode-b-prefix.trace
+  binary   : cert_clang17_O2 (above), run as `timeout 1800 ./cert_clang17_O2 b`
+  timing   : real 30m0.194s, user 19m40.152s, exit 124 (timeout); 8 complete progress lines (800 of 1935 cells)

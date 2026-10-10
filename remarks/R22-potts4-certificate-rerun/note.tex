@@ -1,0 +1,109 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools,booktabs}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{proposition}{Proposition}
+
+\title[Re-execution of the four-state Potts sign certificate]{A third-party re-execution of the exact sign certificate for the ferromagnetic four-state Potts reconstruction threshold}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+
+\begin{document}
+\begin{abstract}
+The OpenAI Math Release preprint \emph{The Reconstruction Threshold for the Ferromagnetic Four-State
+Potts Model} proves nonreconstruction at and below the Kesten--Stigum bound $d\lambda^2\le1$. Its proof
+is computer assisted: via Proposition~3.1 and Lemma~6.1 it rests on two exact-arithmetic subdivision
+traversals (Proposition~6.2), whose counts (Table~2) the authors obtained with GCC~13.3.0. The bundled lightweight checker validates the
+recorded logs but does not repeat the traversals. We re-ran both full traversals on a different
+machine with another GCC version (9.5.0) and Boost~1.86, and obtained stderr traces that are
+byte-identical to the published ones. We also re-ran traversal (a) in full with Clang~17.0.6
+(\texttt{-O2}) and GCC~12.3.0 (\texttt{-O1}), again byte-identical, and the first
+part of traversal (b) with Clang. This is a reproducibility record. It contains no new mathematics, and it
+does not check the reduction from the theorem to the coefficient arrays.
+\end{abstract}
+\maketitle
+
+\noindent\textbf{Attribution.} The theorem, the reduction and the verifier
+\path{verification/checks/certificate.cpp} are OpenAI's work (family 229 of
+\url{https://github.com/openai/math}, commit \nolinkurl{fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb},
+preprint \cite{oai}). We only executed the published program and compared its output.
+Developed with AI assistance (Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; an
+independent adversarial review was run by a separate AI session and is not human peer review.
+
+\section{What the certificate is}
+For the channel $P_\lambda(j\mid i)=\lambda\mathbf 1_{i=j}+(1-\lambda)/4$ on $[4]$, \cite[Theorem~1.1]{oai}
+states that $a_n(d,\lambda)\to0$ whenever $d\lambda^2\le1$, on $d$-ary and Poisson$(d)$ trees. The
+probabilistic argument reduces this to two polynomial inequalities on a product of simplices
+\cite[Proposition~3.1]{oai}. These are certified by Bernstein-type coefficient signs on a midpoint
+subdivision \cite[Lemma~6.1, Proposition~6.2]{oai}. The verifier is a single C++17 file (185 lines,
+exact integer and \texttt{boost::multiprecision::cpp\_int} arithmetic, \texttt{assert} enabled). It
+prints one progress line every 100 visited cells (mode, cell count, current depth, Type~P and Type~T
+leaves so far) and finally
+\begin{center}
+\texttt{done 4479 19 lp=2074 lt=166}\quad (row a),\qquad \texttt{done 1935 20 lp=871 lt=97}\quad (row b),
+\end{center}
+which are the counts of \cite[Table~2]{oai}. The trace samples cumulative counts every 100 cells of a
+deterministic depth-first traversal, so equality of full traces is strong evidence (though not a proof)
+that the same cells were visited and accepted in the same order.
+
+\section{What was already on record}
+The upstream file \texttt{checks/full-runs.json} records the authors' runs: GCC~13.3.0 (Ubuntu
+13.3.0-6ubuntu2\textasciitilde24.04.1), flags \texttt{-std=c++17 -O3}, elapsed $98.1$\,s and
+$1287.9$\,s, with log hashes. The bundle also contains \path{mode-a-ubsan.log}, identical to
+\path{mode-a.log} and not referenced anywhere, apparently a second run of (a) under UBSan. The lightweight checker \texttt{checks/verify.py} rebuilds small parts
+under UBSan, checks the source binding and the recorded logs, and prints \emph{``Full traversals were
+not repeated''}. So the counts rest on the authors' own executions. We found no third-party record
+of a full traversal; a community project (\texttt{cert-machine}) lists this preprint as not yet checked
+and plans a clean-room re-implementation.
+
+\section{What we ran}
+Machine: Intel Xeon Gold 6230R, Linux 6.8 (Ubuntu 22.04.5), single thread per run, Boost~1.86
+headers. Source: \texttt{certificate.cpp}, SHA-256
+\begin{center}\texttt{9f9765fb4dee9f2fc618390df89d3abc\,f2602569709fd4c2133a201b6e86bff}\end{center}
+(equal to the hash in \texttt{full-runs.json}). All builds use \texttt{-std=c++17 -UNDEBUG}.
+\begin{center}
+\small
+\begin{tabular}{lllll}
+\toprule
+Date & Compiler & Opt. & Run & Result (user time)\\
+\midrule
+2026-10-07 & GCC 9.5.0 & \texttt{-O3} & (a) full & trace identical (5m51s)\\
+2026-10-07 & GCC 9.5.0 & \texttt{-O3} & (b) full & trace identical (45m06s)\\
+2026-10-09 & Clang 17.0.6 & \texttt{-O2} & (a) full & trace identical (2m54s)\\
+2026-10-09 & GCC 12.3.0 & \texttt{-O1} & (a) full & trace identical (4m00s)\\
+2026-10-09 & Clang 17.0.6 & \texttt{-O2} & (b) 30 min & 8-line prefix identical (19m40s)\\
+\bottomrule
+\end{tabular}
+\end{center}
+``Trace identical'' means that the complete standard-error output is byte-for-byte equal to the
+upstream \texttt{checks/logs/mode-a.log} (resp.\ \texttt{mode-b.log}). These files are equal to
+\texttt{paper-mode-a.log} (resp.\ \texttt{paper-mode-b.log}) with the authors' trailing
+\texttt{time} output removed. The 2026-10-07 binary was identified afterwards: rebuilding with
+\path{g++ -std=c++17 -O3 -UNDEBUG checks/certificate.cpp} in the same directory reproduces its
+SHA-256 exactly. The helper \texttt{small\_polynomials.py} (the four scalar minima of \cite[Lemma~5.1]{oai} and the
+24 coordinate permutations of \cite[Section~5]{oai}) gives JSON equal to the recorded file
+\path{paper-small-polynomials.json}.
+
+The full traversal (b) was not repeated with a second compiler, because it takes more than 30 minutes
+on this machine. The script \texttt{scripts/run\_all.sh} reruns the hash checks, the trace comparisons,
+a fresh full traversal (a) with a compiler of the user's choice, and optionally (b) in full or as a
+time-limited prefix.
+
+\section{Scope}
+This record shows that the published program, run as published, produces the published counts on
+an unrelated toolchain and machine, and at three optimization levels. It does not check that the
+program computes what \cite[Sections~3--6 and Appendix~A]{oai} say it computes. It also does not
+check the reduction from Theorem~1.1 to the coefficient arrays. Nor is it an independent
+re-implementation of the subdivision. Because the arithmetic is exact, a compiler-independent trace
+is the expected outcome. Its value is evidence against undefined behaviour that changes results on the
+toolchains tested, and against errors in the published logs. The archived traces contain no host or
+compiler data; our local file times and \texttt{time} output support real runs, but a reader can
+re-check only by re-running (mode (a) takes a few CPU minutes, mode (b) 20--45).
+
+\begin{thebibliography}{9}
+\bibitem{oai} OpenAI, \emph{The Reconstruction Threshold for the Ferromagnetic Four-State Potts Model},
+OpenAI Math Release preprint, October 5, 2026,
+\url{https://github.com/openai/math/tree/main/preprints/The-Reconstruction-Threshold-for-the-Ferromagnetic-Four-State-Potts-Model-October-5-2026}.
+\end{thebibliography}
+\end{document}

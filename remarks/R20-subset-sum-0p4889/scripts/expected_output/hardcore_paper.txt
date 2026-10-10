@@ -1,0 +1,8 @@
+configuration = paper  N = 128
+eta = 0.51772  tau = 0.48996  lambda = 8.5 8.3  kappa_f, kappa_g = 1.0315 1.0315
+Delta = 0.02776  Gamma = 0.4622  a = Delta/Gamma in 0.06006057984 0.06006057984
+inner quadrature error bounds: Z_f 7.82e-26  P 9.33e-23  Y 9.53e-22
+||f_beta||^2 < 1.73980328814  ||g_beta||^2 < 1.36329539206  c = sup|Q-1| on strip < 0.518427550976
+strip exponents E1 < 16.3835  E2 < 15.7704  outer quadrature errors < 5.33e-16 3.48e-16
+RIGOROUS  log2 I1 < 0.514974048351   log2 I2 < 0.514851451273
+paper claims both < 0.5168 : True

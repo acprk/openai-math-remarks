@@ -1,0 +1,29 @@
+== new chain: eta = 0.5176, tau_run = 0.48888, claim O(2^{0.4889 n}) ==
+   sigma = 0.38, mu = 0.0877, delta = 0.0112, gamma = 0.3714, theta' = 0.0226, K = 15, guard = 0.00001
+   trial-repetition exponent (1 - h(sigma)) mu in [0.003679714651, 0.003679714651]
+  preliminary cap                    1/2 - delta + zeta + 1e-5 = 0.488825 < tau_run             ok
+  K disjoint sigma*m blocks fit      K sigma mu = 0.49989 < 1/2                                 ok
+  Markov threshold                   theta = delta/(K sigma mu) = 0.02240492908 < theta'        ok
+  useful-block probability           1 - theta/theta' >= 0.008631456443 > 0                     ok
+  many distinct mask weights         gamma < sigma(1-theta') = 0.371412                         ok
+  filtered lists (cumulative)        rep+(1-mu)/2+mu h(sigma/2)-gamma mu = 0.4887769817         ok
+  visited pairs (cumulative, +guard) rep+1-mu+2mu h(sigma/2)-gamma mu-eta+1e-5 = 0.4888560287   ok
+  list generation                    rep+mu+1/4+1e-5 = 0.3413897147                             ok
+  sampling the primes P' (all trials) rep+gamma mu/2 = 0.01996560465                             ok
+  sparse distinctions (global)       h(mu)+mu+1e-5 = 0.516455762 < eta                          ok
+  checksum time                      tau_run + 20 eps = 0.4888802                               ok
+  trial division for P               eta/2 = 0.2588                                             ok
+   all-history exponent tau_tot = max(...) = 0.4888802 ; claim - tau_tot = 1.98e-5 > 0 absorbs poly(n+b+2), b <= n^c
+   checksum certificate at (eta, tau_run, lambda) = (0.5176, 0.48888, 8.323/8.132): see hardcore_certificate.py main
+
+== paper chain (sigma = 1/2, mu = .0567, delta = .01004, gamma = .48925, eta = .51772) ==
+  lists  n/2+(h(1/4)-1/2-gamma)m           = 0.4899089947   (paper, via h(1/4)<.81128: .489909101)
+  pairs  1+(2h(1/4)-1-gamma)mu-eta+1e-5   = 0.4898484643   (paper, via h(1/4)<.81128: .489848677)
+  prelim cap 0.489985, checksum 0.48996 + 20 eps, all-history 0.489995 -> claim 0.49
+
+== comparison ==
+  exponent: 0.49 -> 0.4889 ; saving below 1/2: 0.0100 -> 0.0111 (x1.11)
+  running-time ratio old/new = 2^{0.0011 n}
+  heuristic framework limit ~0.4798 (CONST-OPT): share of the headroom 1/2 - 0.4798 used: paper 0.495, new 0.55
+
+ALL CHAIN CHECKS PASS: True
