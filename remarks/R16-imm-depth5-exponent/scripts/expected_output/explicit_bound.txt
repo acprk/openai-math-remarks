@@ -1,0 +1,28 @@
+== positive control: paper's own chain (03-circuits.tex l.250-299, 06-completion.tex l.9-29)
+  low exponent  = 0.05 (paper 1/20 = 0.05 )
+  high exponent = 0.01875 (paper 3/160 = 0.01875 )
+  min           = 0.01875 >= 1/100 used in Prop 3.1
+  Theorem: S^2 >= n^{sqrt n/100} e^{-O(sqrt n)} -> S >= n^{(1/200-o(1)) sqrt n}; stated 1/400
+  the proof as written actually yields any c < 3/320 = 0.009375
+  single-expansion optimum: sigma=1/2 -> 0.125 (=1/8)
+  new multi-expansion optimum: sigma=1/sqrt2 -> 0.176776695296636881100211090526212259821208984422118509147085  1/(4sqrt2) = 0.176776695296636881100211090526212259821208984422118509147085
+
+== explicit monotone lower bound B(n) = min(B1,B2) for the new proof
+  log n=    14: B1=-0.05102 B2=0.14143  K/sqrt n=3.1811 (C_I 2.039, even 1.053, odd 0.0882)
+  log n=    20: B1=0.02514 B2=0.15225  K/sqrt n=3.0322 (C_I 2.003, even 1.010, odd 0.0192)
+  log n=    50: B1=0.11678 B2=0.16697  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  log n=   100: B1=0.14678 B2=0.17188  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  log n=   200: B1=0.16178 B2=0.17433  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  log n=   300: B1=0.16678 B2=0.17514  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  log n=   500: B1=0.17078 B2=0.17580  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  log n=  1000: B1=0.17378 B2=0.17629  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  log n=  5000: B1=0.17618 B2=0.17668  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  log n= 20000: B1=0.17663 B2=0.17675  K/sqrt n=3.0000 (C_I 2.000, even 1.000, odd 0.0000)
+  B monotone on grid log n in [14,20009] step 5: True
+  c=0.002500: holds for all log n >= 17.59  (n >= 10^7.6)
+  c=0.009375: holds for all log n >= 18.24  (n >= 10^7.9)
+  c=0.125000: holds for all log n >= 57.94  (n >= 10^25.2)
+  c=0.150000: holds for all log n >= 112.04  (n >= 10^48.7)
+  c=0.166667: holds for all log n >= 296.74  (n >= 10^128.9)
+  c=0.170000: holds for all log n >= 442.69  (n >= 10^192.3)
+  limit as n->inf: 0.176776695296636881100211090526212259821208984422118509147085

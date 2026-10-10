@@ -1,0 +1,5 @@
+n=10000: s=70 t1=71.43 q*sqrt(n)=1.03253 maxH/bound=1.000000  Ce/sqrt n=1.0778 (exact all-2 even loss/sqrt n=1.0554)  Co=31.37  min slack in (*)=33.608  [OK]
+n=100001: s=223 t1=224.22 q*sqrt(n)=1.01289 maxH/bound=1.000000  Ce/sqrt n=1.0293 (exact all-2 even loss/sqrt n=1.0227)  Co=53.35  min slack in (*)=57.616  [OK]
+n=1000000: s=706 t1=708.22 q*sqrt(n)=1.00489 maxH/bound=1.000000  Ce/sqrt n=1.0108 (exact all-2 even loss/sqrt n=1.0088)  Co=92.36  min slack in (*)=94.395  [OK]
+n=2000001: s=999 t1=1001.00 q*sqrt(n)=1.00363 maxH/bound=1.000000  Ce/sqrt n=1.0080 (exact all-2 even loss/sqrt n=1.0066)  Co=109.29  min slack in (*)=114.246  [OK]
+n=10000000: s=2236 t1=2236.14 q*sqrt(n)=1.00180 maxH/bound=1.000000  Ce/sqrt n=1.0039 (exact all-2 even loss/sqrt n=1.0033)  Co=162.03  min slack in (*)=164.040  [OK]

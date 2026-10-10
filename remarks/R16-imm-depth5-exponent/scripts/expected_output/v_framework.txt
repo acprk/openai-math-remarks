@@ -1,0 +1,5 @@
+single-degree adversary: max_sigma value = 0.176750 at sigma=0.7070; 1/(4sqrt2)=0.176777
+  sigma=0.5000 single=0.125000  rule-lower min(s/4,1/(8s))=0.125000
+  sigma=0.7071 single=0.176777  rule-lower min(s/4,1/(8s))=0.176777
+  sigma=1.0000 single=0.154509  rule-lower min(s/4,1/(8s))=0.125000
+two-degree mixture adversary at sigma=1/sqrt2 (coarse): 0.176777

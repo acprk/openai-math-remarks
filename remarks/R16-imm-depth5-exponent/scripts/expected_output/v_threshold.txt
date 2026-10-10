@@ -1,0 +1,18 @@
+log n=20: c(n) >= 0.025609
+log n=30: c(n) >= 0.076723
+log n=40: c(n) >= 0.101773
+log n=50: c(n) >= 0.116776
+log n=57.94: c(n) >= 0.124999
+log n=60: c(n) >= 0.126777
+log n=100: c(n) >= 0.146777
+log n=200: c(n) >= 0.161777
+log n=296.7: c(n) >= 0.166665
+log n=300: c(n) >= 0.166777
+log n=1000: c(n) >= 0.173777
+log n=5000: c(n) >= 0.176177
+non-monotone steps on grid logn in [20,1520] step .5: 0
+c=0.002500: threshold log n = 20.000
+c=0.009375: threshold log n = 20.000
+c=0.125000: threshold log n = 57.941
+c=0.166667: threshold log n = 296.735
+1/(4 sqrt2) = 0.1767766952966369

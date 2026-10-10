@@ -1,0 +1,26 @@
+(a) continuum tau*(sigma):
+   sigma=0.4000  tau*=0.100000
+   sigma=0.5000  tau*=0.125000
+   sigma=0.6000  tau*=0.150000
+   sigma=0.7071  tau*=0.176777
+   sigma=0.8000  tau*=0.169258
+   sigma=1.0000  tau*=0.154508
+   sigma=1.5000  tau*=0.125000
+   argmax sigma=0.70711 (1/sqrt2=0.70711) max=0.176776 (1/(4sqrt2)=0.176777)
+   paper's sigma=1: 0.15450849718747373   single-expansion 1/8 = 0.125
+
+(b) exact finite-n framework value / (sqrt n log n)  [upper bound on provable c, no IMM loss]
+   n=1e4: sigma=0.500: 0.0150 (worst e=2, s=50) | sigma=0.707: 0.0640 (worst e=2, s=70) | sigma=1.000: 0.1163 (worst e=67, s=100)
+   n=1e5: sigma=0.500: 0.0375 (worst e=2, s=158) | sigma=0.707: 0.0878 (worst e=2, s=222) | sigma=1.000: 0.1252 (worst e=209, s=316)
+   n=1e6: sigma=0.500: 0.0524 (worst e=2, s=500) | sigma=0.707: 0.1038 (worst e=2, s=706) | sigma=1.000: 0.1308 (worst e=655, s=1000)
+   n=1e7: sigma=0.500: 0.0628 (worst e=2, s=1580) | sigma=0.707: 0.1146 (worst e=2, s=2236) | sigma=1.000: 0.1345 (worst e=2055, s=3162)
+   (finite-n values carry O(1/log n) corrections; limit tau*(sigma))
+
+(c) constrained assignment sum vs H-product, all-degree-2 factors:
+   n=1e4: log constrained=-67.08 log prodH=-58.90 diff/sqrt n=0.0818  saving prodH/(sqrt n log n)=0.0640
+   n=1e5: log constrained=-341.27 log prodH=-319.67 diff/sqrt n=0.0683  saving prodH/(sqrt n log n)=0.0878
+   n=1e6: log constrained=-1498.75 log prodH=-1434.55 diff/sqrt n=0.0642  saving prodH/(sqrt n log n)=0.1038
+
+(d) Lemma 2.1 side conditions with s<=sqrt(n/2), n=e^14:
+   n=1202604 s=774 k=600915 m=601689 lambda=0.4997 s/k=0.0013 a=7.932e+14 b=8.014e+14
+   2n<=min(a,b)/2: True;  a>=k: True;  q=9.160e-04 (<=0.1: True); beta*sqrt n=1.0090;  t1=n/(2s)=776.9>2;  (1-1/(a+v))^-n=1.000000<=2

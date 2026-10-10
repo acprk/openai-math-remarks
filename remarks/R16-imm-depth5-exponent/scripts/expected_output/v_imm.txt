@@ -1,0 +1,11 @@
+n=2000: log exact word sum=8.73  paper bound=87.32  ok=True  (exact/sqrt n=0.195)
+n=5001: log exact word sum=11.59  paper bound=128.58  ok=True  (exact/sqrt n=0.164)
+n=20000: log exact word sum=18.23  paper bound=238.09  ok=True  (exact/sqrt n=0.129)
+n=60001: log exact word sum=26.76  paper bound=396.13  ok=True  (exact/sqrt n=0.109)
+explicit C_I:  C_I - 2sqrt n - 2.5 log n  and  - (2.5+1/(2sqrt2)) log n
+ log n=20: C_I/sqrt n=2.002650  C_I-2sqrt n-2.5logn=8.365  minus (log n)/(2sqrt2) -> 1.294   mlog(1+b)-sqrt n/2=7.177
+ log n=40: C_I/sqrt n=2.000000  C_I-2sqrt n-2.5logn=15.434  minus (log n)/(2sqrt2) -> 1.292   mlog(1+b)-sqrt n/2=14.246
+ log n=57.94: C_I/sqrt n=2.000000  C_I-2sqrt n-2.5logn=21.777  minus (log n)/(2sqrt2) -> 1.292   mlog(1+b)-sqrt n/2=20.588
+ log n=100: C_I/sqrt n=2.000000  C_I-2sqrt n-2.5logn=36.647  minus (log n)/(2sqrt2) -> 1.292   mlog(1+b)-sqrt n/2=35.459
+ log n=200: C_I/sqrt n=2.000000  C_I-2sqrt n-2.5logn=72.002  minus (log n)/(2sqrt2) -> 1.292   mlog(1+b)-sqrt n/2=70.814
+ log n=296.7: C_I/sqrt n=2.000000  C_I-2sqrt n-2.5logn=106.191  minus (log n)/(2sqrt2) -> 1.292   mlog(1+b)-sqrt n/2=105.003

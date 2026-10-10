@@ -1,0 +1,204 @@
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[10pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,amsmath,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\IMM}{\mathrm{IMM}}
+\pdfstringdefDisableCommands{\def\sqrt#1{sqrt(#1)}\def\varepsilon{eps}}
+\title[Depth-five IMM: exponent $1/(4\sqrt2)$]{A remark on OpenAI's homogeneous depth-five lower bound\\ for iterated matrix multiplication:
+the exponent \texorpdfstring{$\sqrt n/400$ becomes $(1/(4\sqrt2)-\varepsilon)\sqrt n$}{sqrt(n)/400 becomes (1/(4 sqrt 2)-eps) sqrt(n)}}
+\author{[AUTHOR NAME]}
+\date{October 9, 2026}
+\begin{document}
+\begin{abstract}
+OpenAI's preprint \emph{Homogeneous depth-five lower bounds for iterated matrix
+multiplication} proves that every syntactically homogeneous
+$\Sigma\Pi\Sigma\Pi\Sigma$ circuit computing $\IMM_{n,n}$ over a field of
+characteristic zero has size at least $n^{\sqrt n/400}$ for large $n$. Re-tuning the
+parameters of the same proof, and expanding all high-degree factors of an upper product
+at once instead of one, gives $n^{(1/(4\sqrt2)-\varepsilon)\sqrt n}$, a factor
+$100/\sqrt2\approx70.7$ in the exponent, with explicit thresholds. Within the
+framework of the paper's product-rank lemma plus arbitrary expansion, and with
+$q\asymp n^{-1/2}$, the leading constant $1/(4\sqrt2)$ cannot be improved (first-order
+continuum argument). There is no new idea here: the remark is a re-tuning. The
+IMM-side argument is OpenAI's and is used unchanged. Developed with AI assistance
+(Anthropic Claude, Opus 5.5) under [AUTHOR NAME]'s direction; independent checks were
+run by separate AI sessions and are not human peer review.
+\end{abstract}
+\maketitle
+
+\section{Statement}
+We write \cite{OAI135} for the preprint, family 135 of
+\url{https://github.com/openai/math}, commit \texttt{fd4aeeb}. Line numbers refer to
+\path{build/sections/*.tex}. Notation ($k,m,\lambda,\rho,v,u,a,b,\alpha,\beta,q,D$,
+$H_e=\sum_{i=0}^e q^{|i-\lambda e|}$, the rank measure $R$) is that of \cite[\S\S2--3]{OAI135}.
+Put $L_q=\log(1/q)$.
+
+\begin{theorem}\label{thm:main}
+For every $\varepsilon>0$ there is $n_0(\varepsilon)$ such that for $n\ge n_0(\varepsilon)$ and every
+field $K$ of characteristic zero, every syntactically homogeneous $\Sigma\Pi\Sigma\Pi\Sigma$
+circuit over $K$ computing $\IMM_{n,n}$ has size
+\[
+S\ \ge\ n^{(1/(4\sqrt2)-\varepsilon)\sqrt n},\qquad \frac1{4\sqrt2}=0.17677\ldots
+\]
+Explicitly, $S\ge n^{c\sqrt n}$ holds for
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+$c$ & $1/400$ & $3/320$ & $1/8$ & $3/20$ & $1/6$\\
+\midrule
+all $\log n\ge$ & $17.6$ & $18.24$ & $57.941$ & $112.04$ & $296.735$\\
+\bottomrule
+\end{tabular}
+\end{center}
+(natural logarithms; $\log n\ge 57.941$ means $n\ge 10^{25.2}$, and $296.735$ means $n\ge10^{128.9}$).
+\end{theorem}
+
+The original theorem states $c=1/400$ with an unspecified absolute threshold; the
+first column makes that threshold explicit.
+
+\section{The modified proof}
+
+\subsection*{M1. The excess $s$ (\texttt{02-rank.tex} L57--58)}
+Let $s$ be the largest integer at most $\sqrt{n/2}$ (instead of $\sqrt n$) with the parity
+of $n$. All other definitions in (eq:parameters) are unchanged. The statement of
+Lemma~2.1 (lem:parameters) remains true as written, since
+$\sqrt{n/2}-2\ge\sqrt n/2$ for $n\ge 95$; the layer schedule of \S4 still has
+$\ell_i\in\{1,2\}$. Put $t_1=n/(2s)$ (instead of $t_0=n/(4s)$) and $x_e=se/(2n)$, so that
+$x_e<1/4$ for $e<t_1$ and $\lambda e=e/2-x_e$.
+
+\subsection*{M2. The bounds on $H_e$ (\texttt{03-circuits.tex} L123--205)}
+Replace Lemma~3.3 (lem:degree-estimates) by the following.
+\begin{lemma}\label{lem:H}
+$H_1\le 2q^{\lambda}$. For $1\le e<t_1$ and $x=x_e$,
+\[
+H_e\le q^{x}\Bigl(1+\tfrac{q^{1-2x}+q}{1-q}\Bigr)\ (e\text{ even}),\qquad
+H_e\le q^{x}\,\tfrac{q^{1/2-2x}+q^{1/2}}{1-q}\ (e\text{ odd}).
+\]
+For every list $e_1,\ldots,e_r$ with $\sum e_j\le n$,
+$\sum_{j:\,e_j<t_1}\log(q^{-x_{e_j}}H_{e_j})\le C_e+C_o$, where, with $f(z)=q^{1-sz/n}/z$,
+\[
+C_e=\frac{n\max\{f(2),f(t_1)\}+nq/2}{1-q}=\sqrt n\,(1+o(1)),\qquad
+C_o=4s\Bigl(\sqrt q+\frac{q}{1-q}\Bigr)=O(n^{1/4}).
+\]
+\end{lemma}
+\begin{proof}
+For even $e$ the nearest integer to $\lambda e$ is $e/2$ (distance $x$); the others are at
+distances $1-x+j$ and $1+x+j$, $j\ge0$. For odd $e$ the two nearest are at $1/2\mp x$, the
+others one further step each. Summing geometric tails gives both displays. For even $e$,
+$\log(1+y)\le y$ and log-convexity of $f$ on $[2,t_1]$ (as in L184--204) give
+$q^{1-se/n}\le e\max\{f(2),f(t_1)\}$; summing with $\sum e_j\le n$ and at most $n/2$ even
+factors gives $C_e$. For odd $e$ with $x\le1/8$ the correction factor is
+$\le(q^{1/4}+q^{1/2})/(1-q)\le1$; odd $e$ with $x>1/8$ have $e>t_1/2$, so there are at most
+$4s$ of them, each costing at most $\log\frac{1+\sqrt q}{1-q}\le\sqrt q+\frac q{1-q}$.
+Since $q=n^{-1/2}(1+o(1))$ by Lemma~2.1, $n f(2)+nq/2=\sqrt n(1+o(1))$ and $nf(t_1)=O(n^{1/4})$.
+\end{proof}
+
+\subsection*{M3. Expanding all high factors (\texttt{03-circuits.tex} L250--299)}
+As in L213--249, $g$ is a sum of at most $S$ scalar multiples of upper products
+$G=\prod_jQ_j$ with $\sum_je_j=n$, each $Q_j$ a sum of at most $S$ products of $e_j$ linear
+forms. Let $X=\{j:e_j\ge t_1\}$ and $E_X=\sum_{j\in X}e_j$, so $|X|\le E_X/t_1$. Expand
+\emph{every} $Q_j$, $j\in X$, simultaneously (the standard multilinear expansion); $G$
+becomes a sum of at most $S^{|X|}$ products of the unexpanded $Q_j$ ($j\notin X$) and $E_X$
+linear forms. Lemma~3.2 (lem:product-rank), Lemma~\ref{lem:H} and
+$\sum_{j\notin X}x_{e_j}=s(n-E_X)/(2n)$, $\lambda=(n-s)/(2n)$ give
+\begin{equation}\label{eq:G}
+R(G)\le 2D\,S^{|X|}\exp\bigl(-L_q s/2-E_X c'+C_e+C_o\bigr),\qquad
+c'=\frac{L_q(n-2s)}{2n}-\log2 .
+\end{equation}
+This replaces (eq:all-low-product), (eq:one-high-product) and the conclusion of
+Proposition~3.1.
+
+\subsection*{M4. Completion (\texttt{06-completion.tex} L9--29)}
+Proposition~4.1 (prop:imm) gives $R(\IMM_{n,n})\ge D e^{-C_I}$. Carrying the paper's
+chain in \S\S4--5 with all terms explicit (the loss in (eq:first-trace), $m\log(1+\beta)$,
+the prefactor and the word-sum bound $Z\le e^{m/b_0}(2+6n^2e^{\sqrt n})$ of
+lem:word-sum) gives
+\[
+C_I=2\sqrt n+\Bigl(\tfrac52+\tfrac1{2\sqrt2}\Bigr)\log n+1.292+o(1).
+\]
+The term $\log n/(2\sqrt2)$ comes from $m\beta=\tfrac{\sqrt n}{2}\,n^{1/\sqrt{2n}}(1+o(1))$
+with the new $s$. Comparing with \eqref{eq:G} summed over at most $S$ upper products,
+\[
+(1+|X|)\log S\ \ge\ A+E_Xc'\ \ge\ A+|X|\,t_1c',\qquad A=\frac{L_qs}{2}-K,\quad
+K=C_I+C_e+C_o+\log2,
+\]
+hence $\log S\ge\min(A,\;t_1c')$. With $L_q=\tfrac12\log n\,(1+o(1))$,
+$s\sim\sqrt{n/2}$ and $t_1\sim\sqrt{n/2}$, both terms are
+$\frac{1}{4\sqrt2}\sqrt n\log n\,(1-o(1))$, proving the first part of
+Theorem~\ref{thm:main}. Corollary~6.1 (characteristic zero) transfers verbatim.
+
+\subsection*{Thresholds}
+For the table, every quantity in $A$ and $t_1c'$ is replaced by an explicit majorant or
+minorant that is monotone in $n$ (worst case of $s\in(\sqrt{n/2}-2,\sqrt{n/2}]$), and the
+resulting lower bound for $\log S/(\sqrt n\log n)$ is evaluated in 60-digit arithmetic and
+bisected. An independent re-implementation with the exact integer parameters of
+(eq:parameters) and exact $C_I(n)$ gives the same thresholds ($57.941$ for $1/8$,
+$296.735$ for $1/6$; at $\log n=296.7$ the bound is $0.166665<1/6$). The side conditions
+of Lemma~2.1 hold at $\log n=14$ and beyond.
+
+\section{Where the factor $70.7$ comes from}
+\begin{center}
+\begin{tabular}{llr}
+\toprule
+step & change & factor\\
+\midrule
+$1/400\to3/320$ & slack in the paper's own chain (it proves any $c<3/320$) & $3.75$\\
+$3/320\to1/8$ & $q\le n^{-2/5}\to q\approx n^{-1/2}$; $\lambda\ge3/8\to\lambda\approx1/2$; threshold and $s$ scaling & $13.3$\\
+$1/8\to1/(4\sqrt2)$ & expand all $|X|$ high factors at cost $S^{|X|}$ (M3) & $\sqrt2$\\
+\midrule
+total & & $70.7$\\
+\bottomrule
+\end{tabular}
+\end{center}
+With one expansion, the bound is $\min(\sigma/4,1/(16\sigma))$ for $s=\sigma\sqrt n$, maximal
+($1/8$) at $\sigma=1/2$. Simultaneous expansion gives $\min(\sigma/4,1/(8\sigma))$, maximal at
+$\sigma=1/\sqrt2$. This is the only step not already present in the paper, and it is a
+standard multilinear expansion.
+
+\section{Limit of the framework}
+\begin{remark}
+Consider the framework ``Lemma~3.2 + expansion of an arbitrary set of factor occurrences
+(cost $S^{|X|}$)'', with the parameter family $\lambda=1/2-\sigma/(2\sqrt n)$ and
+$q\asymp n^{-1/2}$. To first order (continuum limit, factor degrees $y\sqrt n$, the
+adversary choosing the degrees), the best provable constant is
+\[
+\tau^*(\sigma)=\min\Bigl(\frac\sigma4,\ \frac{\sqrt{\sigma^2+4}-\sigma}{8}\Bigr),
+\qquad \max_\sigma\tau^*=\tau^*(1/\sqrt2)=\frac1{4\sqrt2}.
+\]
+So within this framework the leading constant cannot exceed $1/(4\sqrt2)$. This is a
+first-order continuum argument, not a theorem. At finite $n$, exact evaluation of the
+framework value with exact $H_e$ (uniform-degree adversaries, best number of expanded
+copies) is consistent with it (e.g.\ $0.1146$ at $n=10^7$, $\sigma=1/\sqrt2$; the
+corrections are $O(1/\log n)$). Dropping the constraint $\sum_ji_j=k$ in Lemma~3.2 costs only
+$e^{O(\sqrt n)}$.
+\end{remark}
+
+\begin{remark}
+The real obstacle is on the IMM side. A larger saving on the circuit side needs
+$q=n^{-\gamma}$ with $\gamma>1/2$, i.e.\ $\alpha=n^{-\gamma}$. Exact transfer-matrix evaluation of
+the word sum of \S5 then gives a loss of order $n^{\gamma}/(\sqrt2\,\gamma\log n)$, which
+eventually exceeds the circuit-side gain $\frac{2\gamma-1}{4\sqrt2}\sqrt n\log n$
+(at $n=10^6$, $\gamma=0.75$: loss $0.096$ against gain $0.088$, in units $\sqrt n\log n$).
+Thus $q\gtrsim n^{-1/2}$ is forced by the trace method as used in \cite{OAI135}. The
+IMM-side bound $C_I$ itself is loose (the exact word sum is about $0.11\sqrt n$ at $n=6\cdot10^4$,
+against about $1.6\sqrt n$ in the bound). Tightening it lowers the finite thresholds but not the
+leading constant; we do not use this.
+\end{remark}
+
+\section{Scope}
+This is a re-tuning; there is no new idea. The IMM-side proof (\S\S4--5) is OpenAI's and is
+used unchanged; we rely on its correctness. The official Lean formalisation (\path{lean/OAI/Algebra/DepthFive}) covers the
+original $1/400$ statement; nothing here is formalised. Scripts and their expected output
+are in \texttt{scripts/}.
+
+\begin{thebibliography}{9}
+\bibitem{OAI135} OpenAI, \emph{Homogeneous depth-five lower bounds for iterated matrix
+multiplication}, OpenAI Math Release preprint, September 25, 2026,
+\url{https://github.com/openai/math/tree/main/preprints/Homogeneous-depth-five-lower-bounds-for-iterated-matrix-multiplication-September-25-2026}.
+\end{thebibliography}
+\end{document}
