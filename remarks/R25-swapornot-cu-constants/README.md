@@ -6,9 +6,9 @@
   Family 238 (Thorp shuffle) uses the constant C_u = sup_m Σ_{λ⊢m} f_λ^{−u} and proves only that it is
   finite. This remark computes the value of C_u for five values of u. It also points out that one O-bound in
   the main paper is loose. The arguments are routine: enumeration, a peeling recursion and an analytic tail.
-- **Origin, and why it is trivial.** We computed these constants for an internal project ("H-1"):
+- **Origin, and why it is trivial.** We computed these constants for an internal attempt at
   full-domain CCA security of swap-or-not (SN) in O(log N + λ) fixed rounds, via the family's transfer theorem.
-  An internal audit found that H-1 is **trivial**. The asymptotic statement follows in a few lines from the
+  An internal audit found that this statement is **trivial**. The asymptotic statement follows in a few lines from the
   family's own corollary ("7n/8-label error o(1) ⇒ μ∗μ → U") combined with Hoang–Morris–Rogaway's Theorem 3
   and submultiplicativity of total variation. The explicit constants improve on that trivial route only by
   a factor of 3–5. **This remark therefore makes no claim about swap-or-not**, round counts, or the HMR
@@ -108,7 +108,7 @@ The script prints `OK` for each of six outputs:
 
 ## Scope and limitations (what is NOT claimed)
 
-- **No swap-or-not / cryptographic claim.** H-1 and its round counts (8132 rounds at N = 2³², λ = 128, and so
+- **No swap-or-not / cryptographic claim.** That statement and its round counts (8132 rounds at N = 2³², λ = 128, and so
   on) are not part of this remark. The asymptotic statement is a few-line consequence of known results; see
   "Premise".
 - **No new technique.** Every step is a standard peeling estimate. The content is the numbers and their
